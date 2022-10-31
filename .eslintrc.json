@@ -1,0 +1,16 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": ["airbnb-base", "plugin:prettier/recommended"],
+  "rules": {
+    "implicit-arrow-linebreak": ["error", "below"]
+  },
+  "ignorePatterns": ["views", "node_modules/"],
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  }
+}
