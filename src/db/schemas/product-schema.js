@@ -18,17 +18,8 @@ const ProductSchema = new Schema(
       type: String,
       required: false,
     },
-    spcification: {
-      type: new Schema(
-        {
-          spec1: String,
-          spec2: String,
-          spec3: String,
-        },
-        {
-          _id: false,
-        },
-      ),
+    specification: {
+      type: String,
       required: false,
     },
    reviews: [ReviewSchema],
