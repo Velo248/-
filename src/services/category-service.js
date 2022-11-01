@@ -27,7 +27,6 @@ class CategoryService{
 
     //카테고리에 상품추가
     async addProduct(category_name,product){
-        console.log('hi')
         await this.categoryModel.findOneAndUpdate(category_name,product)
     }
 }
