@@ -12,7 +12,7 @@ class UserService {
   // 회원가입
   async addUser(userInfo) {
     // 객체 destructuring
-    const { email, fullName, password } = userInfo;
+    const { email, fullName, password,phoneNumber,address,role } = userInfo;
 
     // 이메일 중복 확인
     const user = await this.userModel.findByEmail(email);
@@ -27,7 +27,7 @@ class UserService {
     // 우선 비밀번호 해쉬화(암호화)
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUserInfo = { fullName, email, password: hashedPassword };
+    const newUserInfo = { fullName, email, password: hashedPassword ,phoneNumber,address,role};
 
     // db에 저장
     const createdNewUser = await this.userModel.create(newUserInfo);
@@ -97,11 +97,12 @@ class UserService {
 
     // 비밀번호 일치 여부 확인
     const correctPasswordHash = user.password;
+    console.log("here2",typeof currentPassword)
     const isPasswordCorrect = await bcrypt.compare(
       currentPassword,
       correctPasswordHash
     );
-
+    console.log("here2")
     if (!isPasswordCorrect) {
       throw new Error(
         "현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요."
