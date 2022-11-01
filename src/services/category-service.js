@@ -9,7 +9,6 @@ class CategoryService{
     async addCategory(categoryInfo){
         const {category_name} = categoryInfo
         const newCategoryInfo = { category_name};
-        console.log(this.categoryModel.create)
         const createdNewCategory = await this.categoryModel.create(newCategoryInfo);
         return createdNewCategory
     }
@@ -22,13 +21,14 @@ class CategoryService{
 
     //카테고리 이름으로 카테고리 받음
     async getCategory(categories){
-        const category = await this.categoryModel.findByName(categories)
+        const category = await this.categoryModel.findOneByName(categories)
         return category
     }
 
     //카테고리에 상품추가
     async addProduct(category_name,product){
-        await this.categoryModel.findOneAndUpdate({category_name},{$push:{products:product}})
+        console.log('hi')
+        await this.categoryModel.findOneAndUpdate(category_name,product)
     }
 }
 
