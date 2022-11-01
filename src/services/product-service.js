@@ -9,7 +9,6 @@ class ProductService{
     async addProduct(productInfo){
         const {product_no,product_name,categories,brand} = productInfo
         const newProductInfo = { product_no,product_name,categories,brand};
-        console.log("ddddddddddddddddd",newProductInfo)
         const createdNewProduct = await this.productModel.create(newProductInfo);
         return createdNewProduct
     }
@@ -18,6 +17,24 @@ class ProductService{
     async getProducts() {
         const products = await this.productModel.findAll();
         return products;
+    }
+
+    //상품정보 수정
+    async updateProduct(productId,toUpdate){
+        // 우선 해당 id의 상품이 db에 있는지 확인
+        let product = await this.productModel.findById(productId);
+        // db에서 찾지 못한 경우, 에러 메시지 반환
+        if (!product) {
+          throw new Error("해당 상품이 없습니다. 다시 한 번 확인해 주세요.");
+        }
+
+        // 업데이트 진행
+        product = await this.productModel.update({
+            productId,
+        update: toUpdate,
+        });
+
+        return product;
     }
 }
 
