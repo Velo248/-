@@ -21,12 +21,17 @@ userRouter.post("/register", async (req, res, next) => {
     const fullName = req.body.fullName;
     const email = req.body.email;
     const password = req.body.password;
-
+    const phoneNumber = req.body.phoneNumber
+    const address = req.body.address
+    const role = req.body.role
     // 위 데이터를 유저 db에 추가하기
     const newUser = await userService.addUser({
       fullName,
       email,
       password,
+      phoneNumber,
+      address,
+      role
     });
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
@@ -63,7 +68,7 @@ userRouter.post("/login", async function (req, res, next) {
 
 // 전체 유저 목록을 가져옴 (배열 형태임)
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
-userRouter.get("/userlist", loginRequired, async function (req, res, next) {
+userRouter.get("/users", loginRequired, async function (req, res, next) {
   try {
     // 전체 사용자 목록을 얻음
     const users = await userService.getUsers();
@@ -74,6 +79,30 @@ userRouter.get("/userlist", loginRequired, async function (req, res, next) {
     next(error);
   }
 });
+
+//사용자 정보 조회
+userRouter.get(
+  "/users/:userId",
+  loginRequired,
+  async function(req,res,next){
+    try{
+      // content-type 을 application/json 로 프론트에서
+      // 설정 안 하고 요청하면, body가 비어 있게 됨.
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          "headers의 Content-Type을 application/json으로 설정해주세요"
+        );
+      }
+
+      // params로부터 id를 가져옴
+      const userId = req.params.userId;
+
+      //body data로부터
+    }catch(error){
+      next(error)
+    }
+  }
+)
 
 // 사용자 정보 수정
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
@@ -92,7 +121,7 @@ userRouter.patch(
 
       // params로부터 id를 가져옴
       const userId = req.params.userId;
-
+         
       // body data 로부터 업데이트할 사용자 정보를 추출함.
       const fullName = req.body.fullName;
       const password = req.body.password;
