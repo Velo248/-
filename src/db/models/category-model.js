@@ -13,9 +13,12 @@ export class CategoryModel {
         const categories = await Category.find({});
         return categories;
       }
-    async findByName(categories){
-        const category = await Category.find({category_name:categories})
+    async findOneByName(categories){
+        const category = await Category.findOne({category_name:categories})
         return category
+    }
+    async findOneAndUpdate(category_name,product){
+     await Category.findOneAndUpdate({category_name},{$push:{products:product}})
     }
 }
 
