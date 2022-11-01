@@ -27,7 +27,7 @@ productRouter.get("/products",async(req,res,next)=>{
 })
 
 //상품 추가
-productRouter.post("/products",async(req,res,next)=>{
+productRouter.post("/product",async(req,res,next)=>{
     try{
         // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -39,21 +39,29 @@ productRouter.post("/products",async(req,res,next)=>{
   
       // req (request)의 body 에서 데이터 가져오기
       const {product_no,product_name,brand,categories}=req.body
-      
+      //상품 추가
+      const newProduct = await productService.addProduct({
+        product_no,product_name,brand,categories
+      });
+
       //카테고리 데이터베이스에서 해당 카테고리 이름이 있는지 찾고 없으면 새로 카테고리 만들기
-      const category = await categoryService.getCategory(categories)
-      console.log(categories)
+      let temp = []
+      for(let c of categories){
+        const category = await categoryService.getCategory(c)
+        if(!category){
+            temp.push(c)
+        }
+      }
+      console.log(temp)
       console.log("----+++++++=========================----------------------------")
-      
-      if(!category){
-        category = await categoryService.addCategory({category_name})
+      for(let c of temp){
+        await categoryService.addCategory({category_name:c})
       }
 
-        const newProduct = await productService.addProduct({
-            product_no,product_name,brand,categories
-        });
-        //카테고리에 상품추가
+    //카테고리에 상품추가
+    for(let category_name of categories){
         await categoryService.addProduct(category_name,newProduct)
+    }
 
     // 추가된 상품의 db 데이터를 프론트에 다시 보내줌
     // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
