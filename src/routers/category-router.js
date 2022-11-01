@@ -25,7 +25,7 @@ categoryRouter.get("/categories",async(req,res,next)=>{
 })
 
 //카테고리 추가
-categoryRouter.post("/categories",async(req,res,next)=>{
+categoryRouter.post("/category",async(req,res,next)=>{
     try{
         // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -36,12 +36,9 @@ categoryRouter.post("/categories",async(req,res,next)=>{
       }
   
       // req (request)의 body 에서 데이터 가져오기
-      const {category_name} = req.body
-      
-        const newCategory = await categoryService.addCategory({
-            category_name
-          });
-    // 추가된 상품의 db 데이터를 프론트에 다시 보내줌
+    const {category_name} = req.body
+    const newCategory = await categoryService.addCategory({category_name});
+    // 추가된 카테고리 db 데이터를 프론트에 다시 보내줌
     // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
     res.status(201).json(newCategory);
     }catch(error){
