@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 //import { CategorySchema } from './category-schema';
-import {ReviewSchema} from './review-schema'
+import { ReviewSchema } from './review-schema';
 const ProductSchema = new Schema(
   {
     product_no: {
@@ -22,9 +22,12 @@ const ProductSchema = new Schema(
       type: String,
       required: false,
     },
-   reviews: [ReviewSchema],
-   categories:[String]
-    
+    stock_quantity: {
+      type: Number,
+      default: 0,
+    },
+    reviews: [ReviewSchema],
+    categories: [String],
   },
   {
     collection: 'products',

@@ -3,13 +3,13 @@ import { ProductSchema } from './product-schema';
 
 const CategorySchema = new Schema(
   {
-    category_name:{
-        type:String,
-        required:true
+    category_name: {
+      type: String,
+      required: true,
     },
-    products:[ProductSchema]
+    products: [ProductSchema],
   },
-    
+
   {
     collection: 'categories',
     timestamps: true,
