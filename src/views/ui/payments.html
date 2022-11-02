@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>결제</title>
+    <link rel="stylesheet" href="../common/reset.css" />
+    <link rel="stylesheet" href="../common/layout.css" />
+    <link rel="stylesheet" href="../common/common.css" />
+    <style>
+      .imsi {
+        max-width: 800px;
+        margin: 0 auto;
+        border: 1px solid #ddd;
+        padding: 20px;
+      }
+
+      .imsi .img_wrap {
+        width: 50px;
+        height: 50px;
+      }
+
+      .imsi .img_wrap img {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>
+        <a href="/categories"
+          ><img src="../images/logo.png" alt="간식조아"
+        /></a>
+      </h1>
+      <nav>
+        <span><a href="#">제품</a></span>
+        <span><a href="#">로그인</a></span>
+        <span><a href="#">장바구니</a></span>
+        <span><a href="#">주문·배송</a></span>
+      </nav>
+    </header>
+
+    <main>
+      <div class="imsi">
+        <!-- 제품 리스트 부분 -->
+        <!-- 한줄한줄 생성 -->
+        <div>
+          <div class="flex-justify-between">
+            <input type="checkbox" />
+            <div class="img_wrap">
+              <img src="../images/driedFood0.jpg" alt="" />
+            </div>
+            <div>제품명제품명제품명...</div>
+            <div>2,000</div>
+            <div><input type="number" value="1" disabled /></div>
+          </div>
+          <div class="flex-justify-between">
+            <input type="checkbox" />
+            <div class="img_wrap">
+              <img src="../images/driedFood0.jpg" alt="" />
+            </div>
+            <div>제품명제품명제품명...</div>
+            <div>2,000</div>
+            <div><input type="number" value="1" disabled /></div>
+          </div>
+        </div>
+
+        <!-- 주문정보 -->
+        <div>
+          <div>주문정보</div>
+          <div class="flex flex-row">
+            <span class="">이름</span>
+            <p>김까망</p>
+          </div>
+          <div class="flex flex-row">
+            <span>주소</span>
+            <p>서울시 강서구 블라블라블라라라라라</p>
+          </div>
+          <div class="flex flex-row">
+            <span>연락처</span>
+            <p>010-0000-0000</p>
+          </div>
+        </div>
+
+        <!-- 결제 방법 -->
+        <div>
+          <input id="impsi_radio" type="radio" />
+          <label for="impsi_radio">바로 결제</label>
+        </div>
+
+        <!-- 총 금액 -->
+        <div>
+          <span>총</span>
+          <span>20,000</span>
+          <span>원</span>
+        </div>
+        <!-- 마지막 결제하기 -->
+        <div>
+          <button>결제하기</button>
+        </div>
+      </div>
+    </main>
+    <footer>&copy; 2022 오히려좋아 by elice 5팀</footer>
+  </body>
+</html>
