@@ -26,8 +26,8 @@ productRouter.get("/products",async(req,res,next)=>{
     }
 })
 
-//상품 추가 API - /api/product
-productRouter.post("/product",async(req,res,next)=>{
+//상품 추가 API - /api/products
+productRouter.post("/products",async(req,res,next)=>{
     try{
         // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -39,7 +39,12 @@ productRouter.post("/product",async(req,res,next)=>{
   
       // req (request)의 body 에서 데이터 가져오기
       const {product_no,product_name,brand,categories}=req.body
-      //상품 추가
+      //상품 추가 / 같은 이름의 상품이 이미 있는 경우 추가하지 않음
+      const product = await productService.getProduct(product_name)
+      if(product){
+        res.status(201).json(product)
+        return
+      }
       const newProduct = await productService.addProduct({
         product_no,product_name,brand,categories
       });
