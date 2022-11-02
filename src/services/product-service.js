@@ -13,10 +13,16 @@ class ProductService{
         return createdNewProduct
     }
 
-    //상품 목록을 받음
+    //상품 전체 목록을 받음
     async getProducts() {
         const products = await this.productModel.findAll();
         return products;
+    }
+
+    //상품 이름으로 가져옴
+    async getProduct(product_name){
+        const product = await this.productModel.findByName(product_name)
+        return product
     }
 
     //상품정보 수정
