@@ -4,17 +4,29 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./mypage.css" />
-    <title>Mypage</title>
+    <title>내 정보 수정</title>
+    <link rel="stylesheet" href="../../../1.public/css/style.css" />
+    <link rel="stylesheet" href="./custom.css" />
   </head>
   <body>
     <header>
-      <nav></nav>
+      <h1>
+        <a href="/categories"
+          ><img src="../../../1.public/images/common/logo.png" alt="간식조아"
+        /></a>
+      </h1>
+      <nav>
+        <span><a href="#">제품</a></span>
+        <span><a href="#">로그인</a></span>
+        <span><a href="#">장바구니</a></span>
+        <span><a href="#">주문·배송</a></span>
+      </nav>
     </header>
+
     <main>
       <div class="wrapper">
         <div class="button">
-          <a href="#" class="edit-profile">내 정보 수정</a>
+          <a href="#" class="out">탈퇴하기</a>
         </div>
         <div class="wrapper flex-column">
           <div class="column">
@@ -32,7 +44,7 @@
         </div>
       </div>
       <div class="wrapper address">
-        배송지정보
+        배송지수정
         <br />
         <div class="column">
           <div class="address-long">열한시 오십구분</div>
@@ -40,31 +52,18 @@
         <div class="column">
           <div class="row postal-code">00000</div>
           <div class="row address-detail">오십오초</div>
+          <button class="button address-search">주소검색</button>
         </div>
       </div>
-      <div class="wrapper orders">
-        <div class="info">주문이력</div>
-        <div class="order-table">
-          <div class="order-table__header">
-            <div class="row">주문번호</div>
-            <div class="row">배송상태</div>
-            <div class="row">금액</div>
-          </div>
-          <div class="order-table__column">
-            <div class="order-table__column-row">01</div>
-            <div class="order-table__column-row">배송중</div>
-            <div class="order-table__column-row">10000</div>
-          </div>
-          <div class="order-table__column">
-            <div class="order-table__column-row">02</div>
-            <div class="order-table__column-row">배송준비</div>
-            <div class="order-table__column-row">12000</div>
-          </div>
-          <div class="order-table__column">
-            <div class="order-table__column-row">03</div>
-            <div class="order-table__column-row">배송완료</div>
-            <div class="order-table__column-row">1000000</div>
-          </div>
+      <div class="wrapper">
+        <div class="form" action="#">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="비밀번호를 확인한다"
+          />
+          <button type="submit">수정 완료(비밀번호 입력 필)</button>
         </div>
       </div>
     </main>

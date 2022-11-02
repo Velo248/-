@@ -1,4 +1,22 @@
-@charset "utf-8";
+.flex {
+  display: flex;
+}
+
+.flex-justify-center {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-all-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-justify-between {
+  display: flex;
+  justify-content: space-between;
+}
 
 /* class로 관리하는 background color */
 .bg-lightBlue {
@@ -211,7 +229,7 @@
 }
 
 /* margin-top */
-.m-t-ss {55555555
+.m-t-ss {
   margin-top: 0.25em;
 }
 
@@ -394,79 +412,4 @@
 
 .relative {
   position: relative;
-}
-
-/* txt-style */
-.detailText {
-  font-size: 11px;
-  color: #888;
-  margin-left: 0px;
-  margin-bottom: 12px;
-}
-
-.smallTitle {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 13px;
-}
-
-.smallTitle i {
-  font-size: 18px;
-  vertical-align: text-bottom;
-}
-
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.diagDetail {
-  font-size: 11px;
-  color: #888;
-  margin-left: 0px;
-  margin-bottom: 12px;
-  margin-top: 5px;
-  line-height: 1.6;
-}
-
-/* 대시보드 장식용 동그라미 */
-.redCircle {
-  width: 12px;
-  height: 12px;
-  background: red;
-  border-radius: 50%;
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 10px;
-}
-
-/* orguser 추가 팝업 */
-/* 상태 표시 버튼 */
-.stsMsg {
-  display: inline-block;
-  width: 75px;
-  text-align: center;
-  padding: 5px 0;
-  color: #fff;
-  border-radius: 3px;
-  cursor: default;
-  box-shadow: 3px 3px 3px #e5e5e5;
-}
-
-/* 점수 표시 동그라미 */
-.circleMsg {
-  display: inline-block;
-  border: none;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  border-radius: 4px;
-  padding: 5px 8px;
-  color: #fff;
-  box-shadow: 3px 3px 3px #e5e5e5;
-  vertical-align: middle;
-  width: 47px;
-  cursor: default;
-  text-align: center;
 }

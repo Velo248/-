@@ -4,34 +4,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>장바구니</title>
-    <link rel="stylesheet" href="../common/reset.css" />
-    <link rel="stylesheet" href="../common/layout.css" />
-    <link rel="stylesheet" href="../common/common.css" />
-    <style>
-      .imsi {
-        max-width: 800px;
-        margin: 0 auto;
-        border: 1px solid #ddd;
-        padding: 20px;
-      }
-
-      .imsi .img_wrap {
-        width: 50px;
-        height: 50px;
-      }
-
-      .imsi .img_wrap img {
-        width: 100%;
-        height: 100%;
-      }
-    </style>
+    <title>결제하기</title>
+    <link rel="stylesheet" href="../../../1.public/css/style.css" />
+    <link rel="stylesheet" href="./custom.css" />
   </head>
   <body>
     <header>
       <h1>
         <a href="/categories"
-          ><img src="../images/logo.png" alt="간식조아"
+          ><img src="../../../1.public/images/common/logo.png" alt="간식조아"
         /></a>
       </h1>
       <nav>
@@ -41,17 +22,8 @@
         <span><a href="#">주문·배송</a></span>
       </nav>
     </header>
-
     <main>
       <div class="imsi">
-        <!-- 맨윗부분 -->
-        <div class="flex-justify-between">
-          <div class="input_wrap">
-            <input id="basketChkAll" type="checkbox" />
-            <label for="basketChkAll"> 전체선택 </label>
-          </div>
-          <button>선택 삭제</button>
-        </div>
         <!-- 제품 리스트 부분 -->
         <!-- 한줄한줄 생성 -->
         <div>
@@ -62,7 +34,7 @@
             </div>
             <div>제품명제품명제품명...</div>
             <div>2,000</div>
-            <div><input type="number" value="1" /></div>
+            <div><input type="number" value="1" disabled /></div>
           </div>
           <div class="flex-justify-between">
             <input type="checkbox" />
@@ -71,8 +43,31 @@
             </div>
             <div>제품명제품명제품명...</div>
             <div>2,000</div>
-            <div><input type="number" value="1" /></div>
+            <div><input type="number" value="1" disabled /></div>
           </div>
+        </div>
+
+        <!-- 주문정보 -->
+        <div>
+          <div>주문정보</div>
+          <div class="flex flex-row">
+            <span class="">이름</span>
+            <p>김까망</p>
+          </div>
+          <div class="flex flex-row">
+            <span>주소</span>
+            <p>서울시 강서구 블라블라블라라라라라</p>
+          </div>
+          <div class="flex flex-row">
+            <span>연락처</span>
+            <p>010-0000-0000</p>
+          </div>
+        </div>
+
+        <!-- 결제 방법 -->
+        <div>
+          <input id="impsi_radio" type="radio" />
+          <label for="impsi_radio">바로 결제</label>
         </div>
 
         <!-- 총 금액 -->
