@@ -5,12 +5,14 @@ const Product = model("products", ProductSchema);
 
 export class ProductModel {
   async findById(productId) {
-    console.log('here')
-    
     const product = await Product.findOne({ _id: productId });
-    console.log('here')
     return product;
   }
+  async findByName(product_name){
+    const product = await Product.findOne({product_name})
+    return product
+  }
+
 
   async create(productInfo) {
     const createdNewProduct = await Product.create(productInfo);
