@@ -5,29 +5,29 @@ h2 {
   font-size: 2.5em;
 }
 
-.main_categories {
+.categories_wrap {
   display: flex;
   width: 100%;
 }
 
-.main_categories li {
+.categories_wrap li {
   flex: 1;
   background-color: #000;
   color: #fff;
 }
 
-.main_categories li a {
+.categories_wrap li a {
   display: inline-block;
   width: 100%;
   text-align: center;
   padding: 15px 5px;
 }
 
-.main_categories li a:hover {
+.categories_wrap li a:hover {
   color: #ddd;
 }
 
-.main_products_wrap {
+.products_wrap {
   display: flex;
   flex-wrap: wrap;
 }
