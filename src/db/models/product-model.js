@@ -46,6 +46,9 @@ export class ProductModel {
   async deleteAll() {
     await Product.deleteMany({});
   }
+  async insertAll(data) {
+    await Product.insertMany(data);
+  }
 }
 
 const productModel = new ProductModel();

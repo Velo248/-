@@ -24,6 +24,9 @@ export class CategoryModel {
   async deleteAll() {
     await Category.deleteMany({});
   }
+  async insertAll(data) {
+    await Category.insertMany(data);
+  }
 }
 
 const categoryModel = new CategoryModel();
