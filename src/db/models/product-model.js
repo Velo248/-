@@ -43,6 +43,9 @@ export class ProductModel {
     const product = await Product.findByIdAndDelete({ _id: productId });
     return product;
   }
+  async deleteAll() {
+    await Product.deleteMany({});
+  }
 }
 
 const productModel = new ProductModel();
