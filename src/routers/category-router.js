@@ -56,4 +56,19 @@ categoryRouter.post(
   },
 );
 
+//카테고리 수정 API - PATCH /category/{title}
+categoryRouter.patch('/category/:title', async (req, res, next) => {
+  throw new Error('카테고리 수정 기능은 구현되어 있지 않습니다.');
+});
+
+//카테고리 삭제 API - DELETE /category/{title}
+categoryRouter.delete('/category/:title', async (req, res, next) => {
+  try {
+    const categoryTitle = req.params.title;
+    const deletedCategory = await categoryService.deleteCategory(categoryTitle);
+    res.status(200).json(deletedCategory);
+  } catch (error) {
+    next(error);
+  }
+});
 export { categoryRouter };
