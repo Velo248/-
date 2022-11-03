@@ -21,6 +21,9 @@ export class CategoryModel {
     const deletedCategory = await Category.findOneAndDelete(query);
     return deletedCategory;
   }
+  async deleteAll() {
+    await Category.deleteMany({});
+  }
 }
 
 const categoryModel = new CategoryModel();

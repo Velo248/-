@@ -35,6 +35,10 @@ export class OrderModel {
     const order = await Order.deleteOne({ _id: orderId });
     return order;
   }
+
+  async deleteAll() {
+    await Order.deleteMany({});
+  }
 }
 
 const orderModel = new OrderModel();
