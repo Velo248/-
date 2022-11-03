@@ -1,0 +1,25 @@
+@import './common.css';
+
+.adminWapper {
+  display: flex;
+  flex-direction: row;
+  width: 80vw;
+  height: 100vh;
+}
+
+.adminNavContainer {
+  width: 18.75rem;
+  height: 100%;
+  background-color: darkolivegreen;
+}
+
+.navItemContainer {
+  height: 50px;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.navItem {
+  background-color: yellow;
+  font-size: medium;
+}
