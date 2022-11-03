@@ -7,14 +7,12 @@ class ProductService {
 
   //상품 추가
   async addProduct(productInfo) {
-    const { product_no, product_name, categories, brand } = productInfo;
-    const newProductInfo = { product_no, product_name, categories, brand };
-    const createdNewProduct = await this.productModel.create(newProductInfo);
+    const createdNewProduct = await this.productModel.create(productInfo);
     return createdNewProduct;
   }
 
   //상품 전체 목록을 받음
-  async getProducts() {
+  async getProductlist() {
     const products = await this.productModel.findAll();
     return products;
   }
@@ -31,7 +29,9 @@ class ProductService {
     let product = await this.productModel.findById(productId);
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!product) {
-      throw new Error('해당 상품이 없습니다. 다시 한 번 확인해 주세요.');
+      throw new Error(
+        '해당 productId의 상품이 없습니다. 다시 한 번 확인해 주세요.',
+      );
     }
 
     // 업데이트 진행
@@ -41,6 +41,12 @@ class ProductService {
     });
 
     return product;
+  }
+
+  //상품 삭제
+  async deleteProduct(productId) {
+    const deletedProduct = this.productModel.delete({ productId });
+    return deletedProduct;
   }
 }
 

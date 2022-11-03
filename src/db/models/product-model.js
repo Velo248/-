@@ -34,6 +34,13 @@ export class ProductModel {
     );
     return updatedProduct;
   }
+
+  async delete(productId) {
+    const product = await Product.findByIdAndRemove({
+      _id: productId['productId'],
+    });
+    return product;
+  }
 }
 
 const productModel = new ProductModel();
