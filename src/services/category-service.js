@@ -18,8 +18,8 @@ class CategoryService {
   }
 
   //카테고리 이름으로 카테고리 받음
-  async getCategory(categories) {
-    const category = await this.categoryModel.findOneByName(categories);
+  async getCategory(title) {
+    const category = await this.categoryModel.findOneByName(title);
     return category;
   }
 }

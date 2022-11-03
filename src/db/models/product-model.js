@@ -8,8 +8,8 @@ export class ProductModel {
     const product = await Product.findOne({ _id: productId });
     return product;
   }
-  async findByName(product_name) {
-    const product = await Product.findOne({ product_name });
+  async findByName(title) {
+    const product = await Product.findOne({ title });
     return product;
   }
 
@@ -20,6 +20,10 @@ export class ProductModel {
 
   async findAll() {
     const products = await Product.find({});
+    return products;
+  }
+  async findAllByCategory(categoryId) {
+    const products = await Product.find({ categoryId });
     return products;
   }
 
