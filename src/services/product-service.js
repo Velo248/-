@@ -17,6 +17,12 @@ class ProductService {
     return products;
   }
 
+  //해당 카테고리의 상품 전체 목록을 받음
+  async getProductlistByCategory(category) {
+    const products = await this.productModel.findAllByCategory(category);
+    return products;
+  }
+
   //상품 이름으로 가져옴
   async getProduct(product_name) {
     const product = await this.productModel.findByName(product_name);

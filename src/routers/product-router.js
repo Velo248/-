@@ -2,7 +2,7 @@ import { Router } from 'express';
 import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { isAdmin, loginRequired } from '../middlewares';
-import { productService } from '../services';
+import { categoryService, productService } from '../services';
 
 const productRouter = Router();
 
@@ -23,7 +23,20 @@ productRouter.get(
   '/productlist/category/:categoryTitle',
   async (req, res, next) => {
     try {
-      res.status(200).json({ hi: '아직 미완성 코드' });
+      const categoryTitle = req.params.categoryTitle;
+      const category = await categoryService.getCategory(categoryTitle);
+
+      if (!category) {
+        res.status(403).json({
+          result: 'resources-not-found',
+          reason: '해당 이름의 카테고리가 없습니다.',
+        });
+      }
+      const products = await productService.getProductlistByCategory(
+        category._id,
+      );
+
+      res.status(200).json(products);
     } catch (error) {
       next(error);
     }
