@@ -40,7 +40,7 @@ export class ProductModel {
   }
 
   async delete(productId) {
-    const product = await Product.findByIdAndRemove({ _id: productId });
+    const product = await Product.findByIdAndDelete({ _id: productId });
     return product;
   }
 }

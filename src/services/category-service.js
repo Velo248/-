@@ -22,6 +22,14 @@ class CategoryService {
     const category = await this.categoryModel.findOneByName(title);
     return category;
   }
+
+  //카테고리 이름으로 삭제
+  async deleteCategory(title) {
+    const deletedCategory = await this.categoryModel.findOneAndDelete({
+      title,
+    });
+    return deletedCategory;
+  }
 }
 
 const categoryService = new CategoryService(categoryModel);
