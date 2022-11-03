@@ -17,11 +17,9 @@ export class CategoryModel {
     const category = await Category.findOne({ title });
     return category;
   }
-  async findOneAndUpdate(category_name, product) {
-    await Category.findOneAndUpdate(
-      { category_name },
-      { $push: { products: product } },
-    );
+  async findOneAndDelete(query) {
+    const deletedCategory = await Category.findOneAndDelete(query);
+    return deletedCategory;
   }
 }
 
