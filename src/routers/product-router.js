@@ -93,9 +93,9 @@ productRouter.post(
   },
 );
 
-//상품 수정 API - PATCH/api/product/update/{productId}
+//상품 수정 API - PATCH/api/product/{productId}
 productRouter.patch(
-  '/product/update/:productId',
+  '/product/:productId',
   loginRequired,
   isAdmin,
   async (req, res, next) => {

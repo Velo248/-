@@ -45,7 +45,7 @@ class ProductService {
 
   //상품 삭제
   async deleteProduct(productId) {
-    const deletedProduct = this.productModel.delete({ productId });
+    const deletedProduct = this.productModel.delete(productId);
     return deletedProduct;
   }
 }
