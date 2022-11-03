@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>등록</title>
+    <link rel="stylesheet" href="../../../1.public/css/style.css" />
+    <link rel="stylesheet" href="./custom.css" />
+  </head>
+  <body>
+    <header>
+      <h1>
+        <!-- 임시로 제품 페이지 -->
+        <a href="../categories/categories.html"
+          ><img src="../../../1.public/images/common/logo.png" alt="간식조아"
+        /></a>
+      </h1>
+      <nav>
+        <span><a href="../categories/categories.html">제품</a></span>
+        <span><a href="../../login/login.html">로그인</a></span>
+        <span><a href="../basket/basket.html">장바구니</a></span>
+        <span><a href="../orders/orders.html">주문·배송</a></span>
+      </nav>
+    </header>
+    <main>
+      <div class="wrapper register-form block">
+        <form action="#" class="register">
+          <div class="field">
+            <label class="label">Username</label>
+            <div class="control has-icons-left has-icons-right">
+              <input
+                class="input"
+                type="text"
+                placeholder="Text input"
+                value="bulma"
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fas fa-check"></i>
+              </span>
+            </div>
+            <!-- <p class="help is-success">This username is available</p> -->
+          </div>
+
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control has-icons-left has-icons-right">
+              <input
+                class="input"
+                type="email"
+                placeholder="Email input"
+                value="hello@not-good.bye"
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fas fa-exclamation-triangle"></i>
+              </span>
+            </div>
+            <!-- <p class="help is-danger">This email is invalid</p> -->
+          </div>
+
+          <div class="field">
+            <label for="" class="label">Password</label>
+            <div class="control has-icons-left has-icons-right">
+              <input
+                type="password"
+                name="password"
+                id="password"
+                class="input"
+                value="**********"
+              />
+              <span class="icon is-small is-left">
+                <!-- 자물쇠 아이콘 -->
+              </span>
+              <!-- <p class="help is-danger">Password is not safe</p> -->
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="" class="label">Password Confirm</label>
+            <div class="control has-icons-left has-icons-right">
+              <input
+                type="password"
+                name="password2"
+                id="password2"
+                class="input"
+                value="**********"
+              />
+              <span class="icon is-small is-left">
+                <!-- 자물쇠 아이콘 -->
+              </span>
+              <!-- <p class="help is-danger">Password is not safe</p> -->
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              "무슨무슨 방침"
+              <label class="radio">
+                <input type="radio" name="question" />
+                Yes
+              </label>
+              <label class="radio">
+                <input type="radio" name="question" />
+                No
+              </label>
+            </div>
+          </div>
+
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-link">Submit</button>
+            </div>
+            <div class="control">
+              <button class="button is-link is-light">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+    <footer>&copy; 2022 오히려좋아 by elice 5팀</footer>
+  </body>
+</html>

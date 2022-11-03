@@ -1,0 +1,24 @@
+@import "./common.css";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+  padding: 1rem;
+  border: 1px solid black;
+  margin-bottom: 1rem;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+}
+
+.item-img {
+  display: inline-block;
+}

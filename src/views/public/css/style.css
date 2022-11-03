@@ -1,0 +1,11 @@
+@charset "utf-8";
+/* index.css를 제외한 모든 css */
+
+/* cdn */
+@import url('https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css');
+
+/* local */
+@import './reset.css';
+@import './common.css';
+@import './layout.css';
+/* @import './hs-common.css';  */
