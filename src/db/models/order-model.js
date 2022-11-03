@@ -39,6 +39,10 @@ export class OrderModel {
   async deleteAll() {
     await Order.deleteMany({});
   }
+
+  async insertAll(data) {
+    await Order.insertMany(data);
+  }
 }
 
 const orderModel = new OrderModel();

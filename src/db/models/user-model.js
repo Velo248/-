@@ -35,6 +35,9 @@ export class UserModel {
   async deleteAll() {
     await User.deleteMany({});
   }
+  async insertAll(data) {
+    await User.insertMany(data);
+  }
 }
 
 const userModel = new UserModel();
