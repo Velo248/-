@@ -27,11 +27,8 @@ orderRouter.get(
   loginRequired,
   async function (req, res, next) {
     try {
-      const orderId = req.currentUserId;
-      if (!orderId) {
-        throw new Error('로그인 해주세요');
-      }
-      const order = await orderService.getOrderByUserId(orderId);
+      const userId = req.currentUserId;
+      const order = await orderService.getOrderByUserId(userId);
       res.status(200).json(order);
     } catch (error) {
       next(error);
