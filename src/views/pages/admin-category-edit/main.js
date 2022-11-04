@@ -1,13 +1,10 @@
+const $admin_category_wapper = document.querySelector('.admin_category_wapper');
 const $categories = document.querySelector('.categories');
-const $selected_category_delete_bnt = document.querySelector(
-  '.selected_category_delete_bnt',
-);
-
-let deleteChecked = {};
-
 const elementCreater = (current, add) => {
   current.innerHTML += add;
 };
+
+let checkObj = {};
 
 const getCategory = async () => {
   const respose = await fetch('/api/categories');
@@ -31,12 +28,12 @@ const pageRender = async () => {
     const html_temp = `
       <div class="category_item">
         <form class='edit_form' id=${_id}>
-          <input class='category_checked'type='checkbox' >
-          <input name='category-name' value=${title}>
-          <input value=${description}>
+          <input class='category_checked'type='checkbox'>
+          <input name='category-title' value="${title}">
+          <input name='category-description' value="${description}">
           <span>${createDate}</span>
           <span>${updateDate}</span>
-          <button type='submit'>수정하기</button>
+          <button class='edit_bnt' type='submit'>수정하기</button>
         </form>
       </div>
     `;
@@ -44,16 +41,19 @@ const pageRender = async () => {
     elementCreater($categories, html_temp);
   });
 
-  return document.querySelectorAll('.edit_form');
+  // return document.querySelectorAll('.edit_form');
 };
 
 const customFetcher = async (data) => {
-  const res = await fetch(`/api/categories/${data}`, {
-    method: 'DELETE',
+  const { target, dataObj, method } = data;
+  console.log(target, dataObj, method);
+  const res = await fetch(`/api/categories/${target}`, {
+    method: `${method}`,
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${sessionStorage.getItem('token')}`,
     },
+    body: JSON.stringify(dataObj),
   });
 
   // 응답 코드가 4XX 계열일 때 (400, 403 등)
@@ -63,43 +63,98 @@ const customFetcher = async (data) => {
 
     throw new Error(reason);
   }
-  console.log(res);
+
+  delete checkObj[data];
+};
+
+const deleteCategoryChecker = (target) => {
+  const targetId = target.parentNode.getAttribute('id');
+  if (target.checked) checkObj[targetId] = target.checked;
+  else delete checkObj[targetId];
+};
+
+const deleteCategory = async () => {
+  Object.keys(checkObj).forEach(async (e) => {
+    const data = {
+      target: e,
+      dataObj: {},
+      method: 'DELETE',
+    };
+    await customFetcher(data);
+  });
   $categories.innerHTML = '';
   await pageRender();
 };
 
-const checkedCategory = (target) => {
-  const targetId = target.parentNode.getAttribute('id');
-  target.addEventListener('click', () => {
-    deleteChecked[targetId] = target.checked;
-  });
+const clickEventMap = {
+  selected_category_delete_bnt() {
+    deleteCategory();
+  },
+  category_checked(e) {
+    deleteCategoryChecker(e);
+  },
+  admin_edit_complete_bnt() {
+    window.history.back(1);
+  },
 };
 
-$selected_category_delete_bnt.addEventListener('click', () => {
-  Object.keys(deleteChecked).forEach(async (e) => {
-    if (deleteChecked[e]) {
-      await customFetcher(e);
-    }
-  });
+const editCategoty = async (target) => {
+  const formData = new FormData(target);
+  const updateObj = {
+    title: formData.get('category-title'),
+    description: formData.get('category-description'),
+  };
+
+  const data = {
+    target: target.getAttribute('id'),
+    dataObj: updateObj,
+    method: 'PATCH',
+  };
+
+  $categories.innerHTML = '';
+  await customFetcher(data);
+  await pageRender();
+};
+
+const createForm = async (target) => {
+  const formData = new FormData(target);
+  const updateObj = {
+    title: formData.get('category-title'),
+    description: formData.get('category-description'),
+  };
+
+  const data = {
+    target: '',
+    dataObj: updateObj,
+    method: 'POST',
+  };
+
+  $categories.innerHTML = '';
+  await customFetcher(data);
+  await pageRender();
+};
+const submitEventMap = {
+  edit_form(e) {
+    editCategoty(e);
+  },
+  create_form(e) {
+    createForm(e);
+  },
+};
+
+$admin_category_wapper.addEventListener('click', (e) => {
+  console.log(e.target);
+  if (!clickEventMap[e.target.className]) return;
+  clickEventMap[e.target.className](e.target);
 });
 
-const setFormEvent = (element) => {
-  console.log(element);
-  element.forEach((e) => {
-    checkedCategory(e[0]);
-
-    e.addEventListener('submit', (event) => {
-      event.preventDefault();
-      // console.log(event.target.getAttribute('id'));
-      const formData = new FormData(e);
-      // console.log(formData);
-      // console.log(formData.get('category-name'));
-      // console.log(formData.get('check'));
-    });
-  });
-};
+$admin_category_wapper.addEventListener('change', (e) => {});
+$admin_category_wapper.addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (!submitEventMap[e.target.className]) return;
+  submitEventMap[e.target.className](e.target);
+});
 
 window.addEventListener('DOMContentLoaded', async () => {
-  const $edit_form = await pageRender();
-  setFormEvent($edit_form);
+  await pageRender();
 });

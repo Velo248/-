@@ -27,9 +27,18 @@
             <div><span>수정 날짜</span></div>
           </div>
           <div class="categories"></div>
+          <div class="admin_create_category_container">
+            <span>새로운 카테고리 추가</span>
+            <form class="create_form">
+              <label for="category-title">카테고리 이름:</label>
+              <input name="category-title" type="text" />
+              <label for="category-description">카테고리 설명: </label>
+              <input name="category-description" type="text" />
+              <button type="submit">추가</button>
+            </form>
+          </div>
         </div>
-        <input class="test" type="checkbox" />
-        <button class="admin_category_edit_bnt">수정하기</button>
+        <button class="admin_edit_complete_bnt">완료</button>
       </div>
       <div class="editBntContainer"></div>
     </main>
@@ -37,22 +46,3 @@
     <script src="main.js"></script>
   </body>
 </html>
-
-<!-- <div class="itemContainer">
-  <ul>
-    <ol class="item">
-      카테고리1 클릭가능하게 할까?
-    </ol>
-    <ol class="item">
-      카테고리1
-    </ol>
-    <ol class="item">
-      카테고리1
-    </ol>
-    <ol class="item">
-      카테고리1
-    </ol>
-    <ol class="item">
-      카테고리1
-    </ol>
-  </ul> -->
