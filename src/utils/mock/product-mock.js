@@ -1,0 +1,67 @@
+export const productMockData = [
+  {
+    title: '여성 청바지',
+    sellerId: '6363d2be949e3adede0a6edd',
+    categoryId: '63509d6fef340d0fb686604e',
+    manufacturer: '바지나라',
+    shortDescription: '여성용 여름 청바지',
+    detailDescription: '시원하고 편안한 청바지로 여름철에 입기 제격입니다.',
+    imageKey:
+      '%EC%B2%AD%EB%B0%94%EC%A7%80/xnfaj_tamara-bellis-zDyJOj8ZXG0-unsplash.jpg',
+    inventory: 25,
+    price: 29000,
+    searchKeywords: ['여자옷', '청바지', '여름'],
+    isRecommended: false,
+    discountPercent: 0,
+  },
+  {
+    title: '찢어진 청바지',
+    sellerId: '6363d2be949e3adede0a6edd',
+    categoryId: '63509d6fef340d0fb686604e',
+    manufacturer: '새로운 바지',
+    shortDescription: '굉장히 힙한 청바지',
+    detailDescription:
+      '과감하게 찢어진 청바지로 남들과는 다른 개성을 드러내세요.',
+    imageKey:
+      '%EC%B2%AD%EB%B0%94%EC%A7%80/0om9i_haley-phelps-RgJ-NU_qWjM-unsplash.jpg',
+    inventory: 13,
+    price: 35000,
+    searchKeywords: ['청바지', '개성있는'],
+    isRecommended: false,
+    discountPercent: 0,
+  },
+  {
+    title: '진한 청바지',
+    sellerId: '6363d2be949e3adede0a6edd',
+    categoryId: '63509d6fef340d0fb686604e',
+    manufacturer: '바지나라',
+    shortDescription: '다크하고 딥한 청바지',
+    detailDescription: '바지나라에서 출시한 탄탄한 청바지입니다.',
+    imageKey:
+      '%EC%B2%AD%EB%B0%94%EC%A7%80/dxwwm_matt-moloney-BBH3z2Jv0WQ-unsplash.jpg',
+    inventory: 7,
+    price: 44000,
+    searchKeywords: ['바지나라', '청바지'],
+    isRecommended: false,
+    discountPercent: 0,
+    createdAt: '2022-10-20T04:23:40.071Z',
+    updatedAt: '2022-10-20T04:23:40.071Z',
+    __v: 0,
+  },
+  {
+    title: '베이직 티셔츠',
+    sellerId: '6363d2f8ae6829fbbe751fb1',
+    categoryId: '6350a6e5d6120b67050df0dd',
+    detailDescription:
+      '맑고 깨끗한 흰색 티셔츠로 꼭 가지고 있어야할 기본 티셔츠입니다.',
+    discountPercent: 0,
+    imageKey:
+      '%EA%B8%B4%ED%8C%94%20%ED%8B%B0%EC%85%94%EC%B8%A0/l8pme_mediamodifier-7cERndkOyDw-unsplash.jpg',
+    inventory: 16,
+    isRecommended: false,
+    manufacturer: '필수 의류제조',
+    price: 13000,
+    searchKeywords: ['흰색', '긴팔'],
+    shortDescription: '겨울철 이너로 입기 좋은 흰색 긴팔 셔츠',
+  },
+];

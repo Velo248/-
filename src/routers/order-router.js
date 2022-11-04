@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { query, Router } from 'express';
 import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { isAdmin, loginRequired } from '../middlewares';
@@ -13,8 +13,44 @@ orderRouter.get(
   isAdmin,
   async (req, res, next) => {
     try {
-      const orders = await orderService.getOrders();
-      res.status(200).json(orders);
+      const sort = req.query.sort || 'created_date';
+      const sortOrder = req.query.sortOrder || 'asc'; // url 쿼리에서 order 받기, 기본값 asc
+      const offset = Number(req.query.offset || 1); // url 쿼리에서 offset 받기, 기본값 1
+      const limit = Number(req.query.limit || 10); // url 쿼리에서 limit 받기, 기본값 10
+      //sortKey은 임의로 정한 것 변경 필요
+      const sortKey = {
+        created_date: 'createdAt',
+        updated_date: 'updatedAt',
+      };
+      const sortOrderType = { asc: 1, desc: -1 };
+      if (!Object.keys(sortKey).includes(sort)) {
+        throw new Error(
+          `잘못된 sort값 입니다. ['created_date', 'updated_date'] 중에서 선택해주세요`,
+        );
+      }
+      if (!Object.keys(sortOrderType).includes(sortOrder)) {
+        throw new Error(
+          `잘못된 order값 입니다.['asc', 'desc'] 중에서 선택해주세요`,
+        );
+      }
+      if (offset < 1 || 5000 <= offset) {
+        throw new Error('offset 범위는 1-5000입니다.');
+      }
+      if (limit < 1 || 100 <= limit) {
+        throw new Error('limit 범위는 1-100입니다.');
+      }
+      const query = {
+        sortKey: sortKey[sort],
+        sortOrder: sortOrderType[sortOrder],
+        offset,
+        limit,
+      };
+      const [orderTotal, orders] = await Promise.all([
+        orderService.getOrdersCount(),
+        orderService.getOrders(query),
+      ]);
+      const totalOrderPage = Math.ceil(orderTotal / limit);
+      res.status(200).json({ orders, totalOrderPage });
     } catch (error) {
       next(error);
     }
