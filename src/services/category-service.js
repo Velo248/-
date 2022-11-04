@@ -8,9 +8,7 @@ class CategoryService {
   //카테고리 추가
   async addCategory(categoryInfo) {
     //같은이름의 카테고리가 이미 있다면 추가하지 않음
-    const category = await categoryService.getCategoryByName(
-      categoryInfo.title,
-    );
+    const category = await this.categoryModel.findOneByName(categoryInfo.title);
     if (category) {
       throw new Error(
         '이 이름은 현재 사용중입니다. 다른 이름을 입력해 주세요..',
