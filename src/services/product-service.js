@@ -13,7 +13,7 @@ class ProductService {
 
   //상품 전체 목록을 받음
   async getProductlist() {
-    const products = await this.productModel.findAll();
+    const products = await this.productModel.findAll({});
     return products;
   }
 
