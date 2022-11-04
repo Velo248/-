@@ -12,6 +12,8 @@ const postAPI = async (url, obj) => {
   ).json();
 };
 
+const routeToken = async (url, token) => {};
+
 const changeLocation = (url) => {
   location.href = `${url}`;
   location.replace(`${url}`);
@@ -37,7 +39,7 @@ $loginBtn.addEventListener('click', async (e) => {
     sessionStorage.setItem('token', token);
     alert('관리자 유저 로그인 성공');
     changeLocation('/admin-main');
-  } else if (data.isAdmin === false) {
+  } else if (!data.isAdmin) {
     alert('일반 유저 로그인 성공');
     changeLocation('/');
   } else {
