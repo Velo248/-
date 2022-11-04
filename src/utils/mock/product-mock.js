@@ -1,6 +1,5 @@
-export const productMockData = () => [
+export const productMockData = [
   {
-    _id: '63509e34ef340d0fb6866053',
     title: '여성 청바지',
     sellerId: '6363d2be949e3adede0a6edd',
     categoryId: '63509d6fef340d0fb686604e',
@@ -14,12 +13,8 @@ export const productMockData = () => [
     searchKeywords: ['여자옷', '청바지', '여름'],
     isRecommended: false,
     discountPercent: 0,
-    createdAt: '2022-10-20T01:02:44.268Z',
-    updatedAt: '2022-10-20T01:02:44.268Z',
-    __v: 0,
   },
   {
-    _id: '6350a8ecd6120b67050df0f6',
     title: '찢어진 청바지',
     sellerId: '6363d2be949e3adede0a6edd',
     categoryId: '63509d6fef340d0fb686604e',
@@ -34,12 +29,8 @@ export const productMockData = () => [
     searchKeywords: ['청바지', '개성있는'],
     isRecommended: false,
     discountPercent: 0,
-    createdAt: '2022-10-20T01:48:28.062Z',
-    updatedAt: '2022-10-20T01:48:28.062Z',
-    __v: 0,
   },
   {
-    _id: '6350cd4c2981903bb599210a',
     title: '진한 청바지',
     sellerId: '6363d2be949e3adede0a6edd',
     categoryId: '63509d6fef340d0fb686604e',
@@ -58,9 +49,9 @@ export const productMockData = () => [
     __v: 0,
   },
   {
-    _id: '6350a795d6120b67050df0e2',
+    title: '베이직 티셔츠',
+    sellerId: '6363d2f8ae6829fbbe751fb1',
     categoryId: '6350a6e5d6120b67050df0dd',
-    createdAt: '2022-10-20T01:42:45.074Z',
     detailDescription:
       '맑고 깨끗한 흰색 티셔츠로 꼭 가지고 있어야할 기본 티셔츠입니다.',
     discountPercent: 0,
@@ -71,10 +62,6 @@ export const productMockData = () => [
     manufacturer: '필수 의류제조',
     price: 13000,
     searchKeywords: ['흰색', '긴팔'],
-    sellerId: '6363d2f8ae6829fbbe751fb1',
     shortDescription: '겨울철 이너로 입기 좋은 흰색 긴팔 셔츠',
-    title: '베이직 티셔츠',
-    updatedAt: '2022-10-20T01:42:45.074Z',
-    __v: 0,
   },
 ];
