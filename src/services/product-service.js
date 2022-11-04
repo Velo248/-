@@ -28,6 +28,11 @@ class ProductService {
     const product = await this.productModel.findByName(product_name);
     return product;
   }
+  //상품 아이디로 가져옴
+  async getProductByProductId(productId) {
+    const product = await this.productModel.findById(productId);
+    return product;
+  }
 
   //상품정보 수정
   async updateProduct(productId, toUpdate) {
