@@ -65,7 +65,7 @@ const init = async () => {
 
   username.innerText = user.fullName;
   email.innerText = user.email;
-  phone.innerText = user.phone;
+  phone.innerText = user.phoneNumber;
   if (user.address) {
     addressLong.innerText = user.address.address1;
     addressDetail.innerText = user.address.address2;
