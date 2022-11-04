@@ -1,10 +1,10 @@
 //비밀번호 1234 고정 admin 계정 맨 밑꺼
 export const userMockData = [
   {
-    email: 'admin1@test.com',
-    fullName: 'admin1',
+    email: 'admin@test.com',
+    fullName: 'admin',
     password: '$2b$10$YNI87UIFk86lXvDtBwO/8.NLIe3uCxZtzlEOO/lAv9EIGWtUOELaW',
-    role: 'basic-user',
+    role: 'admin',
   },
   {
     email: 'elice1@test.com',
