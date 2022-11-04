@@ -32,7 +32,7 @@ class CategoryService {
     return category;
   }
   //카테고리 아이디로 카테고리 받음
-  async getCategoryByName(title) {
+  async getCategoryByTitle(title) {
     const category = await this.categoryModel.findOneByName(title);
     return category;
   }
@@ -54,10 +54,10 @@ class CategoryService {
     return category;
   }
   //카테고리 이름으로 삭제
-  async deleteCategory(title) {
-    const deletedCategory = await this.categoryModel.findOneAndDelete({
-      title,
-    });
+  async deleteCategory(categoryId) {
+    const deletedCategory = await this.categoryModel.findOneAndDelete(
+      categoryId,
+    );
     return deletedCategory;
   }
 }

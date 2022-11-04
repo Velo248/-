@@ -21,8 +21,10 @@ export class CategoryModel {
     const category = await Category.findOne({ title });
     return category;
   }
-  async findOneAndDelete(query) {
-    const deletedCategory = await Category.findOneAndDelete(query);
+  async findOneAndDelete(categoryId) {
+    const deletedCategory = await Category.findOneAndDelete({
+      _id: categoryId,
+    });
     return deletedCategory;
   }
   async update({ categoryId, update }) {
