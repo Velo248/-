@@ -4,8 +4,12 @@ import { OrderSchema } from '../schemas/order-schema';
 const Order = model('orders', OrderSchema);
 
 export class OrderModel {
-  async findAll() {
-    const orders = await Order.find({});
+  async findAll(query) {
+    const { sortKey, sortOrder, limit, offset } = query;
+    const orders = await Order.find({})
+      .sort({ [sortKey]: sortOrder })
+      .skip(limit * (offset - 1))
+      .limit(limit);
     return orders;
   }
 
@@ -42,6 +46,10 @@ export class OrderModel {
 
   async insertAll(data) {
     await Order.insertMany(data);
+  }
+
+  async getCountOrders() {
+    return await Order.countDocuments({});
   }
 }
 
