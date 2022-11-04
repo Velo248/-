@@ -1,3 +1,5 @@
+import { decodeJwt } from '/public/scripts/common.js';
+
 const getLocalStroageItem = (itemKey) => {
   return JSON.parse(localStorage.getItem(itemKey));
 };
@@ -36,7 +38,27 @@ const paintBasket = (basketItemList, basketData) => {
 };
 
 const init = async () => {
-  const isLoggedIn = sessionStorage.getItem('token') ?? null;
+  const loginToken = sessionStorage.getItem('token') ?? null;
+  let basketItems;
+  if (!isLoggedIn) {
+    const { userId } = decodeJwt(loginToken);
+    if (!userId) {
+      alert('비정상적인 접근입니다.');
+      sessionStorage.removeItem('token');
+      location.href = '/';
+    } else {
+      basketItems = await (
+        await fetch('/api/basket', {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${loginToken}`,
+          },
+        })
+      ).json();
+    }
+  } else {
+    basketItems = getLocalStroageItem('basket');
+  }
   const basket = document.querySelector('.basket');
   const basketChkAllBtn = document.querySelector('#basketChkAll');
   const basketItemList = document.querySelector('.basket_item_list');
@@ -48,7 +70,7 @@ const init = async () => {
   // basketItemList.innerHTML = '';
 
   // guset basket
-  const basketItems = getLocalStroageItem('basket');
+  basketItems = getLocalStroageItem('basket');
 
   // loggedInUser basket
   // const basketItems = await (await fetch()).json();
