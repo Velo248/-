@@ -1,9 +1,13 @@
 /**
- * JSON 파일 만들고 DOM 집어서 그안에 차례로 삽입
- *
- *
+ * 1. 싱세 페이지 불러오는 방법이 어떻게 되지...
+ *  -> API에 req를 함께 어떻게 보내면 될지 찾아보기
+ *  = a태그 아이디 쏴줄값...
+ * 2. img src 폴더와 명명법(분류imageKey로?)을 백이랑 안정함
+ * 3. 자식 노드를 손쉽게 삭제 하는 방법은
+ *  결국 부모 태그를 따로 저장하고 삭제 후 다시 만들어서 넣는법인가 ㅠㅠ
  */
 
+// api json 불러오기
 const getAPI = async (url) => {
   return (await fetch(`${url}`)).json();
 };
@@ -57,7 +61,7 @@ const getAllItems = async () => {
     /* src, imageKey 정하고 풀어주기*/
     // console.log(el.imageKey);
     // console.log(el.shortDescription);
-    /* ---4. a태그 /products/뒤에 쏴줄값 삽입 => 라우팅 해야하나? ---*/
+    /* ---1. a태그 /products/뒤에 쏴줄값 삽입 => 라우팅..? 해야하나? ---*/
     products += ` <div class="img_wrap">
         <a href="/products"><img src="${el.imageKey}" alt="${el.shortDescription}" /></a>
       </div>`;
