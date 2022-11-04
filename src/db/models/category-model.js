@@ -13,6 +13,10 @@ export class CategoryModel {
     const categories = await Category.find({});
     return categories;
   }
+  async findOneById(categoryId) {
+    const category = await Category.findOne({ _id: categoryId });
+    return category;
+  }
   async findOneByName(title) {
     const category = await Category.findOne({ title });
     return category;
@@ -20,6 +24,17 @@ export class CategoryModel {
   async findOneAndDelete(query) {
     const deletedCategory = await Category.findOneAndDelete(query);
     return deletedCategory;
+  }
+  async update({ categoryId, update }) {
+    const filter = { categoryId };
+    const option = { returnOriginal: false };
+
+    const updatedCategory = await Category.findOneAndUpdate(
+      filter,
+      update,
+      option,
+    );
+    return updatedCategory;
   }
   async deleteAll() {
     await Category.deleteMany({});

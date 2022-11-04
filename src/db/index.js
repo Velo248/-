@@ -1,10 +1,18 @@
 import mongoose from 'mongoose';
-import { mockGenerator } from '../utils/data-pull';
-const DB_URL =
-  process.env.MONGODB_URL ||
-  'MongoDB 서버 주소가 설정되지 않았습니다.\n./db/index.js 파일을 확인해 주세요. \n.env 파일도 필요합니다.\n';
+import { mockGenerator } from '../utils/mock-generator';
 
-mongoose.connect(DB_URL);
+if (process.env.MONGODB_URL === undefined) {
+  throw new Error(
+    '어플리케이션을 시작하려면 Mongo DB URL(MONGODB_URL) 환경변수가 필요합니다.',
+  );
+}
+
+const DB_URL = process.env.MONGODB_URL;
+
+mongoose.connect(DB_URL, {
+  minPoolSize: 4, // min pool size 설정
+  maxPoolSize: 20, // max pool size 설정
+});
 const db = mongoose.connection;
 
 db.on('connected', async () => {

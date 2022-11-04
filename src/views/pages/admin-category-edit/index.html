@@ -5,73 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../../../public/css/style.css" />
+    <!-- <link rel="stylesheet" href="../../../public/css/style.css" /> -->
     <link rel="stylesheet" href="custom.css" />
   </head>
   <body>
     <header>
-      <nav></nav>
+      <nav>haeder</nav>
     </header>
-    <main class="main">
-      <div class="adminCategoryWapper">
-        <div class="deleteCategoryBntContainer">
-          <button>선택 삭제</button>
+    <main>
+      <div class="admin_category_wapper">
+        <div class="admin_category_header">
+          <h1>카테고리 목록</h1>
+          <button class="selected_category_delete_bnt">선택 샥제</button>
         </div>
-        <div class="workspace">
-          <div class="category">
-            <input class="categoryCheck" type="checkbox" />
-            <span>카테고리</span>
+        <div class="admin_category_workspace">
+          <div class="category_list">
+            <input type="checkbox" />
+            <div class="category_name"><span>카테고리 이름</span></div>
+            <div><span>카테고리 설명</span></div>
+            <div><span>생성 날짜</span></div>
+            <div><span>수정 날짜</span></div>
           </div>
-          <div class="itemContainer">
-            <ul>
-              <ol class="item">
-                <input class="categoryCheck" type="checkbox" />
-                <input
-                  class="categoryEdit"
-                  value="카테고리1 클릭가능하게 할까?"
-                />
-                <button>수정완료</button>
-              </ol>
-              <ol class="item">
-                <input class="categoryCheck" type="checkbox" />
-                <input
-                  class="categoryEdit"
-                  value="카테고리1 클릭가능하게 할까?"
-                />
-                <button>수정완료</button>
-              </ol>
-              <ol class="item">
-                <input class="categoryCheck" type="checkbox" />
-                <input
-                  class="categoryEdit"
-                  value="카테고리1 클릭가능하게 할까?"
-                />
-                <button>수정완료</button>
-              </ol>
-              <ol class="item">
-                <input class="categoryCheck" type="checkbox" />
-                <input
-                  class="categoryEdit"
-                  value="카테고리1 클릭가능하게 할까?"
-                />
-                <button>수정완료</button>
-              </ol>
-              <ol class="item">
-                <input class="categoryCheck" type="checkbox" />
-                <input
-                  class="categoryEdit"
-                  value="카테고리1 클릭가능하게 할까?"
-                />
-                <button>수정완료</button>
-              </ol>
-            </ul>
-          </div>
+          <div class="categories"></div>
         </div>
-        <div class="editBntContainer">
-          <button>완료</button>
-        </div>
+        <input class="test" type="checkbox" />
+        <button class="admin_category_edit_bnt">수정하기</button>
       </div>
+      <div class="editBntContainer"></div>
     </main>
     <footer></footer>
+    <script src="main.js"></script>
   </body>
 </html>
+
+<!-- <div class="itemContainer">
+  <ul>
+    <ol class="item">
+      카테고리1 클릭가능하게 할까?
+    </ol>
+    <ol class="item">
+      카테고리1
+    </ol>
+    <ol class="item">
+      카테고리1
+    </ol>
+    <ol class="item">
+      카테고리1
+    </ol>
+    <ol class="item">
+      카테고리1
+    </ol>
+  </ul> -->

@@ -6,9 +6,9 @@ import { orderService } from '../services';
 
 const orderRouter = Router();
 
-//전체 유저 주문목록조회 API - GET /orderlist/all
+//전체 유저 주문목록조회 API -
 orderRouter.get(
-  '/orderlist/all',
+  '/admin/orders',
   loginRequired,
   isAdmin,
   async (req, res, next) => {
@@ -39,39 +39,33 @@ orderRouter.get(
       if (limit < 1 || 100 <= limit) {
         throw new Error('limit 범위는 1-100입니다.');
       }
-      const query = {
+      const newQuery = {
         sortKey: sortKey[sort],
         sortOrder: sortOrderType[sortOrder],
         offset,
         limit,
       };
-      const [orderTotal, orders] = await Promise.all([
-        orderService.getOrdersCount(),
-        orderService.getOrders(query),
-      ]);
-      const totalOrderPage = Math.ceil(orderTotal / limit);
-      res.status(200).json({ orders, totalOrderPage });
+      const { orders, ...query } = await orderService.getOrdersByAdmin(
+        newQuery,
+      );
+      res.status(200).json({ ...query, orders });
     } catch (error) {
       next(error);
     }
   },
 );
 
-// 현재 로그인한 유저를 기준으로 주문목록조회 API -  GET /orderlist/user
-orderRouter.get(
-  '/orderlist/user',
-  loginRequired,
-  async function (req, res, next) {
-    try {
-      const userId = req.currentUserId;
-      const order = await orderService.getOrderByUserId(userId);
-      res.status(200).json(order);
-    } catch (error) {
-      next(error);
-    }
-  },
-);
-// orderID를 기준으로 주문목록조회 API - GET /orders/{orderId}
+// 현재 로그인한 유저를 기준으로 주문목록조회
+orderRouter.get('/orders', loginRequired, async function (req, res, next) {
+  try {
+    const { currentUserId } = req;
+    const order = await orderService.getOrderByUserId(currentUserId);
+    res.status(200).json({ order });
+  } catch (error) {
+    next(error);
+  }
+});
+// orderID를 기준으로 주문목록조회 API -
 orderRouter.get(
   '/orders/:orderId',
   loginRequired,
@@ -79,14 +73,14 @@ orderRouter.get(
     try {
       const { orderId } = req.params;
       const order = await orderService.getOrderByOrderId(orderId);
-      res.status(200).json(order);
+      res.status(200).json({ order });
     } catch (error) {
       next(error);
     }
   },
 );
-// 주문목록에 데이터 추가 -  POST /api/orderitem
-orderRouter.post('/orderitem', loginRequired, async (req, res, next) => {
+// 주문목록에 데이터 추가 -
+orderRouter.post('/orders', loginRequired, async (req, res, next) => {
   try {
     //user Id 받아옴 loginRequired 27 line 참조
     const currentUserId = req.currentUserId;
@@ -108,7 +102,7 @@ orderRouter.post('/orderitem', loginRequired, async (req, res, next) => {
       status,
     };
     const newOrder = await orderService.addOrder(orderInfo);
-    res.status(201).json(newOrder);
+    res.status(201).json({ newOrder });
   } catch (error) {
     next(error);
   }
@@ -142,7 +136,7 @@ orderRouter.patch(
       const updateOrderInfo = await orderService.setOrder(orderId, toUpdate);
 
       // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
-      res.status(200).json(updateOrderInfo);
+      res.status(200).json({ updateOrderInfo });
     } catch (error) {
       next(error);
     }
@@ -155,11 +149,8 @@ orderRouter.delete(
   async (req, res, next) => {
     try {
       const { orderId } = req.params;
-      const order = await orderService.deleteOrder(orderId);
-      //status 확인 후 중간에 브레이크
-      //if(order.status){
-      //}
-      res.status(200).json(order);
+      const deletedResult = await orderService.deleteOrder(orderId);
+      res.status(200).json(deletedResult);
     } catch (error) {
       next(error);
     }

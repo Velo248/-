@@ -2,6 +2,19 @@ const $admin_category_workspace = document.querySelector(
   '.admin_category_workspace',
 );
 
+const $back_admin_main_bnt = document.querySelector('.back_admin_main_bnt');
+const $admin_category_edit_bnt = document.querySelector(
+  '.admin_category_edit_bnt',
+);
+
+$admin_category_edit_bnt.addEventListener('click', () => {
+  location.href = '/admin-category-edit';
+});
+
+$back_admin_main_bnt.addEventListener('click', () => {
+  location.href = '/admin-main';
+});
+
 const elementCreater = (current, add) => {
   current.innerHTML += add;
 };

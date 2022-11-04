@@ -71,9 +71,15 @@ class OrderService {
     return order;
   }
 
-  async getOrdersCount() {
-    const orders = await this.orderModel.getCountOrders();
-    return orders;
+  async getOrdersByAdmin(query) {
+    const [orderTotal, orders] = await Promise.all([
+      this.orderModel.getOrdersCount(),
+      this.orderModel.findAll(query),
+    ]);
+    const { limit } = query;
+    // const totalOrderPage = Math.ceil(orderTotal / limit);
+    // 총페이지필요하면 그때
+    return { orders };
   }
 }
 
