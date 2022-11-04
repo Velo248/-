@@ -21,10 +21,10 @@ const makeCategoryList = async () => {
   }
 
   categoryList.forEach((el) => {
-    titles += `<li><a href="/${el.title}" onclick="">${el.title}</a></li>`;
+    titles += `<li><a href="/${el._id}" onclick="">${el.title}</a></li>`;
   });
 
-  $categoryList.insertAdjacentHTML('beforeend', titles);
+  $categoryList.innerHTML = `${titles}`;
 };
 
 // 모든 아이템 가져오기
@@ -48,11 +48,11 @@ const getAllItems = async () => {
     // console.log(el.shortDescription);
     /* ---4. a태그 /products/뒤에 쏴줄값 삽입 => 라우팅 해야하나? ---*/
     products += ` <div class="img_wrap">
-        <a href="/products"><img src="${el.imageKey}" alt="${el.shortDescription}" /></a>
+        <a href="/products"><img src="/public/images/products/driedFood/driedFood0.jpg" alt="${el.shortDescription}" /></a>
       </div>`;
   });
-  //   $productsBox.remove('div');
-  $productsBox.insertAdjacentHTML('beforeend', products);
+
+  $productsBox.innerHTML = `${products}`;
 };
 
 const openDetail = (e) => {
@@ -72,24 +72,24 @@ const getCategoryItems = () => {
         getAllItems();
       } else {
         let selectedItems = [];
-        let apiLink = e.target.href.split('/').pop();
+        let _id = e.target.href.split('/').pop();
         // 예시 title: 'feed';
         // console.log(apiLink); // feed
         let $productsBox = document.querySelector('.products_box');
         let selectedBox = ``;
 
         try {
-          selectedItems = await getAPI(`/api/products/category/${apiLink}`);
+          selectedItems = await getAPI(`/api/products/category/${_id}`);
         } catch (err) {
           console.log('에러 발생!!');
           console.log(err);
         }
         selectedItems.forEach((el) => {
           selectedBox += `<div class="img_wrap">
-          <a href="/products" onclick="openDetail" data-itemId="${el._id}"><img src="${el.imageKey}" alt="${el.shortDescription}" /></a>
+          <a href="/products"><img src="/public/images/products/driedFood/driedFood0.jpg" alt="${el.shortDescription}" /></a>
         </div>`;
         });
-        $productsBox.insertAdjacentHTML('beforeend', selectedBox);
+        $productsBox.innerHTML = `${selectedBox}`;
       }
     });
   });

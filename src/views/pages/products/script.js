@@ -48,7 +48,7 @@ const getAllItems = async () => {
   <button onclick="getItem('${idKey}')">장바구니 담기</button>
 </div>`;
 
-  $productDetail.insertAdjacentHTML('beforeend', products);
+  $productDetail.innerHTML = `${products}`;
 };
 
 const getItem = (idKey) => {
