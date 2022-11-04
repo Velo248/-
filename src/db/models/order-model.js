@@ -48,7 +48,7 @@ export class OrderModel {
     await Order.insertMany(data);
   }
 
-  async getCountOrders() {
+  async getOrdersCount() {
     return await Order.countDocuments({});
   }
 }
