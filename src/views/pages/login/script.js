@@ -36,7 +36,7 @@ $loginBtn.addEventListener('click', async (e) => {
   let data = await postAPI('/api/login', headerObj);
   if (data.isAdmin) {
     token = data.token;
-    sessionStorage.setItem('authorization', token);
+    sessionStorage.setItem('token', token);
     alert('관리자 유저 로그인 성공');
     changeLocation('/admin-main');
   } else if (!data.isAdmin) {
