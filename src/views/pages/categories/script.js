@@ -7,22 +7,6 @@
  *  결국 부모 태그를 따로 저장하고 삭제 후 다시 만들어서 넣는법인가 ㅠㅠ
  */
 
-// api json 불러오기
-const getAPI = async (url) => {
-  return (await fetch(`${url}`)).json();
-};
-
-document.addEventListener('DOMContentLoaded', async () => {
-  /* ----- 카테고리 리스트 만들기 ----- */
-  await makeCategoryList();
-
-  /* ----- ALL 탭에서 모든 제품 가져오기 ----- */
-  await getAllItems();
-
-  /* ----- 카테고리 별 아이템 불러오기 ----- */
-  await getCategoryItems();
-});
-
 const makeCategoryList = async () => {
   let categoryList = [];
   let $categoryList = document.querySelector('.category_list');
@@ -67,6 +51,8 @@ const getAllItems = async () => {
       </div>`;
   });
   //   $productsBox.remove('div');
+  $productsBox.insertHTML = '';
+
   $productsBox.insertAdjacentHTML('beforeend', products);
 };
 
@@ -103,3 +89,21 @@ const getCategoryItems = () => {
     });
   });
 };
+
+
+
+// api json 불러오기
+const getAPI = async (url) => {
+  return (await fetch(`${url}`)).json();
+};
+
+document.addEventListener('DOMContentLoaded', async () => {
+  /* ----- 카테고리 리스트 만들기 ----- */
+  await makeCategoryList();
+
+  /* ----- ALL 탭에서 모든 제품 가져오기 ----- */
+  await getAllItems();
+
+  /* ----- 카테고리 별 아이템 불러오기 ----- */
+  await getCategoryItems();
+});

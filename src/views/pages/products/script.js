@@ -5,11 +5,6 @@ const getAPI = async (url) => {
   return (await fetch(`${url}`)).json();
 };
 
-document.addEventListener('DOMContentLoaded', async () => {
-  // /* ----- ALL 탭에서 모든 제품 가져오기 ----- */
-  await getAllItems();
-});
-
 // 모든 아이템 가져오기
 // 변형해서 임시로 사용
 const getAllItems = async () => {
@@ -17,7 +12,7 @@ const getAllItems = async () => {
   let products = '';
 
   try {
-    productsList = await getAPI('/api/productlist'); // 임시로 할거라 1개만
+    const productsList = await getAPI('/api/productlist'); // 임시로 할거라 1개만
   } catch (err) {
     console.log('에러 발생!!');
     console.log(err);
@@ -55,3 +50,9 @@ const getAllItems = async () => {
 
   $productDetail.insertAdjacentHTML('beforeend', products);
 };
+
+
+document.addEventListener('DOMContentLoaded', async () => {
+  // /* ----- ALL 탭에서 모든 제품 가져오기 ----- */
+  await getAllItems();
+});
