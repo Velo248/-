@@ -59,6 +59,17 @@ class ProductService {
     const deletedProduct = this.productModel.delete(productId);
     return deletedProduct;
   }
+
+  async getProductsByAdmin(query) {
+    const [productTotal, products] = await Promise.all([
+      this.productModel.getProductsCount(),
+      this.productModel.findAll(query),
+    ]);
+    const { limit } = query;
+    // const totalProductPage = Math.ceil(productTotal / limit);
+    // 총페이지필요하면 그때
+    return { products };
+  }
 }
 
 const productService = new ProductService(productModel);
