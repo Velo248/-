@@ -24,16 +24,16 @@ main ul li a {
   padding: 20px 0;
 }
 
-.categories_imgBox {
+.products_box {
   display: flex;
   flex-wrap: wrap;
 }
 
-.categories_imgBox .img_wrap {
+.products_box .img_wrap {
   width: 25%;
 }
 
-.categories_imgBox img {
+.products_box img {
   width: 100%;
   height: 100%;
 }

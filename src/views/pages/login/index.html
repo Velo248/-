@@ -4,22 +4,22 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../1.public/css/style.css" />
+    <link rel="stylesheet" href="/public/css/style.css" />
     <link rel="stylesheet" href="./custom.css" />
+    <script src="./script.js" defer></script>
   </head>
   <body>
     <header>
       <h1>
-        <!-- 임시로 제품 페이지 -->
-        <a href="../../2.pages/users/categories/categories.html"
-          ><img src="../../1.public/images/common/logo.png" alt="간식조아"
+        <a href="/"
+          ><img src="/public/images/common/logo.png" alt="간식조아"
         /></a>
       </h1>
       <nav>
-        <span><a href="../users/categories/categories.html">제품</a></span>
-        <span><a href="#none">로그인</a></span>
-        <span><a href="../users/basket/basket.html">장바구니</a></span>
-        <span><a href="../users/orders/orders.html">주문·배송</a></span>
+        <span><a href="/categories">제품</a></span>
+        <span><a href="/login">로그인</a></span>
+        <span><a href="/basket">장바구니</a></span>
+        <span><a href="/orders">주문·배송</a></span>
       </nav>
     </header>
     <main>
@@ -29,10 +29,10 @@
             <label class="label">Email</label>
             <div class="control has-icons-left has-icons-right">
               <input
-                class="input"
+                class="login-email input"
                 type="email"
-                placeholder="Email input"
-                value="hello@not-good.bye"
+                placeholder="이메일을 입력해주세요"
+                value=""
               />
               <span class="icon is-small is-left">
                 <i class="fas fa-envelope"></i>
@@ -51,8 +51,9 @@
                 type="password"
                 name="password"
                 id="password"
-                class="input"
-                value="**********"
+                class="login-pw input"
+                placeholder="비밀번호를 입력해주세요"
+                value=""
               />
               <span class="icon is-small is-left">
                 <!-- 자물쇠 아이콘 -->
@@ -63,7 +64,7 @@
 
           <div class="field is-grouped">
             <div class="control">
-              <button class="button is-link">Login</button>
+              <button class="login-btn button is-link">Login</button>
             </div>
           </div>
 
