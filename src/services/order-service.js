@@ -1,8 +1,10 @@
 import { orderModel } from '../db';
+import { productModel } from '../db';
 
 class OrderService {
-  constructor(orderModel) {
+  constructor(orderModel, productModel) {
     this.orderModel = orderModel;
+    this.productModel = productModel;
   }
 
   //GET
@@ -27,15 +29,51 @@ class OrderService {
   //POST
   //주문
   async addOrder(orderInfo) {
-    const { userId, summaryTitle, totalPrice, address, request, status } =
-      orderInfo;
+    const { userId, address, request, items } = orderInfo;
+    const orders = [];
+    for (const item of items) {
+      //현재 선택된 itemId, 사려는 갯수
+      const { itemId, count } = item;
+      //itemId로 Model에서 가져오기
+      const product = await this.productModel.findById(itemId);
+      //가격, 수량 가져오기
+      const { price, inventory } = product;
+      //수량체크
+      const isCanOrder = inventory >= count ? true : false;
+      //뺄수있을때 수량빼주기
+      if (!isCanOrder) {
+        throw new Error(`사려는 양보다 수량이 적습니다 `);
+      }
+      //사려는 물건 x 수량 계산
+      const priceCount = price * count;
+      const productName = product.manufacturer;
+      orders.push({ itemId, inventory, count, priceCount, productName });
+    }
+    let sumPrice = 0;
+    let summaryTitle = '';
+    //산만큼 수량 빼주기,
+    for (const order of orders) {
+      const { itemId, inventory, count, priceCount, productName } = order;
+      const newProduct = { inventory: inventory - count };
+      await this.productModel.update({
+        productId: itemId,
+        update: newProduct,
+      });
+      //사려는 총 합 계산
+      sumPrice += priceCount;
+      summaryTitle += `${productName} ,${count}개\n `;
+    }
+    //카트지우기? 일단 비워놔
+    //
+    //유저 정보 저장
+
+    //summaryTitle넣어주기<-
     const newOrderInfo = {
       userId,
-      summaryTitle,
-      totalPrice,
       address,
-      request,
-      status,
+      request: '테스트 메시징',
+      summaryTitle,
+      totalPrice: sumPrice,
     };
     const createdNewOrder = await this.orderModel.create(newOrderInfo);
     return createdNewOrder;
@@ -83,6 +121,6 @@ class OrderService {
   }
 }
 
-const orderService = new OrderService(orderModel);
+const orderService = new OrderService(orderModel, productModel);
 
 export { orderService };
