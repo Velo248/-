@@ -91,7 +91,7 @@ const init = async () => {
           'ko-kr',
         )}</div>
     `;
-    orderTable.insertAdjacentElement('afterbegin', orderColumn);
+    orderTable.appendChild(orderColumn);
   });
 };
 
