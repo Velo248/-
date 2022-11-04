@@ -33,7 +33,7 @@ const pageRender = async () => {
 };
 
 const getCategory = async () => {
-  const respose = await fetch('/api/categorylist');
+  const respose = await fetch('/api/categories');
   return await respose.json();
 };
 

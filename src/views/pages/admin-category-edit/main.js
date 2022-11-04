@@ -3,8 +3,15 @@ const $selected_category_delete_bnt = document.querySelector(
   '.selected_category_delete_bnt',
 );
 
+let deleteChecked = {};
+
 const elementCreater = (current, add) => {
   current.innerHTML += add;
+};
+
+const getCategory = async () => {
+  const respose = await fetch('/api/categories');
+  return await respose.json();
 };
 
 const pageRender = async () => {
@@ -23,7 +30,7 @@ const pageRender = async () => {
 
     const html_temp = `
       <div class="category_item">
-        <form class='edit_form' id=${_id} data-title=${title}>
+        <form class='edit_form' id=${_id}>
           <input class='category_checked'type='checkbox' >
           <input name='category-name' value=${title}>
           <input value=${description}>
@@ -41,7 +48,7 @@ const pageRender = async () => {
 };
 
 const customFetcher = async (data) => {
-  const res = await fetch(`/api/category/${data}`, {
+  const res = await fetch(`/api/categories/${data}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -61,29 +68,25 @@ const customFetcher = async (data) => {
   await pageRender();
 };
 
-const getCategory = async () => {
-  const respose = await fetch('/api/categorylist');
-  return await respose.json();
-};
-let obj = {};
-
-const selectedCategoryDelete = (target) => {
+const checkedCategory = (target) => {
+  const targetId = target.parentNode.getAttribute('id');
   target.addEventListener('click', () => {
-    obj[target.parentNode.getAttribute('data-title')] = target.checked;
-    console.log(obj);
+    deleteChecked[targetId] = target.checked;
   });
-
-  // element.addEventListener('click', async () => {
-  //   console.log(target.checked);
-  //   if (target.checked) {
-  //     await customFetcher(target.parentNode.getAttribute('data-title'));
-  //   }
-  // });
 };
+
+$selected_category_delete_bnt.addEventListener('click', () => {
+  Object.keys(deleteChecked).forEach(async (e) => {
+    if (deleteChecked[e]) {
+      await customFetcher(e);
+    }
+  });
+});
 
 const setFormEvent = (element) => {
+  console.log(element);
   element.forEach((e) => {
-    selectedCategoryDelete(e[0]);
+    checkedCategory(e[0]);
 
     e.addEventListener('submit', (event) => {
       event.preventDefault();
