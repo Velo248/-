@@ -8,24 +8,13 @@ const getAPI = async (url) => {
   return (await fetch(`${url}`)).json();
 };
 
-document.addEventListener('DOMContentLoaded', async () => {
-  /* ----- 카테고리 리스트 만들기 ----- */
-  await makeCategoryList();
-
-  /* ----- ALL 탭에서 모든 제품 가져오기 ----- */
-  await getAllItems();
-
-  /* ----- 카테고리 별 아이템 불러오기 ----- */
-  await getCategoryItems();
-});
-
 const makeCategoryList = async () => {
   let categoryList = [];
   let $categoryList = document.querySelector('.category_list');
   let titles = '<li><a href="/all">All</a></li>';
 
   try {
-    categoryList = await getAPI('/api/categorylist');
+    categoryList = await getAPI('/api/categories');
   } catch (err) {
     console.log('에러 발생!!');
     console.log(err);
@@ -46,7 +35,7 @@ const getAllItems = async () => {
   let products = '';
 
   try {
-    productsList = await getAPI('/api/productlist');
+    productsList = await getAPI('/api/products');
   } catch (err) {
     console.log('에러 발생!!');
     console.log(err);
@@ -64,6 +53,12 @@ const getAllItems = async () => {
   });
   //   $productsBox.remove('div');
   $productsBox.insertAdjacentHTML('beforeend', products);
+};
+
+const openDetail = (e) => {
+  e.preventDefault();
+  const targetLink = e.target.href.split('/').pop();
+  console.log(e.target.dataset.itemId);
 };
 
 // 카테고리 별 아이템 가져오기
@@ -84,14 +79,14 @@ const getCategoryItems = () => {
         let selectedBox = ``;
 
         try {
-          selectedItems = await getAPI(`/api/productlist/category/${apiLink}`);
+          selectedItems = await getAPI(`/api/products/category/${apiLink}`);
         } catch (err) {
           console.log('에러 발생!!');
           console.log(err);
         }
         selectedItems.forEach((el) => {
           selectedBox += `<div class="img_wrap">
-          <a href="/products"><img src="${el.imageKey}" alt="${el.shortDescription}" /></a>
+          <a href="/products" onclick="openDetail" data-itemId="${el._id}"><img src="${el.imageKey}" alt="${el.shortDescription}" /></a>
         </div>`;
         });
         $productsBox.insertAdjacentHTML('beforeend', selectedBox);
@@ -99,3 +94,14 @@ const getCategoryItems = () => {
     });
   });
 };
+
+document.addEventListener('DOMContentLoaded', async () => {
+  /* ----- 카테고리 리스트 만들기 ----- */
+  await makeCategoryList();
+
+  /* ----- ALL 탭에서 모든 제품 가져오기 ----- */
+  await getAllItems();
+
+  /* ----- 카테고리 별 아이템 불러오기 ----- */
+  await getCategoryItems();
+});
