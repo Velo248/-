@@ -21,13 +21,14 @@ viewsRouter.use('/admin-user-detail', serveStatic('admin-user-detail'));
 viewsRouter.use('/admin-user-list', serveStatic('admin-user-list'));
 viewsRouter.use('/admin-user-order', serveStatic('admin-user-order'));
 viewsRouter.use('/basket', serveStatic('basket'));
-viewsRouter.use('/categories', serveStatic('categories'));
+// viewsRouter.use('/categories', serveStatic('categories')); // 상품 페이지
+viewsRouter.use('/product', serveStatic('product')); // 상품 페이지
 viewsRouter.use('/login', serveStatic('login'));
 viewsRouter.use('/order-change', serveStatic('order-change'));
 viewsRouter.use('/orders/:orderId', serveStatic('order-detail'));
 viewsRouter.use('/pay-history', serveStatic('pay-history'));
 viewsRouter.use('/payments', serveStatic('payments'));
-viewsRouter.use('/products', serveStatic('products'));
+viewsRouter.use('/product-detail', serveStatic('product-detail'));
 viewsRouter.use('/profile', serveStatic('profile'));
 viewsRouter.use('/profile-edit', serveStatic('profile-edit'));
 viewsRouter.use('/register', serveStatic('register'));
