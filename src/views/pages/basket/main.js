@@ -8,7 +8,10 @@ const getLocalStroageItem = (itemKey) => {
 };
 
 const paintBasket = (basketItemList, basketData) => {
-  basketData?.forEach(({ _id, imgKey, name, price, count }) => {
+  basketData?.forEach(async ({ _id, count }) => {
+    const { imageKey, price, title } = await (
+      await fetch(`/api/products/${_id}`)
+    ).json();
     const itemWrapper = document.createElement('div');
     itemWrapper.className = 'flex-justify-between';
     itemWrapper.classList.add('product');
@@ -16,9 +19,9 @@ const paintBasket = (basketItemList, basketData) => {
     itemWrapper.innerHTML = `
           <input type="checkbox" />
           <div class="img_wrap">
-              <img src="${imgKey}" class="product_img" alt="${name}" />
+              <img src="${imageKey}" class="product_img" alt="${title}" />
           </div>
-          <div class="product_name">${name}</div>
+          <div class="product_name">${title}</div>
           <div class="product_price">${price.toLocaleString('ko-kr')}</div>
           <div>
             <input type="number" class="product_count" value="${Number(
@@ -93,8 +96,6 @@ const init = async () => {
       productTotalPrice.innerText = totalPrice.toLocaleString('ko-kr');
     }
   });
-
-  // select가 true가 될 때 발생하여 total_price를 업데이트하는 이벤트
 
   // 선택 삭제 버튼이벤트
   basket.addEventListener('click', (e) => {
