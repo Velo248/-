@@ -9,17 +9,16 @@ const getAPI = async (url) => {
 const getAllItems = async () => {
   let $productDetail = document.querySelector('.product-detail');
   let productsList = [];
-  let idKey = '바지'; // 임시로
+  let idKey = window.location.href.split('/').pop();
   let products = '';
   try {
-    productsList = await getAPI(`/api/productlist/category/${idKey}`);
+    productsList = await getAPI(`/api/products/${idKey}`);
   } catch (err) {
     console.log('에러 발생!!');
     console.log(err);
   }
 
   let data = productsList[0];
-  console.log(productsList[0]);
   products = `<div>
   <span>카테고리</span>
   <span>${idKey}</span>

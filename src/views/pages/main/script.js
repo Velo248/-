@@ -1,9 +1,3 @@
-/**
- * JSON 파일 만들고 DOM 집어서 그안에 차례로 삽입
- *
- *
- */
-
 const getAPI = async (url) => {
   return (await fetch(`${url}`)).json();
 };
@@ -42,23 +36,13 @@ const getAllItems = async () => {
   }
 
   productsList.forEach((el) => {
-    // console.log(el);
     /* src, imageKey 정하고 풀어주기*/
-    // console.log(el.imageKey);
-    // console.log(el.shortDescription);
-    /* ---4. a태그 /products/뒤에 쏴줄값 삽입 => 라우팅 해야하나? ---*/
     products += ` <div class="img_wrap">
-        <a href="/products"><img src="/public/images/products/driedFood/driedFood0.jpg" alt="${el.shortDescription}" /></a>
+        <a href="/product-detail/${el._id}" data-id="el"><img src="/public/images/products/driedFood/driedFood0.jpg" alt="${el.shortDescription}" /></a>
       </div>`;
   });
 
   $productsBox.innerHTML = `${products}`;
-};
-
-const openDetail = (e) => {
-  e.preventDefault();
-  const targetLink = e.target.href.split('/').pop();
-  console.log(e.target.dataset.itemId);
 };
 
 // 카테고리 별 아이템 가져오기
@@ -73,8 +57,6 @@ const getCategoryItems = () => {
       } else {
         let selectedItems = [];
         let _id = e.target.href.split('/').pop();
-        // 예시 title: 'feed';
-        // console.log(apiLink); // feed
         let $productsBox = document.querySelector('.products_box');
         let selectedBox = ``;
 
@@ -86,7 +68,7 @@ const getCategoryItems = () => {
         }
         selectedItems.forEach((el) => {
           selectedBox += `<div class="img_wrap">
-          <a href="/products"><img src="/public/images/products/driedFood/driedFood0.jpg" alt="${el.shortDescription}" /></a>
+          <a href="/product-detail/${el._id}}"><img src="/public/images/products/driedFood/driedFood0.jpg" alt="${el.shortDescription}" /></a>
         </div>`;
         });
         $productsBox.innerHTML = `${selectedBox}`;
