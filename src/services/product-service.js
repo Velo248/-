@@ -18,8 +18,8 @@ class ProductService {
   }
 
   //해당 카테고리의 상품 전체 목록을 받음
-  async getProductlistByCategory(category) {
-    const products = await this.productModel.findAllByCategory(category);
+  async getProductlistByCategory(categoryId) {
+    const products = await this.productModel.findAllByCategory(categoryId);
     return products;
   }
 

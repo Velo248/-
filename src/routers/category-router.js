@@ -6,8 +6,8 @@ import { categoryService } from '../services';
 
 const categoryRouter = Router();
 
-//전체 카테고리 조회 API - GET /api/categorylist
-categoryRouter.get('/categorylist', async (req, res, next) => {
+//전체 카테고리 조회 API - GET /api/categories
+categoryRouter.get('/categories', async (req, res, next) => {
   try {
     const categories = await categoryService.getCategorylist();
 
@@ -16,10 +16,20 @@ categoryRouter.get('/categorylist', async (req, res, next) => {
     next(error);
   }
 });
+//특정 카테고리 조회 API - GET /api/categories/{categoryId}
+categoryRouter.get('/categories/:categoryId', async (req, res, next) => {
+  try {
+    const { categoryId } = req.params;
+    const category = await categoryService.getCategory(categoryId);
+    res.status(200).json(category);
+  } catch (error) {
+    next(error);
+  }
+});
 
 //카테고리 추가 API - POST /category
 categoryRouter.post(
-  '/category',
+  '/categories',
   loginRequired,
   isAdmin,
   async (req, res, next) => {
@@ -31,16 +41,9 @@ categoryRouter.post(
           'headers의 Content-Type을 application/json으로 설정해주세요',
         );
       }
-
       // req (request)의 body 에서 데이터 가져오기
       const { title, description, themeClass, imageKey } = req.body;
-      //같은이름의 카테고리가 이미 있다면 추가하지 않음
-      const category = await categoryService.getCategory(title);
-      if (category) {
-        throw new Error(
-          '이 이름은 현재 사용중입니다. 다른 이름을 입력해 주세요..',
-        );
-      }
+
       const newCategory = await categoryService.addCategory({
         title,
         description,
@@ -56,9 +59,9 @@ categoryRouter.post(
   },
 );
 
-//카테고리 수정 API - PATCH /category/{title}
+//카테고리 수정 API - PATCH /category/{categoryId}
 categoryRouter.patch(
-  '/category/:title',
+  '/categories/:categoryId',
   loginRequired,
   isAdmin,
   async (req, res, next) => {
@@ -70,7 +73,7 @@ categoryRouter.patch(
           'headers의 Content-Type을 application/json으로 설정해주세요',
         );
       }
-      const categoryTitle = req.params.title;
+      const categoryId = req.params.categoryId;
       const { title, description, themeClass, imageKey } = req.body;
 
       // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
@@ -82,7 +85,7 @@ categoryRouter.patch(
         ...(imageKey && { imageKey }),
       };
       const updatedCategory = await categoryService.updateCategory(
-        categoryTitle,
+        categoryId,
         toUpdate,
       );
       res.status(200).json(updatedCategory);
@@ -92,17 +95,15 @@ categoryRouter.patch(
   },
 );
 
-//카테고리 삭제 API - DELETE /category/{title}
+//카테고리 삭제 API - DELETE /category/{categoryId}
 categoryRouter.delete(
-  '/category/:title',
+  '/categories/:categoryId',
   loginRequired,
   isAdmin,
   async (req, res, next) => {
     try {
-      const categoryTitle = req.params.title;
-      const deletedCategory = await categoryService.deleteCategory(
-        categoryTitle,
-      );
+      const categoryId = req.params.categoryId;
+      const deletedCategory = await categoryService.deleteCategory(categoryId);
       res.status(200).json(deletedCategory);
     } catch (error) {
       next(error);
