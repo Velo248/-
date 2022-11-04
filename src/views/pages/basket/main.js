@@ -1,11 +1,13 @@
-// guest와 user 차이
-// guest는 localStorage에서 불러옴
-// user는 localStorage와 DB를 합침?
-// 이벤트: 전체선택버튼 / 전체선택 해제 시 전부 해제 / 전체선택 후 삭제 / 결제버튼 /
-
 const getLocalStroageItem = (itemKey) => {
   return JSON.parse(localStorage.getItem(itemKey));
 };
+
+const setLocalStorageItem = (itemKey, data) => {
+  localStorage.setItem(itemKey, JSON.stringify(data));
+  return;
+};
+
+const parsePrice = (str) => parseInt(str.replace(/,/g, ''), 10);
 
 const paintBasket = (basketItemList, basketData) => {
   basketData?.forEach(async ({ _id, count }) => {
@@ -32,8 +34,6 @@ const paintBasket = (basketItemList, basketData) => {
     basketItemList.appendChild(itemWrapper);
   });
 };
-
-const parsePrice = (str) => parseInt(str.replace(/,/g, ''), 10);
 
 const init = async () => {
   const isLoggedIn = sessionStorage.getItem('token') ?? null;
