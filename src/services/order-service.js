@@ -7,8 +7,8 @@ class OrderService {
 
   //GET
   //주문가져오기
-  async getOrders() {
-    const orders = await this.orderModel.findAll();
+  async getOrders(query) {
+    const orders = await this.orderModel.findAll(query);
     return orders;
   }
 
@@ -57,7 +57,6 @@ class OrderService {
     return order;
   }
 
-  //DELETE
   //주문 삭제
   async deleteOrder(orderId) {
     // 우선 해당 id의 상품이 db에 있는지 확인
@@ -70,6 +69,11 @@ class OrderService {
     order = await this.orderModel.remove(orderId);
 
     return order;
+  }
+
+  async getOrdersCount() {
+    const orders = await this.orderModel.getCountOrders();
+    return orders;
   }
 }
 
