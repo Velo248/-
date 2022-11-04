@@ -12,12 +12,18 @@ const postAPI = async (url, obj) => {
   ).json();
 };
 
+// verification chk
+/*
+
+
+*/
+
 const routeToken = async (url, token) => {};
 
 const changeLocation = (url) => {
   location.href = `${url}`;
-  location.replace(`${url}`);
-  window.open(`${url}`);
+  // location.replace(`${url}`);
+  // window.open(`${url}`);
 };
 
 // 로그인 요청
