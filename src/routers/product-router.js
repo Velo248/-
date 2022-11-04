@@ -2,12 +2,12 @@ import { Router } from 'express';
 import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { isAdmin, loginRequired } from '../middlewares';
-import { categoryService, productService } from '../services';
+import { productService } from '../services';
 
 const productRouter = Router();
 
 //전체 상품조회 API - GET /api/productlist
-productRouter.get('/productlist', async (req, res, next) => {
+productRouter.get('/products', async (req, res, next) => {
   try {
     //전체 상품 목록을 얻음
     const products = await productService.getProductlist();
@@ -18,37 +18,23 @@ productRouter.get('/productlist', async (req, res, next) => {
   }
 });
 
-//특정 카테고리의 상품들 조회 API - GET /api/productlist/category/{title}
-productRouter.get(
-  '/productlist/category/:categoryTitle',
-  async (req, res, next) => {
-    try {
-      const categoryTitle = req.params.categoryTitle;
-      const category = await categoryService.getCategory(categoryTitle);
-
-      if (!category) {
-        res.status(403).json({
-          result: 'resources-not-found',
-          reason: '해당 이름의 카테고리가 없습니다.',
-        });
-      }
-      const products = await productService.getProductlistByCategory(
-        category._id,
-      );
-
-      res.status(200).json(products);
-    } catch (error) {
-      next(error);
-    }
-  },
-);
+//특정 카테고리의 상품들 조회 API - GET /api/productlist/category/category_id
+productRouter.get('/products/category/:categoryId', async (req, res, next) => {
+  try {
+    const categoryId = req.params.categoryId;
+    const products = await productService.getProductlistByCategory(categoryId);
+    res.status(200).json(products);
+  } catch (error) {
+    next(error);
+  }
+});
 
 //특정 상품 조회 API - GET /api/product/{productId}
 productRouter.get('/products/:productId', async (req, res, next) => {
   try {
     const { productId } = req.params;
     const product = await productService.getProductByProductId(productId);
-    res.status(200).json({ product });
+    res.status(200).json(product);
   } catch (error) {
     next(error);
   }
@@ -56,7 +42,7 @@ productRouter.get('/products/:productId', async (req, res, next) => {
 
 //상품 추가 API - /api/product
 productRouter.post(
-  '/product',
+  '/products',
   loginRequired,
   isAdmin,
   async (req, res, next) => {
@@ -119,7 +105,7 @@ productRouter.post(
 
 //상품 수정 API - PATCH/api/product/{productId}
 productRouter.patch(
-  '/product/:productId',
+  '/products/:productId',
   loginRequired,
   isAdmin,
   async (req, res, next) => {
@@ -176,7 +162,7 @@ productRouter.patch(
 
 //상품 삭제 API - DELETE /api/product/{productId}
 productRouter.delete(
-  '/product/:productId',
+  '/products/:productId',
   loginRequired,
   isAdmin,
   async (req, res, next) => {
