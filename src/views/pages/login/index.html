@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/public/css/style.css" />
     <link rel="stylesheet" href="./custom.css" />
+    <script src="./script.js" defer></script>
   </head>
   <body>
     <header>
@@ -28,10 +29,10 @@
             <label class="label">Email</label>
             <div class="control has-icons-left has-icons-right">
               <input
-                class="input"
+                class="login-email input"
                 type="email"
-                placeholder="Email input"
-                value="hello@not-good.bye"
+                placeholder="이메일을 입력해주세요"
+                value=""
               />
               <span class="icon is-small is-left">
                 <i class="fas fa-envelope"></i>
@@ -50,8 +51,9 @@
                 type="password"
                 name="password"
                 id="password"
-                class="input"
-                value="**********"
+                class="login-pw input"
+                placeholder="비밀번호를 입력해주세요"
+                value=""
               />
               <span class="icon is-small is-left">
                 <!-- 자물쇠 아이콘 -->
@@ -62,7 +64,7 @@
 
           <div class="field is-grouped">
             <div class="control">
-              <button class="button is-link">Login</button>
+              <button class="login-btn button is-link">Login</button>
             </div>
           </div>
 
