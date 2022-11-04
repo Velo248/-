@@ -1,28 +1,27 @@
 /**
- * 상세 조회 api가 없는건지 확인하기
+ * 장바구니 스토리지에 어떻게 담을지 상의
+ * 회원->DB에, 비회원은 세션 or 로컬 스토리지에
  */
 const getAPI = async (url) => {
   return (await fetch(`${url}`)).json();
 };
 
-// 모든 아이템 가져오기
-// 변형해서 임시로 사용
 const getAllItems = async () => {
   let $productDetail = document.querySelector('.product-detail');
+  let productsList = [];
+  let idKey = window.location.href.split('/').pop();
   let products = '';
-
   try {
-    const productsList = await getAPI('/api/productlist'); // 임시로 할거라 1개만
+    productsList = await getAPI(`/api/products/${idKey}`);
   } catch (err) {
     console.log('에러 발생!!');
     console.log(err);
   }
 
   let data = productsList[0];
-  console.log(productsList[0]);
   products = `<div>
   <span>카테고리</span>
-  <span>${data.title}</span>
+  <span>${idKey}</span>
 </div>
 <div>
   <span>제품명</span>
@@ -45,12 +44,21 @@ const getAllItems = async () => {
   <input id="count" class="detail-count" type="number" value="1" />
 </div>
 <div class="button_wrap">
-  <button>장바구니 담기</button>
+  <button onclick="getItem('${idKey}')">장바구니 담기</button>
 </div>`;
 
-  $productDetail.insertAdjacentHTML('beforeend', products);
+  $productDetail.innerHTML = `${products}`;
 };
 
+const getItem = (idKey) => {
+  let count = document.querySelector('.detail-count').value;
+  // * 장바구니 세션에 임시로 저장,
+  // * 장바구니 스토리지 어디에 어떤 형태로 담을지 상의
+  sessionStorage.setItem('basket', JSON.stringify({ idKey, count }));
+  alert('상품을 장바구니에 담았습니다');
+  let moveBasket = confirm('장바구니로 이동하시겠습니까?');
+  if (moveBasket) location.href = '/basket';
+};
 
 document.addEventListener('DOMContentLoaded', async () => {
   // /* ----- ALL 탭에서 모든 제품 가져오기 ----- */

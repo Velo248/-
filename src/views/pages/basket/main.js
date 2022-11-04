@@ -1,14 +1,21 @@
-// guest와 user 차이
-// guest는 localStorage에서 불러옴
-// user는 localStorage와 DB를 합침?
-// 이벤트: 전체선택버튼 / 전체선택 해제 시 전부 해제 / 전체선택 후 삭제 / 결제버튼 /
+import { decodeJwt } from '/public/scripts/common.js';
 
 const getLocalStroageItem = (itemKey) => {
   return JSON.parse(localStorage.getItem(itemKey));
 };
 
+const setLocalStorageItem = (itemKey, data) => {
+  localStorage.setItem(itemKey, JSON.stringify(data));
+  return;
+};
+
+const parsePrice = (str) => parseInt(str.replace(/,/g, ''), 10);
+
 const paintBasket = (basketItemList, basketData) => {
-  basketData?.forEach(({ _id, imgKey, name, price, count }) => {
+  basketData?.forEach(async ({ _id, count }) => {
+    const { imageKey, price, title } = await (
+      await fetch(`/api/products/${_id}`)
+    ).json();
     const itemWrapper = document.createElement('div');
     itemWrapper.className = 'flex-justify-between';
     itemWrapper.classList.add('product');
@@ -16,9 +23,9 @@ const paintBasket = (basketItemList, basketData) => {
     itemWrapper.innerHTML = `
           <input type="checkbox" />
           <div class="img_wrap">
-              <img src="${imgKey}" class="product_img" alt="${name}" />
+              <img src="${imageKey}" class="product_img" alt="${title}" />
           </div>
-          <div class="product_name">${name}</div>
+          <div class="product_name">${title}</div>
           <div class="product_price">${price.toLocaleString('ko-kr')}</div>
           <div>
             <input type="number" class="product_count" value="${Number(
@@ -30,10 +37,28 @@ const paintBasket = (basketItemList, basketData) => {
   });
 };
 
-const parsePrice = (str) => parseInt(str.replace(/,/g, ''), 10);
-
 const init = async () => {
-  const isLoggedIn = sessionStorage.getItem('token') ?? null;
+  const loginToken = sessionStorage.getItem('token') ?? null;
+  let basketItems;
+  if (!isLoggedIn) {
+    const { userId } = decodeJwt(loginToken);
+    if (!userId) {
+      alert('비정상적인 접근입니다.');
+      sessionStorage.removeItem('token');
+      location.href = '/';
+    } else {
+      basketItems = await (
+        await fetch('/api/basket', {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${loginToken}`,
+          },
+        })
+      ).json();
+    }
+  } else {
+    basketItems = getLocalStroageItem('basket');
+  }
   const basket = document.querySelector('.basket');
   const basketChkAllBtn = document.querySelector('#basketChkAll');
   const basketItemList = document.querySelector('.basket_item_list');
@@ -45,7 +70,7 @@ const init = async () => {
   // basketItemList.innerHTML = '';
 
   // guset basket
-  const basketItems = getLocalStroageItem('basket');
+  basketItems = getLocalStroageItem('basket');
 
   // loggedInUser basket
   // const basketItems = await (await fetch()).json();
@@ -93,8 +118,6 @@ const init = async () => {
       productTotalPrice.innerText = totalPrice.toLocaleString('ko-kr');
     }
   });
-
-  // select가 true가 될 때 발생하여 total_price를 업데이트하는 이벤트
 
   // 선택 삭제 버튼이벤트
   basket.addEventListener('click', (e) => {
