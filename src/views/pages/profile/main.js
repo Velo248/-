@@ -77,17 +77,16 @@ const init = async () => {
 
   const orders = await getOrders();
 
-  console.log(orders);
   orderTable.innerHTML = '';
-  orders?.forEach(({ _id, status, price }) => {
+  orders?.forEach(({ _id, status, totalPrice }) => {
     const orderColumn = document.createElement('div');
     orderColumn.className = 'order_table_column';
     orderColumn.innerHTML = `
         <div class="order_table__column-row">
-            <a href="/orders">${_id}</a>
+            <a href="/orders/${_id}">${_id}</a>
         </div>
         <div class="order_table__column-row">${status}</div>
-        <div class="order_table__column-row">${price.toLocaleString(
+        <div class="order_table__column-row">${totalPrice.toLocaleString(
           'ko-kr',
         )}</div>
     `;
