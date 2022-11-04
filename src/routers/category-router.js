@@ -57,18 +57,56 @@ categoryRouter.post(
 );
 
 //카테고리 수정 API - PATCH /category/{title}
-categoryRouter.patch('/category/:title', async (req, res, next) => {
-  throw new Error('카테고리 수정 기능은 구현되어 있지 않습니다.');
-});
+categoryRouter.patch(
+  '/category/:title',
+  loginRequired,
+  isAdmin,
+  async (req, res, next) => {
+    try {
+      // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+      // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
+      const categoryTitle = req.params.title;
+      const { title, description, themeClass, imageKey } = req.body;
+
+      // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
+      // 보내주었다면, 업데이트용 객체에 삽입함.
+      const toUpdate = {
+        ...(title && { title }),
+        ...(description && { description }),
+        ...(themeClass && { themeClass }),
+        ...(imageKey && { imageKey }),
+      };
+      const updatedCategory = await categoryService.updateCategory(
+        categoryTitle,
+        toUpdate,
+      );
+      res.status(200).json(updatedCategory);
+    } catch (error) {
+      next(error);
+    }
+  },
+);
 
 //카테고리 삭제 API - DELETE /category/{title}
-categoryRouter.delete('/category/:title', async (req, res, next) => {
-  try {
-    const categoryTitle = req.params.title;
-    const deletedCategory = await categoryService.deleteCategory(categoryTitle);
-    res.status(200).json(deletedCategory);
-  } catch (error) {
-    next(error);
-  }
-});
+categoryRouter.delete(
+  '/category/:title',
+  loginRequired,
+  isAdmin,
+  async (req, res, next) => {
+    try {
+      const categoryTitle = req.params.title;
+      const deletedCategory = await categoryService.deleteCategory(
+        categoryTitle,
+      );
+      res.status(200).json(deletedCategory);
+    } catch (error) {
+      next(error);
+    }
+  },
+);
 export { categoryRouter };

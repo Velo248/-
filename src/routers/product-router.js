@@ -43,6 +43,17 @@ productRouter.get(
   },
 );
 
+//특정 상품 조회 API - GET /api/product/{productId}
+productRouter.get('/products/:productId', async (req, res, next) => {
+  try {
+    const { productId } = req.params;
+    const product = await productService.getProductByProductId(productId);
+    res.status(200).json({ product });
+  } catch (error) {
+    next(error);
+  }
+});
+
 //상품 추가 API - /api/product
 productRouter.post(
   '/product',
@@ -178,14 +189,5 @@ productRouter.delete(
     }
   },
 );
-
-//특정 상품 조회 API - GET /api/product/{productId}
-productRouter.get('/products/:productId', async (req, res, next) => {
-  try {
-    res.status(200).json({ hi: '아직 미완성코드' });
-  } catch (error) {
-    next(error);
-  }
-});
 
 export { productRouter };

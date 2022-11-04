@@ -22,7 +22,25 @@ class CategoryService {
     const category = await this.categoryModel.findOneByName(title);
     return category;
   }
+  //카테고리 정보 수정
+  async updateCategory(title, toUpdate) {
+    // 우선 해당 title의 카테고리가 db에 있는지 확인
+    let category = await this.categoryModel.findOneByName(title);
+    // db에서 찾지 못한 경우, 에러 메시지 반환
+    if (!category) {
+      throw new Error(
+        '해당 카테고리가 없습니다. 이름을 다시 확인해 주세요. category_id를 받지 않습니다.',
+      );
+    }
 
+    // 업데이트 진행
+    category = await this.categoryModel.update({
+      title,
+      update: toUpdate,
+    });
+
+    return category;
+  }
   //카테고리 이름으로 삭제
   async deleteCategory(title) {
     const deletedCategory = await this.categoryModel.findOneAndDelete({
