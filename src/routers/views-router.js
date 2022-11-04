@@ -84,7 +84,7 @@ viewsRouter.use('/basket', serveStatic('basket'));
 viewsRouter.use('/categories', serveStatic('categories'));
 viewsRouter.use('/login', serveStatic('login'));
 viewsRouter.use('/order-change', serveStatic('order-change'));
-viewsRouter.use('/orders', serveStatic('orders'));
+viewsRouter.use('/orders/:orderId', serveStatic('order-detail'));
 viewsRouter.use('/pay-history', serveStatic('pay-history'));
 viewsRouter.use('/payments', serveStatic('payments'));
 viewsRouter.use('/products', serveStatic('products'));
