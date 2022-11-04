@@ -8,8 +8,8 @@ export class ProductModel {
     const product = await Product.findOne({ _id: productId });
     return product;
   }
-  async findByName(title) {
-    const product = await Product.findOne({ title });
+  async findByName(productTitle) {
+    const product = await Product.findOne({ productTitle });
     return product;
   }
 
