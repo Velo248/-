@@ -13,7 +13,7 @@ class ProductService {
 
   //상품 전체 목록을 받음
   async getProductlist() {
-    const products = await this.productModel.findAll({});
+    const products = await this.productModel.findAll();
     return products;
   }
 
@@ -63,7 +63,7 @@ class ProductService {
   async getProductsByAdmin(query) {
     const [productTotal, products] = await Promise.all([
       this.productModel.getProductsCount(),
-      this.productModel.findAll(query),
+      this.productModel.findPage(query),
     ]);
     const { limit } = query;
     // const totalProductPage = Math.ceil(productTotal / limit);
