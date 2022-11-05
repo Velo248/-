@@ -9,7 +9,7 @@ export class ProductModel {
     return product;
   }
   async findByName(productTitle) {
-    const product = await Product.findOne({ productTitle });
+    const product = await Product.findOne({ title: productTitle });
     return product;
   }
 

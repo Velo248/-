@@ -70,15 +70,7 @@ productRouter.post(
         isRecommended,
         discountPercent,
       } = req.body;
-      //상품 추가, 만약 같은 이름의 상품이 이미 있는 경우 추가하지 않음
-      console.log(title);
-      const product = await productService.getProduct(title);
-      // console.log(product);
-      if (product) {
-        throw new Error(
-          '이 이름은 현재 사용중입니다. 다른 이름을 입력해 주세요..',
-        );
-      }
+
       const newProduct = await productService.addProduct({
         title,
         sellerId,
