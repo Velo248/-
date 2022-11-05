@@ -9,7 +9,7 @@ export class ProductModel {
     return product;
   }
   async findByName(productTitle) {
-    const product = await Product.findOne({ productTitle });
+    const product = await Product.findOne({ title: productTitle });
     return product;
   }
 
@@ -22,15 +22,6 @@ export class ProductModel {
     const products = await Product.find({});
     return products;
   }
-  async findPage(query) {
-    const { sortKey, sortOrder, limit, offset } = query;
-    const products = await Product.find({})
-      .sort({ [sortKey]: sortOrder })
-      .skip(limit * (offset - 1))
-      .limit(limit);
-    return products;
-  }
-
   async findAllByCategory(categoryId) {
     const products = await Product.find({ categoryId });
     return products;
@@ -57,9 +48,6 @@ export class ProductModel {
   }
   async insertAll(data) {
     await Product.insertMany(data);
-  }
-  async getProductsCount() {
-    return await Product.countDocuments({});
   }
 }
 

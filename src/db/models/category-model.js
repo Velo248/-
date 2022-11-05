@@ -28,7 +28,7 @@ export class CategoryModel {
     return deletedCategory;
   }
   async update({ categoryId, update }) {
-    const filter = { categoryId };
+    const filter = { _id: categoryId };
     const option = { returnOriginal: false };
 
     const updatedCategory = await Category.findOneAndUpdate(
@@ -36,6 +36,8 @@ export class CategoryModel {
       update,
       option,
     );
+    console.log(categoryId);
+    console.log(updatedCategory);
     return updatedCategory;
   }
   async deleteAll() {
