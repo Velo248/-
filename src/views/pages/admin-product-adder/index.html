@@ -4,59 +4,123 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../../public/css/style.css" />
+    <!-- <link rel="stylesheet" href="../../../public/css/style.css" /> -->
     <link rel="stylesheet" href="custom.css" />
     <title>Document</title>
   </head>
   <body>
     <header>
-      <nav></nav>
+      <nav>header</nav>
     </header>
     <main>
-      <div class="wrapper">
-        <form action="#" class="new-item">
-          <div class="field is-grouped">
-            <label for="" class="label">카테고리명</label>
-            <select name="" id="" class="category">
-              <option value="---">카테고리 선택</option>
-              <option value="fordog">개를위한</option>
-              <option value="fourdog">개가넷</option>
-              <option value="forcat">고양이를위한</option>
-            </select>
+      <div class="admin_product_wapper">
+        <div class="admin_product_header">
+          <h1>새 상품 추가</h1>
+          <button class="back_admin_main_bnt">전체 메뉴로</button>
+        </div>
+        <div class="workspace">
+          <div class="formContainer">
+            <form class="create_form">
+              <div class="category_select_container">
+                <label>카테고리</label>
+                <select class="category_select" name="category_select"></select>
+              </div>
+              <div>
+                <label>제품명</label>
+                <input type="text" name="title"></input>
+              </div>
+              <div>
+                <label>판매자</label>
+                <input type="text" name="sellerId"></input>
+              </div>
+              <div>
+                <label>제조사</label>
+                <input type="text" name="manufacturer"></input>
+              </div>
+              <div>
+                <label>설명</label>
+                <input type="text" name="shortDescription"></input>
+              </div>
+              <div>
+                <label>상세 설명</label>
+                <input type="text" name="detailDescription"></input>
+              </div>
+              <div>
+                <label>이미지 경로</label>
+                <input type="file" name="imageKey"></input>
+              </div>
+              <div>
+                <label>재고</label>
+                <input type="number" name="inventory"></input>
+              </div>
+              <div>
+                <label>가격</label>
+                <input type="number" name="price"></input>
+              </div>
+              <div>
+                <label>검색 키워드</label>
+                <input type="text" name="searchKeywords"></input>
+              </div>
+              <div>
+                <label>추천 여부</label>
+                <input type="checkbox" name="isRecommended"></input>
+              </div>
+              <div>
+                <label>할인율</label>
+                <input type="number" name="discountPercent"></input>
+              </div>
+              <button type="submit" class="create_form_summit_bnt">상품추가</button>
+            </form>
           </div>
-          <div class="field is-grouped">
-            <label for="" class="label">제품명</label>
-            <input
-              type="text"
-              name=""
-              id=""
-              class="input"
-              placeholder="제품명을 입력"
-            />
-          </div>
-          <div class="field is-grouped">
-            <label for="" class="label">제조사</label>
-            <input
-              type="text"
-              name=""
-              id=""
-              class="input"
-              placeholder="제조사를 입력"
-            />
-          </div>
-          <div class="field is-grouped">
-            <label for="" class="label">가격</label>
-            <input type="number" name="" id="" class="input" placeholder="0" />
-          </div>
-          <div class="field">
-            <label for="" class="label">상품 이미지</label>
-            <input type="file" name="" id="" class="input" />
-          </div>
-          <div class="field">
-            <button class="button is-primary">등록 완료</button>
-          </div>
-        </form>
+        </div>
       </div>
     </main>
+    <footer></footer>
+    <script src="main.js"></script>
   </body>
 </html>
+
+<!-- <div class="wrapper">
+  <form action="#" class="new-item">
+    <div class="field is-grouped">
+      <label for="" class="label">카테고리명</label>
+      <select name="" id="" class="category">
+        <option value="---">카테고리 선택</option>
+        <option value="fordog">개를위한</option>
+        <option value="fourdog">개가넷</option>
+        <option value="forcat">고양이를위한</option>
+      </select>
+    </div>
+    <div class="field is-grouped">
+      <label for="" class="label">제품명</label>
+      <input
+        type="text"
+        name=""
+        id=""
+        class="input"
+        placeholder="제품명을 입력"
+      />
+    </div>
+    <div class="field is-grouped">
+      <label for="" class="label">제조사</label>
+      <input
+        type="text"
+        name=""
+        id=""
+        class="input"
+        placeholder="제조사를 입력"
+      />
+    </div>
+    <div class="field is-grouped">
+      <label for="" class="label">가격</label>
+      <input type="number" name="" id="" class="input" placeholder="0" />
+    </div>
+    <div class="field">
+      <label for="" class="label">상품 이미지</label>
+      <input type="file" name="" id="" class="input" />
+    </div>
+    <div class="field">
+      <button class="button is-primary">등록 완료</button>
+    </div>
+  </form>
+</div> -->
