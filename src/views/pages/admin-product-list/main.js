@@ -79,6 +79,9 @@ const clickEventMap = {
   back_admin_main_bnt() {
     location.href = '/admin-main';
   },
+  create_product_bnt() {
+    location.href = '/admin-product-adder';
+  },
 };
 
 $admin_product_wapper.addEventListener('click', (e) => {

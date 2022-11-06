@@ -38,3 +38,7 @@ header {
 .product_list_name > div > span {
   font-size: 1.5rem;
 }
+
+.create_product_bnt {
+  margin-left: 90%;
+}
