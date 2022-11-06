@@ -29,9 +29,10 @@ header {
   height: 85%;
 }
 
-.product_list_name {
+.product_list_name,
+.product_item {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
 }
 
 .product_list_name > div > span {
