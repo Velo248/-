@@ -34,19 +34,17 @@ const elementCreater = (current, add) => {
   current.innerHTML += add;
 };
 
+const dateFormet = (date) => {
+  return `${date.substring(0, 10)} ${date.substring(11, 16)}`;
+};
+
 const pageRender = async () => {
   const categories = await getCategory();
   console.log(categories);
   categories.forEach((e) => {
     const { _id, title, description, createdAt, updatedAt } = e;
-    const createDate = `${createdAt.substring(0, 10)} ${createdAt.substring(
-      11,
-      16,
-    )}`;
-    const updateDate = `${updatedAt.substring(0, 10)} ${updatedAt.substring(
-      11,
-      16,
-    )}`;
+    const createDate = dateFormet(createdAt);
+    const updateDate = dateFormet(updatedAt);
 
     const html_temp = `
       <div class="category_item">
