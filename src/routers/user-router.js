@@ -100,17 +100,10 @@ userRouter.get(
   loginRequired,
   async function (req, res, next) {
     try {
-      // content-type 을 application/json 로 프론트에서
-      // 설정 안 하고 요청하면, body가 비어 있게 됨.
-      if (is.emptyObject(req.body)) {
-        throw new Error(
-          'headers의 Content-Type을 application/json으로 설정해주세요',
-        );
-      }
-
       // params로부터 id를 가져옴
       const userId = req.params.userId;
-
+      const user = await userService.getUser(userId);
+      res.status(200).json(user);
       //body data로부터
     } catch (error) {
       next(error);
