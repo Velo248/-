@@ -13,15 +13,36 @@ export class CategoryModel {
     const categories = await Category.find({});
     return categories;
   }
-  async findOneByName(categories) {
-    const category = await Category.findOne({ category_name: categories });
+  async findOneById(categoryId) {
+    const category = await Category.findOne({ _id: categoryId });
     return category;
   }
-  async findOneAndUpdate(category_name, product) {
-    await Category.findOneAndUpdate(
-      { category_name },
-      { $push: { products: product } },
+  async findOneByName(title) {
+    const category = await Category.findOne({ title });
+    return category;
+  }
+  async findOneAndDelete(categoryId) {
+    const deletedCategory = await Category.findOneAndDelete({
+      _id: categoryId,
+    });
+    return deletedCategory;
+  }
+  async update({ categoryId, update }) {
+    const filter = { categoryId };
+    const option = { returnOriginal: false };
+
+    const updatedCategory = await Category.findOneAndUpdate(
+      filter,
+      update,
+      option,
     );
+    return updatedCategory;
+  }
+  async deleteAll() {
+    await Category.deleteMany({});
+  }
+  async insertAll(data) {
+    await Category.insertMany(data);
   }
 }
 

@@ -76,9 +76,14 @@ class UserService {
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
 
     // 2개 프로퍼티를 jwt 토큰에 담음
+    // 관리자라면 토큰과 함께 주는 isAdmin속성을 true로 보내줌
+    let isAdmin = false;
+    if (user.role == 'admin') {
+      isAdmin = true;
+    }
     const token = jwt.sign({ userId: user._id, role: user.role }, secretKey);
 
-    return { token };
+    return { token, isAdmin };
   }
 
   // 사용자 목록을 받음.
@@ -86,7 +91,10 @@ class UserService {
     const users = await this.userModel.findAll();
     return users;
   }
-
+  async getUser(userId) {
+    const user = await this.userModel.findById(userId);
+    return user;
+  }
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
   async setUser(userInfoRequired, toUpdate) {
     // 객체 destructuring

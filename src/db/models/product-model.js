@@ -8,8 +8,8 @@ export class ProductModel {
     const product = await Product.findOne({ _id: productId });
     return product;
   }
-  async findByName(product_name) {
-    const product = await Product.findOne({ product_name });
+  async findByName(productTitle) {
+    const product = await Product.findOne({ productTitle });
     return product;
   }
 
@@ -20,6 +20,19 @@ export class ProductModel {
 
   async findAll() {
     const products = await Product.find({});
+    return products;
+  }
+  async findAll(query) {
+    const { sortKey, sortOrder, limit, offset } = query;
+    const products = await Product.find({})
+      .sort({ [sortKey]: sortOrder })
+      .skip(limit * (offset - 1))
+      .limit(limit);
+    return products;
+  }
+
+  async findAllByCategory(categoryId) {
+    const products = await Product.find({ categoryId });
     return products;
   }
 
@@ -33,6 +46,20 @@ export class ProductModel {
       option,
     );
     return updatedProduct;
+  }
+
+  async delete(productId) {
+    const product = await Product.findByIdAndDelete({ _id: productId });
+    return product;
+  }
+  async deleteAll() {
+    await Product.deleteMany({});
+  }
+  async insertAll(data) {
+    await Product.insertMany(data);
+  }
+  async getProductsCount() {
+    return await Product.countDocuments({});
   }
 }
 

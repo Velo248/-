@@ -3,31 +3,18 @@ import { Schema } from 'mongoose';
 import { ReviewSchema } from './review-schema';
 const ProductSchema = new Schema(
   {
-    product_no: {
-      type: Number,
-      index: true,
-    },
-    product_name: {
-      type: String,
-    },
-    price: {
-      type: Number,
-      index: true,
-    },
-    brand: {
-      type: String,
-      required: false,
-    },
-    specification: {
-      type: String,
-      required: false,
-    },
-    stock_quantity: {
-      type: Number,
-      default: 0,
-    },
-    reviews: [ReviewSchema],
-    categories: [String],
+    title: { type: String, required: true },
+    sellerId: String,
+    categoryId: { type: String, required: true },
+    manufacturer: String,
+    shortDescription: String,
+    detailDescription: String,
+    imageKey: String,
+    inventory: Number,
+    price: Number,
+    searchKeywords: [String],
+    isRecommended: Boolean,
+    discountPercent: Number,
   },
   {
     collection: 'products',

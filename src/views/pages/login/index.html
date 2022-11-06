@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/public/css/style.css" />
+    <link rel="stylesheet" href="./custom.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>
+        <a href="/"
+          ><img src="/public/images/common/logo.png" alt="간식조아"
+        /></a>
+      </h1>
+      <nav>
+        <span><a href="/product">제품</a></span>
+        <span><a href="/profile">내정보</a></span>
+        <span><a href="/login">로그인</a></span>
+        <span><a href="/register">회원가입</a></span>
+        <span><a href="/basket">장바구니</a></span>
+        <span><a href="/pay-history">주문·배송</a></span>
+      </nav>
+    </header>
+
+    <main>
+      <div class="wrapper login-form block">
+        <form action="#" class="login">
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control has-icons-left has-icons-right">
+              <input
+                class="login-email input"
+                type="email"
+                placeholder="이메일을 입력해주세요"
+                value=""
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fas fa-exclamation-triangle"></i>
+              </span>
+            </div>
+            <!-- <p class="help is-danger">This email is invalid</p> -->
+          </div>
+
+          <div class="field">
+            <label for="" class="label">Password</label>
+            <div class="control has-icons-left has-icons-right">
+              <input
+                type="password"
+                name="password"
+                id="password"
+                class="login-pw input"
+                placeholder="비밀번호를 입력해주세요"
+                value=""
+              />
+              <span class="icon is-small is-left">
+                <!-- 자물쇠 아이콘 -->
+              </span>
+              <!-- <p class="help is-danger">Password is not safe</p> -->
+            </div>
+          </div>
+
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="login-btn button is-link">Login</button>
+            </div>
+          </div>
+
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-ghost">비밀번호 찾기</button>
+              <button class="button is-ghost">회원가입</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+    <footer>&copy; 2022 오히려좋아 by elice 5팀</footer>
+  </body>
+</html>

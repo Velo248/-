@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../../public/css/style.css" />
+    <link rel="stylesheet" href="custom.css" />
+    <title>Orders</title>
+  </head>
+  <body>
+    <header>
+      <nav></nav>
+    </header>
+    <main>
+      <div class="wrapper order-detail">
+        <div class="wrapper flex-column">
+          <div class="order-number">
+            <span>주문 번호: </span>
+            <span>20221102-1502-1220228z1</span>
+          </div>
+          <div class="order-history">
+            <h4>주문 내역</h4>
+            <div class="order-wrapper flex-column">
+              <div class="row">
+                <span class="column">제품명</span>
+                <span class="column">가격</span>
+                <span class="column">수량</span>
+              </div>
+              <div class="row">
+                <span class="column">
+                  <img src="#" alt="" width="60" height="60" class="item-img" />
+                  <span>NOT FOR SALE</span>
+                </span>
+                <span class="column"> 2000 </span>
+                <span class="column"> 2 </span>
+              </div>
+            </div>
+            <div class="total_price">
+              <span>총</span>
+              <span>~~~~~~~~~원</span>
+            </div>
+          </div>
+        </div>
+        <div class="wrapper">
+          <div class="delevery-info">
+            <h4>배송 정보</h4>
+            <div class="info flex-column">
+              <div class="line">
+                <span>이름</span>
+                <span>아무개</span>
+              </div>
+              <div class="line">
+                <span>주소</span>
+                <span>OOOOO 열한시 이십오분 삼십칠초 401</span>
+              </div>
+              <div class="line">
+                <span>연락처</span>
+                <span>010 1234 1234</span>
+              </div>
+              <div class="line">
+                <span>현재 상태</span>
+                <span>배송 준비 중</span>
+              </div>
+              <div class="line">
+                <span>배송 상태 수정</span>
+                <select name="" id="">
+                  <option value="ready">배송준비</option>
+                  <option value="ing">배송중</option>
+                  <option value="done">배송완료</option>
+                  <option value="cancel">주문취소</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button class="button is-link">배송 정보 수정</button>
+          <button class="button is-link">주문 취소</button>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

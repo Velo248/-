@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>내 정보 수정</title>
+    <link rel="stylesheet" href="/public/css/style.css" />
+    <link rel="stylesheet" href="./custom.css" />
+  </head>
+  <body>
+    <header>
+      <h1>
+        <a href="/"
+          ><img src="/public/images/common/logo.png" alt="간식조아"
+        /></a>
+      </h1>
+      <nav>
+        <span><a href="/product">제품</a></span>
+        <span><a href="/profile">내정보</a></span>
+        <span><a href="/login">로그인</a></span>
+        <span><a href="/logout">로그아웃</a></span>
+        <span><a href="/register">회원가입</a></span>
+        <span><a href="/basket">장바구니</a></span>
+        <span><a href="/pay-history">주문·배송</a></span>
+      </nav>
+    </header>
+
+    <main>
+      <form class="wrapper form">
+        <div class="wrapper">
+          <button class="button sign_out">탈퇴하기</button>
+          <div class="wrapper flex-column">
+            <div class="column">
+              <div class="row">사용자명:</div>
+              <div class="row username">Username</div>
+            </div>
+            <div class="column">
+              <div class="row">이메일:</div>
+              <div class="row email">something@went.wrong</div>
+            </div>
+            <div class="column">
+              <div class="row">전화번호:</div>
+              <input
+                type="text"
+                class="row phone"
+                placeholder="00000000000 -없이"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="wrapper address">
+          배송지수정
+          <br />
+          <div class="column">
+            <div class="address-long">열한시 오십구분</div>
+          </div>
+          <div class="column">
+            <div class="row postal-code">00000</div>
+            <input class="row address-detail" disabled="true" />
+            <button class="button address_search">주소검색</button>
+          </div>
+        </div>
+        <div class="wrapper">
+          현재 비밀번호
+          <input type="password" class="password" />
+          <button type="submit">수정 완료</button>
+        </div>
+      </form>
+    </main>
+    <footer>&copy; 2022 오히려좋아 by elice 5팀</footer>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="./main.js" type="module"></script>
+  </body>
+</html>
