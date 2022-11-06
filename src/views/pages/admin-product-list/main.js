@@ -67,10 +67,6 @@ const getCategoryTitleFromId = (product, category) => {
   return newProduct;
 };
 
-const dateFormet = (date) => {
-  return `${date.substring(0, 10)} ${date.substring(11, 16)}`;
-};
-
 const productDetail = (productId) => {
   sessionStorage.setItem('p_id', productId);
   window.location.href = '/admin-product-detail';
@@ -80,16 +76,16 @@ const clickEventMap = {
   detail_bnt(e) {
     productDetail(e.parentNode.parentNode.getAttribute('data-key'));
   },
+  back_admin_main_bnt() {
+    location.href = '/admin-main';
+  },
 };
 
 $admin_product_wapper.addEventListener('click', (e) => {
-  // console.log(e.target);
   if (!clickEventMap[e.target.className]) return;
 
   clickEventMap[e.target.className](e.target);
 });
-$admin_product_wapper.addEventListener('change', () => {});
-$admin_product_wapper.addEventListener('submit', () => {});
 
 window.addEventListener('DOMContentLoaded', async () => {
   await pageRender();
