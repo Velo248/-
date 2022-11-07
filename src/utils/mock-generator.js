@@ -1,4 +1,10 @@
-import { categoryModel, orderModel, productModel, userModel } from '../db';
+import {
+  categoryModel,
+  orderModel,
+  productModel,
+  userModel,
+  cartModel,
+} from '../db';
 import {
   orderMockData,
   categoryMockData,
@@ -14,6 +20,7 @@ async function dataReset() {
   await productModel.deleteAll();
   await orderModel.deleteAll();
   await categoryModel.deleteAll();
+  await cartModel.deleteAll();
 }
 //더미데이터 삽입
 async function dataPull() {

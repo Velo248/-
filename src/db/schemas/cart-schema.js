@@ -7,7 +7,7 @@ const CartSchema = new Schema(
       type: String,
       required: true,
     },
-    orderSheet: [orderSheet],
+    orderSheets: [orderSheet],
   },
   {
     collection: 'carts',
