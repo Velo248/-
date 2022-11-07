@@ -72,9 +72,25 @@ const init = async () => {
   );
   deliveryDetail.appendChild(createDeliveryInfo({ address, status }));
 
+  const orderChangeBtn = document.querySelector('.order_change_btn');
+  if (['배송 중', '배송완료'].includes(status)) {
+    orderChangeBtn.disabled = true;
+    orderChangeBtn.style.display = 'hidden';
+    orderChangeBtn.innerText = '배송을 취소할 수 없습니다.';
+  } else {
+    orderChangeBtn.addEventListener('click', async (e) => {
+      if (confirm('배송정보를 수정하시겠습니까?')) {
+        location.href = `/order-change/${orderId}`;
+      } else {
+        return;
+      }
+    });
+  }
+
   const orderCancelBtn = document.querySelector('.order_cancel_btn');
   if (['배송 중', '배송완료'].includes(status)) {
     orderCancelBtn.disabled = true;
+    orderCancelBtn.style.display = 'hidden';
     orderCancelBtn.innerText = '배송을 취소할 수 없습니다.';
   } else {
     orderCancelBtn.addEventListener('click', async (e) => {
