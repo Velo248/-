@@ -57,6 +57,8 @@ const createProduct = async (target) => {
   };
 
   await customFetcher(data);
+  sessionStorage.removeItem('p_id');
+  window.location.href = '/admin-main';
 };
 
 const submitEventMap = {
