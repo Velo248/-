@@ -34,59 +34,48 @@
             <h4>주문 상세</h4>
             <div class="order_wrapper flex-column">
               <div class="row">
-                <span class="column">제품명</span>
-                <span class="column">가격</span>
-                <span class="column">수량</span>
+                <span class="column">주문 요약</span>
+                <span class="column">배송상태</span>
+                <span class="column">총 가격</span>
               </div>
-              <div class="row">
-                <span class="column">
-                  <img
-                    src="#"
-                    alt=""
-                    width="60"
-                    height="60"
-                    class="product_img"
-                  />
-                  <span class="product_name">NOT FOR SALE</span>
-                </span>
-                <span class="column product_price"> 2000 </span>
-                <span class="column product_count"> 2 </span>
-              </div>
-            </div>
-            <div class="product_total_price">
-              <span>총</span>
-              <span>~~~~~~~~~원</span>
+              <!-- <div class="row">
+                <span class="order_summary">NOT FOR SALE</span>
+                <span class="column order_status"> 2 </span>
+                <span class="column order_price"> 2000 </span>
+              </div> -->
             </div>
           </div>
         </div>
-        <div class="wrapper">
-          <div class="delevery_info">
+        <div class="wrapper delivery_detail">
+          <!-- <div class="delevery_info">
             <h4>배송 정보</h4>
             <div class="info flex-column">
               <div class="line">
                 <span>이름</span>
-                <span>아무개</span>
+                <span class="receiver_name">아무개</span>
               </div>
               <div class="line">
                 <span>주소</span>
-                <span>OOOOO 열한시 이십오분 삼십칠초 401</span>
+                <span class="receiver_address"
+                  >OOOOO 열한시 이십오분 삼십칠초 401</span
+                >
               </div>
               <div class="line">
                 <span>연락처</span>
-                <span>010 1234 1234</span>
+                <span class="receiver_phone_number">010 1234 1234</span>
               </div>
               <div class="line">
                 <span>배송상태</span>
-                <span>배송 중</span>
+                <span class="delevery_status">배송 중</span>
               </div>
-            </div>
+            </div> -->
           </div>
           <a href="/order-change" class="button is-link">배송 정보 수정</a>
-          <button class="button is-link">주문 취소</button>
+          <button class="button is-link order_cancel_btn">주문 취소</button>
         </div>
       </div>
     </main>
     <footer>&copy; 2022 오히려좋아 by elice 5팀</footer>
-    <script src="./main.js" type="module"></script>
+    <script src="./main2.js" type="module"></script>
   </body>
 </html>
