@@ -61,6 +61,12 @@ const pageRender = async () => {
   });
 };
 
+const orderDatail = (target) => {
+  const orderId = target.parentNode.parentNode.getAttribute('id');
+  sessionStorage.setItem('o_id', orderId);
+  location.href = '/admin/order/detail';
+};
+
 const orderFiltering = async (target) => {
   const formData = new FormData(target);
 
