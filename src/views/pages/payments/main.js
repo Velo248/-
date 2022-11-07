@@ -166,7 +166,8 @@ const init = async () => {
           })
         ).json();
         if (response.ok) {
-          alert('결제가 완료되었습니다 잠시 후 결제 내역 페이지로 이동합니다.');
+          alert('결제가 완료되었습니다 결제 내역 페이지로 이동합니다.');
+          localStorage.removeItem('orderList');
           location.href = '/pay-history';
         }
       } else {
