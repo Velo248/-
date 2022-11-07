@@ -13,22 +13,22 @@ orderRouter.get(
   isAdmin,
   async (req, res, next) => {
     try {
-      const sort = req.query.sort || 'created_date';
-      const sortOrder = req.query.sortOrder || 'asc'; // url 쿼리에서 order 받기, 기본값 asc
-      const offset = Number(req.query.offset || 1); // url 쿼리에서 offset 받기, 기본값 1
-      const limit = Number(req.query.limit || 10); // url 쿼리에서 limit 받기, 기본값 10
+      const sortBy = req.query.sort || 'created_date';
+      const orderBy = req.query.order || 'asc'; // url 쿼리에서 order 받기, 기본값 asc
+      const offset = Number(req.query.offset) ? req.query.offset : 1; // url 쿼리에서 offset 받기, 기본값 1
+      const limit = Number(req.query.limit) ? req.query.limit : 10; // url 쿼리에서 limit 받기, 기본값 10
       //sortKey은 임의로 정한 것 변경 필요
       const sortKey = {
         created_date: 'createdAt',
         updated_date: 'updatedAt',
       };
       const sortOrderType = { asc: 1, desc: -1 };
-      if (!Object.keys(sortKey).includes(sort)) {
+      if (!Object.keys(sortKey).includes(sortBy)) {
         throw new Error(
           `잘못된 sort값 입니다. ['created_date', 'updated_date'] 중에서 선택해주세요`,
         );
       }
-      if (!Object.keys(sortOrderType).includes(sortOrder)) {
+      if (!Object.keys(sortOrderType).includes(orderBy)) {
         throw new Error(
           `잘못된 order값 입니다.['asc', 'desc'] 중에서 선택해주세요`,
         );
@@ -39,16 +39,27 @@ orderRouter.get(
       if (limit < 1 || 100 <= limit) {
         throw new Error('limit 범위는 1-100입니다.');
       }
-      const newQuery = {
-        sortKey: sortKey[sort],
-        sortOrder: sortOrderType[sortOrder],
-        offset,
-        limit,
-      };
-      const { orders, ...query } = await orderService.getOrdersByAdmin(
-        newQuery,
-      );
-      res.status(200).json({ ...query, orders });
+      if (
+        req.query.sort ||
+        req.query.order ||
+        req.query.offset ||
+        req.query.limit
+      ) {
+        console.log('query 가 존재합니다');
+        const newQuery = {
+          sortBy: sortKey[sortBy],
+          orderBy: sortOrderType[orderBy],
+          offset,
+          limit,
+        };
+        const orders = await orderService.getOrdersByAdmin(newQuery);
+        res.status(200).json({ orders });
+        //query없으면 전체반환
+        return;
+      }
+      console.log('orders find all');
+      const orders = await orderService.getOrders();
+      res.status(200).json({ orders });
     } catch (error) {
       next(error);
     }

@@ -9,7 +9,7 @@ export class ProductModel {
     return product;
   }
   async findByName(productTitle) {
-    const product = await Product.findOne({ productTitle });
+    const product = await Product.findOne({ title: productTitle });
     return product;
   }
 
@@ -22,7 +22,7 @@ export class ProductModel {
     const products = await Product.find({});
     return products;
   }
-  async findAll(query) {
+  async findPage(query) {
     const { sortKey, sortOrder, limit, offset } = query;
     const products = await Product.find({})
       .sort({ [sortKey]: sortOrder })

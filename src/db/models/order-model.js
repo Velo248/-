@@ -4,15 +4,20 @@ import { OrderSchema } from '../schemas/order-schema';
 const Order = model('orders', OrderSchema);
 
 export class OrderModel {
-  async findAll(query) {
-    const { sortKey, sortOrder, limit, offset } = query;
+  async findAll() {
+    const orders = await Order.find({});
+    return orders;
+  }
+
+  //query가 있을 때 작업
+  async findFilteredBySortAndOrders(query) {
+    const { sortBy, orderBy, limit, offset } = query;
     const orders = await Order.find({})
-      .sort({ [sortKey]: sortOrder })
+      .sort({ [sortBy]: orderBy })
       .skip(limit * (offset - 1))
       .limit(limit);
     return orders;
   }
-
   async findByUserId(userId) {
     const order = await Order.find({ userId });
     return order;
