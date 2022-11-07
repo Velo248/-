@@ -7,7 +7,7 @@ import { cartService } from '../services';
 const cartRouter = Router();
 
 //전체 장바구니 조회 API - GET /api/carts
-cartRouter.get('/cart', loginRequired, async (req, res, next) => {
+cartRouter.get('/carts', loginRequired, async (req, res, next) => {
   try {
     const { currentUserId } = req;
     console.log(currentUserId);
@@ -18,11 +18,12 @@ cartRouter.get('/cart', loginRequired, async (req, res, next) => {
   }
 });
 //장바구니 추가 API - POST /cart
-cartRouter.post('/cart', loginRequired, async (req, res, next) => {
+cartRouter.post('/carts', loginRequired, async (req, res, next) => {
   try {
     const { currentUserId } = req;
-    const newCart = await cartService.addCart({
-      orderSheets: [],
+    const { orderSheets } = req.body;
+    const newCart = await cartService.addOrderSheets({
+      orderSheets,
       userId: currentUserId,
     });
     // 추가된 장바구니 db 데이터를 프론트에 다시 보내줌
@@ -34,7 +35,7 @@ cartRouter.post('/cart', loginRequired, async (req, res, next) => {
 });
 
 //장바구니에 추가 API - PATCH /cart/{cartId}
-cartRouter.patch('/cart', loginRequired, async (req, res, next) => {
+cartRouter.patch('/carts', loginRequired, async (req, res, next) => {
   try {
     const { currentUserId } = req;
     const { productId, quantity } = req.body;
@@ -63,7 +64,7 @@ cartRouter.patch('/cart', loginRequired, async (req, res, next) => {
 });
 
 //장바구니 삭제 API - DELETE /cart/{cartId}
-cartRouter.delete('/cart', loginRequired, async (req, res, next) => {
+cartRouter.delete('/carts', loginRequired, async (req, res, next) => {
   try {
     const { productId } = req.body;
     const { currentUserId } = req;
@@ -82,4 +83,31 @@ cartRouter.delete('/cart', loginRequired, async (req, res, next) => {
     next(error);
   }
 });
+
+//아래는 잘되는지 테스팅용 코드 위에는 일일이 register,login 과정을 거쳐야하기때문
+cartRouter.get('/carts/:userId', loginRequired, async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const carts = await cartService.getCartByUserId(userId);
+    res.status(200).json(carts);
+  } catch (error) {
+    next(error);
+  }
+});
+cartRouter.post('/carts/:userId', loginRequired, async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const { orderSheets } = req.body;
+    const newCart = await cartService.addOrderSheets({
+      userId,
+      orderSheets,
+    });
+    // 추가된 장바구니 db 데이터를 프론트에 다시 보내줌
+    // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
+    res.status(201).json({ newCart });
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { cartRouter };
