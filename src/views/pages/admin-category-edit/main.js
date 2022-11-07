@@ -1,46 +1,19 @@
+import { elementCreater, dateFormet } from '/public/scripts/util.js';
+import categoryService from '/public/scripts/categoryService.js';
+
 const $admin_category_wapper = document.querySelector('.admin_category_wapper');
 const $categories = document.querySelector('.categories');
 
-let checkObj = {};
-
-const customFetcher = async (data) => {
-  const { target, dataObj, method } = data;
-
-  const res = await fetch(`/api/categories/${target}`, {
-    method: `${method}`,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-    },
-    body: JSON.stringify(dataObj),
-  });
-
-  if (!res.ok) {
-    const errorContent = await res.json();
-    const { reason } = errorContent;
-
-    throw new Error(reason);
-  }
-
-  delete checkObj[data];
-};
+const checkObj = {};
 
 const getCategory = async () => {
-  const respose = await fetch('/api/categories');
-  return await respose.json();
-};
-
-const elementCreater = (current, add) => {
-  current.innerHTML += add;
-};
-
-const dateFormet = (date) => {
-  return `${date.substring(0, 10)} ${date.substring(11, 16)}`;
+  const response = await categoryService.getAllCategories();
+  return response;
 };
 
 const pageRender = async () => {
   const categories = await getCategory();
-  console.log(categories);
+
   categories.forEach((e) => {
     const { _id, title, description, createdAt, updatedAt } = e;
     const createDate = dateFormet(createdAt);
@@ -49,7 +22,7 @@ const pageRender = async () => {
     const html_temp = `
       <div class="category_item">
         <form class='edit_form' id=${_id}>
-          <input class='category_checked'type='checkbox'>
+          <input class='category_checked' type='checkbox'>
           <input name='category-title' value="${title}">
           <input name='category-description' value="${description}">
           <span>${createDate}</span>
@@ -63,59 +36,64 @@ const pageRender = async () => {
   });
 };
 
+const editCategoty = async (target) => {
+  const formData = new FormData(target);
+
+  const updateObj = {
+    title: formData.get('category-title'),
+    description: formData.get('category-description'),
+  };
+
+  const categoryId = target.getAttribute('id');
+
+  await categoryService.setCategoryInfomation(categoryId, updateObj);
+  $categories.innerHTML = '';
+  await pageRender();
+};
+
+const createCategory = async (target) => {
+  const formData = new FormData(target);
+
+  const createObj = {
+    title: formData.get('create-category-title'),
+    description: formData.get('create-category-description'),
+  };
+
+  const $title = document.querySelector('[name="create-category-title"]');
+  const $description = document.querySelector(
+    '[name="create-category-description"]',
+  );
+  $title.value = '';
+  $description.value = '';
+
+  await categoryService.addCategory(createObj);
+
+  $categories.innerHTML = '';
+  await pageRender();
+};
+
+const deleteCategory = async () => {
+  const categoryId = Object.keys(checkObj);
+  for (const id of categoryId) {
+    await categoryService.deleteCategory(id);
+    delete checkObj[id];
+  }
+  $categories.innerHTML = '';
+  await pageRender();
+};
+
 const deleteCategoryChecker = (target) => {
   const targetId = target.parentNode.getAttribute('id');
   if (target.checked) checkObj[targetId] = target.checked;
   else delete checkObj[targetId];
 };
 
-const deleteCategory = async () => {
-  Object.keys(checkObj).forEach(async (e) => {
-    const data = {
-      target: e,
-      dataObj: {},
-      method: 'DELETE',
-    };
-    await customFetcher(data);
+const allCheckboxChanger = (target) => {
+  const $category_checked = document.querySelectorAll('.category_checked');
+  $category_checked.forEach((checkbox) => {
+    checkbox.checked = target.checked;
+    deleteCategoryChecker(checkbox);
   });
-  $categories.innerHTML = '';
-  await pageRender();
-};
-
-const editCategoty = async (target) => {
-  const formData = new FormData(target);
-  const updateObj = {
-    title: formData.get('category-title'),
-    description: formData.get('category-description'),
-  };
-
-  const data = {
-    target: target.getAttribute('id'),
-    dataObj: updateObj,
-    method: 'PATCH',
-  };
-
-  $categories.innerHTML = '';
-  await customFetcher(data);
-  await pageRender();
-};
-
-const createForm = async (target) => {
-  const formData = new FormData(target);
-  const updateObj = {
-    title: formData.get('category-title'),
-    description: formData.get('category-description'),
-  };
-
-  const data = {
-    target: '',
-    dataObj: updateObj,
-    method: 'POST',
-  };
-
-  $categories.innerHTML = '';
-  await customFetcher(data);
-  await pageRender();
 };
 
 const clickEventMap = {
@@ -125,8 +103,11 @@ const clickEventMap = {
   category_checked(e) {
     deleteCategoryChecker(e);
   },
+  all_check(e) {
+    allCheckboxChanger(e);
+  },
   admin_edit_complete_bnt() {
-    window.history.back(1);
+    location.href = '/admin/category/list';
   },
 };
 
@@ -135,7 +116,7 @@ const submitEventMap = {
     editCategoty(e);
   },
   create_form(e) {
-    createForm(e);
+    createCategory(e);
   },
 };
 
@@ -147,13 +128,10 @@ $admin_category_wapper.addEventListener('click', (e) => {
 
 $admin_category_wapper.addEventListener('submit', (e) => {
   e.preventDefault();
-
   if (!submitEventMap[e.target.className]) return;
 
   submitEventMap[e.target.className](e.target);
 });
-
-$admin_category_wapper.addEventListener('change', (e) => {});
 
 window.addEventListener('DOMContentLoaded', async () => {
   await pageRender();
