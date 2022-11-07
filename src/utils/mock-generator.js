@@ -60,6 +60,9 @@ async function dataPull() {
       userId: userIdList[randomN]._id,
     });
   }
+  for (const userId of userIdList) {
+    await cartModel.create({ userId, orderSheets: [] });
+  }
 }
 
 async function mockGenerator() {

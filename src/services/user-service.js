@@ -1,5 +1,6 @@
 import { userModel } from '../db';
 import { orderModel } from '../db';
+import { cartModel } from '../db';
 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -76,7 +77,11 @@ class UserService {
 
     // 로그인 성공 -> JWT 웹 토큰 생성
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
-
+    // 로그인 성공시 쇼핑하던 장바구니 불러옴 없으면 새로운 장바구니 생성
+    const cart = await cartModel.findOneByUserId(user._id);
+    if (!cart) {
+      await cartModel.create({ userId: user._id, orderSheets: [] });
+    }
     // 2개 프로퍼티를 jwt 토큰에 담음
     // 관리자라면 토큰과 함께 주는 isAdmin속성을 true로 보내줌
     let isAdmin = false;
