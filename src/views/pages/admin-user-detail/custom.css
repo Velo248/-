@@ -1,17 +1,47 @@
-@import "./common.css";
+/* @import "./common.css"; */
 
-.wrapper {
-  width: 80%;
-  padding: 1rem;
-  margin: 0 auto;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.user-info {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+
+header {
+  height: 5vh;
+  background-color: yellow;
 }
-.user-info-line {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
+
+.admin_user_wapper {
+  height: 95vh;
+  background-color: bisque;
+}
+
+.admin_user_header {
+  text-align: center;
+}
+.admin_user_header > h1 {
+  display: inline;
+}
+
+.workspace_container {
+  background-color: white;
+  margin: 1.875rem 5%;
+  height: 85%;
+}
+.workspace_container > button {
+  margin-left: 50%;
+}
+.workspace {
+  display: grid;
+  height: 90%;
+  grid-template-columns: 1fr 1fr;
+}
+.list_name {
+  text-align: center;
+}
+
+.list_name,
+.user_dateil {
+  display: grid;
+  grid-template-rows: auto;
 }
