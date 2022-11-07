@@ -101,14 +101,13 @@ orderRouter.post('/orders', loginRequired, async (req, res, next) => {
         'headers의 Content-Type을 application/json으로 설정해주세요',
       );
     }
-    const currentUserId = req.currentUserId;
-    const { address, request, items } = req.body;
-
+    const { currentUserId } = req;
+    const { address, request, products } = req.body;
     const orderInfo = {
       userId: currentUserId,
       address,
       request,
-      items,
+      products,
     };
     const newOrder = await orderService.addOrder(orderInfo);
     res.status(201).json({ newOrder });
