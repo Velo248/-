@@ -1,14 +1,20 @@
 header {
+  position: fixed;
   display: flex;
+  width: 100vw;
+  height: 97px;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 35px;
+  backdrop-filter: blur(25px);
+  padding: 0px 35px 0 10px;
   margin-bottom: 60px;
+  box-shadow: 0px 1px 8px #adadad;
+  z-index: 9;
 }
 
 header h1 {
   width: 235px;
-  height: 100px;
+  height: 100%;
 }
 
 header h1 img {
@@ -16,22 +22,62 @@ header h1 img {
   height: 100%;
 }
 
-nav span {
+.nav_wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 85%;
+  text-align: right;
+}
+
+.subnav {
+  font-size: 13px;
+}
+
+.subnav a {
   display: inline-block;
-  margin-right: 25px;
+  margin-left: 13px;
+}
+
+nav {
+  font-size: 24px;
+  text-align: right;
+}
+
+nav a {
+  margin-left: 20px;
 }
 
 main {
   max-width: 1240px;
   /* footer가 자꾸 올라와서  
     >> 임시로 min-height */
-  min-height: 1240px;
+  min-height: calc(100vh - 56px);
   margin: 0 auto;
+  padding: 116px 20px 20px;
 }
 
 footer {
-  padding: 20px 0;
+  padding: 20px 80px;
   background-color: #5c5c5c;
-  text-align: center;
-  color: #fff;
+  color: #a3a3a3;
+  font-size: 12px;
+  text-align: left;
+}
+
+footer .img_wrap {
+  display: inline-block;
+  width: 166px;
+  height: 40px;
+  margin-right: 20px;
+}
+
+footer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.footer_detail div {
+  margin: 10px 0;
 }
