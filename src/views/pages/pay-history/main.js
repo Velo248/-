@@ -1,20 +1,16 @@
-const testLogin = async () => {
-  const { token } = await (
-    await fetch('/api/login', {
-      method: 'POST',
+const getOrders = async () => {
+  const orders = await (
+    await fetch('/api/orders', {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
       },
-      body: JSON.stringify({
-        email: 'elice1@test.com',
-        password: '1234',
-      }),
     })
   ).json();
-
-  return token;
+  return orders;
 };
-const templateHistory = ({ _id, summaryTitle, totalPrice, status }) => {
+
+const createHistoryDiv = ({ _id, summaryTitle, totalPrice, status }) => {
   const historyDetail = document.createElement('div');
   historyDetail.className = 'flex-justify-between payment_history_detail';
   historyDetail.dataset.id = _id;
@@ -31,23 +27,13 @@ const templateHistory = ({ _id, summaryTitle, totalPrice, status }) => {
 };
 
 const init = async () => {
-  const token = (await testLogin()) || sessionStorage.getItem('token');
-
   const paymentHistoryBody = document.querySelector('.payment_history_body');
 
-  // api 수정 후 URL 변경 필수
-  const orders = await (
-    await fetch('/api/orderlist/user', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-  ).json();
   paymentHistoryBody.innerHTML = '';
+  const orders = await getOrders();
   orders.forEach((order) => {
-    paymentHistoryBody.appendChild(templateHistory(order));
+    paymentHistoryBody.appendChild(createHistoryDiv(order));
   });
 };
 
-init();
+document.addEventListener('DOMContentLoaded', init);
