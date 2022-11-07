@@ -30,7 +30,8 @@ export class ProductModel {
       limit: limit,
     };
     let priceOption = null;
-    console.log(priceMax);
+    // 자꾸 NaN뜸
+    // console.log(priceMax);
     if (!priceMax) {
       priceOption = { $gte: priceMin };
     } else {

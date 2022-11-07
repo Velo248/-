@@ -22,7 +22,7 @@ export class OrderModel {
     const orders = await Order.find({ userId });
     return orders;
   }
-  async findByOrderId(orderId) {
+  async findOneByOrderId(orderId) {
     const order = await Order.findOne({ _id: orderId });
     return order;
   }
@@ -40,9 +40,9 @@ export class OrderModel {
     return updatedOrder;
   }
 
-  async remove(orderId) {
-    const order = await Order.deleteOne({ _id: orderId });
-    return order;
+  async deleteOneByOrderId(orderId) {
+    const result = await Order.deleteOne({ _id: orderId });
+    return result;
   }
 
   async deleteAll() {
