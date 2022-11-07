@@ -1,6 +1,7 @@
 import { elementCreater, dateFormet } from '/public/scripts/util.js';
 import productService from '/public/scripts/productService.js';
 import categoryService from '/public/scripts/categoryService.js';
+import adminService from '/public/scripts/adminService.js';
 
 const $product_detail_wapper = document.querySelector('.product_detail_wapper');
 const $product = document.querySelector('.product');
@@ -128,9 +129,7 @@ const pageRender = async () => {
 
 const deleteProduct = async () => {
   if (confirm('진심 삭제함?')) {
-    await productService.deleteProductByProductId(
-      sessionStorage.getItem('p_id'),
-    );
+    await adminService.deleteProductByProductId(sessionStorage.getItem('p_id'));
     return (location.href = '/admin/product/list');
   }
   return;

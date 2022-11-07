@@ -1,11 +1,11 @@
 import { elementCreater } from '/public/scripts/util.js';
-import userService from '/public/scripts/userService.js';
+import adminService from '/public/scripts/adminService.js';
 
 const $admin_user_wapper = document.querySelector('.admin_user_wapper');
 const $user_list = document.querySelector('.user_list');
 
 const getUsers = async () => {
-  const users = await userService.getAllUser();
+  const users = await adminService.getAllUser();
   return users;
 };
 

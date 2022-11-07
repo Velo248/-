@@ -1,5 +1,6 @@
 import { elementCreater, dateFormet } from '/public/scripts/util.js';
 import categoryService from '/public/scripts/categoryService.js';
+import adminService from '/public/scripts/adminService.js';
 
 const $admin_category_wapper = document.querySelector('.admin_category_wapper');
 const $categories = document.querySelector('.categories');
@@ -46,7 +47,7 @@ const editCategoty = async (target) => {
 
   const categoryId = target.getAttribute('id');
 
-  await categoryService.setCategoryInfomation(categoryId, updateObj);
+  await adminService.setCategoryByCategoryId(categoryId, updateObj);
   $categories.innerHTML = '';
   await pageRender();
 };
@@ -66,7 +67,7 @@ const createCategory = async (target) => {
   $title.value = '';
   $description.value = '';
 
-  await categoryService.addCategory(createObj);
+  await adminService.createCategory(createObj);
 
   $categories.innerHTML = '';
   await pageRender();
@@ -75,7 +76,7 @@ const createCategory = async (target) => {
 const deleteCategory = async () => {
   const categoryId = Object.keys(checkObj);
   for (const id of categoryId) {
-    await categoryService.deleteCategory(id);
+    await adminService.deleteCategoryByCategoryId(id);
     delete checkObj[id];
   }
   $categories.innerHTML = '';

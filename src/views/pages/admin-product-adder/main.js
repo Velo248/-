@@ -1,6 +1,6 @@
 import { elementCreater } from '/public/scripts/util.js';
-import productService from '/public/scripts/productService.js';
 import categoryService from '/public/scripts/categoryService.js';
+import adminService from '/public/scripts/adminService.js';
 
 const $admin_product_wapper = document.querySelector('.admin_product_wapper');
 const $category_select = document.querySelector('.category_select');
@@ -53,7 +53,7 @@ const createProduct = async (target) => {
   createObj.isRecommended = formData.get('isRecommended') ? true : false;
   createObj.discountPercent = formData.get('discountPercent');
 
-  await productService.addProduct(createObj);
+  await adminService.createProduct(createObj);
   sessionStorage.removeItem('p_id');
   window.location.href = '/admin/product/list';
 };
@@ -66,7 +66,7 @@ const submitEventMap = {
 
 const clickEventMap = {
   back_admin_main_bnt() {
-    window.location.href = '/admin-main';
+    window.location.href = '/admin/product/list';
   },
 };
 
@@ -77,7 +77,6 @@ $admin_product_wapper.addEventListener('submit', (e) => {
 });
 
 $admin_product_wapper.addEventListener('click', (e) => {
-  console.log(e.target);
   if (!clickEventMap[e.target.className]) return;
   clickEventMap[e.target.className](e.target);
 });
