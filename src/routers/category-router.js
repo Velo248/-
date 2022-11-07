@@ -26,10 +26,23 @@ categoryRouter.get('/categories/:categoryId', async (req, res, next) => {
     next(error);
   }
 });
-
+categoryRouter.get(
+  '/categories/:categoryId/products',
+  async (req, res, next) => {
+    try {
+      const { categoryId } = req.params;
+      const products = await categoryService.getProductsByCategories(
+        categoryId,
+      );
+      res.status(200).json(products);
+    } catch (error) {
+      next(error);
+    }
+  },
+);
 //카테고리 추가 API - POST /category
 categoryRouter.post(
-  '/categories',
+  '/admin/categories',
   loginRequired,
   isAdmin,
   async (req, res, next) => {
@@ -61,7 +74,7 @@ categoryRouter.post(
 
 //카테고리 수정 API - PATCH /category/{categoryId}
 categoryRouter.patch(
-  '/categories/:categoryId',
+  '/admin/categories/:categoryId',
   loginRequired,
   isAdmin,
   async (req, res, next) => {
@@ -97,7 +110,7 @@ categoryRouter.patch(
 
 //카테고리 삭제 API - DELETE /category/{categoryId}
 categoryRouter.delete(
-  '/categories/:categoryId',
+  '/admin/categories/:categoryId',
   loginRequired,
   isAdmin,
   async (req, res, next) => {

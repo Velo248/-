@@ -1,9 +1,8 @@
-import { productModel, categoryModel } from '../db';
+import { productModel } from '../db';
 
 class ProductService {
-  constructor(productModel, categoryModel) {
+  constructor(productModel) {
     this.productModel = productModel;
-    this.categoryModel = categoryModel;
   }
 
   //상품 추가
@@ -25,20 +24,6 @@ class ProductService {
   //상품 전체 목록을 받음
   async getProductlist() {
     const products = await this.productModel.findAll();
-    return products;
-  }
-
-  //해당 카테고리의 상품 전체 목록을 받음
-  async getProductlistByCategory(categoryId) {
-    //해당 카테고리가 카테고리에 없는 경우 에러메시지 전달
-    console.log(categoryId);
-    const category = await this.categoryModel.findOneById(categoryId);
-    if (!category) {
-      throw new Error(
-        '해당 id의 카테고리를 찾을 수 없습니다. 다시 확인해주세요.',
-      );
-    }
-    const products = await this.productModel.findAllByCategory(categoryId);
     return products;
   }
 
@@ -114,6 +99,6 @@ class ProductService {
   }
 }
 
-const productService = new ProductService(productModel, categoryModel);
+const productService = new ProductService(productModel);
 
 export { productService };
