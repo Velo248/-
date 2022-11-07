@@ -15,10 +15,10 @@ export const productMockData = [
     discountPercent: 0,
   },
   {
-    title: '빨간노트북',
+    title: '빨간 노트북',
     sellerId: '634fcbe23192f3965bc65015',
     categoryId: '6364b9d7b8a0ba71b60c8aba',
-    manufacturer: '빨간노트북',
+    manufacturer: '빨간 노트북',
     shortDescription: '테스트용 빨간노트북',
     detailDescription: '테스트 데이터입니다.',
     imageKey:

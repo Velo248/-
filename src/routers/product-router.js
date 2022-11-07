@@ -6,13 +6,55 @@ import { productService } from '../services';
 
 const productRouter = Router();
 
-//전체 상품조회 API - GET /api/productlist
+//전체 상품조회 API - GET /api/products
 productRouter.get('/products', async (req, res, next) => {
   try {
-    //전체 상품 목록을 얻음
-    const products = await productService.getProductlist();
+    // if (Object.keys(req.query).length === 0) {
+    //   //전체 상품 목록을 얻음
+    //   const products = await productService.getProductlist();
+    //   res.status(200).json(products);
+    // } else {
+    const sortBy = req.query.sortBy || 'created_date';
+    const sortOrder = req.query.orderBy || 'asc'; // url 쿼리에서 order 받기, 기본값 asc
+    const offset = Number(req.query.offset || 1); // url 쿼리에서 offset 받기, 기본값 1
+    const limit = Number(req.query.limit || 0); // url 쿼리에서 limit 받기, 기본값 0
+    const priceMax = Number(req.query.priceMax); // url 쿼리에서 priceMax 받기
+    const priceMin = Number(req.query.priceMin || 0); // url 쿼리에서 priceMin 받기 기본값 0
+    //sortKey은 임의로 정한 것 변경 필요
+    const sortKey = {
+      created_date: 'createdAt',
+      updated_date: 'updatedAt',
+    };
+    const sortOrderType = { asc: 1, desc: -1 };
+    if (!Object.keys(sortKey).includes(sortBy)) {
+      throw new Error(
+        `잘못된 sort값 입니다. ['created_date', 'updated_date'] 중에서 선택해주세요`,
+      );
+    }
+    if (!Object.keys(sortOrderType).includes(sortOrder)) {
+      throw new Error(
+        `잘못된 order값 입니다.['asc', 'desc'] 중에서 선택해주세요`,
+      );
+    }
+    if (offset < 1) {
+      throw new Error(`offset 0보다 커야합니다.`);
+    }
+    if (limit < 0) {
+      throw new Error(`limit 0보다 크거나 같아야합니다.`);
+    }
+    const newQuery = {
+      sortBy: sortKey[sortBy],
+      orderBy: sortOrderType[sortOrder],
+      offset,
+      limit,
+      priceMax,
+      priceMin,
+    };
+
+    const products = await productService.getProductsByQuery(newQuery);
 
     res.status(200).json(products);
+    // }
   } catch (error) {
     next(error);
   }
@@ -167,49 +209,5 @@ productRouter.delete(
     }
   },
 );
-
-//상품 페이지네이션
-productRouter.get('/page/products', async (req, res, next) => {
-  try {
-    const sort = req.query.sort || 'created_date';
-    const sortOrder = req.query.sortOrder || 'asc'; // url 쿼리에서 order 받기, 기본값 asc
-    const offset = Number(req.query.offset || 1); // url 쿼리에서 offset 받기, 기본값 1
-    const limit = Number(req.query.limit || 10); // url 쿼리에서 limit 받기, 기본값 10
-    //sortKey은 임의로 정한 것 변경 필요
-    const sortKey = {
-      created_date: 'createdAt',
-      updated_date: 'updatedAt',
-    };
-    const sortOrderType = { asc: 1, desc: -1 };
-    if (!Object.keys(sortKey).includes(sort)) {
-      throw new Error(
-        `잘못된 sort값 입니다. ['created_date', 'updated_date'] 중에서 선택해주세요`,
-      );
-    }
-    if (!Object.keys(sortOrderType).includes(sortOrder)) {
-      throw new Error(
-        `잘못된 order값 입니다.['asc', 'desc'] 중에서 선택해주세요`,
-      );
-    }
-    if (offset < 1 || 5000 <= offset) {
-      throw new Error('offset 범위는 1-5000입니다.');
-    }
-    if (limit < 1 || 100 <= limit) {
-      throw new Error('limit 범위는 1-100입니다.');
-    }
-    const newQuery = {
-      sortKey: sortKey[sort],
-      sortOrder: sortOrderType[sortOrder],
-      offset,
-      limit,
-    };
-    const { products, ...query } = await productService.getProductsByAdmin(
-      newQuery,
-    );
-    res.status(200).json({ ...query, products });
-  } catch (error) {
-    next(error);
-  }
-});
 
 export { productRouter };

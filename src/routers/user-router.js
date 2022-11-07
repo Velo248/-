@@ -110,6 +110,21 @@ userRouter.get(
     }
   },
 );
+userRouter.get(
+  '/users/:userId/orders',
+  loginRequired,
+  async function (req, res, next) {
+    try {
+      // params로부터 id를 가져옴
+      const { userId } = req.params;
+      const orders = await userService.getOrdersByUser(userId);
+      res.status(200).json(orders);
+      //body data로부터
+    } catch (error) {
+      next(error);
+    }
+  },
+);
 
 // 사용자 정보 수정
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)

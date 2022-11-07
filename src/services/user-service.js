@@ -1,12 +1,14 @@
 import { userModel } from '../db';
+import { orderModel } from '../db';
 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 class UserService {
   // 본 파일의 맨 아래에서, new UserService(userModel) 하면, 이 함수의 인자로 전달됨
-  constructor(userModel) {
+  constructor(userModel, orderModel) {
     this.userModel = userModel;
+    this.orderModel = orderModel;
   }
 
   // 회원가입
@@ -95,6 +97,12 @@ class UserService {
     const user = await this.userModel.findById(userId);
     return user;
   }
+
+  //user의 order가져오기
+  async getOrdersByUser(userId) {
+    const orders = await this.orderModel.findByUserId(userId);
+    return orders;
+  }
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
   async setUser(userInfoRequired, toUpdate) {
     // 객체 destructuring
@@ -144,6 +152,6 @@ class UserService {
   }
 }
 
-const userService = new UserService(userModel);
+const userService = new UserService(userModel, orderModel);
 
 export { userService };
