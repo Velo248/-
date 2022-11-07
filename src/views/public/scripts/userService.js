@@ -2,6 +2,7 @@ import { customFetcher } from './fatcher.js';
 
 const userService = {};
 
+//회원가입
 userService.register = async function (obj) {
   const { email, fullName, password, phoneNumber, address, role } = obj;
   const data = {
@@ -22,6 +23,7 @@ userService.register = async function (obj) {
   return await response.json();
 };
 
+//로그인
 userService.login = async function (email, password) {
   const data = {
     email: email,
@@ -37,16 +39,7 @@ userService.login = async function (email, password) {
   return await response.json();
 };
 
-userService.getAllUser = async function () {
-  const reqObj = {
-    target: '/users',
-    method: 'GET',
-  };
-
-  const response = await customFetcher(reqObj);
-  return await response.json();
-};
-
+//로그인 유저
 userService.getCurrentUser = async function () {
   const reqObj = {
     target: '/user',
@@ -57,26 +50,7 @@ userService.getCurrentUser = async function () {
   return await response.json();
 };
 
-userService.getUserFromUserId = async function (userId) {
-  const reqObj = {
-    target: `/users/${userId}`,
-    method: 'GET',
-  };
-
-  const response = await customFetcher(reqObj);
-  return await response.json();
-};
-
-userService.getUserOrdersFromUserId = async function (userId) {
-  const reqObj = {
-    target: `/users/${userId}/orders`,
-    method: 'GET',
-  };
-
-  const response = await customFetcher(reqObj);
-  return await response.json();
-};
-
+//로그인 유저 정보수정
 userService.setUserInfomation = async function (userId, obj) {
   const { currentPassword, fullName, password, address, phoneNumber, role } =
     obj;
@@ -94,6 +68,17 @@ userService.setUserInfomation = async function (userId, obj) {
     target: `/users/${userId}`,
     method: 'POST',
     bodyObj: data,
+  };
+
+  const response = await customFetcher(reqObj);
+  return await response.json();
+};
+
+//탈퇴
+userService.deleteUser = async function (userId) {
+  const reqObj = {
+    target: `/users/${userId}`,
+    method: 'DELETE',
   };
 
   const response = await customFetcher(reqObj);
