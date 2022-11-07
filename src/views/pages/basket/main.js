@@ -184,7 +184,7 @@ const init = async () => {
     if (e.target === paymentBtn) {
       if (!loginToken) {
         alert('로그인이 필요합니다.');
-        location.reload();
+        location.href = '/login';
       } else {
         const orderList = getOrderList();
         if (orderList.length < 1) {
