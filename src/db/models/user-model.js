@@ -40,7 +40,7 @@ export class UserModel {
   }
 
   async delete(userId) {
-    const user = await User.findByIdAndDelete({ _id: userId });
+    const user = await User.deleteOne({ _id: userId });
     return user;
   }
 }

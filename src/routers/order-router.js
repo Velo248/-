@@ -70,8 +70,8 @@ orderRouter.get(
 orderRouter.get('/orders', loginRequired, async function (req, res, next) {
   try {
     const { currentUserId } = req;
-    const order = await orderService.getOrderByUserId(currentUserId);
-    res.status(200).json({ order });
+    const orders = await orderService.getOrdersByUserId(currentUserId);
+    res.status(200).json({ orders });
   } catch (error) {
     next(error);
   }
@@ -189,8 +189,12 @@ orderRouter.delete(
   loginRequired,
   async (req, res, next) => {
     try {
+      const { currentUserId } = req;
       const { orderId } = req.params;
-      const deletedResult = await orderService.deleteOrder(orderId);
+      const deletedResult = await orderService.deleteOrder(
+        currentUserId,
+        orderId,
+      );
       res.status(200).json(deletedResult);
     } catch (error) {
       next(error);
@@ -203,12 +207,8 @@ orderRouter.delete(
   isAdmin,
   async (req, res, next) => {
     try {
-      const { currentUserId } = req;
       const { orderId } = req.params;
-      const deletedResult = await orderService.deleteOrderByAdmin(
-        currentUserId,
-        orderId,
-      );
+      const deletedResult = await orderService.deleteOrderByAdmin(orderId);
       res.status(200).json(deletedResult);
     } catch (error) {
       next(error);
