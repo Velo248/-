@@ -1,11 +1,11 @@
-import { customFetcher } from './fatcher';
+import { customFetcher } from './fatcher.js';
 
 const categoryService = {};
 
 categoryService.getAllCategories = async function () {
   const reqObj = {
     target: '/categories',
-    medtod: 'GET',
+    method: 'GET',
   };
 
   const response = await customFetcher(reqObj);
@@ -15,7 +15,7 @@ categoryService.getAllCategories = async function () {
 categoryService.getCategoryInfomation = async function (categoryId) {
   const reqObj = {
     target: `/categories/${categoryId}`,
-    medtod: 'GET',
+    method: 'GET',
   };
 
   const response = await customFetcher(reqObj);
@@ -33,8 +33,8 @@ categoryService.addCategory = async function (obj) {
   };
 
   const reqObj = {
-    target: '/admin/categories',
-    medtod: 'POST',
+    target: '/categories',
+    method: 'POST',
     bodyObj: data,
   };
 
@@ -53,8 +53,8 @@ categoryService.setCategoryInfomation = async function (categoryId, obj) {
   };
 
   const reqObj = {
-    target: `/admin/categories/${categoryId}`,
-    medtod: 'PATCH',
+    target: `/categories/${categoryId}`,
+    method: 'PATCH',
     bodyObj: data,
   };
 
@@ -64,8 +64,8 @@ categoryService.setCategoryInfomation = async function (categoryId, obj) {
 
 categoryService.deleteCategory = async function (categoryId) {
   const reqObj = {
-    target: `/admin/categories/${categoryId}`,
-    medtod: 'DELETE',
+    target: `/categories/${categoryId}`,
+    method: 'DELETE',
   };
 
   const response = await customFetcher(reqObj);

@@ -14,7 +14,7 @@ userService.register = async function (obj) {
   };
   const reqObj = {
     target: '/register',
-    medtod: 'POST',
+    method: 'POST',
     bodyObj: data,
   };
 
@@ -29,7 +29,7 @@ userService.login = async function (email, password) {
   };
   const reqObj = {
     target: '/login',
-    medtod: 'POST',
+    method: 'POST',
     bodyObj: data,
   };
 
@@ -40,7 +40,7 @@ userService.login = async function (email, password) {
 userService.getAllUser = async function () {
   const reqObj = {
     target: '/users',
-    medtod: 'GET',
+    method: 'GET',
   };
 
   const response = await customFetcher(reqObj);
@@ -50,7 +50,7 @@ userService.getAllUser = async function () {
 userService.getCurrentUser = async function () {
   const reqObj = {
     target: '/user',
-    medtod: 'GET',
+    method: 'GET',
   };
 
   const response = await customFetcher(reqObj);
@@ -60,7 +60,7 @@ userService.getCurrentUser = async function () {
 userService.getUserFromUserId = async function (userId) {
   const reqObj = {
     target: `/users/${userId}`,
-    medtod: 'GET',
+    method: 'GET',
   };
 
   const response = await customFetcher(reqObj);
@@ -70,7 +70,7 @@ userService.getUserFromUserId = async function (userId) {
 userService.getUserOrdersFromUserId = async function (userId) {
   const reqObj = {
     target: `/users/${userId}/orders`,
-    medtod: 'GET',
+    method: 'GET',
   };
 
   const response = await customFetcher(reqObj);
@@ -92,7 +92,7 @@ userService.setUserInfomation = async function (userId, obj) {
 
   const reqObj = {
     target: `/users/${userId}`,
-    medtod: 'POST',
+    method: 'POST',
     bodyObj: data,
   };
 
