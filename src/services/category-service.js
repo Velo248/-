@@ -70,7 +70,6 @@ class CategoryService {
         title: '삭제된 카테고리',
       });
     }
-    console.log(deletedCategory._id);
     const products = await this.productModel.findAllByCategory(categoryId);
     for (const product of products) {
       await this.productModel.update({
@@ -80,7 +79,6 @@ class CategoryService {
         },
       });
     }
-    console.log(products);
     return category;
   }
 }
