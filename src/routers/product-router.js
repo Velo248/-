@@ -183,11 +183,11 @@ productRouter.patch(
         ...(isRecommended && { isRecommended }),
         ...(discountPercent && { discountPercent }),
       };
-      const updatedProuct = await productService.updateProduct(
+      const updatedProduct = await productService.updateProduct(
         productId,
         toUpdate,
       );
-      res.status(200).json(updatedProuct);
+      res.status(200).json(updatedProduct);
     } catch (error) {
       next(error);
     }

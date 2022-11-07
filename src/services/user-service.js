@@ -111,16 +111,18 @@ class UserService {
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
   async setUser(userInfoRequired, toUpdate) {
     // 객체 destructuring
-    const { userId, currentPassword } = userInfoRequired;
-
+    const { userId, currentPassword, currentUserId } = userInfoRequired;
+    console.log(userId);
     // 우선 해당 id의 유저가 db에 있는지 확인
     let user = await this.userModel.findById(userId);
-
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!user) {
       throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
     }
-
+    const findUserId = user._id;
+    if (!findUserId.equals(currentUserId)) {
+      throw new Error('접근할 수 없습니다. ');
+    }
     // 이제, 정보 수정을 위해 사용자가 입력한 비밀번호가 올바른 값인지 확인해야 함
 
     // 비밀번호 일치 여부 확인
@@ -153,6 +155,63 @@ class UserService {
       update: toUpdate,
     });
 
+    return user;
+  }
+
+  async setUserByAdmin(userId, toUpdate) {
+    // 객체 destructuring
+
+    // 우선 해당 id의 유저가 db에 있는지 확인
+    let user = await this.userModel.findById(userId);
+
+    // db에서 찾지 못한 경우, 에러 메시지 반환
+    if (!user) {
+      throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
+    }
+
+    // 이제, 정보 수정을 위해 사용자가 입력한 비밀번호가 올바른 값인지 확인해야 함
+
+    // 이제 드디어 업데이트 시작
+    // 비밀번호도 변경하는 경우에는, 회원가입 때처럼 해쉬화 해주어야 함.
+    const { password } = toUpdate;
+
+    if (password) {
+      const newPasswordHash = await bcrypt.hash(password, 10);
+      toUpdate.password = newPasswordHash;
+    }
+
+    // 업데이트 진행
+    user = await this.userModel.update({
+      userId,
+      update: toUpdate,
+    });
+    return user;
+  }
+  async deleteUser(currentUserId, userId) {
+    // 우선 해당 id의 상품이 db에 있는지 확인
+    let user = await this.userModel.findById(userId);
+    // db에서 찾지 못한 경우, 에러 메시지 반환
+    if (!user) {
+      throw new Error('remove error : 해당 주문을 찾을 수 없습니다.');
+    }
+    const findUserId = user._id;
+    if (!findUserId.equals(currentUserId)) {
+      throw new Error('접근할 수 없습니다.');
+    }
+    // 업데이트 진행
+    user = await this.userModel.delete(userId);
+
+    return user;
+  }
+  async deleteUserByAdmin(userId) {
+    // 우선 해당 id의 상품이 db에 있는지 확인
+    let user = await this.userModel.findById(userId);
+    // db에서 찾지 못한 경우, 에러 메시지 반환
+    if (!user) {
+      throw new Error('remove error : 해당 주문을 찾을 수 없습니다.');
+    }
+    // 업데이트 진행
+    user = await this.userModel.delete(userId);
     return user;
   }
 }
