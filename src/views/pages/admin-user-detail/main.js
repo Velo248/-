@@ -40,11 +40,9 @@ const pageRender = async () => {
   $user_dateil.setAttribute('data-key', _id);
 };
 
-//api 확인후 수정필요
 const userOrderDirect = () => {
   const userId = $user_dateil.getAttribute('data-key');
-  console.log(userId);
-  sessionStorage.setItem('u_id', userId);
+  sessionStorage.setItem('filter_user', userId);
   location.href = '/admin/user/order';
 };
 
@@ -53,7 +51,7 @@ const clickEventMap = {
     userOrderDirect();
   },
   back_admin_main_bnt() {
-    sessionStorage.removeItem('u_id');
+    sessionStorage.removeItem('filter_user');
     location.href = '/admin/user/list';
   },
 };
