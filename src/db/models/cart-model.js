@@ -10,7 +10,37 @@ export class CartModel {
   }
 
   async findOneByUserId(userId) {
-    const cart = await Cart.findOne({ userId: userId });
+    const cart = await Cart.findOne({ userId });
+    return cart;
+  }
+  async addOrderSheet(userId, orderSheet) {
+    const cart = await Cart.findOne({ userId });
+    //같은상품인경우 push로 추가하지않고 quantity를 합쳐줌
+    let index = -1;
+    for (const order in cart.orderSheets) {
+      if (orderSheet.productId == cart.orderSheets[order].productId) {
+        index = order;
+      }
+    }
+
+    if (index < 0) {
+      await Cart.updateOne({ userId }, { $push: { orderSheets: orderSheet } });
+    } else {
+      const sum = cart.orderSheets[index].quantity + orderSheet.quantity;
+      //기존 orderSheets를 넘겨줘야 덮어쓰지않고 수정이됨
+
+      cart.orderSheets.splice(index, 1);
+      await Cart.updateOne(
+        { userId },
+        {
+          orderSheets: [
+            ...cart.orderSheets,
+            { productId: orderSheet.productId, quantity: sum },
+          ],
+        },
+      );
+    }
+
     return cart;
   }
 

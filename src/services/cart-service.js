@@ -1,19 +1,31 @@
-import { cartModel } from '../db';
+import { cartModel, productModel } from '../db';
 
 class CartService {
-  constructor(cartModel) {
+  constructor(cartModel, productModel) {
     this.cartModel = cartModel;
+    this.productModel = productModel;
   }
 
   //추가
-  async addCart(cartInfo) {
-    const { userId } = cartInfo;
+  async addOrderSheets(cartInfo) {
+    const { userId, orderSheets } = cartInfo;
+
     const cart = await this.cartModel.findOneByUserId(userId);
-    if (cart) {
-      throw new Error(`이미 장바구니가 존재하기 때문에 생성할 수 없습니다`);
+    if (!cart) {
+      throw new Error(`URL의 유저id를 다시 확인해주세요`);
     }
-    const createdNewCart = await this.cartModel.create(cartInfo);
-    return createdNewCart;
+
+    for (const ordersheet of orderSheets) {
+      const product = await this.productModel.findById(ordersheet.productId);
+      if (!product) {
+        throw new Error('해당id의 상품이 존재하지 않습니다.');
+      }
+    }
+    for (const orderSheet of orderSheets) {
+      await this.cartModel.addOrderSheet(userId, orderSheet);
+    }
+    const updatedCart = await this.cartModel.findOneByUserId(userId);
+    return updatedCart;
   }
 
   //카트목록 목록을 받음
@@ -122,6 +134,6 @@ class CartService {
   }
 }
 
-const cartService = new CartService(cartModel);
+const cartService = new CartService(cartModel, productModel);
 
 export { cartService };

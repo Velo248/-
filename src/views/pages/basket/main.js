@@ -108,7 +108,7 @@ const getOrderList = () => {
 const createItemWrapper = ({ _id, quantity, title, price, imageKey }) => {
   const itemWrapper = document.createElement('div');
   itemWrapper.className = 'flex-justify-between product';
-  itemWrapper.dataset.product_id = basketItem._id;
+  itemWrapper.dataset.product_id = _id;
   itemWrapper.innerHTML = `
         <input type="checkbox" />
         <div class="img_wrap">
@@ -147,6 +147,12 @@ const init = async () => {
 
   let basketItems = [];
 
+  const basket = document.querySelector('.basket');
+  const basketItemList = document.querySelector('.basket_item_list');
+  basketItemList.innerHTML = `
+    <div class="flex-justify-between">장바구니에 상품이 없습니다</div>
+  `;
+
   if (!loginToken) {
     basketItems = getLocalBasket();
     basketItems?.forEach(paintGuestBasketItem);
@@ -155,8 +161,6 @@ const init = async () => {
     basketItems?.forEach(paintUserBasketItem);
   }
 
-  const basket = document.querySelector('.basket');
-  const basketItemList = document.querySelector('.basket_item_list');
   const basketChkAllBtn = document.querySelector('#basketChkAll');
   const removeSelectedItemBtn = document.querySelector('.remove_selected_item');
   const paymentBtn = document.querySelector('.payment');
@@ -184,7 +188,7 @@ const init = async () => {
     if (e.target === paymentBtn) {
       if (!loginToken) {
         alert('로그인이 필요합니다.');
-        location.reload();
+        location.href = '/login';
       } else {
         const orderList = getOrderList();
         if (orderList.length < 1) {
@@ -196,6 +200,7 @@ const init = async () => {
         }
       }
     }
+    setOrderList();
     // 이벤트에 대해 선택된 물건의 수량을 기준으로 총 금액을 설정한다.
     printTotalPrice();
   });

@@ -1,51 +1,45 @@
+import { elementCreater } from '/public/scripts/util.js';
+import categoryService from '/public/scripts/categoryService.js';
+
+const $admin_category_wapper = document.querySelector('.admin_category_wapper');
 const $admin_category_workspace = document.querySelector(
   '.admin_category_workspace',
 );
 
-const $back_admin_main_bnt = document.querySelector('.back_admin_main_bnt');
-const $admin_category_edit_bnt = document.querySelector(
-  '.admin_category_edit_bnt',
-);
-
-$admin_category_edit_bnt.addEventListener('click', () => {
-  location.href = '/admin-category-edit';
-});
-
-$back_admin_main_bnt.addEventListener('click', () => {
-  location.href = '/admin-main';
-});
-
-const elementCreater = (current, add) => {
-  current.innerHTML += add;
+const getCategory = async () => {
+  const response = await categoryService.getAllCategories();
+  return response;
 };
 
 const pageRender = async () => {
   const categories = await getCategory();
 
   categories.forEach((e) => {
-    elementCreater(
-      $admin_category_workspace,
-      `<div data-key=${e._id} class="category_item">${e.title}</div>`,
-    );
-  });
+    const temp_html = `
+    <div data-key=${e._id} class="category_item">
+      ${e.title}
+    </div>
+    `;
 
-  return document.querySelectorAll('.category_item');
-};
-
-const getCategory = async () => {
-  const respose = await fetch('/api/categories');
-  return await respose.json();
-};
-
-const setClickEvent = (element) => {
-  element.forEach((e) => {
-    e.addEventListener('click', (event) => {
-      console.log(event.target.getAttribute('data-key'));
-    });
+    elementCreater($admin_category_workspace, temp_html);
   });
 };
+
+const clickEventMap = {
+  back_admin_main_bnt() {
+    location.href = '/admin';
+  },
+  admin_category_edit_bnt() {
+    location.href = '/admin/category/edit';
+  },
+};
+
+$admin_category_wapper.addEventListener('click', (e) => {
+  if (!clickEventMap[e.target.className]) return;
+
+  clickEventMap[e.target.className](e.target);
+});
 
 window.addEventListener('DOMContentLoaded', async () => {
-  const $category_item = await pageRender();
-  setClickEvent($category_item);
+  await pageRender();
 });
