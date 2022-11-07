@@ -5,34 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../../../public/css/style.css" />
-    <link rel="stylesheet" href="product.css" />
+    <!-- <link rel="stylesheet" href="../../../public/css/style.css" /> -->
+    <link rel="stylesheet" href="custom.css" />
   </head>
   <body>
-    <header><nav></nav></header>
-    <main class="main">
-      <div class="productWapper">
-        <div class="workspace">
-          <div class="listName">
-            <div><span>이름</span></div>
+    <header><nav>header</nav></header>
+    <main>
+      <div class="admin_product_wapper">
+        <div class="admin_product_header">
+          <h1>상품 목록</h1>
+          <button class="back_admin_main_bnt">전체 메뉴로</button>
+        </div>
+        <div class="admin_product_workspace">
+          <div class="product_list_name">
+            <div><span>상품명</span></div>
             <div><span>카테고리</span></div>
             <div><span>설명</span></div>
             <div><span>제조사</span></div>
-            <div><span>금액</span></div>
-            <div><span></span></div>
+            <div><span>가격</span></div>
+            <!-- <div><span>상세</span></div> -->
           </div>
-          <div class="listItemContainer">
-            <div><span>태그를 바꿔야될거같은데</span></div>
-            <div><span>여기</span></div>
-            <div><span>밀리는데</span></div>
-            <div><span>grid로 바꿔서</span></div>
-            <div><span>비율을 잡아야되나?</span></div>
-            <div><button>상세보기</button></div>
-          </div>
+          <div class="products"></div>
         </div>
-        <div class="addProductBntContainer"><button>상품 추가</button></div>
+        <button class="create_product_bnt">새 상품 추가</button>
       </div>
     </main>
     <footer></footer>
+    <script src="main.js"></script>
   </body>
 </html>
