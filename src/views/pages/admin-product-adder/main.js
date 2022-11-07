@@ -1,4 +1,4 @@
-import { elementCreater, dateFormet } from '/public/scripts/util.js';
+import { elementCreater } from '/public/scripts/util.js';
 import productService from '/public/scripts/productService.js';
 import categoryService from '/public/scripts/categoryService.js';
 
