@@ -1,21 +1,51 @@
-@import "./common.css";
+/* @import "./common.css"; */
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  height: 5vh;
+  background-color: yellow;
+}
+
+.product_detail_wapper {
+  height: 95vh;
+  background-color: bisque;
+}
+
+.product_header {
+  text-align: center;
+}
+.product_header > h1 {
+  display: inline;
+}
+
+.workspace {
+  background-color: white;
+  margin: 1.875rem 5%;
+  height: 85%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.edit_form,
+.product_detail_name {
+  display: grid;
+  height: 100%;
+}
+
+.edit_form > div > input {
   width: 80%;
-  margin: 0 auto;
-  padding: 1rem;
-  border: 1px solid black;
-  margin-bottom: 1rem;
 }
-.item-info {
-  display: flex;
-  flex-direction: column;
+
+.product_detail_name {
+  text-align: right;
+  margin-right: 3%;
 }
-.item-info-line {
-  width: 60%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
+
+.product_edit_bnt {
+  margin-left: 90%;
 }

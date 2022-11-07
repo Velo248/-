@@ -8,6 +8,7 @@ const orderSheet = {
     require: true,
   },
   index: false,
+  _id: false,
 };
 
 export default orderSheet;
