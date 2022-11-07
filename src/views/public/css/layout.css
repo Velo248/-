@@ -2,18 +2,18 @@ header {
   position: fixed;
   display: flex;
   width: 100vw;
-  height: 97px;
+  height: 9.7rem;
   align-items: center;
   justify-content: space-between;
-  backdrop-filter: blur(25px);
-  padding: 0px 35px 0 10px;
-  margin-bottom: 60px;
-  box-shadow: 0px 1px 8px #adadad;
+  backdrop-filter: blur(2.5rem);
+  padding: 0rem 3.5rem 0 1rem;
+  margin-bottom: 6rem;
+  box-shadow: 0rem 0.1rem 0.8rem #adadad;
   z-index: 9;
 }
 
 header h1 {
-  width: 235px;
+  width: 23.5rem;
   height: 100%;
 }
 
@@ -31,45 +31,43 @@ header h1 img {
 }
 
 .subnav {
-  font-size: 13px;
+  font-size: 1.3rem;
 }
 
 .subnav a {
   display: inline-block;
-  margin-left: 13px;
+  margin-left: 1.3rem;
 }
 
 nav {
-  font-size: 24px;
+  font-size: 2.4rem;
   text-align: right;
 }
 
 nav a {
-  margin-left: 20px;
+  margin-left: 2rem;
 }
 
 main {
-  max-width: 1240px;
-  /* footer가 자꾸 올라와서  
-    >> 임시로 min-height */
-  min-height: calc(100vh - 56px);
+  max-width: 124rem;
+  min-height: calc(100vh - 25.2rem);
   margin: 0 auto;
-  padding: 116px 20px 20px;
+  padding: 11.6rem 2rem 2rem;
 }
 
 footer {
-  padding: 20px 80px;
+  padding: 2rem 8rem;
   background-color: #5c5c5c;
   color: #a3a3a3;
-  font-size: 12px;
+  font-size: 1.2rem;
   text-align: left;
 }
 
 footer .img_wrap {
   display: inline-block;
-  width: 166px;
-  height: 40px;
-  margin-right: 20px;
+  width: 16.6rem;
+  height: 4rem;
+  margin-right: 2rem;
 }
 
 footer img {
@@ -79,5 +77,5 @@ footer img {
 }
 
 .footer_detail div {
-  margin: 10px 0;
+  margin: 1rem 0;
 }
