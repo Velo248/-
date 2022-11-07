@@ -1,32 +1,35 @@
+import { elementCreater, dateFormet } from '/public/scripts/util.js';
+import productService from '/public/scripts/productService.js';
+import categoryService from '/public/scripts/categoryService.js';
+
 const $admin_product_wapper = document.querySelector('.admin_product_wapper');
 const $category_select = document.querySelector('.category_select');
 
-let categoryObj = {};
-
-const elementCreater = (current, add) => {
-  current.innerHTML += add;
-};
+const categoryObj = {};
 
 const getCategory = async () => {
-  const respose = await fetch('/api/categories');
-  return await respose.json();
+  const response = await categoryService.getAllCategories();
+  return response;
 };
 
-const setCategoryMap = async () => {
-  const category = await getCategory();
-  category.forEach((e) => {
-    categoryObj[e._id] = e.title;
+const setCategoryMap = (target) => {
+  target.forEach((categoty) => {
+    categoryObj[categoty._id] = categoty.title;
   });
 };
 
-const pageRender = async () => {
-  await setCategoryMap();
+const setSelectOption = () => {
   Object.values(categoryObj).forEach((categoryTitle) => {
     const temp_html = `
       <option value="${categoryTitle}">${categoryTitle}</option>
     `;
     elementCreater($category_select, temp_html);
   });
+};
+const pageRender = async () => {
+  const categories = await getCategory();
+  setCategoryMap(categories);
+  setSelectOption();
 };
 
 const createProduct = async (target) => {
@@ -46,19 +49,13 @@ const createProduct = async (target) => {
   createObj.imageKey = formData.get('imageKey').name;
   createObj.inventory = formData.get('inventory');
   createObj.price = formData.get('price');
-  createObj.searchKeywords = formData.get('searchKeywords');
+  createObj.searchKeywords = formData.get('searchKeywords').split(',');
   createObj.isRecommended = formData.get('isRecommended') ? true : false;
   createObj.discountPercent = formData.get('discountPercent');
 
-  const data = {
-    target: '',
-    dataObj: createObj,
-    method: 'POST',
-  };
-
-  await customFetcher(data);
+  await productService.addProduct(createObj);
   sessionStorage.removeItem('p_id');
-  window.location.href = '/admin-main';
+  window.location.href = '/admin/product/list';
 };
 
 const submitEventMap = {
@@ -88,24 +85,3 @@ $admin_product_wapper.addEventListener('click', (e) => {
 window.addEventListener('DOMContentLoaded', async () => {
   await pageRender();
 });
-
-const customFetcher = async (data) => {
-  const { target, dataObj, method } = data;
-  console.log(target, dataObj, method);
-
-  const res = await fetch(`/api/products/${target}`, {
-    method: `${method}`,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-    },
-    body: JSON.stringify(dataObj),
-  });
-
-  if (!res.ok) {
-    const errorContent = await res.json();
-    const { reason } = errorContent;
-
-    throw new Error(reason);
-  }
-};
