@@ -1,22 +1,17 @@
+import { elementCreater } from '/public/scripts/util.js';
+import userService from '/public/scripts/userService.js';
+
 const $admin_user_wapper = document.querySelector('.admin_user_wapper');
 const $user_list = document.querySelector('.user_list');
 
 const getUsers = async () => {
-  const data = {
-    target: '',
-    method: 'GET',
-  };
-
-  const response = await customFetcher(data);
-  return await response.json();
-};
-
-const elementCreater = (current, add) => {
-  current.innerHTML += add;
+  const users = await userService.getAllUser();
+  return users;
 };
 
 const pageRender = async () => {
   const users = await getUsers();
+
   users.forEach((user) => {
     const temp_html = `
       <div><span>${user.fullName}</span></div>
@@ -30,8 +25,8 @@ const pageRender = async () => {
 
 const userDetail = (target) => {
   const userId = target.parentNode.getAttribute('data-key');
-  window.sessionStorage.setItem('u_id', userId);
-  window.location.href = '/admin-user-detail';
+  sessionStorage.setItem('u_id', userId);
+  location.href = '/admin/user/detail';
 };
 
 const clickEventMap = {
@@ -39,7 +34,7 @@ const clickEventMap = {
     userDetail(e);
   },
   back_admin_main_bnt() {
-    window.location.href = '/admin-main';
+    window.location.href = '/admin';
   },
 };
 
@@ -52,25 +47,3 @@ $admin_user_wapper.addEventListener('click', (e) => {
 window.addEventListener('DOMContentLoaded', async () => {
   await pageRender();
 });
-
-const customFetcher = async (data) => {
-  const { target, dataObj, method } = data;
-
-  const res = await fetch(`/api/users/${target}`, {
-    method: `${method}`,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-    },
-    body: JSON.stringify(dataObj),
-  });
-
-  if (!res.ok) {
-    const errorContent = await res.json();
-    const { reason } = errorContent;
-
-    throw new Error(reason);
-  }
-
-  return res;
-};
