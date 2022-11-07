@@ -24,7 +24,7 @@ async function dataReset() {
 }
 //더미데이터 삽입
 async function dataPull() {
-  console.log('data pulling...관계는 랜덤으로 배정됩니다');
+  console.log('data pulling...');
 
   const userIdList = [];
   for (const data in userMockData) {
@@ -41,10 +41,19 @@ async function dataPull() {
     const randomN = Math.floor(
       (Math.random() * 100) % (newCategories.length - 1),
     );
+    //랜덤배정하고싶은경우 아래코드삭제//
+    const productMockDataTitle = productMockData[data].title.split(' ');
+    let index = 0;
+    for (const category in newCategories) {
+      if (productMockDataTitle.includes(newCategories[category].title)) {
+        index = category;
+      }
+    }
+    /////////////////////////////////////
     await productModel.create({
       ...productMockData[data],
       sellerId: userIdList[0],
-      categoryId: newCategories[randomN]._id,
+      categoryId: newCategories[index]._id,
     });
   }
   for (const data in orderMockData) {

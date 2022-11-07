@@ -22,13 +22,28 @@ export class ProductModel {
     const products = await Product.find({});
     return products;
   }
-  async findPage(query) {
-    const { sortKey, sortOrder, limit, offset } = query;
-    const products = await Product.find({})
-      .sort({ [sortKey]: sortOrder })
-      .skip(limit * (offset - 1))
-      .limit(limit);
-    return products;
+  async findByQuery(query) {
+    const { sortBy, orderBy, limit, offset, priceMax, priceMin } = query;
+    const options = {
+      sort: { [sortBy]: orderBy },
+      skip: limit * (offset - 1),
+      limit: limit,
+    };
+    let priceOption = null;
+    console.log(priceMax);
+    if (!priceMax) {
+      priceOption = { $gte: priceMin };
+    } else {
+      priceOption = { $lte: priceMax, $gte: priceMin };
+    }
+    const products = await Product.find({ price: priceOption });
+    const productsPerpage = await Product.find(
+      { price: priceOption },
+      null,
+      options,
+    );
+
+    return { products: productsPerpage, count: products.length };
   }
 
   async findAllByCategory(categoryId) {

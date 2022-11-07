@@ -33,7 +33,7 @@ class ProductService {
     //해당 카테고리가 카테고리에 없는 경우 에러메시지 전달
     console.log(categoryId);
     const category = await this.categoryModel.findOneById(categoryId);
-    if (category) {
+    if (!category) {
       throw new Error(
         '해당 id의 카테고리를 찾을 수 없습니다. 다시 확인해주세요.',
       );
@@ -95,15 +95,22 @@ class ProductService {
     return deletedProduct;
   }
 
-  async getProductsByAdmin(query) {
-    const [productTotal, products] = await Promise.all([
-      this.productModel.getProductsCount(),
-      this.productModel.findPage(query),
-    ]);
-    const { limit } = query;
-    // const totalProductPage = Math.ceil(productTotal / limit);
+  async getProductsByQuery(query) {
+    const products = await this.productModel.findByQuery(query);
+    const { limit, offset } = query;
+    let totalProductPage = Math.ceil(products.count / limit);
     // 총페이지필요하면 그때
-    return { products };
+    if (!limit) {
+      totalProductPage = 1;
+    }
+    if (offset > totalProductPage) {
+      throw new Error(`offset 범위는 1-${totalProductPage}입니다.`);
+    }
+    return { ...products, totalProductPage };
+  }
+
+  async getProductsCount() {
+    return this.productModel.getProductsCount();
   }
 }
 
