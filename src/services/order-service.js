@@ -37,7 +37,7 @@ class OrderService {
       //itemId로 Model에서 가져오기
       const product = await this.productModel.findById(itemId);
       if (!product) {
-        throw new Error(`해당 ${itemId}의 주문목록을 찾을 수 없습니다.`);
+        throw new Error(`해당 ${itemId}의 상품id를 찾을 수 없습니다.`);
       }
       //가격, 수량 가져오기
       const { price, inventory } = product;
