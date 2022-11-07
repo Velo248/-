@@ -117,10 +117,42 @@ orderRouter.post('/orders', loginRequired, async (req, res, next) => {
   }
 });
 
+orderRouter.patch('/orders/:orderId', loginRequired, async (req, res, next) => {
+  try {
+    // content-type 을 application/json 로 프론트에서
+    // 설정 안 하고 요청하면, body가 비어 있게 됨.
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        'headers의 Content-Type을 application/json으로 설정해주세요',
+      );
+    }
+    // params로부터 id를 가져옴
+    const { currentUserId } = req;
+    const { orderId } = req.params;
+    const { address, request } = req.body;
+
+    const toUpdate = {
+      ...(address && { address }),
+      ...(request && { request }),
+    };
+
+    // 사용자 정보를 업데이트함.
+    const updateOrderInfo = await orderService.setOrder(
+      currentUserId,
+      orderId,
+      toUpdate,
+    );
+
+    // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
+    res.status(200).json({ updateOrderInfo });
+  } catch (error) {
+    next(error);
+  }
+});
 // orderId 의 주문 변경 -  PATCH /orders/:orderId
 // 바꿀 수 있는 프로퍼티 address,request,status
 orderRouter.patch(
-  '/orders/:orderId',
+  '/admin/orders/:orderId',
   loginRequired,
   isAdmin,
   async (req, res, next) => {
@@ -135,16 +167,16 @@ orderRouter.patch(
       // params로부터 id를 가져옴
       const { orderId } = req.params;
       const { address, request, status } = req.body;
-
       const toUpdate = {
         ...(address && { address }),
         ...(request && { request }),
         ...(status && { status }),
       };
-
       // 사용자 정보를 업데이트함.
-      const updateOrderInfo = await orderService.setOrder(orderId, toUpdate);
-
+      const updateOrderInfo = await orderService.setOrderByAdmin(
+        orderId,
+        toUpdate,
+      );
       // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
       res.status(200).json({ updateOrderInfo });
     } catch (error) {
@@ -166,5 +198,22 @@ orderRouter.delete(
     }
   },
 );
-
+orderRouter.delete(
+  '/admin/orders/:orderId',
+  loginRequired,
+  isAdmin,
+  async (req, res, next) => {
+    try {
+      const { currentUserId } = req;
+      const { orderId } = req.params;
+      const deletedResult = await orderService.deleteOrderByAdmin(
+        currentUserId,
+        orderId,
+      );
+      res.status(200).json(deletedResult);
+    } catch (error) {
+      next(error);
+    }
+  },
+);
 export { orderRouter };

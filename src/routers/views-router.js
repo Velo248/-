@@ -23,7 +23,7 @@ viewsRouter.use('/admin-user-order', serveStatic('admin-user-order'));
 viewsRouter.use('/basket', serveStatic('basket'));
 viewsRouter.use('/product', serveStatic('product'));
 viewsRouter.use('/login', serveStatic('login'));
-viewsRouter.use('/order-change', serveStatic('order-change'));
+viewsRouter.use('/order-change/:orderId', serveStatic('order-change'));
 viewsRouter.use('/orders/:orderId', serveStatic('order-detail'));
 viewsRouter.use('/pay-history', serveStatic('pay-history'));
 viewsRouter.use('/payments', serveStatic('payments'));

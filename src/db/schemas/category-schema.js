@@ -1,14 +1,22 @@
 import { Schema } from 'mongoose';
-import { ProductSchema } from './product-schema';
 
 const CategorySchema = new Schema(
   {
     title: { type: String, required: true },
-    description: String,
+    description: {
+      type: String,
+      default: '',
+    },
     //themeClass는 테마색상?? CSS속성인듯? ex)"is-link","is-light","is-warning"
-    themeClass: String,
+    themeClass: {
+      type: String,
+      default: '',
+    },
     //imageKey는 이미지 파일 경로
-    imageKey: String,
+    imageKey: {
+      type: String,
+      default: '',
+    },
   },
 
   {

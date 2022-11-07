@@ -38,9 +38,6 @@ async function dataPull() {
   }
 
   for (const data in productMockData) {
-    const randomN = Math.floor(
-      (Math.random() * 100) % (newCategories.length - 1),
-    );
     //랜덤배정하고싶은경우 아래코드삭제//
     const productMockDataTitle = productMockData[data].title.split(' ');
     let index = 0;

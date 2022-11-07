@@ -18,6 +18,7 @@ const UserSchema = new Schema(
     phoneNumber: {
       type: String,
       required: false,
+      default: '',
     },
     address,
     role: {

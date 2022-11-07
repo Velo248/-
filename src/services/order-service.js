@@ -80,7 +80,7 @@ class OrderService {
     return createdNewOrder;
   }
   //주문 수정
-  async setOrder(orderId, toUpdate) {
+  async setOrderByAdmin(orderId, toUpdate) {
     // 우선 해당 id의 상품이 db에 있는지 확인
     let order = await this.orderModel.findByOrderId(orderId);
     // db에서 찾지 못한 경우, 에러 메시지 반환
@@ -95,9 +95,26 @@ class OrderService {
 
     return order;
   }
+  async setOrder(userId, orderId, toUpdate) {
+    // 우선 해당 id의 상품이 db에 있는지 확인
+    let order = await this.orderModel.findByOrderId(orderId);
+    // db에서 찾지 못한 경우, 에러 메시지 반환
+    if (!order) {
+      throw new Error('update error : 해당 주문을 찾을 수 없습니다.');
+    }
+    if (order.userId !== userId) {
+      throw new Error('이 주문에 접근할 수 없습니다.');
+    }
+    // 업데이트 진행
+    order = await this.orderModel.update({
+      orderId,
+      update: toUpdate,
+    });
 
+    return order;
+  }
   //주문 삭제
-  async deleteOrder(orderId) {
+  async deleteOrderByAdmin(orderId) {
     // 우선 해당 id의 상품이 db에 있는지 확인
     let order = await this.orderModel.findByOrderId(orderId);
     // db에서 찾지 못한 경우, 에러 메시지 반환
@@ -109,7 +126,21 @@ class OrderService {
 
     return order;
   }
+  async deleteOrder(userId, orderId) {
+    // 우선 해당 id의 상품이 db에 있는지 확인
+    let order = await this.orderModel.findByOrderId(orderId);
+    // db에서 찾지 못한 경우, 에러 메시지 반환
+    if (!order) {
+      throw new Error('remove error : 해당 주문을 찾을 수 없습니다.');
+    }
+    if (order.userId !== userId) {
+      throw new Error('이 주문에 접근할 수 없습니다.');
+    }
+    // 업데이트 진행
+    order = await this.orderModel.remove(orderId);
 
+    return order;
+  }
   async getOrdersByAdmin(query) {
     const orders = await this.orderModel.findFilteredBySortAndOrders(query);
 
