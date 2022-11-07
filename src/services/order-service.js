@@ -29,42 +29,43 @@ class OrderService {
   //POST
   //주문
   async addOrder(orderInfo) {
-    const { userId, address, request, items } = orderInfo;
+    const { userId, address, request, products } = orderInfo;
     const orders = [];
-    for (const item of items) {
+
+    for (const product of products) {
       //현재 선택된 itemId, 사려는 갯수
-      const { itemId, count } = item;
+      const { productId, quantity } = product;
       //itemId로 Model에서 가져오기
-      const product = await this.productModel.findById(itemId);
+      const productData = await this.productModel.findById(productId);
       if (!product) {
-        throw new Error(`해당 ${itemId}의 상품id를 찾을 수 없습니다.`);
+        throw new Error(`해당 ${productId}의 상품id를 찾을 수 없습니다.`);
       }
       //가격, 수량 가져오기
-      const { price, inventory } = product;
+      const { price, inventory } = productData;
       //수량체크
-      const isCanOrder = inventory >= count ? true : false;
+      const isCanOrder = inventory >= quantity ? true : false;
       //뺄수없으면 에러
       if (!isCanOrder) {
         throw new Error(`사려는 양보다 수량이 적습니다 `);
       }
       //사려는 물건 x 수량 계산
-      const priceCount = price * count;
-      const { title } = product;
-      orders.push({ itemId, inventory, count, priceCount, title });
+      const priceCount = price * quantity;
+      const { title } = productData;
+      orders.push({ productId, inventory, quantity, priceCount, title });
     }
     let sumPrice = 0;
     let summaryTitle = '';
     //산만큼 수량 빼주기,
     for (const order of orders) {
-      const { itemId, inventory, count, priceCount, title } = order;
-      const newProduct = { inventory: inventory - count };
+      const { productId, inventory, quantity, priceCount, title } = order;
+      const newProduct = { inventory: inventory - quantity };
       await this.productModel.update({
-        productId: itemId,
+        productId,
         update: newProduct,
       });
       //사려는 총 합 계산
       sumPrice += priceCount;
-      summaryTitle += `${title} ,${count}개\n `;
+      summaryTitle += `${title} ,${quantity}개\n `;
     }
     //카트지우기? 일단 비워놔
     //유저 정보 저장

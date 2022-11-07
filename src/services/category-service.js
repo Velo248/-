@@ -35,6 +35,17 @@ class CategoryService {
     const category = await this.categoryModel.findOneByName(title);
     return category;
   }
+  async getProductsByCategories(categoryId) {
+    console.log(categoryId);
+    const category = await this.categoryModel.findOneById(categoryId);
+    if (!category) {
+      throw new Error(
+        '해당 id의 카테고리를 찾을 수 없습니다. 다시 확인해주세요.',
+      );
+    }
+    const products = await this.productModel.findAllByCategory(categoryId);
+    return products;
+  }
   //카테고리 정보 수정
   async updateCategory(categoryId, toUpdate) {
     // 우선 해당 title의 카테고리가 db에 있는지 확인

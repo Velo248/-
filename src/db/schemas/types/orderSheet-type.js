@@ -2,12 +2,12 @@ const orderSheet = {
   productId: {
     type: String,
     default: '',
-    require: true,
+    required: true,
   },
   quantity: {
     type: Number,
     default: 0,
-    require: true,
+    required: true,
   },
   index: false,
   _id: false,
