@@ -5,33 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>주문 정보 수정</title>
-    <link rel="stylesheet" href="../../../public/css/style.css" />
+    <link rel="stylesheet" href="/public/css/style.css" />
     <link rel="stylesheet" href="./custom.css" />
   </head>
   <body>
     <header>
       <h1>
-        <!-- 임시로 제품 페이지 -->
-        <a href="../categories/categories.html"
-          ><img src="../../../1.public/images/common/logo.png" alt="간식조아"
+        <a href="/"
+          ><img src="/public/images/common/logo.png" alt="간식조아"
         /></a>
       </h1>
       <nav>
-        <span><a href="../categories/categories.html">제품</a></span>
-        <span><a href="../../login/login.html">로그인</a></span>
-        <span><a href="../basket/basket.html">장바구니</a></span>
-        <span><a href="../orders/orders.html">주문·배송</a></span>
+        <span><a href="/categories">제품</a></span>
+        <span><a href="/login">로그인</a></span>
+        <span><a href="/basket">장바구니</a></span>
+        <span><a href="/payments">주문·배송</a></span>
       </nav>
     </header>
 
     <main>
-      <div class="wrapper order-detail">
+      <div class="wrapper order_change">
         <div class="wrapper flex-column">
           <div class="order-number">
             <span>주문 번호: </span>
             <span>20221102-1502-1220228z1</span>
           </div>
-          <div class="order-history">
+          <div class="order">
             <h4>주문 내역</h4>
             <div class="order-wrapper flex-column">
               <div class="row">
@@ -39,33 +38,41 @@
                 <span class="column">가격</span>
                 <span class="column">수량</span>
               </div>
-              <div class="row">
-                <span class="column">
-                  <img src="#" alt="" width="60" height="60" class="item-img" />
-                  <span>NOT FOR SALE</span>
-                </span>
-                <span class="column"> 2000 </span>
-                <span class="column"> 2 </span>
-              </div>
-            </div>
-            <div class="total_price">
-              <span>총</span>
-              <span>~~~~~~~~~원</span>
+              <!-- <div class="row">
+                <span class="order_summary">NOT FOR SALE</span>
+                <span class="column order_status"> 2 </span>
+                <span class="column order_price"> 2000 </span>
+              </div> -->
             </div>
           </div>
         </div>
-        <div class="wrapper">
-          <div class="delevery-info">
+        <div class="wrapper delivery_detail receiver_info">
+          <div class="delivery_info">
             <h4>배송 정보</h4>
             <div class="info flex-column">
-              <div class="address-change">
+              <div class="flex flex-row">
+                <span>수령자 이름</span>
+                <input type="text" class="input receiver_name" required />
+              </div>
+              <div class="flex flex-row">
+                <span>수령자 전화번호</span>
+                <input
+                  type="text"
+                  class="input receiver_phone"
+                  placeholder="00000000000 -를 빼고 입력하세요"
+                  required
+                />
+              </div>
+            </div>
+            <div class="info flex-column">
+              <div class="address_field">
                 <div class="field">
                   <input
                     type="text"
                     name="postal-code"
                     id="postal-code"
-                    class="input is-primary"
-                    value="주소지의 가장 긴 부분"
+                    class="input is-primary address_long"
+                    placeholder="주소"
                     disabled
                   />
                   <div class="field is-grouped">
@@ -73,30 +80,38 @@
                       type="text"
                       name="postal-code"
                       id="postal-code"
-                      class="input is-primary"
-                      value="12034"
+                      class="input is-primary postal_code"
+                      placeholder="12034"
                       disabled
                     />
                     <input
                       type="text"
                       name="postal-code"
                       id="postal-code"
-                      class="input is-primary"
-                      value="주소지의 짤은 부분"
+                      class="input is-primary address_detail"
+                      placeholder="상세주소"
                       disabled
                     />
                   </div>
                 </div>
               </div>
               <div class="field">
-                <button class="button is-link is-small">주소 검색</button>
+                <button
+                  class="button is-link is-small address_search"
+                  type="button"
+                >
+                  주소 검색
+                </button>
               </div>
             </div>
           </div>
-          <button class="button is-link">수정 완료하기</button>
+          <button class="button is-link done_btn">수정 완료하기</button>
+          <button class="button is-link cancel_btn">수정 취소</button>
         </div>
       </div>
     </main>
     <footer>&copy; 2022 오히려좋아 by elice 5팀</footer>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="./main.js" type="module"></script>
   </body>
 </html>
