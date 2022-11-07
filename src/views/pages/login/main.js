@@ -29,7 +29,6 @@ $loginBtn.addEventListener('click', async (e) => {
   let token = '';
   sessionStorage.removeItem('token');
 
-  console.log('abc');
   e.preventDefault();
 
   let headerObj = {
@@ -45,6 +44,8 @@ $loginBtn.addEventListener('click', async (e) => {
     changeLocation('/admin-main');
   } else if (!data.isAdmin) {
     token = data.token;
+
+    // 토큰도 같이 저장해주기~
     sessionStorage.setItem('token', token);
     alert('일반 유저 로그인 성공');
     changeLocation('/');

@@ -42,7 +42,7 @@ const getAllItems = async () => {
   </div>
   <div>
     <label for="count">수량</label>
-    <input id="count" class="detail-count" type="number" value="1" />
+    <input id="count" class="detail-count" type="number" value="1" min="1" />
   </div>
   <div class="button_wrap">
     <button onclick="getItem('${data._id}')">장바구니 담기</button>
@@ -51,30 +51,41 @@ const getAllItems = async () => {
   $productDetail.innerHTML = `${products}`;
 };
 
-const getItem = (_id) => {
-  let count = document.querySelector('.detail-count').value;
+const getItem = (itemId) => {
+  let count = parseInt(document.querySelector('.detail-count').value);
+  let items = [];
 
-  if (sessionStorage.getItem('basket')) {
-    let items = [];
-    items = JSON.parse(sessionStorage.getItem('basket'));
+  if (localStorage.getItem('basket')) {
+    items = JSON.parse(localStorage.getItem('basket'));
 
-    items.push({ _id, count });
-
-    // 중복 제거 함수, 수량 업데이트는 아직 X
-    const newArray = items.reduce(function (acc, current) {
-      if (acc.findIndex(({ _id }) => _id === current._id) === -1) {
-        acc.push(current);
+    for (let i = 0; i < items.length; i++) {
+      // items.length 이게 문제인거 같다!
+      if (items[i].itemId == itemId && items[i].count == count) {
+        break;
+      } else if (items[i].itemId == itemId) {
+        items[i].count = count;
+        break;
+      } else if (items[i].itemId !== itemId) {
+        console.log(itemId, items[i].itemId);
+        items.push({ itemId, count });
+        break;
       }
-      return acc;
-    }, []);
-    sessionStorage.setItem('basket', JSON.stringify(newArray));
+      console.log(items[i]);
+    }
+
+    localStorage.setItem('basket', JSON.stringify(items));
 
     alert('상품을 장바구니에 담았습니다');
-    let moveBasket = confirm('장바구니로 이동하시겠습니까?');
-    if (moveBasket) location.href = '/basket';
+    if (confirm('장바구니로 이동하시겠습니까?')) {
+      location.href = '/basket';
+    }
   } else {
-    let items = [{ _id, count }];
-    sessionStorage.setItem('basket', JSON.stringify(items));
+    let items = [{ itemId, count }];
+    localStorage.setItem('basket', JSON.stringify(items));
+    alert('상품을 장바구니에 담았습니다');
+    if (confirm('장바구니로 이동하시겠습니까?')) {
+      location.href = '/basket';
+    }
   }
 };
 
