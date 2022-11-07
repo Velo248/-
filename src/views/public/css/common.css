@@ -1,3 +1,53 @@
+:root {
+  --white: #fff;
+  --blue: #557deb;
+  --pink: #e67e7e;
+  --deepred: #bf0000;
+  --orange: #ff9225;
+  --green: #18a956;
+  --violte: #6c6ad3;
+  --yellow: #ffe26d;
+  --darkgreen: #21920f;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+body {
+  font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+}
+
+h2 {
+  text-align: center;
+}
+
+h2 span {
+  display: inline-block;
+  position: relative;
+  margin: 3rem 0 7.5rem;
+  text-align: center;
+  font-weight: lighter;
+  font-size: 2.5em;
+}
+
+h2 span::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  bottom: -0.7rem;
+  transform: translateX(-50%);
+  width: 108%;
+  height: 1.5rem;
+  background-color: var(--yellow);
+  z-index: -1;
+}
+
 .flex {
   display: flex;
 }
@@ -7,132 +57,78 @@
   justify-content: center;
 }
 
+.flex-justify-between {
+  display: flex;
+  justify-content: space-between;
+}
+
 .flex-all-center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.flex-justify-between {
+.flex-column-center {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-column-bottom {
+  display: flex;
+  align-items: baseline;
 }
 
 /* class로 관리하는 background color */
-.bg-lightBlue {
-  background-color: #6797f8;
-}
-
 .bg-blue {
-  background-color: #557deb;
-}
-
-.bg-bg-red {
-  background-color: #eb5555;
-}
-
-.bg-bg-deepred {
-  background-color: #bf0000;
-}
-
-.bg-orange {
-  background-color: #ff9225;
-}
-
-.bg-gray {
-  background-color: #727272;
-}
-
-.bg-grey {
-  background-color: #a9a9a9;
-}
-
-.bg-darkblue {
-  background-color: #3f4181;
+  background-color: var(--blue);
 }
 
 .bg-pink {
-  background-color: #fc7383;
+  background-color: var(--pink);
+}
+
+.bg-deepred {
+  background-color: var(--deepred);
+}
+
+.bg-orange {
+  background-color: var(--orange);
 }
 
 .bg-green {
-  background-color: #18a956;
-}
-
-.bg-deepgreen {
-  background-color: #1e8f4f;
+  background-color: var(--green);
 }
 
 .bg-violet {
-  background-color: #6c6ad3;
-}
-
-.bg-Brown {
-  background-color: #a86d4b;
-}
-
-.bg-lightgray {
-  background-color: #f3f3f3;
+  background-color: var(--violet);
 }
 
 .bg-yellow {
-  background-color: #ffd400;
-}
-
-.bg-lightgreen {
-  background-color: #67c314;
+  background-color: var(--yellow);
 }
 
 .bg-darkGreen {
-  background-color: #64765f;
+  background-color: var(--darkgreen);
 }
 
-.bg-paleBlue {
-  background: #f5f8ff;
-}
-
-.bg-paleGreen {
-  background: #e9ffe9;
-}
-
-.bg-paleYellow {
-  background: #fffee9;
-}
-
-.bg-pastelRed {
-  background-color: #f85454;
-}
-
-.bg-pastelPink {
-  background-color: #ff9f8d;
-}
-
-.bg-pastelYello {
-  background-color: #ffc723;
-}
-
-.bg-pastelGreen {
-  background-color: #72c6a5;
-}
-
-.bg-pastelPurple {
-  background-color: #9395bf;
-}
-
-.bg-pastelGray {
-  background-color: #9b9b9b;
-}
-
-.transparent {
+.bg-transparent {
   background-color: transparent;
+}
+
+.color-pink {
+  color: var(--pink);
+}
+
+.color-white {
+  color: var(--white);
 }
 
 .blind {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  width: 1rem;
+  height: 1rem;
   overflow: hidden;
-  margin: -1px;
+  margin: -1rem;
   clip: rect(0, 0, 0, 0);
 }
 
@@ -169,247 +165,89 @@
   font-weight: bold;
 }
 
-/* font color */
-.ft-Green {
-  color: #37987d;
-}
-
-.ft-White {
-  color: #fff;
-}
-
-.ft-Black {
-  color: #333;
-}
-
-.ft-Red {
-  color: #eb5555;
-}
-
-.ft-Org {
-  color: #ff9225;
-}
-
-.ft-Yellow {
-  color: #ffd400;
-}
-
-.ft-Lightgreen {
-  color: #67c314;
-}
-
-.ft-Gray {
-  color: #727272;
-}
-
 /* fz */
 .fz-s {
-  font-size: 0.5em;
-}
-
-.fz-m {
   font-size: 1em;
 }
 
+.fz-m {
+  font-size: 1.6em;
+}
+
 .fz-l {
-  font-size: 1.5em;
+  font-size: 2.4em;
 }
 
 .fz-m-l- {
-  font-size: 2em;
+  font-size: 3.2em;
 }
 
 .fz-xl {
-  font-size: 2.5em;
+  font-size: 4em;
 }
 
-/* width px */
-.w-3em {
-  width: 3em;
-}
-
-/* margin-top */
-.m-t-ss {
-  margin-top: 0.25em;
-}
-
-.m-t-s {
-  margin-top: 0.5em;
-}
-
-.m-t-m {
-  margin-top: 1em;
-}
-
-.m-t-ml {
-  margin-top: 1.5em;
-}
-
-.m-t-l {
-  margin-top: 2em;
-}
-
-.m-t-xl {
-  margin-top: 2.5em;
-}
-
-/* margin-bottom */
-.m-b-ss {
-  margin-bottom: 0.25em;
-}
-
-.m-b-s {
-  margin-bottom: 0.5em;
-}
-
-.m-b-m {
-  margin-bottom: 1em;
-}
-
-.m-b-ml {
-  margin-bottom: 1.5em;
-}
-
-.m-b-l {
-  margin-bottom: 2em;
-}
-
-.m-b-xl {
-  margin-bottom: 2.5em;
-}
-
-/* padding-top */
-.pt5 {
-  padding-top: 5px;
-}
-
-.pt10 {
-  padding-top: 10px;
-}
-
-.pt15 {
-  padding-top: 15px;
-}
-
-.pt20 {
-  padding-top: 20px;
-}
-
-.pt25 {
-  padding-top: 25px;
-}
-
-.pt30 {
-  padding-top: 30px;
-}
-
-.pt35 {
-  padding-top: 35px;
-}
-
-.pt40 {
-  padding-top: 40px;
-}
-
-/* padding-bottom */
-.pb5 {
-  padding-bottom: 5px;
-}
-
-.pb10 {
-  padding-bottom: 10px;
-}
-
-.pb15 {
-  padding-bottom: 15px;
-}
-
-.pb20 {
-  padding-bottom: 20px;
-}
-
-.pb25 {
-  padding-bottom: 25px;
-}
-
-.pb30 {
-  padding-bottom: 30px;
-}
-
-.pb35 {
-  padding-bottom: 35px;
-}
-
-.pb40 {
-  padding-bottom: 40px;
-}
-
-/* padding-right */
-.pr5 {
-  padding-right: 5px;
-}
-
-.pr10 {
-  padding-right: 10px;
-}
-
-.pr15 {
-  padding-right: 15px;
-}
-
-.pr20 {
-  padding-right: 20px;
-}
-
-.pr25 {
-  padding-right: 25px;
-}
-
-.pr30 {
-  padding-right: 30px;
-}
-
-.pr35 {
-  padding-right: 35px;
-}
-
-.pr40 {
-  padding-right: 40px;
-}
-
-/* padding-left */
-.pl5 {
-  padding-left: 5px;
-}
-
-.pl10 {
-  padding-left: 10px;
-}
-
-.pl15 {
-  padding-left: 15px;
-}
-
-.pl20 {
-  padding-left: 20px;
-}
-
-.pl25 {
-  padding-left: 25px;
-}
-
-.pl30 {
-  padding-left: 30px;
-}
-
-.pl35 {
-  padding-left: 35px;
-}
-
-.pl40 {
-  padding-left: 40px;
-}
-
-.relative {
+.position-relative {
   position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.text_blind {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  overflow: hidden;
+  margin: -1rem;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* 로고 시작 */
+.main_logo {
+  display: inline-block;
+  background-image: url('/public/images/common/logo-b.png');
+  background-size: cover;
+  width: 21.4rem;
+  height: 7.9rem;
+}
+/* 로고 끝 */
+
+/* 선택하는 탭 모양 시작 */
+.category_tab {
+  display: flex;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.category_tab li {
+  flex: 1;
+  min-width: 17rem;
+  color: #555;
+}
+
+.category_tab li a {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding: 1.5rem 0.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.category_tab li a.on {
+  border: 1px solid #ddd;
+  border-bottom: none;
+}
+
+.category_tab li a:hover {
+  opacity: 0.5;
+}
+/* 선택하는 탭 모양 끝 */
+
+/* 버튼 모양 */
+.btn-s {
+  display: inline-block;
+  border-radius: 2.5rem;
+  padding: 1rem 2rem;
+  color: var(--white);
 }
