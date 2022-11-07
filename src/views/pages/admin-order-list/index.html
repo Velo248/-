@@ -4,57 +4,35 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../../public/css/style.css" />
+    <!-- <link rel="stylesheet" href="../../../public/css/style.css" /> -->
     <link rel="stylesheet" href="custom.css" />
     <title>Document</title>
   </head>
   <body>
     <header>
-      <nav></nav>
+      <nav>header</nav>
     </header>
     <main>
-      <div class="wrapper">
-        <div class="order-table">
-          <div class="order-table-header">
-            <div>이름</div>
-            <div>주문번호</div>
-            <div>날짜</div>
-            <div>금액</div>
-            <div>배송상태</div>
-            <div>---</div>
+      <div class="admin_order_wapper">
+        <div class="admin_order_header">
+          <h1>주문 목록</h1>
+          <button class="back_admin_main_bnt">전체 메뉴로</button>
+          <button class="all_order_list_bnt">전체 주문정보 확인</button>
+        </div>
+        <div class="workspace">
+          <div class="list_name">
+            <div><span>이름</span></div>
+            <div><span>주문번호</span></div>
+            <div><span>날짜</span></div>
+            <div><span>금액</span></div>
+            <div><span>배송상태</span></div>
+            <div><span>---</span></div>
           </div>
-          <div class="order-table-column">
-            <div>일이삼</div>
-            <div>202211099441</div>
-            <div>2022-10-08</div>
-            <div>300,000</div>
-            <div>배송중</div>
-            <div>
-              <a href="#"> 상세보기 </a>
-            </div>
-          </div>
-          <div class="order-table-column">
-            <div>일이삼</div>
-            <div>202211099441</div>
-            <div>2022-10-08</div>
-            <div>300,000</div>
-            <div>배송중</div>
-            <div>
-              <a href="#"> 상세보기 </a>
-            </div>
-          </div>
-          <div class="order-table-column">
-            <div>일이삼</div>
-            <div>202211099441</div>
-            <div>2022-10-08</div>
-            <div>300,000</div>
-            <div>배송중</div>
-            <div>
-              <a href="#"> 상세보기 </a>
-            </div>
-          </div>
+          <div class="list"></div>
         </div>
       </div>
     </main>
+    <footer></footer>
+    <script src="main.js"></script>
   </body>
 </html>
