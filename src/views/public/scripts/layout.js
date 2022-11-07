@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   <div class="nav_wrap">
     <div class="subnav">
       <a href="/login">로그인</a>
-      <!-- <a href="#" onclick="logout()">로그아웃</a> -->
+      <a href="#" onclick="logout()">로그아웃</a>
       <a href="/register">회원가입</a>
-      <!-- <a href="/profile">내정보</a>
-      <a href="/pay-history">주문·배송</a> -->
+      <a href="/profile">내정보</a>
+      <a href="/pay-history">주문·배송</a>
       <a href="/basket">장바구니</a>
     </div>
     <nav>
