@@ -61,15 +61,7 @@ productRouter.get('/products', async (req, res, next) => {
 });
 
 //특정 카테고리의 상품들 조회 API - GET /api/productlist/category/category_id
-productRouter.get('/products/category/:categoryId', async (req, res, next) => {
-  try {
-    const categoryId = req.params.categoryId;
-    const products = await productService.getProductlistByCategory(categoryId);
-    res.status(200).json(products);
-  } catch (error) {
-    next(error);
-  }
-});
+//카테고리로바꿈
 
 //특정 상품 조회 API - GET /api/product/{productId}
 productRouter.get('/products/:productId', async (req, res, next) => {
@@ -84,7 +76,7 @@ productRouter.get('/products/:productId', async (req, res, next) => {
 
 //상품 추가 API - /api/product
 productRouter.post(
-  '/products',
+  '/admin/products',
   loginRequired,
   isAdmin,
   async (req, res, next) => {
@@ -139,7 +131,7 @@ productRouter.post(
 
 //상품 수정 API - PATCH/api/product/{productId}
 productRouter.patch(
-  '/products/:productId',
+  '/admin/products/:productId',
   loginRequired,
   isAdmin,
   async (req, res, next) => {
@@ -196,7 +188,7 @@ productRouter.patch(
 
 //상품 삭제 API - DELETE /api/product/{productId}
 productRouter.delete(
-  '/products/:productId',
+  '/admin/products/:productId',
   loginRequired,
   isAdmin,
   async (req, res, next) => {
