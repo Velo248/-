@@ -1,14 +1,41 @@
 const $admin_category_wapper = document.querySelector('.admin_category_wapper');
 const $categories = document.querySelector('.categories');
-const elementCreater = (current, add) => {
-  current.innerHTML += add;
-};
 
 let checkObj = {};
+
+const customFetcher = async (data) => {
+  const { target, dataObj, method } = data;
+
+  const res = await fetch(`/api/categories/${target}`, {
+    method: `${method}`,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+    },
+    body: JSON.stringify(dataObj),
+  });
+
+  if (!res.ok) {
+    const errorContent = await res.json();
+    const { reason } = errorContent;
+
+    throw new Error(reason);
+  }
+
+  delete checkObj[data];
+};
 
 const getCategory = async () => {
   const respose = await fetch('/api/categories');
   return await respose.json();
+};
+
+const elementCreater = (current, add) => {
+  current.innerHTML += add;
+};
+
+const dateFormet = (date) => {
+  return `${date.substring(0, 10)} ${date.substring(11, 16)}`;
 };
 
 const pageRender = async () => {
@@ -16,14 +43,8 @@ const pageRender = async () => {
   console.log(categories);
   categories.forEach((e) => {
     const { _id, title, description, createdAt, updatedAt } = e;
-    const createDate = `${createdAt.substring(0, 10)} ${createdAt.substring(
-      11,
-      16,
-    )}`;
-    const updateDate = `${updatedAt.substring(0, 10)} ${updatedAt.substring(
-      11,
-      16,
-    )}`;
+    const createDate = dateFormet(createdAt);
+    const updateDate = dateFormet(updatedAt);
 
     const html_temp = `
       <div class="category_item">
@@ -40,31 +61,6 @@ const pageRender = async () => {
 
     elementCreater($categories, html_temp);
   });
-
-  // return document.querySelectorAll('.edit_form');
-};
-
-const customFetcher = async (data) => {
-  const { target, dataObj, method } = data;
-  console.log(target, dataObj, method);
-  const res = await fetch(`/api/categories/${target}`, {
-    method: `${method}`,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-    },
-    body: JSON.stringify(dataObj),
-  });
-
-  // 응답 코드가 4XX 계열일 때 (400, 403 등)
-  if (!res.ok) {
-    const errorContent = await res.json();
-    const { reason } = errorContent;
-
-    throw new Error(reason);
-  }
-
-  delete checkObj[data];
 };
 
 const deleteCategoryChecker = (target) => {
@@ -84,18 +80,6 @@ const deleteCategory = async () => {
   });
   $categories.innerHTML = '';
   await pageRender();
-};
-
-const clickEventMap = {
-  selected_category_delete_bnt() {
-    deleteCategory();
-  },
-  category_checked(e) {
-    deleteCategoryChecker(e);
-  },
-  admin_edit_complete_bnt() {
-    window.history.back(1);
-  },
 };
 
 const editCategoty = async (target) => {
@@ -133,6 +117,19 @@ const createForm = async (target) => {
   await customFetcher(data);
   await pageRender();
 };
+
+const clickEventMap = {
+  selected_category_delete_bnt() {
+    deleteCategory();
+  },
+  category_checked(e) {
+    deleteCategoryChecker(e);
+  },
+  admin_edit_complete_bnt() {
+    window.history.back(1);
+  },
+};
+
 const submitEventMap = {
   edit_form(e) {
     editCategoty(e);
@@ -143,17 +140,20 @@ const submitEventMap = {
 };
 
 $admin_category_wapper.addEventListener('click', (e) => {
-  console.log(e.target);
   if (!clickEventMap[e.target.className]) return;
+
   clickEventMap[e.target.className](e.target);
 });
 
-$admin_category_wapper.addEventListener('change', (e) => {});
 $admin_category_wapper.addEventListener('submit', (e) => {
   e.preventDefault();
+
   if (!submitEventMap[e.target.className]) return;
+
   submitEventMap[e.target.className](e.target);
 });
+
+$admin_category_wapper.addEventListener('change', (e) => {});
 
 window.addEventListener('DOMContentLoaded', async () => {
   await pageRender();

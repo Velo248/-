@@ -1,15 +1,53 @@
-@import "./common.css";
+/* @import "./common.css"; */
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  margin: 0 auto;
-  padding: 1rem;
-  border: 1px solid black;
-  margin-bottom: 1rem;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.label {
-  min-width: max-content;
-  margin-right: 0.5rem;
+
+header {
+  height: 5vh;
+  background-color: yellow;
+}
+
+.admin_product_header {
+  text-align: center;
+}
+.admin_product_header > h1 {
+  display: inline;
+}
+
+.admin_product_wapper {
+  height: 95vh;
+  background-color: bisque;
+}
+
+.workspace {
+  background-color: white;
+  margin: 1.875rem 20%;
+  height: 85%;
+}
+
+.create_form > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 80%;
+  margin: 3% 0;
+  font-size: 1.25rem;
+}
+
+.create_form > div > label {
+  text-align: center;
+}
+.create_form > div > input {
+  font-size: 1.25rem;
+}
+
+.create_form_summit_bnt {
+  margin-top: auto;
+  height: 5rem;
+  width: 100%;
+  background-color: lightsalmon;
+  font-size: 1.5625rem;
 }
