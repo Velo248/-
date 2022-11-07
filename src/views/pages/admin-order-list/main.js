@@ -1,44 +1,30 @@
+import { elementCreater, dateFormet } from '/public/scripts/util.js';
+import adminService from '/public/scripts/adminService.js';
+
 const $admin_order_wapper = document.querySelector('.admin_order_wapper');
 const $list = document.querySelector('.list');
-const userObj = {};
+
+const userMap = {};
 
 const getOrders = async () => {
-  const data = {
-    target: '/admin/orders',
-    method: 'GET',
-  };
-
-  const response = await customFetcher(data);
-  return await response.json();
+  const orders = await adminService.getAllOrders();
+  sessionStorage.removeItem('filter_user');
+  return orders;
 };
 
 const getUsers = async () => {
-  const data = {
-    target: '/users',
-    method: 'GET',
-  };
-
-  const response = await customFetcher(data);
-  return await response.json();
-};
-
-const dateFormet = (date) => {
-  return `${date.substring(0, 10)} ${date.substring(11, 16)}`;
-};
-
-const elementCreater = (current, add) => {
-  current.innerHTML += add;
+  const users = await adminService.getAllUser();
+  return users;
 };
 
 const setUserName = (orders, users) => {
   users.forEach((user) => {
-    userObj[user._id] = user.fullName;
+    userMap[user._id] = user.fullName;
   });
 
   orders.orders.forEach((order) => {
-    order.fullName = userObj[order.userId];
+    order.fullName = userMap[order.userId];
   });
-
   return orders;
 };
 
@@ -68,19 +54,36 @@ const pageRender = async () => {
 
 const orderDatail = (target) => {
   const orderId = target.parentNode.parentNode.getAttribute('id');
-  window.sessionStorage.setItem('o_id', orderId);
-  window.location.href = '/admin-order-detail';
+  sessionStorage.setItem('o_id', orderId);
+  location.href = '/admin-order-detail';
+};
+
+const orderFiltering = async (target) => {
+  const formData = new FormData(target);
+
+  const userId = Object.keys(userMap).find(
+    (key) => userMap[key] === formData.get('user_name'),
+  );
+  sessionStorage.setItem('filter_user', userId);
+  location.href = '/admin/user/order';
 };
 
 const clickEventMap = {
   back_admin_main_bnt() {
-    window.location.href = '/admin-main';
+    location.href = '/admin';
   },
-  all_order_list_bnt() {
-    async () => await pageRender();
+  async all_order_list_bnt() {
+    sessionStorage.removeItem('filter_user');
+    location.href = '/admin/order/list';
   },
   order_detail_bnt(e) {
     orderDatail(e);
+  },
+};
+
+const submitEventMap = {
+  filter_form(e) {
+    orderFiltering(e);
   },
 };
 
@@ -90,28 +93,13 @@ $admin_order_wapper.addEventListener('click', (e) => {
   clickEventMap[e.target.className](e.target);
 });
 
+$admin_order_wapper.addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (!submitEventMap[e.target.className]) return;
+
+  submitEventMap[e.target.className](e.target);
+});
+
 window.addEventListener('DOMContentLoaded', async () => {
   await pageRender();
 });
-
-const customFetcher = async (data) => {
-  const { target, dataObj, method } = data;
-
-  const res = await fetch(`/api${target}`, {
-    method: `${method}`,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-    },
-    body: JSON.stringify(dataObj),
-  });
-
-  if (!res.ok) {
-    const errorContent = await res.json();
-    const { reason } = errorContent;
-
-    throw new Error(reason);
-  }
-
-  return res;
-};
