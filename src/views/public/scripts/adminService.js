@@ -33,7 +33,7 @@ adminService.getUserOrdersByUserId = async function (userId) {
   return await response.json();
 };
 
-adminService.setUserInfomationByUserId = async function (userId, obj) {
+adminService.setUserInformationByUserId = async function (userId, obj) {
   const { currentPassword, fullName, password, address, phoneNumber, role } =
     obj;
 
@@ -77,7 +77,7 @@ adminService.getAllOrders = async function () {
   return await response.json();
 };
 
-adminService.setOrderInfomationByOrderId = async function (orderId, obj) {
+adminService.setOrderInformationByOrderId = async function (orderId, obj) {
   const { address, request, status } = obj;
   const data = {
     address: address || null,
@@ -177,7 +177,10 @@ adminService.setProductByProductId = async function (productId, obj) {
   return await response.json();
 };
 
-adminService.setProductInfomationByProductId = async function (productId, obj) {
+adminService.setProductInformationByProductId = async function (
+  productId,
+  obj,
+) {
   const reqObj = {
     target: `/admin/products/${productId}`,
     method: 'PATCH',

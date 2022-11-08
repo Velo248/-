@@ -69,7 +69,7 @@ userService.getCurrentUser = async () => {
  * @param {Object} obj  required(currentPassword) / fullName, password, address, phoneNumber, role
  * @returns { json } response
  */
-userService.setUserInfomation = async (obj) => {
+userService.setUserInformation = async (obj) => {
   const { currentPassword, fullName, password, address, phoneNumber, role } =
     obj;
 

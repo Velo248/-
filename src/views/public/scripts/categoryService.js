@@ -21,7 +21,7 @@ categoryService.getAllCategories = async () => {
  * @param { String } categoryId 카테고리 아이디
  * @returns { json } response
  */
-categoryService.getCategoryInfomation = async (categoryId) => {
+categoryService.getCategoryInformation = async (categoryId) => {
   const reqObj = {
     target: `/categories/${categoryId}`,
     method: 'GET',
