@@ -1,24 +1,50 @@
-@import "./common.css";
+/* @import "./common.css"; */
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  margin: 0 auto;
-  padding: 1rem;
-  border: 1px solid black;
-  margin-bottom: 1rem;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.flex-column {
-  display: flex;
-  flex-direction: column;
+header {
+  height: 5vh;
+  background-color: yellow;
 }
 
-.row {
-  display: flex;
+.admin_order_detail_wapper {
+  height: 95vh;
+  background-color: bisque;
 }
 
-.item-img {
-  display: inline-block;
+.admin_order_detail_header {
+  text-align: center;
+}
+.admin_order_detail_header > h1 {
+  display: inline;
+}
+
+.workspace {
+  background-color: white;
+  margin: 1.875rem 5%;
+  height: 85%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.detail_container,
+.delivery_container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  height: 100%;
+}
+
+.detail_name,
+.detail_info,
+.delivery_name,
+.delivery_info {
+  display: grid;
+}
+
+.bnt_container {
+  margin-left: 80%;
 }
