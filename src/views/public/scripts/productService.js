@@ -67,5 +67,25 @@ productService.getProductByProductId = async (productId) => {
   return await response.json();
 };
 
+/**
+ * 검색어를 통한 상품정보 !미완성, 완성 시 해당알림 삭제
+ * @param { String } search
+ * @returns { json } response
+ */
+productService.getProductBySearch = async (search) => {
+  const data = {
+    search: search,
+  };
+
+  const reqObj = {
+    target: `/search/products`,
+    method: 'GET',
+    bodyObj: data,
+  };
+
+  const response = await customFetcher(reqObj);
+  return await response.json();
+};
+
 export default productService;
 Object.freeze(productService);
