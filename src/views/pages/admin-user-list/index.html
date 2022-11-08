@@ -4,52 +4,31 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../../public/css/style.css" />
-    <link rel="stylesheet" href="./admin-users.css" />
+    <!-- <link rel="stylesheet" href="../../../public/css/style.css" /> -->
+    <link rel="stylesheet" href="custom.css" />
     <title>Document</title>
   </head>
   <body>
     <header>
-      <nav></nav>
+      <nav>header</nav>
     </header>
     <main>
-      <div class="wrapper">
-        <div class="users-table">
-          <div class="users-table-header">
-            <div>이름</div>
-            <div>이메일</div>
-            <div>---</div>
+      <div class="admin_user_wapper">
+        <div class="admin_user_header">
+          <h1>유저 목록</h1>
+          <button class="back_admin_main_bnt">전체 메뉴로</button>
+        </div>
+        <div class="workspace">
+          <div class="list_name">
+            <div><span>이름</span></div>
+            <div><span>이메일</span></div>
+            <div><span>상세</span></div>
           </div>
-          <div class="users-table-column">
-            <div>일이삼</div>
-            <div>abc@def.ghi</div>
-            <div>
-              <a href="#"> 상세보기 </a>
-            </div>
-          </div>
-          <div class="users-table-column">
-            <div>일이삼</div>
-            <div>abc@def.ghi</div>
-            <div>
-              <a href="#"> 상세보기 </a>
-            </div>
-          </div>
-          <div class="users-table-column">
-            <div>일이삼</div>
-            <div>abc@def.ghi</div>
-            <div>
-              <a href="#"> 상세보기 </a>
-            </div>
-          </div>
-          <div class="users-table-column">
-            <div>일이삼</div>
-            <div>abc@def.ghi</div>
-            <div>
-              <a href="#"> 상세보기 </a>
-            </div>
-          </div>
+          <div class="user_list"></div>
         </div>
       </div>
     </main>
+    <footer></footer>
+    <script type="module" src="main.js"></script>
   </body>
 </html>

@@ -81,8 +81,8 @@ const init = async () => {
   addressLong.value = address.address1;
   addressDetail.value = address.address2;
   postalCode.value = address.postalCode;
-  receiverName = address.receiverName;
-  receiverPhone = address.receiverPhoneNumber;
+  receiverName.value = address.receiverName;
+  receiverPhone.value = address.receiverPhoneNumber;
 
   const addressSearchBtn = document.querySelector('.address_search');
   addressSearchBtn.addEventListener('click', (e) => {
@@ -127,7 +127,7 @@ const init = async () => {
             body: JSON.stringify(toUpdateObj),
           })
         ).json();
-        if (response.ok) {
+        if (response.updateOrderInfo) {
           alert('수정이 완료되었습니다');
           location.href = '/pay-history';
         }

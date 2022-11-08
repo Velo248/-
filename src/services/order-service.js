@@ -16,14 +16,14 @@ class OrderService {
 
   //GET
   //userId 생성된 주문 가져오기
-  async getOrderByUserId(userId) {
-    const order = await this.orderModel.findByUserId(userId);
-    return order;
+  async getOrdersByUserId(userId) {
+    const orders = await this.orderModel.findByUserId(userId);
+    return orders;
   }
   //GET
   //orderId 기준으로 생성된 주문 가져오기
   async getOrderByOrderId(orderId) {
-    const order = await this.orderModel.findByOrderId(orderId);
+    const order = await this.orderModel.findOneByOrderId(orderId);
     return order;
   }
   //POST
@@ -37,7 +37,7 @@ class OrderService {
       const { productId, quantity } = product;
       //itemId로 Model에서 가져오기
       const productData = await this.productModel.findById(productId);
-      if (!product) {
+      if (!productData) {
         throw new Error(`해당 ${productId}의 상품id를 찾을 수 없습니다.`);
       }
       //가격, 수량 가져오기
@@ -83,7 +83,7 @@ class OrderService {
   //주문 수정
   async setOrderByAdmin(orderId, toUpdate) {
     // 우선 해당 id의 상품이 db에 있는지 확인
-    let order = await this.orderModel.findByOrderId(orderId);
+    let order = await this.orderModel.findOneByOrderId(orderId);
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!order) {
       throw new Error('update error : 해당 주문을 찾을 수 없습니다.');
@@ -98,7 +98,7 @@ class OrderService {
   }
   async setOrder(userId, orderId, toUpdate) {
     // 우선 해당 id의 상품이 db에 있는지 확인
-    let order = await this.orderModel.findByOrderId(orderId);
+    let order = await this.orderModel.findOneByOrderId(orderId);
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!order) {
       throw new Error('update error : 해당 주문을 찾을 수 없습니다.');
@@ -117,19 +117,19 @@ class OrderService {
   //주문 삭제
   async deleteOrderByAdmin(orderId) {
     // 우선 해당 id의 상품이 db에 있는지 확인
-    let order = await this.orderModel.findByOrderId(orderId);
+    let order = await this.orderModel.findOneByOrderId(orderId);
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!order) {
       throw new Error('remove error : 해당 주문을 찾을 수 없습니다.');
     }
     // 업데이트 진행
-    order = await this.orderModel.remove(orderId);
+    order = await this.orderModel.deleteOneByOrderId(orderId);
 
     return order;
   }
   async deleteOrder(userId, orderId) {
     // 우선 해당 id의 상품이 db에 있는지 확인
-    let order = await this.orderModel.findByOrderId(orderId);
+    let order = await this.orderModel.findOneByOrderId(orderId);
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!order) {
       throw new Error('remove error : 해당 주문을 찾을 수 없습니다.');
@@ -138,7 +138,7 @@ class OrderService {
       throw new Error('이 주문에 접근할 수 없습니다.');
     }
     // 업데이트 진행
-    order = await this.orderModel.remove(orderId);
+    order = await this.orderModel.deleteOneByOrderId(orderId);
 
     return order;
   }

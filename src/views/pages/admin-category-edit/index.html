@@ -16,11 +16,11 @@
       <div class="admin_category_wapper">
         <div class="admin_category_header">
           <h1>카테고리 목록</h1>
-          <button class="selected_category_delete_bnt">선택 샥제</button>
+          <button class="selected_category_delete_bnt">선택 삭제</button>
         </div>
         <div class="admin_category_workspace">
           <div class="category_list">
-            <input type="checkbox" />
+            <input class="all_check" type="checkbox" />
             <div class="category_name"><span>카테고리 이름</span></div>
             <div><span>카테고리 설명</span></div>
             <div><span>생성 날짜</span></div>
@@ -30,10 +30,10 @@
           <div class="admin_create_category_container">
             <span>새로운 카테고리 추가</span>
             <form class="create_form">
-              <label for="category-title">카테고리 이름:</label>
-              <input name="category-title" type="text" />
-              <label for="category-description">카테고리 설명: </label>
-              <input name="category-description" type="text" />
+              <label for="create-category-title">카테고리 이름:</label>
+              <input name="create-category-title" type="text" />
+              <label for="create-category-description">카테고리 설명: </label>
+              <input name="create-category-description" type="text" />
               <button type="submit">추가</button>
             </form>
           </div>
@@ -43,6 +43,6 @@
       <div class="editBntContainer"></div>
     </main>
     <footer></footer>
-    <script src="main.js"></script>
+    <script type="module" src="main.js"></script>
   </body>
 </html>

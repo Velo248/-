@@ -1,19 +1,40 @@
-@import "./common.css";
+/* @import './common.css'; */
 
-.wrapper {
-  width: 80%;
-  padding: 1rem;
-  margin: 0 auto;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.order-table {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+header {
+  height: 5vh;
+  background-color: yellow;
 }
-.order-table-header,
-.order-table-column {
-  width: 100%;
+
+.admin_order_wapper {
+  height: 95vh;
+  background-color: bisque;
+}
+
+.admin_order_header {
+  text-align: center;
+}
+.admin_order_header > h1 {
+  display: inline;
+}
+.workspace {
+  background-color: white;
+  margin: 1.875rem 5%;
+  height: 85%;
+}
+
+.list_name,
+.list_container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.list_name > div {
+  margin-bottom: 1.25rem;
+  font-size: 1.25rem;
 }
