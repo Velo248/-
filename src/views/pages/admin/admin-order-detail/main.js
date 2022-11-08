@@ -156,7 +156,7 @@ const setDeliveryStatus = async () => {
   const obj = {
     status: $delivery_status.value,
   };
-  await adminService.setOrderInfomationByOrderId(deliveryId, obj);
+  await adminService.setOrderInformationByOrderId(deliveryId, obj);
   location.href = '/admin/order/list';
 };
 
