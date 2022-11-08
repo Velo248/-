@@ -7,60 +7,44 @@
     <link rel="stylesheet" href="/public/css/style.css" />
     <link rel="stylesheet" href="./custom.css" />
     <script src="/public/scripts/layout.js"></script>
-    <script src="./main.js" defer></script>
+  <script src="./main.js" defer></script>
   </head>
   <body>
     <header></header>
 
-    <main>
-      <div class="wrapper login-form block">
+    <main class="flex-column-center">
+      <div class="box-style-center">
         <form action="#" class="login">
-          <div class="field">
-            <label class="label">Email</label>
-            <div class="control has-icons-left has-icons-right">
-              <input
-                class="login-email input"
-                type="email"
-                placeholder="이메일을 입력해주세요"
-                value=""
-              />
-              <span class="icon is-small is-left">
-                <i class="fas fa-envelope"></i>
-              </span>
-              <span class="icon is-small is-right">
-                <i class="fas fa-exclamation-triangle"></i>
-              </span>
-            </div>
-            <!-- <p class="help is-danger">This email is invalid</p> -->
+          <div>
+            <label>Email</label>
+            <input
+              class="login-email"
+              type="email"
+              placeholder="이메일을 입력해주세요"
+              autocomplete="false"
+            />
           </div>
 
-          <div class="field">
-            <label for="" class="label">Password</label>
-            <div class="control has-icons-left has-icons-right">
-              <input
-                type="password"
-                name="password"
-                id="password"
-                class="login-pw input"
-                placeholder="비밀번호를 입력해주세요"
-                value=""
-              />
-            </div>
+          <div>
+            <label for="">Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              class="login-pw"
+              placeholder="비밀번호를 입력해주세요"
+              value=""
+            />
           </div>
 
-          <div class="field">
-            <div class="control">
-              <button class="login-btn button">Login</button>
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="control">
-              <button class="button">비밀번호 찾기</button>
-              <button class="button">회원가입</button>
-            </div>
+          <div>
+            <button class="login-btn full bg-darkgreen">Login</button>
           </div>
         </form>
+        <div class="btn-collect">
+          <a href="#">비밀번호 찾기</a>
+          <a href="/register">회원가입</a>
+        </div>
       </div>
     </main>
     <footer>&copy; 2022 오히려좋아 by elice 5팀</footer>
