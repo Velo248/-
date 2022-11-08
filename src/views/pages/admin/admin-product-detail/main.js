@@ -158,7 +158,7 @@ const editProduct = async () => {
   updateObj.isRecommended = formData.get('isRecommended');
   updateObj.discountPercent = formData.get('discountPercent');
 
-  await adminService.setProductInfomationByProductId(productId, updateObj);
+  await adminService.setProductInformationByProductId(productId, updateObj);
   sessionStorage.removeItem('p_id');
   location.href = '/admin/product/list';
 };
