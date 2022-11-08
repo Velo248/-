@@ -40,6 +40,20 @@ categoryRouter.get(
     }
   },
 );
+categoryRouter.get(
+  '/admin/deleted-categories/products',
+  loginRequired,
+  isAdmin,
+  async (req, res, next) => {
+    try {
+      const products = await categoryService.getDeletedCategoriesProducts();
+      res.status(200).json(products);
+    } catch (error) {
+      next(error);
+    }
+  },
+);
+
 //카테고리 추가 API - POST /category
 categoryRouter.post(
   '/admin/categories',
