@@ -1,5 +1,6 @@
 const logout = () => {
   sessionStorage.removeItem('token');
+  sessionStorage.removeItem('isAdmin');
   alert('로그아웃 되었습니다');
 };
 
