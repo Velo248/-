@@ -103,16 +103,16 @@ const pageRender = async () => {
         <input name='inventory' value="${inventory}">
       </div>
       <div>
-        <input name='price' value="${price}">
+        <input type='number' name='price' value="${price}">
       </div>
       <div>
         <input name='searchKeywords' value="${searchKeywords}">
       </div>
       <div>
-        <input name='isRecommended' value="${isRecommended}">
+        <input type='number' name='isRecommended' value="${isRecommended}">
       </div>
       <div>
-        <input name='discountPercent' value="${discountPercent}">
+        <input type='number' name='discountPercent' value="${discountPercent}">
       </div>
       <div>
         <span>${createDate}</span>
@@ -158,18 +158,18 @@ const editProduct = async () => {
   updateObj.isRecommended = formData.get('isRecommended');
   updateObj.discountPercent = formData.get('discountPercent');
 
-  await productService.setProductInfomation(productId, updateObj);
+  await adminService.setProductInfomationByProductId(productId, updateObj);
   sessionStorage.removeItem('p_id');
   location.href = '/admin/product/list';
 };
 
 const clickEventMap = {
-  product_delete_bnt() {
-    deleteProduct();
+  async product_delete_bnt() {
+    await deleteProduct();
   },
 
-  product_edit_bnt() {
-    editProduct();
+  async product_edit_bnt() {
+    await editProduct();
   },
 };
 

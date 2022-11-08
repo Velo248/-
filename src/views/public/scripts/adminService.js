@@ -177,6 +177,17 @@ adminService.setProductByProductId = async function (productId, obj) {
   return await response.json();
 };
 
+adminService.setProductInfomationByProductId = async function (productId, obj) {
+  const reqObj = {
+    target: `/admin/products/${productId}`,
+    method: 'PATCH',
+    bodyObj: obj,
+  };
+
+  const response = await customFetcher(reqObj);
+  return await response.json();
+};
+
 adminService.deleteProductByProductId = async function (productId) {
   const reqObj = {
     target: `/admin/products/${productId}`,
