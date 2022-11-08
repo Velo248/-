@@ -41,7 +41,7 @@ $loginBtn.addEventListener('click', async (e) => {
     token = data.token;
     sessionStorage.setItem('token', token);
     alert('관리자 유저 로그인 성공');
-    changeLocation('/admin-main');
+    changeLocation('/admin');
   } else if (!data.isAdmin) {
     token = data.token;
 
