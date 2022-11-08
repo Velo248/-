@@ -97,6 +97,15 @@ class ProductService {
   async getProductsCount() {
     return this.productModel.getProductsCount();
   }
+
+  async searchProducts(search) {
+    //search:String = "노랑 텀블러"
+
+    const keywords = search.split(' ');
+
+    const products = await this.productModel.findByKeywords(keywords);
+    return products;
+  }
 }
 
 const productService = new ProductService(productModel);
