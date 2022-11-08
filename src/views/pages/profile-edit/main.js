@@ -1,72 +1,138 @@
-const testLogin = async () => {
-  const { token } = await (
-    await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: 'elice1@test.com',
-        password: '1234',
-      }),
-    })
-  ).json();
+import userService from '/public/scripts/userService.js';
+import orderService from '/public/scripts/orderService.js';
 
-  return token;
-};
 const getCurrentUser = async () => {
-  // const token = sessionStorage.getItem('token');
-  const token = await testLogin();
-  const user = await (
-    await fetch('/api/user', {
+  return await (
+    await fetch(`/api/users`, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
       },
     })
   ).json();
+};
 
-  return user;
+const signOutUser = async () => {
+  return await (
+    await fetch(`/api/users`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+      },
+    })
+  ).json();
+};
+
+const updateUpser = async (toUpdateObj) => {
+  return await (
+    await fetch(`/api/users`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+      },
+      body: JSON.stringify(toUpdateObj),
+    })
+  ).json();
+};
+
+const createUserSection = ({ fullName, email, phoneNumber }) => {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'wrapper flex-column';
+  wrapper.innerHTML = `
+        <div class="column">
+            <div class="row">사용자명:</div>
+            <div class="row username">${fullName}</div>
+        </div>
+        <div class="column">
+            <div class="row">이메일:</div>
+            <div class="row email">${email}</div>
+        </div>
+        <div class="column">
+            <div class="row">전화번호:</div>
+            ${
+              phoneNumber
+                ? `<input
+                type="text"
+                class="row phone"
+                value="${phoneNumber}"
+                placeholder="00000000000 -없이"
+              />`
+                : `<input
+                type="text"
+                class="row phone"
+                placeholder="00000000000 -없이"
+              />`
+            }
+            
+        </div>
+    `;
+  return wrapper;
+};
+
+const signOutEventHandler = async (e) => {
+  e.preventDefault();
+  e.target.disabled = true;
+  if (confirm('정말 탈퇴하시겠습니까?')) {
+    const response = await signOutUser();
+    if (response.acknowledged) {
+      alert('탈퇴가 완료되었습니다.');
+      sessionStorage.removeItem('token');
+      location.href = '/';
+    }
+  }
+  e.target.disabled = false;
+  return;
+};
+
+const profileEditSubmitEventHandler = async (e) => {
+  e.preventDefault();
+  const phoneNumberInput = document.querySelector('.phone');
+  const addressLongInput = document.querySelector('.address_long');
+  const addressDetailInput = document.querySelector('.address_detail');
+  const postalCodeInput = document.querySelector('.postal_code');
+  const currentPasswordInput = document.querySelector('.password');
+
+  const toUpdateObj = {
+    address: {
+      address1: addressLongInput.value,
+      address2: addressDetailInput.value,
+      postalCode: postalCodeInput.value,
+    },
+    phoneNumber: phoneNumberInput.value,
+    currentPassword: currentPasswordInput.value,
+  };
+
+  const response = await updateUpser(toUpdateObj);
+  if (response._id) {
+    alert('수정이 완료되었습니다');
+    location.href = '/profile';
+  }
 };
 
 const init = async () => {
-  const token = await testLogin();
-
-  const signOutAnchor = document.querySelector('.sign_out');
-  signOutAnchor.addEventListener('click', (e) => e.preventDefault());
-  // signOutAnchor.addEventListener('click', async (e) => {
-  //   e.preventDefault();
-  //   if (confirm('정말 탈퇴하시겠습니까?')) {
-  //     try {
-  //       // if {result: ok} -> 탈퇴 완료 -> main으로 이동
-  //       // if not -> alert 탈퇴 실패
-  //       // const response = await (await fetch()).json();
-  //       if (true) {
-  //         alert('탈퇴가 완료되었습니다. 안녕히 가세요');
-  //         location.href = '/';
-  //       } else {
-  //         alert('탈퇴에 실패했습니다');
-  //         location.reload();
-  //       }
-  //     } catch (err) {}
-  //   }
-  // });
   const user = await getCurrentUser();
 
-  const username = document.querySelector('.username');
-  const email = document.querySelector('.email');
-  const phone = document.querySelector('.phone');
-  const addressLong = document.querySelector('.address-long');
-  const addressDetail = document.querySelector('.address-detail');
-  const postalCode = document.querySelector('.postal-code');
+  const profileEditForm = document.querySelector('.profile_edit');
+  profileEditForm.addEventListener('submit', profileEditSubmitEventHandler);
 
-  username.innerText = user.fullName;
-  email.innerText = user.email;
-  phone.innerText = user.phone;
+  const signOutBtn = document.querySelector('.sign_out');
+  signOutBtn.addEventListener('click', signOutEventHandler);
+
+  const profileWrapper = document.querySelector('.profile');
+  profileWrapper.innerHTML = '';
+  profileWrapper.appendChild(createUserSection(user));
+
+  const addressLongInput = document.querySelector('.address_long');
+  const addressDetailInput = document.querySelector('.address_detail');
+  const postalCodeInput = document.querySelector('.postal_code');
+
   if (user.address) {
-    addressLong.innerText = user.address.address1;
-    addressDetail.value = user.address.address2;
-    postalCode.innerText = user.address.postalCode;
+    const { address1, address2, postalCode } = user.address;
+    addressLongInput.value = address1;
+    addressDetailInput.value = address2;
+    postalCodeInput.value = postalCode;
   }
 
   const addressSearchBtn = document.querySelector('.address_search');
@@ -74,52 +140,13 @@ const init = async () => {
     e.preventDefault();
     new daum.Postcode({
       oncomplete: ({ zonecode, address }) => {
-        addressLong.innerText = address;
-        postalCode.innerText = zonecode;
-        addressDetail.disabled = false;
+        addressLongInput.value = address;
+        postalCodeInput.value = zonecode;
+        addressDetailInput.disabled = false;
+        addressDetailInput.focus();
+        addressDetailInput.placeholder = '상세주소를 입력해주세요';
       },
     }).open();
-  });
-
-  const form = document.querySelector('.form');
-  const passwordInput = document.querySelector('.password');
-  // 배송지 수정 form의 event
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const phoneNumber = phone.value;
-    const password = passwordInput.value;
-    console.log(password);
-    if (
-      !/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(
-        phoneNumber,
-      )
-    ) {
-      alert('전화번호 형식이 맞지 않습니다.');
-      phone.focus();
-    }
-    const address = {
-      address1: addressLong.textContent,
-      address2: addressDetail.value,
-      postalCode: postalCode.textContent,
-    };
-    // fetch patch
-    // if reuslt: ok -> ~
-    const response = await (
-      await fetch(`/api/users/${user._id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          address,
-          phoneNumber,
-          currentPassword: password,
-        }),
-      })
-    ).json();
-
-    console.log(response);
   });
 };
 
