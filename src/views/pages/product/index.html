@@ -7,28 +7,16 @@
     <title>제품</title>
     <link rel="stylesheet" href="/public/css/style.css" />
     <link rel="stylesheet" href="./custom.css" />
-    <script src="./script.js" defer></script>
+    <script src="/public/scripts/layout.js"></script>
+    <script src="./main.js" defer></script>
   </head>
   <body>
-    <header>
-      <h1>
-        <a href="/"
-          ><img src="/public/images/common/logo.png" alt="간식조아"
-        /></a>
-      </h1>
-      <nav>
-        <span><a href="/product">제품</a></span>
-        <span><a href="/profile">내정보</a></span>
-        <span><a href="/login">로그인</a></span>
-        <span><a href="/register">회원가입</a></span>
-        <span><a href="/basket">장바구니</a></span>
-        <span><a href="/pay-history">주문·배송</a></span>
-      </nav>
-    </header>
+    <header></header>
 
     <main>
+      <h2><span>카테고리별 상품들</span></h2>
       <!-- 카테고리 선택 태그 -->
-      <ul class="category_list"></ul>
+      <ul class="category_tab"></ul>
 
       <!-- 탭처럼 위에 클릭에 따라 변경 -->
       <div class="products_box"></div>

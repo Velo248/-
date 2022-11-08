@@ -40,11 +40,11 @@ const getLocalBasket = () => {
 };
 // 수량 변경 시 사용
 const setLocalBasket = (item) => {
-  const productId = item.dataset.product_id;
+  const productId = item.dataset.productId;
   const quantity = Number(item.querySelector('.product_count').value);
   const localBasket = getLocalBasket();
   const updatedBasket = localBasket.map((basketItem) => {
-    if (basketItem._id === productId) {
+    if (basketItem.productId === productId) {
       basketItem.quantity = quantity;
     }
   });
@@ -52,23 +52,35 @@ const setLocalBasket = (item) => {
 };
 // 물품 삭제 시 사용
 const deleteLocalBasket = (item) => {
-  const productId = item.datset.product_id;
+  const productId = item.dataset.productId;
   const localBasket = getLocalBasket();
-  const updatedBasket = localBasket.filter(({ _id }) => _id !== productId);
+  const updatedBasket = localBasket.filter(
+    (localItem) => localItem.productId !== productId,
+  );
   setLocalStorageItem('basket', updatedBasket);
   return;
 };
 
 // user only 장바구니 RUD -> usnig api
 // user에 의한 접근 시 장바구니를 생성
-const getUserCartItems = async () => {};
+const getUserCartItems = async () => {
+  const { orderSheets } = await (
+    await fetch(`/api/carts`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+      },
+    })
+  ).json();
+  return orderSheets;
+};
 // 장바구니 수량 변경 시 사용
 const patchUserCartItem = async (item) => {
-  const productId = item.dataset.product_id;
+  const productId = item.dataset.productId;
   const quantity = Number(item.querySelector('.product_count').value);
   const toUpdate = { productId, quantity };
   const response = await (
-    await fetch(`/api/cart`, {
+    await fetch(`/api/carts`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -77,13 +89,14 @@ const patchUserCartItem = async (item) => {
       body: JSON.stringify(toUpdate),
     })
   ).json();
+  setLocalBasket(item);
   return;
 };
 // 물품 삭제 시 사용
 const deleteUserCartItem = async (item) => {
-  const productId = item.dataset.product_id;
+  const productId = item.dataset.productId;
   const response = await (
-    await fetch(`/api/cart`, {
+    await fetch(`/api/carts`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -96,7 +109,14 @@ const deleteUserCartItem = async (item) => {
 };
 
 // guest, user 공통 주문목록 설정 -> payment page로 전달될 array
-const setOrderList = (orderItems) => {
+const setOrderList = () => {
+  const selected = selectedItems();
+  const orderItems = [];
+  selected.forEach((item) => {
+    const productId = item.dataset.productId;
+    const quantity = Number(item.querySelector('.product_count').value);
+    orderItems.push({ productId, quantity });
+  });
   setLocalStorageItem('orderList', orderItems);
   return;
 };
@@ -105,10 +125,10 @@ const getOrderList = () => {
 };
 
 // 장바구니 item 정보를 이용하여 동적으로 생성한다
-const createItemWrapper = ({ _id, quantity, title, price, imageKey }) => {
+const createItemWrapper = ({ _id, title, price, imageKey }, quantity) => {
   const itemWrapper = document.createElement('div');
   itemWrapper.className = 'flex-justify-between product';
-  itemWrapper.dataset.product_id = _id;
+  itemWrapper.dataset.productId = _id;
   itemWrapper.innerHTML = `
         <input type="checkbox" />
         <div class="img_wrap">
@@ -125,18 +145,10 @@ const createItemWrapper = ({ _id, quantity, title, price, imageKey }) => {
   return itemWrapper;
 };
 // guest라면 basketItem이 _id와 수량만을 가짐 {_id, quantity}
-const paintGuestBasketItem = async ({ _id }) => {
+const paintBasketItem = async ({ productId, quantity }) => {
   const basketItemList = document.querySelector('.basket_item_list');
-  const basketItem = await (await fetch(`/api/products/${_id}`)).json();
-  const itemWrapper = createItemWrapper(basketItem);
-  basketItemList.appendChild(itemWrapper);
-  return;
-};
-
-// user라면 basketItem이 모든 정보를 가짐 { _id, imageKey, title, price, quantity }
-const paintUserBasketItem = (basketItem) => {
-  const basketItemList = document.querySelector('.basket_item_list');
-  const itemWrapper = createItemWrapper(basketItem);
+  const basketItem = await (await fetch(`/api/products/${productId}`)).json();
+  const itemWrapper = createItemWrapper(basketItem, quantity);
   basketItemList.appendChild(itemWrapper);
   return;
 };
@@ -155,11 +167,11 @@ const init = async () => {
 
   if (!loginToken) {
     basketItems = getLocalBasket();
-    basketItems?.forEach(paintGuestBasketItem);
   } else {
     basketItems = await getUserCartItems();
-    basketItems?.forEach(paintUserBasketItem);
+    localStorage.setItem('basket', JSON.stringify(basketItems));
   }
+  basketItems?.forEach(paintBasketItem);
 
   const basketChkAllBtn = document.querySelector('#basketChkAll');
   const removeSelectedItemBtn = document.querySelector('.remove_selected_item');
@@ -179,9 +191,8 @@ const init = async () => {
       selected.forEach(async (item) => {
         if (loginToken) {
           await deleteUserCartItem(item);
-        } else {
-          deleteLocalBasket(item);
         }
+        deleteLocalBasket(item);
         item.remove();
       });
     }
@@ -194,13 +205,13 @@ const init = async () => {
         if (orderList.length < 1) {
           alert('선택된 상품이 없습니다');
         } else {
+          setOrderList();
           if (confirm('결제를 진행하시겠습니까?')) {
             location.href = '/payments';
           }
         }
       }
     }
-    setOrderList();
     // 이벤트에 대해 선택된 물건의 수량을 기준으로 총 금액을 설정한다.
     printTotalPrice();
   });

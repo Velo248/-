@@ -19,7 +19,6 @@
         <span><a href="/product">제품</a></span>
         <span><a href="/profile">내정보</a></span>
         <span><a href="/login">로그인</a></span>
-        <span><a href="/logout">로그아웃</a></span>
         <span><a href="/register">회원가입</a></span>
         <span><a href="/basket">장바구니</a></span>
         <span><a href="/pay-history">주문·배송</a></span>
@@ -27,10 +26,10 @@
     </header>
 
     <main>
-      <form class="wrapper form">
+      <form class="wrapper form profile_edit">
         <div class="wrapper">
-          <button class="button sign_out">탈퇴하기</button>
-          <div class="wrapper flex-column">
+          <button class="button sign_out" type="button">탈퇴하기</button>
+          <div class="wrapper flex-column profile">
             <div class="column">
               <div class="row">사용자명:</div>
               <div class="row username">Username</div>
@@ -50,20 +49,56 @@
           </div>
         </div>
         <div class="wrapper address">
-          배송지수정
-          <br />
-          <div class="column">
-            <div class="address-long">열한시 오십구분</div>
-          </div>
-          <div class="column">
-            <div class="row postal-code">00000</div>
-            <input class="row address-detail" disabled="true" />
-            <button class="button address_search">주소검색</button>
+          <h4>주소 입력/수정</h4>
+          <div class="info flex-column">
+            <div class="address_field">
+              <div class="field">
+                <input
+                  type="text"
+                  name="postal-code"
+                  id="postal-code"
+                  class="input is-primary address_long"
+                  placeholder="주소"
+                  disabled
+                />
+                <div class="field is-grouped">
+                  <input
+                    type="text"
+                    name="postal-code"
+                    id="postal-code"
+                    class="input is-primary postal_code"
+                    placeholder="12034"
+                    disabled
+                  />
+                  <input
+                    type="text"
+                    name="postal-code"
+                    id="postal-code"
+                    class="input is-primary address_detail"
+                    placeholder="상세주소"
+                    disabled
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <button
+                class="button is-link is-small address_search"
+                type="button"
+              >
+                주소 검색
+              </button>
+            </div>
           </div>
         </div>
         <div class="wrapper">
           현재 비밀번호
-          <input type="password" class="password" />
+          <input
+            type="password"
+            class="password"
+            placeholder="현재 비밀번호"
+            required
+          />
           <button type="submit">수정 완료</button>
         </div>
       </form>

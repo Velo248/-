@@ -21,7 +21,7 @@ class CategoryService {
 
   //카테고리 목록을 받음
   async getCategorylist() {
-    const products = await this.categoryModel.findAll();
+    const products = await this.categoryModel.findAllExceptDeleted();
     return products;
   }
 
@@ -44,6 +44,18 @@ class CategoryService {
       );
     }
     const products = await this.productModel.findAllByCategory(categoryId);
+    return products;
+  }
+  async getDeletedCategoriesProducts() {
+    const deletedCategory = await this.categoryModel.findOneByName(
+      '삭제된 카테고리',
+    );
+    if (!deletedCategory) {
+      return [];
+    }
+    const products = await this.productModel.findAllByCategory(
+      deletedCategory._id,
+    );
     return products;
   }
   //카테고리 정보 수정

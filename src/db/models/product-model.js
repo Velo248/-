@@ -52,6 +52,12 @@ export class ProductModel {
     return products;
   }
 
+  async findByKeywords(keywords) {
+    //keywords는 키워드들의 배열
+    const products = await Product.find({ searchKeywords: { $in: keywords } });
+    return products;
+  }
+
   async update({ productId, update }) {
     const filter = { _id: productId };
     const option = { returnOriginal: false };
