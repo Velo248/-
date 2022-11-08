@@ -167,7 +167,7 @@ orderRouter.patch(
       const { orderId } = req.params;
       const { address, request, status } = req.body;
       const statusType = ['배송 준비', '배송 중', '배송 완료'];
-      if (statusType.includes(status)) {
+      if (!statusType.includes(status)) {
         throw new Error(
           `status '배송 준비', '배송 중', '배송 완료' 의 상태만 가질 수 있습니다.`,
         );
