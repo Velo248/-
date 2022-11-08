@@ -19,33 +19,19 @@ const getAllItems = async () => {
     console.log(err);
   }
 
+  // 수량란이 사용하기 어려워서 증가 삭제 버튼 추가 예정
   let data = productsList;
-  products = `<div>
-    <span>카테고리</span>
-    <span>${data.title}</span>
-  </div>
+  products = `<div class="detail-producer">${data.manufacturer}</div>
+  <h3 class="detail-title">${data.title}</h3>
+
+  <p class="detail-producer">${data.detailDescription}</p>
+  <div class="detail-price">${data.price}</div>
   <div>
-    <span>제품명</span>
-    <span class="detail-title">${data.title}</span>
-  </div>
-  <div>
-    <span>제조사</span>
-    <span class="detail-producer">${data.manufacturer}</span>
-  </div>
-  <div>
-    <span>상세설명</span>
-    <span class="detail-producer">${data.detailDescription}</span>
-  </div>
-  <div>
-    <span>가격</span>
-    <span class="detail-price">${data.price}</span>
-  </div>
-  <div>
-    <label for="count">수량</label>
+    <label class="blind" for="count">수량</label>
     <input id="count" class="detail-count" type="number" value="1" min="1" />
   </div>
   <div class="button_wrap">
-    <button onclick="getItem('${data._id}')">장바구니 담기</button>
+    <button class="bg-pink btn-m-box" onclick="getItem('${data._id}')">장바구니 담기</button>
   </div>`;
 
   $productDetail.innerHTML = `${products}`;

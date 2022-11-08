@@ -8,6 +8,7 @@
   --violte: #6c6ad3;
   --yellow: #ffe26d;
   --darkgreen: #21920f;
+  --gray: #999;
 }
 
 html {
@@ -20,6 +21,16 @@ body {
 
 body {
   font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+}
+
+a:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+h1 a:hover {
+  text-decoration: none;
+  opacity: 1;
 }
 
 h2 {
@@ -132,58 +143,64 @@ h2 span::after {
   clip: rect(0, 0, 0, 0);
 }
 
-.unSeen {
-  display: none;
-}
-
-/* margin */
-.m-0-auto {
-  margin: 0 auto;
-}
-
-.m-0 {
-  margin: 0;
-}
-
-/* padding */
-.p-0 {
-  padding: 0;
-}
-
-/* padding 0 margin 0 */
-.pm-reset {
-  padding: 0;
-  margin: 0;
-}
-
-.relativeDiv {
-  position: relative;
-}
-
 /* font weight */
 .bold {
   font-weight: bold;
 }
 
-/* fz */
+/* font style */
+/* hightlight */
 .fz-s {
-  font-size: 1em;
+  font-size: 1rem;
 }
 
 .fz-m {
-  font-size: 1.6em;
+  font-size: 1.6rem;
+}
+
+.fz-mm {
+  font-size: 2rem;
 }
 
 .fz-l {
-  font-size: 2.4em;
+  font-size: 2.4rem;
 }
 
-.fz-m-l- {
-  font-size: 3.2em;
+.fz-m-l {
+  font-size: 3.2rem;
 }
 
 .fz-xl {
-  font-size: 4em;
+  font-size: 4rem;
+}
+
+.mt-s {
+  margin-top: 1rem;
+}
+
+.mt-m {
+  margin-top: 1.6rem;
+}
+
+.mt-mm {
+  margin-top: 2rem;
+}
+
+.mt-l {
+  margin-top: 2.4rem;
+}
+
+.mt-m-l {
+  margin-top: 3.2rem;
+}
+
+.mt-xl {
+  margin-top: 4rem;
+}
+
+/* font style set */
+.font-hightlight {
+  font-size: 3rem;
 }
 
 .position-relative {
@@ -239,9 +256,6 @@ h2 span::after {
   border-bottom: none;
 }
 
-.category_tab li a:hover {
-  opacity: 0.5;
-}
 /* 선택하는 탭 모양 끝 */
 
 /* 버튼 모양 */
@@ -250,4 +264,19 @@ h2 span::after {
   border-radius: 2.5rem;
   padding: 1rem 2rem;
   color: var(--white);
+}
+
+.btn-m {
+  display: inline-block;
+  border-radius: 2.5rem;
+  padding: 1rem 2rem;
+  color: var(--white);
+}
+
+.btn-m-box {
+  display: inline-block;
+  border-radius: 0.5rem;
+  padding: 1rem 2rem;
+  color: var(--white);
+  font-weight: bold;
 }
