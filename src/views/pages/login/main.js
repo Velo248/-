@@ -12,12 +12,6 @@ const postAPI = async (url, obj) => {
   ).json();
 };
 
-// verification chk
-/*
-
-
-*/
-
 const routeToken = async (url, token) => {};
 
 const changeLocation = (url) => {
@@ -26,31 +20,35 @@ const changeLocation = (url) => {
 
 // 로그인 요청
 $loginBtn.addEventListener('click', async (e) => {
-  let token = '';
-  sessionStorage.removeItem('token');
-
   e.preventDefault();
+
+  let token = '';
 
   let headerObj = {
     email: $loginEmail.value,
     password: $loginPassword.value,
   };
 
+  console.log(headerObj);
+
   let data = await postAPI('/api/login', headerObj);
-  if (data.isAdmin) {
+  if (data.isAdmin && data.token) {
     token = data.token;
     sessionStorage.setItem('token', token);
+    sessionStorage.setItem('isAdmin', data.isAdmin);
     alert('관리자 유저 로그인 성공');
     changeLocation('/admin');
-  } else if (!data.isAdmin) {
+  } else if (!data.isAdmin && data.token) {
     token = data.token;
 
     // 토큰도 같이 저장해주기~
     sessionStorage.setItem('token', token);
+    sessionStorage.setItem('isAdmin', data.isAdmin);
+
     alert('일반 유저 로그인 성공');
     changeLocation('/');
   } else {
-    alert('로그인 실패');
+    alert('유효하지 않은 이메일 입니다');
   }
   // input 초기화
   $loginEmail.value = '';
