@@ -1,4 +1,4 @@
-import { query, Router } from 'express';
+import { Router } from 'express';
 import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { isAdmin, loginRequired } from '../middlewares';
@@ -166,6 +166,12 @@ orderRouter.patch(
       // params로부터 id를 가져옴
       const { orderId } = req.params;
       const { address, request, status } = req.body;
+      const statusType = ['배송 준비', '배송 중', '배송 완료'];
+      if (statusType.includes(status)) {
+        throw new Error(
+          `status '배송 준비', '배송 중', '배송 완료' 의 상태만 가질 수 있습니다.`,
+        );
+      }
       const toUpdate = {
         ...(address && { address }),
         ...(request && { request }),

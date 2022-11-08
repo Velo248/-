@@ -36,8 +36,6 @@ export class CategoryModel {
       update,
       option,
     );
-    console.log(categoryId);
-    console.log(updatedCategory);
     return updatedCategory;
   }
   async deleteAll() {

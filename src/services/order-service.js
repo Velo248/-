@@ -72,7 +72,7 @@ class OrderService {
     const newOrderInfo = {
       userId,
       address,
-      request: '테스트 메시징',
+      request,
       summaryTitle,
       totalPrice: sumPrice,
     };
