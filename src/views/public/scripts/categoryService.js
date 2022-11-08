@@ -1,8 +1,12 @@
-import { customFetcher } from './fatcher.js';
+import { customFetcher } from './fetcher.js';
 
 const categoryService = {};
 
-categoryService.getAllCategories = async function () {
+/**
+ * 모든 카테고리 정보
+ * @returns { json } response
+ */
+categoryService.getAllCategories = async () => {
   const reqObj = {
     target: '/categories',
     method: 'GET',
@@ -12,7 +16,12 @@ categoryService.getAllCategories = async function () {
   return await response.json();
 };
 
-categoryService.getCategoryInfomation = async function (categoryId) {
+/**
+ * 특정 카테고리 정보 확인
+ * @param { String } categoryId 카테고리 아이디
+ * @returns { json } response
+ */
+categoryService.getCategoryInfomation = async (categoryId) => {
   const reqObj = {
     target: `/categories/${categoryId}`,
     method: 'GET',
@@ -22,50 +31,15 @@ categoryService.getCategoryInfomation = async function (categoryId) {
   return await response.json();
 };
 
-categoryService.addCategory = async function (obj) {
-  const { title, description, themeClass, imageKey } = obj;
-
-  const data = {
-    title: title,
-    description: description ? description : null,
-    themeClass: themeClass ? themeClass : null,
-    imageKey: imageKey ? imageKey : null,
-  };
-
+/**
+ * 특정 카테고리의 모든 상품정보
+ * @param { String } categoryId 카테고리 아이디
+ * @returns { json } response
+ */
+categoryService.getAllProductByCategoryId = async (categoryId) => {
   const reqObj = {
-    target: '/categories',
-    method: 'POST',
-    bodyObj: data,
-  };
-
-  const response = await customFetcher(reqObj);
-  return await response.json();
-};
-
-categoryService.setCategoryInfomation = async function (categoryId, obj) {
-  const { title, description, themeClass, imageKey } = obj;
-
-  const data = {
-    title: title,
-    description: description ? description : null,
-    themeClass: themeClass ? themeClass : null,
-    imageKey: imageKey ? imageKey : null,
-  };
-
-  const reqObj = {
-    target: `/categories/${categoryId}`,
-    method: 'PATCH',
-    bodyObj: data,
-  };
-
-  const response = await customFetcher(reqObj);
-  return await response.json();
-};
-
-categoryService.deleteCategory = async function (categoryId) {
-  const reqObj = {
-    target: `/categories/${categoryId}`,
-    method: 'DELETE',
+    target: `/categories/${categoryId}/products`,
+    method: 'GET',
   };
 
   const response = await customFetcher(reqObj);

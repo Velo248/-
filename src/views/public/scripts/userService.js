@@ -1,17 +1,22 @@
-import { customFetcher } from './fatcher.js';
+import { customFetcher } from './fetcher.js';
 
 const userService = {};
 
-//회원가입
-userService.register = async function (obj) {
+/**
+ * 회원가입
+ * @param { Object } obj required(email, fullName, password) / phoneNumber, address, role
+ * @returns { json } response
+ */
+userService.register = async (obj) => {
   const { email, fullName, password, phoneNumber, address, role } = obj;
+
   const data = {
-    email: email,
-    fullName: fullName,
-    password: password,
-    phoneNumber: phoneNumber ? phoneNumber : null,
-    address: address ? address : null,
-    role: role ? role : null,
+    email: email ?? null,
+    fullName: fullName ?? null,
+    password: password ?? null,
+    phoneNumber: phoneNumber ?? null,
+    address: address ?? null,
+    role: role ?? null,
   };
   const reqObj = {
     target: '/register',
@@ -23,12 +28,18 @@ userService.register = async function (obj) {
   return await response.json();
 };
 
-//로그인
-userService.login = async function (email, password) {
+/**
+ *로그인
+ * @param { Stirng } email
+ * @param { String } password
+ * @returns { json } response
+ */
+userService.login = async (email, password) => {
   const data = {
     email: email,
     password: password,
   };
+
   const reqObj = {
     target: '/login',
     method: 'POST',
@@ -39,10 +50,13 @@ userService.login = async function (email, password) {
   return await response.json();
 };
 
-//로그인 유저
-userService.getCurrentUser = async function () {
+/**
+ * 로그인한 유저
+ * @returns { json } response
+ */
+userService.getCurrentUser = async () => {
   const reqObj = {
-    target: '/user',
+    target: '/users',
     method: 'GET',
   };
 
@@ -50,22 +64,26 @@ userService.getCurrentUser = async function () {
   return await response.json();
 };
 
-//로그인 유저 정보수정
-userService.setUserInfomation = async function (userId, obj) {
+/**
+ * 로그인 유저 정보수정
+ * @param {Object} obj  required(currentPassword) / fullName, password, address, phoneNumber, role
+ * @returns { json } response
+ */
+userService.setUserInfomation = async (obj) => {
   const { currentPassword, fullName, password, address, phoneNumber, role } =
     obj;
 
   const data = {
-    currentPassword: currentPassword,
-    fullName: fullName ? fullName : null,
-    password: password ? password : null,
-    address: address ? address : null,
-    phoneNumber: phoneNumber ? phoneNumber : null,
-    role: role ? role : null,
+    currentPassword: currentPassword ?? null,
+    fullName: fullName ?? null,
+    password: password ?? null,
+    address: address ?? null,
+    phoneNumber: phoneNumber ?? null,
+    role: role ?? null,
   };
 
   const reqObj = {
-    target: `/users/${userId}`,
+    target: `/users`,
     method: 'POST',
     bodyObj: data,
   };
@@ -74,10 +92,13 @@ userService.setUserInfomation = async function (userId, obj) {
   return await response.json();
 };
 
-//탈퇴
-userService.deleteUser = async function (userId) {
+/**
+ * 회원 탈퇴
+ * @returns { json } response
+ */
+userService.deleteUser = async () => {
   const reqObj = {
-    target: `/users/${userId}`,
+    target: `/users`,
     method: 'DELETE',
   };
 

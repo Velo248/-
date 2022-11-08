@@ -1,4 +1,4 @@
-import { customFetcher } from './fatcher.js';
+import { customFetcher } from './fetcher.js';
 
 const adminService = {};
 
