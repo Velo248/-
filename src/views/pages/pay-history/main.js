@@ -1,5 +1,5 @@
 const getOrders = async () => {
-  const orders = await (
+  const { orders } = await (
     await fetch('/api/orders', {
       headers: {
         'Content-Type': 'application/json',

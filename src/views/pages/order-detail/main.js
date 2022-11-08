@@ -94,7 +94,7 @@ const init = async () => {
     orderCancelBtn.innerText = '배송을 취소할 수 없습니다.';
   } else {
     orderCancelBtn.addEventListener('click', async (e) => {
-      if (confirm('배송을 취소하시겠습니까?')) {
+      if (confirm('주문을 취소하시겠습니까?')) {
         const response = await (
           await fetch(`/api/orders/${orderId}`, {
             method: 'DELETE',
@@ -104,6 +104,8 @@ const init = async () => {
             },
           })
         ).json();
+        // 이슈: 존재하는 order에 대해 주문을 찾을 수 없다는 error를 띄움
+        console.log(response);
         if (response.acknowledged) {
           alert('주문이 취소되었습니다.');
           location.href = '/pay-history';
