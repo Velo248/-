@@ -230,6 +230,7 @@ class UserService {
       userId,
       update: {
         loggedOutAt: timestamp,
+        loggedIn: false,
       },
     });
     return user;
