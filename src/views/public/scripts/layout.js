@@ -1,10 +1,9 @@
-// const e = require('cors');
-
 const logout = () => {
   localStorage.clear();
   sessionStorage.clear();
   alert('로그아웃 되었습니다');
   headerMaker();
+  location.href = '/';
 };
 
 const headerMaker = () => {
@@ -27,7 +26,7 @@ const headerMaker = () => {
       </div>
       <nav>
         <a href="/product">제품</a>
-        <a href="/product">이벤트</a>
+        <a href="#" onclick="alert('개발 예정입니다')">이벤트</a>
       </nav>
     </div>
     `;
@@ -47,7 +46,7 @@ const headerMaker = () => {
       </div>
       <nav>
         <a href="/product">제품</a>
-        <a href="/product">이벤트</a>
+        <a href="#" onclick="alert('개발 예정입니다')">이벤트</a>
       </nav>
     </div>
     `;
@@ -67,7 +66,7 @@ const footerMaker = () => {
   </div>
   <div>
     주소: 서울시 강남구 도산대로 777 (신사동) |
-    <a href="#">엘리스 바로가기</a> <a href="#">5팀 깃랩 바로가기</a>
+    <a href="https://elice.training/" target="_blank">엘리스 바로가기</a> | <a href="https://kdt-gitlab.elice.io/sw_track/class_03/web_project/team5/team5-commerce" target="_blank">5팀 깃랩 바로가기</a>
   </div>
   <div>&copy; Elice 5팀 오히려좋아. All rights reserved.</div>
 </div>
@@ -75,7 +74,7 @@ const footerMaker = () => {
 `;
 };
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
   headerMaker();
   footerMaker();
 });

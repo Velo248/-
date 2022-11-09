@@ -17,7 +17,7 @@ const db = mongoose.connection;
 
 db.on('connected', async () => {
   await mockGenerator();
-  dormantAccountCheckScheduler();
+  // dormantAccountCheckScheduler();
   console.log('정상적으로 MongoDB 서버에 연결되었습니다.  ' + DB_URL);
 });
 db.on('error', (error) =>
@@ -32,5 +32,4 @@ export * from './models/user-model';
 export * from './models/product-model';
 export * from './models/category-model';
 export * from './models/order-model';
-export * from './models/cart-model';
 export * from './models/basket-model';
