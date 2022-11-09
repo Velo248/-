@@ -4,7 +4,7 @@ const getAPI = async (url) => {
 
 const makeCategoryList = async () => {
   let categoryList = [];
-  let $categoryList = document.querySelector('.category_tab');
+  const $categoryList = document.querySelector('.category_tab');
   let titles = '<li><a href="/all" class="on">All</a></li>';
 
   try {
@@ -25,7 +25,7 @@ const makeCategoryList = async () => {
 const getAllItems = async () => {
   // 2. 문제, img src를 안정함
   let productsList = [];
-  let $productsBox = document.querySelector('.products_box');
+  const $productsBox = document.querySelector('.products_box');
   let products = '';
 
   try {
@@ -35,7 +35,9 @@ const getAllItems = async () => {
     console.log(err);
   }
 
-  productsList.products.forEach((el) => {
+  // 메인에서는 아이템이 최대 8개만 표시되게
+  let get8 = productsList.products.slice(0, 8);
+  get8.forEach((el) => {
     /* src, imageKey 정하고 풀어주기*/
     products += ` <div class="img_wrap">
         <a href="/product-detail/${el._id}" data-id="el"><img src="/public/images/products/driedFood/driedFood0.jpg" alt="${el.shortDescription}" /></a>
@@ -60,22 +62,27 @@ const getCategoryItems = () => {
         getAllItems();
       } else {
         let selectedItems = [];
-        let _id = e.target.href.split('/').pop();
-        let $productsBox = document.querySelector('.products_box');
+        const categoryId = e.target.href.split('/').pop();
+        const $productsBox = document.querySelector('.products_box');
         let selectedBox = ``;
 
         try {
-          selectedItems = await getAPI(`/api/products/category/${_id}`);
+          selectedItems = await getAPI(
+            `/api/categories/${categoryId}/products`,
+          );
         } catch (err) {
           console.log('에러 발생!!');
           console.log(err);
         }
-        selectedItems.forEach((el) => {
+
+        // 메인에서는 아이템이 최대 8개만 표시되게
+        let get8 = selectedItems.slice(0, 8);
+        get8.forEach((data) => {
           selectedBox += `<div class="img_wrap">
-          <a href="/product-detail/${el._id}}"><img src="/public/images/products/driedFood/driedFood0.jpg" alt="${el.shortDescription}" /></a>
-        </div>`;
+            <a href="/product-detail/${data._id}}"><img src="/public/images/products/driedFood/driedFood0.jpg" alt="${data.shortDescription}" /></a>
+          </div>`;
+          $productsBox.innerHTML = `${selectedBox}`;
         });
-        $productsBox.innerHTML = `${selectedBox}`;
       }
     });
   });
