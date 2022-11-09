@@ -1,4 +1,5 @@
 import orderService from '/public/scripts/orderService.js';
+import { loggedInOnlyPageProtector } from '/public/scripts/common.js';
 
 const createOrderRow = ({ summaryTitle, totalPrice, status }) => {
   const orderRow = document.createElement('div');
@@ -89,6 +90,7 @@ const cancleBtnEventHandler = (orderId) => (e) => {
 };
 
 const init = async () => {
+  loggedInOnlyPageProtector();
   const orderId = location.pathname.split('/')[2];
 
   const { order } = await orderService.getOrderByOrderId(orderId);

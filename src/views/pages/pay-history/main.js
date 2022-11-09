@@ -1,4 +1,5 @@
 import orderService from '/public/scripts/orderService.js';
+import { loggedInOnlyPageProtector } from '/public/scripts/common.js';
 
 const createHistoryDiv = ({ _id, summaryTitle, totalPrice, status }) => {
   const historyDetail = document.createElement('div');
@@ -20,6 +21,7 @@ const createHistoryDiv = ({ _id, summaryTitle, totalPrice, status }) => {
 };
 
 const init = async () => {
+  loggedInOnlyPageProtector();
   const paymentHistoryBody = document.querySelector('.payment_history_body');
 
   paymentHistoryBody.innerHTML = '';
