@@ -13,6 +13,10 @@ import {
 } from './routers';
 import { errorHandler } from './middlewares';
 const app = express();
+import morgan from 'morgan';
+
+import { stream } from './utils/logger';
+app.use(morgan('combined', { stream }));
 
 // CORS 에러 방지
 app.use(cors());
