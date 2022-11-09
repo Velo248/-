@@ -31,32 +31,29 @@ const getAllItems = async () => {
     <input id="count" class="detail-count" type="number" value="1" min="1" />
   </div>
   <div class="button_wrap">
-    <button class="bg-pink btn-m-box" onclick="getItem('${data._id}')">장바구니 담기</button>
+    <button class="bg-pink btn-m-box" onclick="getBasket('${data._id}')">장바구니 담기</button>
   </div>`;
 
   $productDetail.innerHTML = `${products}`;
 };
 
-const getItem = (itemId) => {
+const getBasket = (itemId) => {
   let count = parseInt(document.querySelector('.detail-count').value);
-  let items = [];
+  let items = JSON.parse(localStorage.getItem('basket'))
+    ? JSON.parse(localStorage.getItem('basket'))
+    : [];
 
-  if (localStorage.getItem('basket')) {
-    items = JSON.parse(localStorage.getItem('basket'));
-
+  if (items.length !== 0) {
     for (let i = 0; i < items.length; i++) {
-      // items.length 이게 문제인거 같다!
       if (items[i].itemId == itemId && items[i].count == count) {
         break;
       } else if (items[i].itemId == itemId) {
         items[i].count = count;
         break;
-      } else if (items[i].itemId !== itemId) {
-        console.log(itemId, items[i].itemId);
+      } else if (items[i].itemId !== itemId && i == items.length - 1) {
         items.push({ itemId, count });
         break;
       }
-      console.log(items[i]);
     }
 
     localStorage.setItem('basket', JSON.stringify(items));
@@ -68,7 +65,9 @@ const getItem = (itemId) => {
   } else {
     let items = [{ itemId, count }];
     localStorage.setItem('basket', JSON.stringify(items));
+
     alert('상품을 장바구니에 담았습니다');
+
     if (confirm('장바구니로 이동하시겠습니까?')) {
       location.href = '/basket';
     }
