@@ -1,6 +1,6 @@
 import userService from '/public/scripts/userService.js';
 import orderService from '/public/scripts/orderService.js';
-import { getLocalStorageItem, parsePrice } from '/public/scritps/util.js';
+import { getLocalStorageItem, parsePrice } from '/public/scripts/util.js';
 import { loggedInOnlyPageProtector } from '/public/scripts/common.js';
 
 const getOrderList = () => {
