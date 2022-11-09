@@ -1,34 +1,43 @@
-/* @import './common.css'; */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+h2 {
+  margin: 2rem 0;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
 }
 
-header {
-  height: 5vh;
-  background-color: yellow;
+button.back_admin_main_bnt {
+  display: block;
+  padding: 1rem 6rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  background-color: var(--darkgray);
+
+  width: 95%;
+  font-size: 1.6rem;
+  margin: 0 auto;
 }
 
-.admin_category_wapper {
-  height: 95vh;
-  background-color: bisque;
-}
-
-.admin_category_wapper > button {
-  margin-left: 80%;
+button.admin_category_edit_bnt {
+  display: inline-block;
+  color: var(--white);
+  background-color: var(--darkgray);
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
 }
 
 .admin_category_header {
-  text-align: center;
+  max-width: 95%;
+  margin: 0 auto;
 }
-.admin_category_header > h1 {
-  display: inline;
+
+.admin_category_wapper {
+  max-width: 45rem;
 }
 
 .admin_category_workspace {
-  background-color: white;
-  margin: 1.875rem 10%;
-  height: 85%;
+  height: 45rem;
+}
+
+.admin_category_workspace > div {
+  line-height: 1.6;
 }

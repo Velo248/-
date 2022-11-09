@@ -4,24 +4,27 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <!-- <link rel="stylesheet" href="../../../public/css/style.css" /> -->
-    <link rel="stylesheet" href="custom.css" />
+    <title>관리자 | 카테고리 관리</title>
+    <link rel="stylesheet" href="/public/css/style.css" />
+    <link rel="stylesheet" href="./custom.css" />
+    <script src="/public/scripts/layout.js" defer></script>
   </head>
   <body>
-    <header>
-      <nav>haeder</nav>
-    </header>
-    <main>
+    <header></header>
+    <main class="flex-all-center">
       <div class="admin_category_wapper">
         <div class="admin_category_header">
-          <h1>카테고리 목록</h1>
-          <button class="back_admin_main_bnt">전체 메뉴로</button>
+          <h2>카테고리 목록</h2>
+          <div class="right">
+            <button class="admin_category_edit_bnt">수정하기</button>
+          </div>
         </div>
-        <div class="admin_category_workspace"></div>
-        <button class="admin_category_edit_bnt">수정하기</button>
+        <div class="content-box w-l">
+          <div class="admin_category_workspace"></div>
+        </div>
+        <button class="back_admin_main_bnt">전체 메뉴로</button>
       </div>
-      <div class="editBntContainer"></div>
+      <!-- <div class="editBntContainer"></div> -->
     </main>
     <footer></footer>
     <script type="module" src="main.js"></script>

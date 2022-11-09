@@ -11,6 +11,7 @@
   --gray: #d9d9d9;
   --deepgray: #adadad;
   --darkgray: #787878;
+  --dark: #333;
 }
 
 html {
@@ -63,7 +64,7 @@ button:hover {
 h2 {
   text-align: center;
   margin-top: 6rem;
-  margin-bottom: 9rem;
+  margin-bottom: 8rem;
 }
 
 h2 span {
@@ -272,6 +273,19 @@ h2 span.hightlight::after {
   height: 38rem;
 }
 
+/* text-align */
+.left {
+  text-align: right;
+}
+
+.middle {
+  text-align: right;
+}
+
+.right {
+  text-align: right;
+}
+
 /* font style set */
 .font-hightlight {
   font-size: 3rem;
@@ -378,6 +392,13 @@ h2 span.hightlight::after {
   border-radius: 0.3rem;
   color: #fff;
   width: 100%;
+  font-size: 1.6rem;
+}
+
+/* 정렬 + 모양용 */
+.more {
+  text-align: right;
+  padding: 0.6rem;
   font-size: 1.6rem;
 }
 
