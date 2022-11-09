@@ -4,6 +4,7 @@ import {
   productModel,
   userModel,
   cartModel,
+  basketModel,
 } from '../db';
 import {
   orderMockData,
@@ -21,6 +22,7 @@ async function dataReset() {
   await orderModel.deleteAll();
   await categoryModel.deleteAll();
   await cartModel.deleteAll();
+  await basketModel.deleteAll();
 }
 //더미데이터 삽입
 async function dataPull() {
