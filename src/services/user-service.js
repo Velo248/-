@@ -122,7 +122,9 @@ class UserService {
     if (user.role == 'dormant-account') {
       isDormantAccount.value = true;
     }
-
+    if (Math.floor((currentTime - logoutTime) / 1000) < 30) {
+      isDormantAccount.value = false;
+    }
     //로그인 성공시 유저스키마의 loggedIn 상태를 true로 바꿔줌
     await this.userModel.update({
       userId: user._id,
