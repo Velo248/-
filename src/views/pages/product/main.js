@@ -41,6 +41,7 @@ const getAllItems = async () => {
 };
 
 // 카테고리 별 아이템 가져오기
+// 카테고리 별 아이템 가져오기
 const getCategoryItems = () => {
   const allA = document.querySelectorAll('.category_tab li a');
   allA.forEach((el, index) => {
@@ -55,22 +56,24 @@ const getCategoryItems = () => {
         getAllItems();
       } else {
         let selectedItems = [];
-        let _id = e.target.href.split('/').pop();
+        let categoryId = e.target.href.split('/').pop();
         let $productsBox = document.querySelector('.products_box');
         let selectedBox = ``;
 
         try {
-          selectedItems = await getAPI(`/api/products/category/${_id}`);
+          selectedItems = await getAPI(
+            `/api/categories/${categoryId}/products`,
+          );
         } catch (err) {
           console.log('에러 발생!!');
           console.log(err);
         }
-        selectedItems.forEach((el) => {
+        selectedItems.forEach((data) => {
           selectedBox += `<div class="img_wrap">
-          <a href="/product-detail/${el._id}"><img src="/public/images/products/driedFood/driedFood0.jpg" alt="${el.shortDescription}" /></a>
-        </div>`;
+            <a href="/product-detail/${data._id}}"><img src="/public/images/products/driedFood/driedFood0.jpg" alt="${data.shortDescription}" /></a>
+          </div>`;
+          $productsBox.innerHTML = `${selectedBox}`;
         });
-        $productsBox.innerHTML = `${selectedBox}`;
       }
     });
   });
