@@ -1,5 +1,6 @@
 import userService from '/public/scripts/userService.js';
 import orderService from '/public/scripts/orderService.js';
+import { loggedInOnlyPageProtector } from '/public/scripts/common.js';
 
 const createUserSection = ({ fullName, email, phoneNumber }) => {
   const wrapper = document.createElement('div');
@@ -57,6 +58,7 @@ const createOrderElement = ({ _id, status, totalPrice }) => {
 };
 
 const init = async () => {
+  loggedInOnlyPageProtector();
   const user = await userService.getCurrentUser(); // userService.getCurrentUser로 변경 예정
   const { orders } = (await orderService.getOrdersByCurrentUser()) ?? {
     orders: [],

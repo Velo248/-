@@ -1,6 +1,7 @@
 import userService from '/public/scripts/userService.js';
 import orderService from '/public/scripts/orderService.js';
-import { getLocalStorageItem, parsePrice } from '/public/scritps/util.js';
+import { getLocalStorageItem, parsePrice } from '/public/scripts/util.js';
+import { loggedInOnlyPageProtector } from '/public/scripts/common.js';
 
 const getOrderList = () => {
   return getLocalStorageItem('orderList');
@@ -107,11 +108,7 @@ const paymentBtnEventHandler = (orderObj) => async (e) => {
 };
 
 const init = async () => {
-  const loginToken = sessionStorage.getItem('token') ?? true;
-  if (!loginToken) {
-    alert('로그인이 필요합니다.');
-    location.href = '/';
-  }
+  loggedInOnlyPageProtector();
   const orderList = getOrderList() ?? [];
   if (orderList.length < 1) {
     alert('주문할 내역이 없습니다');

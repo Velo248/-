@@ -1,4 +1,5 @@
 import userService from '/public/scripts/userService.js';
+import { loggedInOnlyPageProtector } from '/public/scripts/common.js';
 
 const createUserSection = ({ fullName, email, phoneNumber }) => {
   const wrapper = document.createElement('div');
@@ -67,6 +68,7 @@ const profileEditSubmitEventHandler = async (e) => {
 };
 
 const init = async () => {
+  loggedInOnlyPageProtector();
   const user = await userService.getCurrentUser();
 
   const profileEditForm = document.querySelector('.profile_edit');
