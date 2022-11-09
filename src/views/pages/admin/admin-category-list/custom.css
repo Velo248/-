@@ -34,7 +34,8 @@ button.admin_category_edit_bnt {
 }
 
 .admin_category_workspace {
-  height: 45rem;
+  height: 38rem;
+  overflow-y: auto;
 }
 
 .admin_category_workspace > div {

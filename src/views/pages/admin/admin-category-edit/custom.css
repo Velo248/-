@@ -26,7 +26,7 @@ button.admin_edit_complete_bnt {
   width: 95%;
   font-size: 1.6rem;
   background-color: var(--dark);
-  margin: 0 auto;
+  margin: 1.8rem auto 0;
 }
 
 .admin_category_header {
@@ -39,7 +39,7 @@ button.admin_edit_complete_bnt {
 }
 
 .admin_category_workspace {
-  height: 44rem;
+  height: 46rem;
 }
 
 .admin_category_workspace > div {
