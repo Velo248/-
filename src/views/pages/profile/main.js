@@ -14,60 +14,56 @@ const getCurrentUser = async () => {
 
 const createUserSection = ({ fullName, email, phoneNumber }) => {
   const wrapper = document.createElement('div');
-  wrapper.className = 'wrapper flex-column';
+  wrapper.className = 'flex-column';
   wrapper.innerHTML = `
-        <div class="button">
-          <a href="/profile-edit" class="edit-profile">내 정보 수정</a>
-        </div>
-        <div class="column">
-            <div class="row">사용자명:</div>
-            <div class="row username">${fullName}</div>
-        </div>
-        <div class="column">
-            <div class="row">이메일:</div>
-            <div class="row email">${email}</div>
-        </div>
-        <div class="column">
-            <div class="row">전화번호:</div>
-            <div class="row phone">${
-              phoneNumber || '전화번호가 없습니다.'
-            }</div>
-        </div>
+      <div>
+        <label>사용자명</label>
+        <input type="text" class="username" value="${fullName}" readonly></input>
+      </div>
+      <div>
+        <label>이메일</label>
+        <input type="text" class="email" value="${email}" readonly></input>
+      </div>
+      <div>
+        <label>전화번호</label>
+        <input type="tel" class="phone" value="${
+          phoneNumber || '전화번호가 없습니다.'
+        }" readonly></input>
+      </div>
     `;
   return wrapper;
 };
 const createAddressSection = ({ address1, address2, postalCode }) => {
   const wrapper = document.createElement('div');
-  wrapper.className = 'wrapper address';
+  wrapper.className = 'address';
   if (!address1) {
     wrapper.innerHTML = `
-        배송지정보
-        <div>등록된 배송지가 없습니다.</div>
+        <em>배송지정보</em>
+        <div><div>등록된 배송지가 없습니다.</div></div>
     `;
   } else {
     wrapper.innerHTML = `
-            배송지정보
-            <br />
-            <div class="column">
-                <div class="address_long">${address1}</div>
-            </div>
-            <div class="column">
-                <div class="row postal_code">${postalCode}</div>
-                <div class="row address_detail">${address2}</div>
-            </div>
+        <em>배송지정보</em>
+        <div>
+          <div class="address_long">${address1}</div>
+          <div class="flex">
+            <div class="postal_code">${postalCode}</div>&nbsp;&nbsp;
+            <div class="address_detail">${address2}</div>
+          </div>
+        </div>
         `;
   }
   return wrapper;
 };
 const createOrderElement = ({ _id, status, totalPrice }) => {
   const orderColumn = document.createElement('div');
-  orderColumn.className = 'order-table__column';
+  orderColumn.className = '';
   orderColumn.innerHTML = `
-        <div class="order-table__column-row">${_id}</div>
-        <div class="order-table__column-row">${status}</div>
-        <div class="order-table__column-row">${Number(
-          totalPrice,
-        ).toLocaleString('ko-kr')}</div>
+      <span>${_id}</span>
+      <span>${status}</span>
+      <span>
+        ${Number(totalPrice).toLocaleString('ko-kr')}
+      </span>
     `;
   return orderColumn;
 };

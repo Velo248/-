@@ -1,78 +1,82 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>마이페이지</title>
-    <link rel="stylesheet" href="/public/css/style.css" />
-    <link rel="stylesheet" href="./custom.css" />
-  </head>
-  <body>
-    <header>
-      <h1>
-        <a href="/"
-          ><img src="/public/images/common/logo.png" alt="간식조아"
-        /></a>
-      </h1>
-      <nav>
-        <span><a href="/product">제품</a></span>
-        <span><a href="/profile">내정보</a></span>
-        <span><a href="/login">로그인</a></span>
-        <span><a href="/register">회원가입</a></span>
-        <span><a href="/basket">장바구니</a></span>
-        <span><a href="/pay-history">주문·배송</a></span>
-      </nav>
-    </header>
 
-    <main>
-      <div class="wrapper profile">
-        <div class="button">
-          <a href="/profile-edit" class="edit-profile">내 정보 수정</a>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>마이페이지</title>
+  <link rel="stylesheet" href="/public/css/style.css" />
+  <!-- <link rel="stylesheet" href="./custom.css" /> -->
+  <script src="/public/scripts/layout.js" defer></script>
+</head>
+
+<body>
+  <header></header>
+
+  <main class="flex-column-center">
+    <div class="content-box">
+      <div>
+        <em>사용자 정보</em>
+        <div class="profile">
+          <!-- 여기부터 -->
+          <div>
+            <label>사용자명</label>
+            <input type="text" class="username" value="${fullName}" readonly></input>
+          </div>
+          <div>
+            <label>이메일</label>
+            <input type="text" class="email" value="${email}" readonly></input>
+          </div>
+          <div>
+            <label>전화번호</label>
+            <input type="tel" class="phone" value="${ phoneNumber || '전화번호가 없습니다.' }" readonly></input>
+          </div>
+          <!-- 여기까지 -->
         </div>
-        <div class="wrapper flex-column">
-          <div class="column">
-            <div class="row">사용자명:</div>
-            <div class="row username">Username</div>
+      </div>
+
+      <div class="address">
+        <!-- 여기부터 -->
+        <em>배송지정보</em>
+        <div>
+          <div class="address_long">${address1}</div>
+          <div class="flex">
+            <div class="postal_code">${postalCode}</div>
+            <div class="address_detail">${address2}</div>
           </div>
-          <div class="column">
-            <div class="row">이메일:</div>
-            <div class="row email">something@went.wrong</div>
+        </div>
+        <!-- 여기까지 -->
+      </div>
+
+      <div>
+        <em>주문내역</em>
+        <div class="table-box w-ls ">
+          <div>
+            <span>주문번호</span>
+            <span>배송상태</span>
+            <span>금액</span>
           </div>
-          <div class="column">
-            <div class="row">전화번호:</div>
-            <div class="row phone">012-3456-7890</div>
+          <div class="orders h-s">
+            <!-- 여기 안을 넣는것 -->
+            <!-- <div>
+              <span>${_id}</span>
+              <span>${status}</span>
+              <span>
+                ${Number( totalPrice, ).toLocaleString('ko-kr')}
+              </span>
+            </div> -->
+            <!-- 여기까지-->
           </div>
         </div>
       </div>
-      <div class="wrapper address">
-        배송지정보
-        <br />
-        <div class="column">
-          <div class="address-long">열한시 오십구분</div>
-        </div>
-        <div class="column">
-          <div class="row postal-code">00000</div>
-          <div class="row address-detail">오십오초</div>
-        </div>
-      </div>
-      <div class="wrapper orders">
-        <div class="info">주문내역</div>
-        <div class="order-table">
-          <div class="order-table__header">
-            <div class="row">주문번호</div>
-            <div class="row">배송상태</div>
-            <div class="row">금액</div>
-          </div>
-          <!-- <div class="order-table__column">
-            <div class="order-table__column-row">01</div>
-            <div class="order-table__column-row">배송중</div>
-            <div class="order-table__column-row">10000</div>
-          </div> -->
-        </div>
-      </div>
-    </main>
-    <footer>&copy; 2022 오히려좋아 by elice 5팀</footer>
-    <script src="./main.js" type="module"></script>
-  </body>
+
+      <a href="/profile-edit" class="middle bg-darkgreen">내 정보 수정</a>
+
+    </div>
+  </main>
+  <footer></footer>
+  <script src="./main.js" type="module"></script>
+</body>
+
 </html>

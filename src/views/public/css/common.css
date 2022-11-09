@@ -7,8 +7,10 @@
   --green: #18a956;
   --violte: #6c6ad3;
   --yellow: #ffe26d;
-  --darkgreen: #21920f;
-  --gray: #999;
+  --darkgreen: #3f9550;
+  --gray: #d9d9d9;
+  --deepgray: #adadad;
+  --darkgray: #787878;
 }
 
 html {
@@ -23,6 +25,23 @@ body {
   font-family: 'Poppins', 'Noto Sans KR', sans-serif;
 }
 
+/* Change the color to your own background color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s;
+}
+
+input:focus {
+  outline: none;
+}
+
+input[readonly] {
+  background-color: var(--gray);
+  border: 1px solid #ccc;
+}
+
 a:hover {
   text-decoration: underline;
   opacity: 0.8;
@@ -33,20 +52,29 @@ h1 a:hover {
   opacity: 1;
 }
 
+button {
+  opacity: 0.92;
+}
+
+button:hover {
+  opacity: 1;
+}
+
 h2 {
   text-align: center;
+  margin-top: 6rem;
+  margin-bottom: 9rem;
 }
 
 h2 span {
   display: inline-block;
   position: relative;
-  margin: 3rem 0 7.5rem;
   text-align: center;
   font-weight: lighter;
   font-size: 2.5em;
 }
 
-h2 span::after {
+h2 span.hightlight::after {
   content: '';
   display: inline-block;
   position: absolute;
@@ -118,8 +146,20 @@ h2 span::after {
   background-color: var(--yellow);
 }
 
-.bg-darkGreen {
+.bg-darkgreen {
   background-color: var(--darkgreen);
+}
+
+.bg-deepgray {
+  background-color: var(--deepgray);
+}
+
+.bg-darkgray {
+  background-color: var(--darkgray);
+}
+
+.bg-gray {
+  background-color: var(--gray);
 }
 
 .bg-transparent {
@@ -128,6 +168,10 @@ h2 span::after {
 
 .color-pink {
   color: var(--pink);
+}
+
+.color-white {
+  color: var(--white);
 }
 
 .color-white {
@@ -198,6 +242,36 @@ h2 span::after {
   margin-top: 4rem;
 }
 
+/* width */
+.w-s {
+  width: 6rem;
+}
+
+.w-ms {
+  width: 10rem;
+}
+
+.w-mm {
+  width: 20rem;
+}
+
+.w-ls {
+  width: 55rem;
+}
+
+.w-l {
+  width: 70rem;
+}
+
+/* height */
+.h-s {
+  height: 8rem;
+}
+
+.h-l {
+  height: 38rem;
+}
+
 /* font style set */
 .font-hightlight {
   font-size: 3rem;
@@ -228,6 +302,7 @@ h2 span::after {
   width: 21.4rem;
   height: 7.9rem;
 }
+
 /* 로고 끝 */
 
 /* 선택하는 탭 모양 시작 */
@@ -279,4 +354,197 @@ h2 span::after {
   padding: 1rem 2rem;
   color: var(--white);
   font-weight: bold;
+}
+
+.small {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  color: #fff;
+}
+
+.middle {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  /* width: 100%; */
+  font-size: 1.6rem;
+}
+
+.full {
+  display: inline-block;
+  padding: 1rem 6rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  width: 100%;
+  font-size: 1.6rem;
+}
+
+/* 태그 감싸는  */
+.box-style-center {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  /* height: calc(100vh - 28.3rem); */
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.box-style-center > form {
+  font-size: 2.2rem;
+  text-align: center;
+  padding: 3rem 6rem;
+  border: 1px solid #ebebeb;
+  box-shadow: 2px 2px 12px #e7e7e7;
+}
+
+.box-style-center > form > div {
+  display: flex;
+  margin-top: 2.8rem;
+}
+
+.box-style-center > form > div > label {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  width: 14rem;
+  font-size: 1.8rem;
+  /* margin-right: 2rem; */
+}
+
+.box-style-center > form input:not([type='radio']) {
+  padding: 1rem 0.7rem;
+  background: #ffffff;
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.box-style-center > form > div:last-child {
+  display: inline-block;
+  width: 100%;
+  margin-top: 3rem;
+  margin-bottom: 0.8rem;
+  font-size: 1.6rem;
+}
+
+.box-style-center > form > .description {
+  font-size: 1.4rem;
+}
+
+.box-style-center > form > .description > div {
+  margin-right: 4rem;
+}
+
+.box-style-center > form > .description > div:first-child {
+  width: 14rem;
+  text-align: left;
+}
+
+.box-style-center > form button.full:not(:first-child) {
+  margin-top: 1rem;
+}
+
+.box-style-center > .btn-collect {
+  width: 42rem;
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.box-style-center > .btn-collect a {
+  display: inline-block;
+  margin: 0 3rem;
+  width: 10rem;
+}
+
+.content-box {
+  margin: 0 auto;
+  max-width: 95%;
+}
+
+.content-box input {
+  padding: 1rem 0.4rem;
+  background: #fff;
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.content-box input:read-only {
+  background: none;
+  border: none;
+}
+
+.content-box > div {
+  /* border: 1px solid #ddd; */
+  border: 1px solid #ebebeb;
+  padding: 2rem;
+  margin: 1.2rem 0;
+  box-shadow: 2px 2px 12px #e7e7e7;
+}
+
+.content-box em {
+  background-color: var(--darkgray);
+  color: #fff;
+  padding: 0.2rem 0.6rem;
+}
+
+.content-box em ~ div > div {
+  font-size: 1.4rem;
+  padding-top: 2rem;
+}
+
+.content-box label {
+  width: 10rem;
+  display: inline-block;
+  text-align: center;
+}
+
+.table-box span {
+  display: inline-block;
+  text-align: center;
+}
+
+.table-box > :first-child {
+  display: flex;
+  justify-content: space-between;
+  /* margin-right: 1.6rem; */
+  padding-top: 1.6rem;
+  padding-bottom: 1.2rem;
+}
+
+.table-box > :first-child > span {
+  display: inline-block;
+  flex: 1;
+}
+
+.table-box > :first-child > span:first-child {
+  flex: 2;
+}
+
+.table-box > :first-child > span:last-child {
+  flex: 1;
+}
+
+.table-box span a {
+  text-decoration: underline;
+}
+
+.table-box > :last-child {
+  overflow-y: auto;
+  padding-top: 0;
+}
+
+.table-box > :last-child > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 1.9;
+}
+
+.table-box > :last-child > div span:first-child {
+  flex: 2;
+}
+.table-box > :last-child > div span {
+  flex: 1;
 }

@@ -39,33 +39,24 @@ const updateUpser = async (toUpdateObj) => {
 
 const createUserSection = ({ fullName, email, phoneNumber }) => {
   const wrapper = document.createElement('div');
-  wrapper.className = 'wrapper flex-column';
+  wrapper.className = '';
   wrapper.innerHTML = `
-        <div class="column">
-            <div class="row">사용자명:</div>
-            <div class="row username">${fullName}</div>
+        <div>
+          <label>사용자명</label>
+          <input type="text" class="username" value="${fullName}" readonly></input>
         </div>
-        <div class="column">
-            <div class="row">이메일:</div>
-            <div class="row email">${email}</div>
+        <div>
+          <label>이메일</label>
+          <input class="email" value="${email}" readonly></input>
         </div>
-        <div class="column">
-            <div class="row">전화번호:</div>
-            ${
-              phoneNumber
-                ? `<input
-                type="text"
-                class="row phone"
-                value="${phoneNumber}"
-                placeholder="00000000000 -없이"
-              />`
-                : `<input
-                type="text"
-                class="row phone"
-                placeholder="00000000000 -없이"
-              />`
-            }
-            
+        <div>
+          <label>전화번호:</label>
+          ${
+            phoneNumber
+              ? `<input type="text" class="phone" value="${phoneNumber}"
+            placeholder="00000000000 -없이" />`
+              : `<input type="text" class="phone" placeholder="-없이 번호만 입력해주세요" />`
+          }
         </div>
     `;
   return wrapper;

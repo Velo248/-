@@ -1,110 +1,70 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>내 정보 수정</title>
-    <link rel="stylesheet" href="/public/css/style.css" />
-    <link rel="stylesheet" href="./custom.css" />
-  </head>
-  <body>
-    <header>
-      <h1>
-        <a href="/"
-          ><img src="/public/images/common/logo.png" alt="간식조아"
-        /></a>
-      </h1>
-      <nav>
-        <span><a href="/product">제품</a></span>
-        <span><a href="/profile">내정보</a></span>
-        <span><a href="/login">로그인</a></span>
-        <span><a href="/register">회원가입</a></span>
-        <span><a href="/basket">장바구니</a></span>
-        <span><a href="/pay-history">주문·배송</a></span>
-      </nav>
-    </header>
 
-    <main>
-      <form class="wrapper form profile_edit">
-        <div class="wrapper">
-          <button class="button sign_out" type="button">탈퇴하기</button>
-          <div class="wrapper flex-column profile">
-            <div class="column">
-              <div class="row">사용자명:</div>
-              <div class="row username">Username</div>
-            </div>
-            <div class="column">
-              <div class="row">이메일:</div>
-              <div class="row email">something@went.wrong</div>
-            </div>
-            <div class="column">
-              <div class="row">전화번호:</div>
-              <input
-                type="text"
-                class="row phone"
-                placeholder="00000000000 -없이"
-              />
-            </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>내 정보 수정</title>
+  <link rel="stylesheet" href="/public/css/style.css" />
+  <script src="/public/scripts/layout.js" defer></script>
+</head>
+
+<body>
+  <header></header>
+
+  <main class="flex-column-center">
+    <form class="profile_edit content-box">
+      <!-- <div class="content-box"> -->
+      <button class="sign_out" type="button">탈퇴하기</button>
+
+      <div>
+        <em>정보 수정</em>
+        <div class="profile">
+          <!-- 여기부터 넣기 -->
+          <div>
+            <label>사용자명</label>
+            <input type="text" class="username" value="${fullName}" readonly></input>
           </div>
+          <div>
+            <label>이메일</label>
+            <input class="email" value="${email}" readonly></input>
+          </div>
+          <div>
+            <label>전화번호:</label>
+            <input type="text" class="phone" placeholder="00000000000 -없이" />
+          </div>
+          <!-- 여기까지 넣기 -->
         </div>
-        <div class="wrapper address">
-          <h4>주소 입력/수정</h4>
-          <div class="info flex-column">
-            <div class="address_field">
-              <div class="field">
-                <input
-                  type="text"
-                  name="postal-code"
-                  id="postal-code"
-                  class="input is-primary address_long"
-                  placeholder="주소"
-                  disabled
-                />
-                <div class="field is-grouped">
-                  <input
-                    type="text"
-                    name="postal-code"
-                    id="postal-code"
-                    class="input is-primary postal_code"
-                    placeholder="12034"
-                    disabled
-                  />
-                  <input
-                    type="text"
-                    name="postal-code"
-                    id="postal-code"
-                    class="input is-primary address_detail"
-                    placeholder="상세주소"
-                    disabled
-                  />
-                </div>
+      </div>
+      <div class="address">
+        <em>주소 입력/수정</em>
+        <div class="info">
+          <div class="address_field">
+            <div>
+              <input type="text" name="postal-code" id="postal-code" class="address_long" placeholder="주소" disabled />
+              <div>
+                <input type="text" name="postal-code" id="postal-code" class="postal_code w-s" placeholder="12034"
+                  disabled />
+                <input type="text" name="postal-code" id="postal-code" class="address_detail" placeholder="상세주소"
+                  disabled />
+                <button class="address_search small bg-deepgray" type="button">주소 검색</button>
               </div>
             </div>
-            <div class="field">
-              <button
-                class="button is-link is-small address_search"
-                type="button"
-              >
-                주소 검색
-              </button>
-            </div>
           </div>
         </div>
-        <div class="wrapper">
-          현재 비밀번호
-          <input
-            type="password"
-            class="password"
-            placeholder="현재 비밀번호"
-            required
-          />
-          <button type="submit">수정 완료</button>
-        </div>
-      </form>
-    </main>
-    <footer>&copy; 2022 오히려좋아 by elice 5팀</footer>
-    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="./main.js" type="module"></script>
-  </body>
+      </div>
+      <div class="wrapper">
+        <label>현재 비밀번호</label>
+        <input type="password" class="password" placeholder="현재 비밀번호" required />
+      </div>
+      <button type="submit" class="full bg-darkgreen">수정 완료</button>
+      <!-- </div> -->
+    </form>
+  </main>
+  <footer></footer>
+  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script src="./main.js" type="module"></script>
+</body>
+
 </html>
