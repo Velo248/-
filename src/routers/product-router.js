@@ -1,4 +1,4 @@
-import { response, Router } from 'express';
+import { Router } from 'express';
 import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { isAdmin, loginRequired } from '../middlewares';
@@ -55,28 +55,6 @@ productRouter.get('/products', async (req, res, next) => {
 
     res.status(200).json(products);
     // }
-  } catch (error) {
-    next(error);
-  }
-});
-
-//특정 카테고리의 상품들 조회 API - GET /api/productlist/category/category_id
-//카테고리로바꿈
-
-//서치키워드들로 상품들 조회 API - GET /api/search/products?search=노랑 노트북
-productRouter.get('/search/products', async (req, res, next) => {
-  try {
-    const { search } = req.query;
-
-    if (search) {
-      const products = await productService.searchProducts(search);
-      res.status(200).json(products);
-    } else {
-      res.status(421).json({
-        err: 'Misdirected Request',
-        reason: 'querystring should include search',
-      });
-    }
   } catch (error) {
     next(error);
   }
