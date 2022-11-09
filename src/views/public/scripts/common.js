@@ -1,6 +1,7 @@
-export const decodeJwt = (token) => {
-  const base64 = token.split('.')[1];
-  const payload = atob(base64);
-
-  return JSON.parse(payload);
+export const loggedInOnlyPageProtector = () => {
+  const token = sessionStorage.getItem('token');
+  if (token) return;
+  else {
+    return (location.href = '/login');
+  }
 };

@@ -51,6 +51,11 @@ export class UserModel {
   async findOne(query, projection, options = { lean: true }) {
     return await User.findOne(query, projection, options).exec();
   }
+  async createWithTimestamp(userInfo) {
+    userInfo.passwordUpdatedAt = new Date();
+    const createdNewUser = await User.create(userInfo);
+    return createdNewUser;
+  }
 }
 
 const userModel = new UserModel();

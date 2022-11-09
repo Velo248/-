@@ -41,6 +41,7 @@
 .products_box {
   display: flex;
   flex-wrap: wrap;
+  min-height: 50rem;
 }
 
 .products_box .img_wrap {

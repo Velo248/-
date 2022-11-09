@@ -93,6 +93,29 @@ userService.setUserInformation = async (obj) => {
 };
 
 /**
+ * 로그인 유저의 정보 <수정>
+ * @param {object} obj required(currentPassword) / 이외 선택사항
+ * @returns { object } parsed json object
+ */
+userService.updateUserInformation = async (obj) => {
+  const { currentPassword, address, phoneNumber } = obj;
+  const data = {
+    currentPassword,
+    address,
+    phoneNumber,
+  };
+
+  const reqObj = {
+    target: '/users',
+    method: 'PATCH',
+    bodyObj: data,
+  };
+
+  const response = await customFetcher(reqObj);
+  return await response.json();
+};
+
+/**
  * 회원 탈퇴
  * @returns { json } response
  */

@@ -34,6 +34,7 @@ class UserService {
       fullName,
       email,
       password: hashedPassword,
+      passwordUpdatedAt: new Date(),
       phoneNumber,
       address,
       role,
@@ -90,7 +91,49 @@ class UserService {
     }
     const token = jwt.sign({ userId: user._id, role: user.role }, secretKey);
 
-    return { token, isAdmin };
+    //-----여기부터 휴면계정,비밀번호변경권고 로직들
+
+    const logoutTime = user.loggedOutAt.getTime();
+    const updatedAt = user.passwordUpdatedAt.getTime();
+    const currentTime = Date.now();
+    const miliSeconds = currentTime - updatedAt;
+    const seconds = Math.floor(miliSeconds / 1000);
+    const msg = `비밀번호 변경 한지 ${Math.floor(seconds / 60)}분 ${
+      seconds % 60
+    }초 지났습니다.`;
+    const isPasswordUpdateNeeded = {
+      value: false,
+      msg,
+    };
+    //어드민은 패스워드 변경 권고를 안해줌
+    if (user.role != 'admin') {
+      //비밀번호 변경한지 30초가 지나면 권고하도록함. 원래는 30일이지만 시연할때 오래 기다릴수는 없으니
+      if (seconds > 30) {
+        isPasswordUpdateNeeded.value = true;
+      }
+    }
+
+    const isDormantAccount = {
+      value: false,
+      msg: `id ${user._id} 유저 : 로그아웃 한지 ${Math.floor(
+        (currentTime - logoutTime) / 1000,
+      )}초 지났습니다.`,
+    };
+    if (user.role == 'dormant-account') {
+      isDormantAccount.value = true;
+    }
+    if (Math.floor((currentTime - logoutTime) / 1000) < 30) {
+      isDormantAccount.value = false;
+    }
+    //로그인 성공시 유저스키마의 loggedIn 상태를 true로 바꿔줌
+    await this.userModel.update({
+      userId: user._id,
+      update: { loggedIn: true },
+    });
+
+    //-----여기까지 휴면계정,비밀번호변경권고 로직들
+
+    return { token, isAdmin, isPasswordUpdateNeeded, isDormantAccount };
   }
 
   // 사용자 목록을 받음.
@@ -121,12 +164,10 @@ class UserService {
     }
     // 비밀번호 일치 여부 확인
     const correctPasswordHash = user.password;
-    console.log('here2', typeof currentPassword);
     const isPasswordCorrect = await bcrypt.compare(
       currentPassword,
       correctPasswordHash,
     );
-    console.log('here2');
     if (!isPasswordCorrect) {
       throw new Error(
         '현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.',
@@ -138,6 +179,8 @@ class UserService {
     if (password) {
       const newPasswordHash = await bcrypt.hash(password, 10);
       toUpdate.password = newPasswordHash;
+      //비밀번호 변경하는 경우 비밀번호 변경 날짜 기입
+      toUpdate.passwordUpdatedAt = new Date();
     }
 
     // 업데이트 진행
@@ -156,13 +199,14 @@ class UserService {
     if (!user) {
       throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
     }
-    // 이제, 정보 수정을 위해 사용자가 입력한 비밀번호가 올바른 값인지 확인해야 함
-    // 이제 드디어 업데이트 시작
-    // 비밀번호도 변경하는 경우에는, 회원가입 때처럼 해쉬화 해주어야 함.
+
+    // 비밀번호 변경시, 회원가입 때처럼 해쉬화 해주어야 함.
     const { password } = toUpdate;
     if (password) {
       const newPasswordHash = await bcrypt.hash(password, 10);
       toUpdate.password = newPasswordHash;
+      //비밀번호 변경시 비밀번호 변경 날짜 기입
+      toUpdate.passwordUpdatedAt = new Date();
     }
     // 업데이트 진행
     user = await this.userModel.update({
@@ -181,6 +225,42 @@ class UserService {
     // 업데이트 진행
     user = await this.userModel.delete(userId);
     return user;
+  }
+  async setLogoutTime(userId) {
+    const timestamp = new Date();
+    const user = await this.userModel.update({
+      userId,
+      update: {
+        loggedOutAt: timestamp,
+        loggedIn: false,
+      },
+    });
+    return user;
+  }
+
+  async dormantAccountCheck() {
+    const users = await this.userModel.findAll();
+    for (const user of users) {
+      //만약 접속중이 아니라면 마지막 로그아웃 시간을 체크하여 휴면계정으로 돌림
+      if (!user.loggedIn) {
+        //어드민은 휴면계정으로 전환 안함 그리고 이미 휴면 계정인것은 체크안함
+        if (user.role != 'admin' && user.role != 'dormant-account') {
+          const logoutTime = user.loggedOutAt.getTime();
+          const currentTime = Date.now();
+          const miliSeconds = currentTime - logoutTime;
+          const seconds = Math.floor(miliSeconds / 1000);
+          const msg = `id ${user._id} 유저 : 로그아웃 한지 ${seconds}초 지났습니다.`;
+          //로그아웃한지 30초가 지나면 휴면 계정으로 전환. 원래는 몇달이겠지만 시연할때 오래 기다릴수는 없으니
+          if (seconds > 30) {
+            await this.userModel.update({
+              userId: user._id,
+              update: { role: 'dormant-account' },
+            });
+            console.log(`${user.fullName} 유저 휴면계정으로 전환되었습니다.`);
+          }
+        }
+      }
+    }
   }
 }
 
