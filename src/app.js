@@ -33,7 +33,6 @@ app.use('/api', userRouter);
 app.use('/api', productRouter);
 app.use('/api', categoryRouter);
 app.use('/api', orderRouter);
-app.use('/api', cartRouter);
 app.use('/api', searchRouter);
 app.use('/api', basketRouter);
 app.use('/api', sendMailRouter);
