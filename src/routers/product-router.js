@@ -3,12 +3,14 @@ import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { isAdmin, loginRequired } from '../middlewares';
 import { productService } from '../services';
+import { asyncHandler } from '../utils/async-handler';
 
 const productRouter = Router();
 
 //전체 상품조회 API - GET /api/products
-productRouter.get('/products', async (req, res, next) => {
-  try {
+productRouter.get(
+  '/products',
+  asyncHandler(async (req, res) => {
     // if (Object.keys(req.query).length === 0) {
     //   //전체 상품 목록을 얻음
     //   const products = await productService.getProductlist();
@@ -55,75 +57,68 @@ productRouter.get('/products', async (req, res, next) => {
 
     res.status(200).json(products);
     // }
-  } catch (error) {
-    next(error);
-  }
-});
+  }),
+);
 
 //특정 상품 조회 API - GET /api/product/{productId}
-productRouter.get('/products/:productId', async (req, res, next) => {
-  try {
+productRouter.get(
+  '/products/:productId',
+  asyncHandler(async (req, res) => {
     const { productId } = req.params;
     const product = await productService.getProductByProductId(productId);
     res.status(200).json(product);
-  } catch (error) {
-    next(error);
-  }
-});
+  }),
+);
 
 //상품 추가 API - /api/product
 productRouter.post(
   '/admin/products',
   loginRequired,
   isAdmin,
-  async (req, res, next) => {
-    try {
-      // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
-      // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
-      if (is.emptyObject(req.body)) {
-        throw new Error(
-          'headers의 Content-Type을 application/json으로 설정해주세요',
-        );
-      }
-
-      // req (request)의 body 에서 데이터 가져오기
-      const {
-        title,
-        sellerId,
-        categoryId,
-        manufacturer,
-        shortDescription,
-        detailDescription,
-        imageKey,
-        inventory,
-        price,
-        searchKeywords,
-        isRecommended,
-        discountPercent,
-      } = req.body;
-
-      const newProduct = await productService.addProduct({
-        title,
-        sellerId,
-        categoryId,
-        manufacturer,
-        shortDescription,
-        detailDescription,
-        imageKey,
-        inventory,
-        price,
-        searchKeywords,
-        isRecommended,
-        discountPercent,
-      });
-
-      // 추가된 상품의 db 데이터를 프론트에 다시 보내줌
-      // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
-      res.status(201).json(newProduct);
-    } catch (error) {
-      next(error);
+  asyncHandler(async (req, res) => {
+    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        'headers의 Content-Type을 application/json으로 설정해주세요',
+      );
     }
-  },
+
+    // req (request)의 body 에서 데이터 가져오기
+    const {
+      title,
+      sellerId,
+      categoryId,
+      manufacturer,
+      shortDescription,
+      detailDescription,
+      imageKey,
+      inventory,
+      price,
+      searchKeywords,
+      isRecommended,
+      discountPercent,
+    } = req.body;
+
+    const newProduct = await productService.addProduct({
+      title,
+      sellerId,
+      categoryId,
+      manufacturer,
+      shortDescription,
+      detailDescription,
+      imageKey,
+      inventory,
+      price,
+      searchKeywords,
+      isRecommended,
+      discountPercent,
+    });
+
+    // 추가된 상품의 db 데이터를 프론트에 다시 보내줌
+    // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
+    res.status(201).json(newProduct);
+  }),
 );
 
 //상품 수정 API - PATCH/api/product/{productId}
@@ -131,56 +126,52 @@ productRouter.patch(
   '/admin/products/:productId',
   loginRequired,
   isAdmin,
-  async (req, res, next) => {
-    try {
-      // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
-      // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
-      if (is.emptyObject(req.body)) {
-        throw new Error(
-          'headers의 Content-Type을 application/json으로 설정해주세요',
-        );
-      }
-      const productId = req.params.productId;
-      const {
-        title,
-        sellerId,
-        categoryId,
-        manufacturer,
-        shortDescription,
-        detailDescription,
-        imageKey,
-        inventory,
-        price,
-        searchKeywords,
-        isRecommended,
-        discountPercent,
-      } = req.body;
-
-      // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
-      // 보내주었다면, 업데이트용 객체에 삽입함.
-      const toUpdate = {
-        ...(title && { title }),
-        ...(sellerId && { sellerId }),
-        ...(categoryId && { categoryId }),
-        ...(manufacturer && { manufacturer }),
-        ...(shortDescription && { shortDescription }),
-        ...(detailDescription && { detailDescription }),
-        ...(imageKey && { imageKey }),
-        ...(inventory && { inventory }),
-        ...(price && { price }),
-        ...(searchKeywords && { searchKeywords }),
-        ...(isRecommended && { isRecommended }),
-        ...(discountPercent && { discountPercent }),
-      };
-      const updatedProduct = await productService.updateProduct(
-        productId,
-        toUpdate,
+  asyncHandler(async (req, res) => {
+    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        'headers의 Content-Type을 application/json으로 설정해주세요',
       );
-      res.status(200).json(updatedProduct);
-    } catch (error) {
-      next(error);
     }
-  },
+    const productId = req.params.productId;
+    const {
+      title,
+      sellerId,
+      categoryId,
+      manufacturer,
+      shortDescription,
+      detailDescription,
+      imageKey,
+      inventory,
+      price,
+      searchKeywords,
+      isRecommended,
+      discountPercent,
+    } = req.body;
+
+    // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
+    // 보내주었다면, 업데이트용 객체에 삽입함.
+    const toUpdate = {
+      ...(title && { title }),
+      ...(sellerId && { sellerId }),
+      ...(categoryId && { categoryId }),
+      ...(manufacturer && { manufacturer }),
+      ...(shortDescription && { shortDescription }),
+      ...(detailDescription && { detailDescription }),
+      ...(imageKey && { imageKey }),
+      ...(inventory && { inventory }),
+      ...(price && { price }),
+      ...(searchKeywords && { searchKeywords }),
+      ...(isRecommended && { isRecommended }),
+      ...(discountPercent && { discountPercent }),
+    };
+    const updatedProduct = await productService.updateProduct(
+      productId,
+      toUpdate,
+    );
+    res.status(200).json(updatedProduct);
+  }),
 );
 
 //상품 삭제 API - DELETE /api/product/{productId}
@@ -188,15 +179,11 @@ productRouter.delete(
   '/admin/products/:productId',
   loginRequired,
   isAdmin,
-  async (req, res, next) => {
-    try {
-      const productId = req.params.productId;
-      const deletedProduct = await productService.deleteProduct(productId);
-      res.status(200).json(deletedProduct);
-    } catch (error) {
-      next(error);
-    }
-  },
+  asyncHandler(async (req, res) => {
+    const productId = req.params.productId;
+    const deletedProduct = await productService.deleteProduct(productId);
+    res.status(200).json(deletedProduct);
+  }),
 );
 
 export { productRouter };
