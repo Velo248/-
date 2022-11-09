@@ -27,8 +27,8 @@ const getAllItems = async () => {
   <p class="detail-producer">${data.detailDescription}</p>
   <div class="detail-price">${data.price.toLocaleString('ko-KR')} 원</div>
   <div>
-    <label class="blind" for="count">수량</label>
-    <input id="count" class="detail-count" type="number" value="1" min="1" />
+    <label class="blind" for="quantity">수량</label>
+    <input id="quantity" class="detail-quantity" type="number" value="1" min="1" />
   </div>
   <div class="button_wrap">
     <button class="bg-pink btn-m-box" onclick="getBasket('${
@@ -39,21 +39,21 @@ const getAllItems = async () => {
   $productDetail.innerHTML = `${products}`;
 };
 
-const getBasket = (itemId) => {
-  let count = parseInt(document.querySelector('.detail-count').value);
+const getBasket = (productId) => {
+  let quantity = parseInt(document.querySelector('.detail-quantity').value);
   let items = JSON.parse(localStorage.getItem('basket'))
     ? JSON.parse(localStorage.getItem('basket'))
     : [];
 
   if (items.length !== 0) {
     for (let i = 0; i < items.length; i++) {
-      if (items[i].itemId == itemId && items[i].count == count) {
+      if (items[i].productId == productId && items[i].quantity == quantity) {
         break;
-      } else if (items[i].itemId == itemId) {
-        items[i].count = count;
+      } else if (items[i].productId == productId) {
+        items[i].quantity = quantity;
         break;
-      } else if (items[i].itemId !== itemId && i == items.length - 1) {
-        items.push({ itemId, count });
+      } else if (items[i].productId !== productId && i == items.length - 1) {
+        items.push({ productId, quantity });
         break;
       }
     }
@@ -65,7 +65,7 @@ const getBasket = (itemId) => {
       location.href = '/basket';
     }
   } else {
-    let items = [{ itemId, count }];
+    let items = [{ productId, quantity }];
     localStorage.setItem('basket', JSON.stringify(items));
 
     alert('상품을 장바구니에 담았습니다');
