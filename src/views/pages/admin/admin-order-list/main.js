@@ -45,6 +45,7 @@ const orderFiltering = async (target) => {
   await pageRender(userOrder);
 };
 
+//이벤트 함수
 const clickEventMap = {
   back_admin_main_bnt: () => (location.href = '/admin'),
   all_order_list_bnt: async () => await pageRender(),
@@ -55,6 +56,7 @@ const submitEventMap = {
   filter_form: orderFiltering,
 };
 
+//이벤트 리스너
 $admin_order_wapper.addEventListener('click', (e) => {
   if (!clickEventMap[e.target.className]) return;
   clickEventMap[e.target.className](e.target);
@@ -94,5 +96,20 @@ const pageRender = async (filter) => {
 };
 
 window.addEventListener('DOMContentLoaded', async () => {
+  if (sessionStorage.getItem('filter_user')) {
+    const userId = sessionStorage.getItem('filter_user');
+    sessionStorage.removeItem('filter_user');
+
+    const initFilterOrder = await adminService.getUserOrdersByUserId(userId);
+
+    initFilterOrder.orders.length === 0
+      ? (async () => {
+          alert('검색한 유저의 주문정보가 없습니다.');
+          await pageRender();
+        })()
+      : await pageRender(initFilterOrder);
+    return;
+  }
+
   await pageRender();
 });
