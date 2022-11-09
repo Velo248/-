@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>등록</title>
     <link rel="stylesheet" href="/public/css/style.css" />
-    <link rel="stylesheet" href="./custom.css" />
     <script src="/public/scripts/layout.js" defer></script>
     <script src="./main.js" defer></script>
   </head>
@@ -18,7 +17,7 @@
         <form action="">
           <div>
             <label>Email</label>
-            <input type="email" placeholder="abcde@email.com" />
+            <input type="email" class="email" placeholder="abcde@email.com" />
           </div>
           <div>
             <label>Name</label>
@@ -65,8 +64,12 @@
           </div>
 
           <div>
-            <button class="btn-submit full bg-darkgreen">가입</button>
-            <button class="btn-cancle full bg-deepgray">취소</button>
+            <button type="button" class="btn-submit full bg-darkgreen">
+              가입
+            </button>
+            <button type="button" class="btn-cancle full bg-deepgray">
+              취소
+            </button>
           </div>
         </form>
       </div>
