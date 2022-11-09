@@ -25,13 +25,15 @@ const getAllItems = async () => {
   <h3 class="detail-title">${data.title}</h3>
 
   <p class="detail-producer">${data.detailDescription}</p>
-  <div class="detail-price">${data.price} 원</div>
+  <div class="detail-price">${data.price.toLocaleString('ko-KR')} 원</div>
   <div>
     <label class="blind" for="count">수량</label>
     <input id="count" class="detail-count" type="number" value="1" min="1" />
   </div>
   <div class="button_wrap">
-    <button class="bg-pink btn-m-box" onclick="getBasket('${data._id}')">장바구니 담기</button>
+    <button class="bg-pink btn-m-box" onclick="getBasket('${
+      data._id
+    }')">장바구니 담기</button>
   </div>`;
 
   $productDetail.innerHTML = `${products}`;
