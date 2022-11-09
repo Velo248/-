@@ -1,32 +1,13 @@
-/* @import './common.css'; */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-header {
-  height: 5vh;
-  background-color: yellow;
-}
-
-.admin_product_wapper {
-  height: 95vh;
-  background-color: bisque;
-}
-
 .admin_product_header {
-  text-align: center;
-}
-.admin_product_header > h1 {
-  display: inline;
+  max-width: 95%;
+  margin: 0 auto;
 }
 
-.admin_product_workspace {
-  background-color: white;
-  margin: 1.875rem 5%;
-  height: 85%;
+h2 {
+  margin: 2rem 0;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
 }
 
 .product_list_name,
@@ -35,10 +16,62 @@ header {
   grid-template-columns: repeat(6, 1fr);
 }
 
-.product_list_name > div > span {
-  font-size: 1.5rem;
+button {
+  display: inline-block;
+  background-color: var(--darkgray);
+  color: var(--white);
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
 }
 
-.create_product_bnt {
-  margin-left: 90%;
+button.create_product_bnt {
+  display: inline-block;
+  color: var(--white);
+  background-color: var(--darkgray);
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
+}
+
+.product_list_name > div {
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 1.2rem;
+}
+
+button.back_admin_main_bnt {
+  display: block;
+  padding: 1rem 6rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  background-color: var(--darkgray);
+  width: 95%;
+  font-size: 1.6rem;
+  margin: 0 auto;
+}
+
+.admin_product_workspace {
+  height: 40rem;
+  overflow-y: hidden;
+}
+
+.products {
+  overflow-y: auto;
+  height: 33rem;
+}
+
+.product_item {
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+.product_item > div:nth-of-type(3) {
+  width: 135px;
+}
+
+.product_item > div:nth-of-type(3) span {
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
