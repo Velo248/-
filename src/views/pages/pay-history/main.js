@@ -1,14 +1,4 @@
-const getOrders = async () => {
-  const { orders } = await (
-    await fetch('/api/orders', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-      },
-    })
-  ).json();
-  return orders;
-};
+import orderService from '/public/scripts/orderService.js';
 
 const createHistoryDiv = ({ _id, summaryTitle, totalPrice, status }) => {
   const historyDetail = document.createElement('div');
@@ -33,7 +23,7 @@ const init = async () => {
   const paymentHistoryBody = document.querySelector('.payment_history_body');
 
   paymentHistoryBody.innerHTML = '';
-  const orders = await getOrders();
+  const { orders } = await orderService.getOrdersByCurrentUser();
   orders.forEach((order) => {
     paymentHistoryBody.appendChild(createHistoryDiv(order));
   });

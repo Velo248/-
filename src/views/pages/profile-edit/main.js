@@ -1,45 +1,7 @@
 import userService from '/public/scripts/userService.js';
-import orderService from '/public/scripts/orderService.js';
-
-const getCurrentUser = async () => {
-  return await (
-    await fetch(`/api/users`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-      },
-    })
-  ).json();
-};
-
-const signOutUser = async () => {
-  return await (
-    await fetch(`/api/users`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-      },
-    })
-  ).json();
-};
-
-const updateUpser = async (toUpdateObj) => {
-  return await (
-    await fetch(`/api/users`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-      },
-      body: JSON.stringify(toUpdateObj),
-    })
-  ).json();
-};
 
 const createUserSection = ({ fullName, email, phoneNumber }) => {
   const wrapper = document.createElement('div');
-  wrapper.className = '';
   wrapper.innerHTML = `
         <div>
           <label>사용자명</label>
@@ -66,7 +28,7 @@ const signOutEventHandler = async (e) => {
   e.preventDefault();
   e.target.disabled = true;
   if (confirm('정말 탈퇴하시겠습니까?')) {
-    const response = await signOutUser();
+    const response = await userService.deleteUser();
     if (response.acknowledged) {
       alert('탈퇴가 완료되었습니다.');
       sessionStorage.removeItem('token');
@@ -95,7 +57,9 @@ const profileEditSubmitEventHandler = async (e) => {
     currentPassword: currentPasswordInput.value,
   };
 
-  const response = await updateUpser(toUpdateObj);
+  console.log(toUpdateObj);
+
+  const response = await userService.updateUserInformation(toUpdateObj);
   if (response._id) {
     alert('수정이 완료되었습니다');
     location.href = '/profile';
@@ -103,7 +67,7 @@ const profileEditSubmitEventHandler = async (e) => {
 };
 
 const init = async () => {
-  const user = await getCurrentUser();
+  const user = await userService.getCurrentUser();
 
   const profileEditForm = document.querySelector('.profile_edit');
   profileEditForm.addEventListener('submit', profileEditSubmitEventHandler);

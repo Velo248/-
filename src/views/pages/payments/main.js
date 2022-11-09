@@ -1,22 +1,10 @@
-import { decodeJwt } from '/public/scripts/common.js';
+import userService from '/public/scripts/userService.js';
+import orderService from '/public/scripts/orderService.js';
+import { getLocalStorageItem, parsePrice } from '/public/scritps/util.js';
 
 const getOrderList = () => {
-  return JSON.parse(localStorage.getItem('orderList'));
+  return getLocalStorageItem('orderList');
 };
-
-const getUser = async () => {
-  const user = await (
-    await fetch('/api/user', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-      },
-    })
-  ).json();
-  return user;
-};
-
-const parsePrice = (str) => parseInt(str.replace(/,/g, ''), 10);
 
 const createOrderItem = (product, quantity) => {
   const itemWrapper = document.createElement('div');
@@ -83,6 +71,41 @@ const getTotalPrice = () => {
   return totalPrice.toLocaleString('ko-kr');
 };
 
+const getSelectedPaymentType = () => {
+  const paymentTypes = document.querySelectorAll('.payment_type');
+  return [...paymentTypes].filter((radio) => radio.checked)[0];
+};
+
+const paymentBtnEventHandler = (orderObj) => async (e) => {
+  e.target.disabled = true;
+  const selectedPaymentType = getSelectedPaymentType();
+  if (
+    !orderObj.addressDetail ||
+    !orderObj.receiverPhoneNumber ||
+    !orderObj.receiverName
+  ) {
+    alert('배송 정보를 모두 입력해 주세요');
+    e.target.disabled = false;
+    return;
+  } else if (!selectedPaymentType) {
+    alert('결제 방법을 선택해 주세요');
+    e.target.disabled = false;
+    return;
+  } else {
+    if (confirm('선택한 방법으로 결제를 진행하시겠습니까?')) {
+      const response = await orderService.createOrder(orderObj);
+
+      if (response.newOrder) {
+        alert('결제가 완료되었습니다. 결제 내역 페이지로 이동합니다');
+        localStorage.removeItem('orderList');
+        location.href = '/pay-history';
+      }
+    }
+  }
+  e.target.disabled = false;
+  return;
+};
+
 const init = async () => {
   const loginToken = sessionStorage.getItem('token') ?? true;
   if (!loginToken) {
@@ -94,14 +117,14 @@ const init = async () => {
     alert('주문할 내역이 없습니다');
     location.href = '/';
   }
-  const payments = document.querySelector('.payments');
+
   const orders = document.querySelector('.orders');
   const userInfo = document.querySelector('.user_info');
   orders.innerHTML = '';
   userInfo.innerHTML = '';
 
   const orderTotalPrice = document.querySelector('.order_total_price');
-  const user = await getUser();
+  const user = await userService.getCurrentUser();
 
   paintOrderItems(orders, orderList);
   paintUserSection(userInfo, user);
@@ -144,44 +167,8 @@ const init = async () => {
     orderObj.items.push({ itemId: productId, count: quantity });
   });
 
-  const paymentTypes = document.querySelectorAll('.payment_type');
   const paymentBtn = document.querySelector('.payment_button');
-  paymentBtn.addEventListener('click', async (e) => {
-    e.target.disabled = true;
-    const selectedPaymentType = [...paymentTypes].filter(
-      (radio) => radio.checked,
-    );
-    if (!addressDetail.value || !receiverPhone.value || !receiverName.value) {
-      alert('배송지 정보를 모두 입력해 주세요');
-      e.target.disabled = false;
-      return;
-    } else if (selectedPaymentType.length < 1) {
-      alert('결제 방법을 선택해 주세요');
-      e.target.disabled = false;
-      return;
-    } else {
-      if (confirm('선택한 방법으로 결제를 진행하시겠습니까?')) {
-        const response = await (
-          await fetch(`/api/orders`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${loginToken}`,
-            },
-            body: JSON.stringify(orderObj),
-          })
-        ).json();
-        if (response.ok) {
-          alert('결제가 완료되었습니다 결제 내역 페이지로 이동합니다.');
-          localStorage.removeItem('orderList');
-          location.href = '/pay-history';
-        }
-      } else {
-        e.target.disabled = false;
-        return;
-      }
-    }
-  });
+  paymentBtn.addEventListener('click', paymentBtnEventHandler(orderObj));
 };
 
 document.addEventListener('DOMContentLoaded', init);
