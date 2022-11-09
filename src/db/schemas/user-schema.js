@@ -15,6 +15,17 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    passwordUpdatedAt: {
+      type: Date,
+    },
+    loggedOutAt: {
+      type: Date,
+      default: new Date(),
+    },
+    loggedIn: {
+      type: Boolean,
+      default: false,
+    },
     phoneNumber: {
       type: String,
       required: false,

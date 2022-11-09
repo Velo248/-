@@ -28,7 +28,7 @@ async function dataPull() {
 
   const userIdList = [];
   for (const data in userMockData) {
-    const { _id } = await userModel.create(userMockData[data]);
+    const { _id } = await userModel.createWithTimestamp(userMockData[data]);
     userIdList.push(_id);
   }
   const newCategories = [];

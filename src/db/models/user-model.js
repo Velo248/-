@@ -43,6 +43,11 @@ export class UserModel {
     const user = await User.deleteOne({ _id: userId });
     return user;
   }
+  async createWithTimestamp(userInfo) {
+    userInfo.passwordUpdatedAt = new Date();
+    const createdNewUser = await User.create(userInfo);
+    return createdNewUser;
+  }
 }
 
 const userModel = new UserModel();

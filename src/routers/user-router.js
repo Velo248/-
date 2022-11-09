@@ -66,6 +66,19 @@ userRouter.post('/login', async function (req, res, next) {
   }
 });
 
+//로그아웃API 로그아웃 시간을 db에 남겨야함
+userRouter.post('/logout', loginRequired, async function (req, res, next) {
+  try {
+    const userId = req.currentUserId;
+    const user = await userService.setLogoutTime(userId);
+    //201 상태코드로 로그아웃시간기록이 잘 되었음을 알려줌,
+    //user json 데이터는 필요 없을것이지만 그냥 보내줌
+    res.status(201).json(user);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // 전체 유저 목록을 가져옴 (배열 형태임)
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
 userRouter.get(
