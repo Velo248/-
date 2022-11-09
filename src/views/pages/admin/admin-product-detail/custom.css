@@ -1,51 +1,53 @@
-/* @import "./common.css"; */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-header {
-  height: 5vh;
-  background-color: yellow;
-}
-
-.product_detail_wapper {
-  height: 95vh;
-  background-color: bisque;
+h2 {
+  margin: 2rem 0;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
 }
 
 .product_header {
   text-align: center;
+  max-width: 95%;
+  margin: 0 auto;
 }
 .product_header > h1 {
   display: inline;
 }
 
 .workspace {
-  background-color: white;
-  margin: 1.875rem 5%;
-  height: 85%;
+  height: 55rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
 .edit_form,
 .product_detail_name {
-  display: grid;
+  /* display: grid; */
   height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.edit_form > div,
+.product_detail_name > div {
+  flex: 1;
+  display: flex;
+  align-items: center;
 }
 
 .edit_form > div > input {
   width: 80%;
 }
 
-.product_detail_name {
-  text-align: right;
-  margin-right: 3%;
+button.product_edit_bnt {
+  display: inline-block;
+  color: var(--white);
+  background-color: var(--darkgray);
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
 }
 
-.product_edit_bnt {
-  margin-left: 90%;
+.flex-justify-between {
+  width: 95%;
+  margin: 0 auto;
 }

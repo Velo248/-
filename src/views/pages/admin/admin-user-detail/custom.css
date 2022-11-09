@@ -1,47 +1,52 @@
-/* @import "./common.css"; */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-header {
-  height: 5vh;
-  background-color: yellow;
-}
-
-.admin_user_wapper {
-  height: 95vh;
-  background-color: bisque;
-}
-
-.admin_user_header {
+.admin_user_header h2 {
+  margin: 2rem 0 4rem 0;
   text-align: center;
-}
-.admin_user_header > h1 {
-  display: inline;
+  font-size: 4rem;
+  font-weight: bold;
 }
 
-.workspace_container {
-  background-color: white;
-  margin: 1.875rem 5%;
-  height: 85%;
+.admin_user_wapper .content-box {
+  max-width: 100%;
+  margin: 0 auto;
 }
-.workspace_container > button {
-  margin-left: 50%;
+
+.admin_user_wapper .content-box > div {
+  width: 35rem;
+  padding: 3rem 3.2rem;
 }
+
 .workspace {
+  font-size: 1.4rem;
   display: grid;
-  height: 90%;
+  height: 25rem;
   grid-template-columns: 1fr 1fr;
-}
-.list_name {
-  text-align: center;
 }
 
 .list_name,
 .user_dateil {
   display: grid;
   grid-template-rows: auto;
+}
+
+.user_order_bnt {
+  display: inline-block;
+  color: var(--white);
+  background-color: var(--darkgray);
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
+}
+
+.back_admin_main_bnt {
+  display: block;
+  padding: 1rem 6rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  background-color: var(--dark);
+  width: 100%;
+  font-size: 1.6rem;
+  margin: 0 auto;
+}
+
+.center button {
+  width: 100%;
 }

@@ -4,28 +4,29 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link rel="stylesheet" href="../../../public/css/style.css" /> -->
+    <title>관리자 | 유저 목록</title>
     <link rel="stylesheet" href="custom.css" />
-    <title>Document</title>
+    <link rel="stylesheet" href="/public/css/style.css" />
+    <script src="/public/scripts/layout.js" defer></script>
   </head>
   <body>
-    <header>
-      <nav>header</nav>
-    </header>
-    <main>
+    <header></header>
+    <main class="flex-all-center">
       <div class="admin_user_wapper">
         <div class="admin_user_header">
-          <h1>유저 목록</h1>
-          <button class="back_admin_main_bnt">전체 메뉴로</button>
+          <h2>유저 목록</h2>
         </div>
-        <div class="workspace">
-          <div class="list_name">
-            <div><span>이름</span></div>
-            <div><span>이메일</span></div>
-            <div><span>상세</span></div>
+        <div class="content-box">
+          <div class="workspace">
+            <div class="list_name">
+              <div><span>이름</span></div>
+              <div><span>이메일</span></div>
+              <div><span> </span></div>
+            </div>
+            <div class="user_list"></div>
           </div>
-          <div class="user_list"></div>
         </div>
+        <button class="back_admin_main_bnt">전체 메뉴로</button>
       </div>
     </main>
     <footer></footer>

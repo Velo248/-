@@ -43,6 +43,18 @@ input[readonly] {
   border: 1px solid #ccc;
 }
 
+button {
+  opacity: 0.92;
+}
+
+button:hover {
+  opacity: 1;
+}
+
+select:focus {
+  outline: none;
+}
+
 a:hover {
   text-decoration: underline;
   opacity: 0.8;
@@ -50,14 +62,6 @@ a:hover {
 
 h1 a:hover {
   text-decoration: none;
-  opacity: 1;
-}
-
-button {
-  opacity: 0.92;
-}
-
-button:hover {
   opacity: 1;
 }
 
@@ -275,11 +279,11 @@ h2 span.hightlight::after {
 
 /* text-align */
 .left {
-  text-align: right;
+  text-align: left;
 }
 
-.middle {
-  text-align: right;
+.center {
+  text-align: center;
 }
 
 .right {
