@@ -1,8 +1,8 @@
 // const e = require('cors');
 
 const logout = () => {
-  sessionStorage.removeItem('token');
-  sessionStorage.removeItem('isAdmin');
+  localStorage.clear();
+  sessionStorage.clear();
   alert('로그아웃 되었습니다');
   headerMaker();
 };
