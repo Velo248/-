@@ -67,7 +67,6 @@ $admin_order_detail_wapper.addEventListener('click', (e) => {
 const pageRender = async () => {
   const order = await getOrder();
 
-  console.log(order.order);
   const {
     _id,
     request,
@@ -76,7 +75,6 @@ const pageRender = async () => {
     totalPrice,
     createdAt,
     updatedAt,
-    userId,
     address,
   } = order.order;
 
