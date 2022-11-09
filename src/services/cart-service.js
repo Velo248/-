@@ -15,8 +15,8 @@ class CartService {
       throw new Error(`URL의 유저id를 다시 확인해주세요`);
     }
 
-    for (const ordersheet of orderSheets) {
-      const product = await this.productModel.findById(ordersheet.productId);
+    for (const orderSheet of orderSheets) {
+      const product = await this.productModel.findById(orderSheet.productId);
       if (!product) {
         throw new Error('해당id의 상품이 존재하지 않습니다.');
       }
