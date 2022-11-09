@@ -34,7 +34,6 @@ const chkJoin = () => {
     let reg =
       /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     let regText = reg.test(data);
-    console.log(regText);
     return regText;
   };
 
@@ -46,7 +45,7 @@ const chkJoin = () => {
 
   // email 정규식 검사
   if (!isValidEmail(email.value)) {
-    alert('이메일을 올바른 형식으로 입력해주세요');
+    alert('이메일을 올바른 형식으로 입력해주세요. (ex) abc@gmail.com');
     email.focus();
     return false;
   }
@@ -68,7 +67,7 @@ const chkJoin = () => {
 
   // 비밀번호 정규식 검사
   if (!isValidPW(password.value)) {
-    alert('하나 이상 숫자와 영문를 포함하여 6자 이상 입력하세요');
+    alert('영문과 하나 이상의 숫자를 포함하여 6자 이상 입력하세요');
     password.value = '';
     password2.value = '';
     password.focus();
@@ -78,6 +77,7 @@ const chkJoin = () => {
   // 개인정보동의 했는지 검사
   if (!chkPolicy[0].checked) {
     alert('개인정보 제공에 동의하지 않으면 회원가입이 불가능합니다.');
+    return false;
   }
 
   sendJoin();
