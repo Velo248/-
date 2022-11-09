@@ -27,7 +27,8 @@ export class UserModel {
   async update({ userId, update }) {
     const filter = { _id: userId };
     const option = { returnOriginal: false };
-
+    console.log(filter);
+    console.log(update);
     const updatedUser = await User.findOneAndUpdate(filter, update, option);
     return updatedUser;
   }
@@ -42,6 +43,13 @@ export class UserModel {
   async delete(userId) {
     const user = await User.deleteOne({ _id: userId });
     return user;
+  }
+  //리펙토링시 결정
+  async find(query, projection, sort = { id: 1 }, options = { lean: true }) {
+    return User.find(query, projection, options).sort(sort).exec();
+  }
+  async findOne(query, projection, options = { lean: true }) {
+    return await User.findOne(query, projection, options).exec();
   }
   async createWithTimestamp(userInfo) {
     userInfo.passwordUpdatedAt = new Date();
