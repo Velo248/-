@@ -6,17 +6,6 @@ const $list = document.querySelector('.list');
 
 const userMap = {};
 
-const getOrders = async () => {
-  const orders = await adminService.getAllOrders();
-  sessionStorage.removeItem('filter_user');
-  return orders;
-};
-
-const getUsers = async () => {
-  const users = await adminService.getAllUser();
-  return users;
-};
-
 const setUserName = (orders, users) => {
   users.forEach((user) => {
     userMap[user._id] = user.fullName;
@@ -28,9 +17,61 @@ const setUserName = (orders, users) => {
   return orders;
 };
 
-const pageRender = async () => {
-  const ordersResponse = await getOrders();
-  const usersResponse = await getUsers();
+const userNameMatch = (userName) => {
+  return Object.keys(userMap).find((key) => userMap[key] === userName);
+};
+
+const orderDatail = (target) => {
+  const orderId = target.parentNode.parentNode.getAttribute('id');
+  sessionStorage.setItem('o_id', orderId);
+  location.href = '/admin/order/detail';
+};
+
+const orderFiltering = async (target) => {
+  const formData = new FormData(target);
+  const formValue = formData.get('user_name');
+
+  if (!formValue) return;
+
+  const userId = userNameMatch(formValue);
+
+  if (userId === undefined) {
+    alert('검색한 유저의 주문정보가 없습니다.');
+    await pageRender();
+    return;
+  }
+
+  const userOrder = await adminService.getUserOrdersByUserId(userId);
+  await pageRender(userOrder);
+};
+
+const clickEventMap = {
+  back_admin_main_bnt: () => (location.href = '/admin'),
+  all_order_list_bnt: async () => await pageRender(),
+  order_detail_bnt: orderDatail,
+};
+
+const submitEventMap = {
+  filter_form: orderFiltering,
+};
+
+$admin_order_wapper.addEventListener('click', (e) => {
+  if (!clickEventMap[e.target.className]) return;
+  clickEventMap[e.target.className](e.target);
+});
+
+$admin_order_wapper.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  if (!submitEventMap[e.target.className]) return;
+  submitEventMap[e.target.className](e.target);
+});
+
+const pageRender = async (filter) => {
+  $list.innerHTML = '';
+
+  const ordersResponse = filter ? filter : await adminService.getAllOrders();
+  const usersResponse = await adminService.getAllUser();
   const orders = setUserName(ordersResponse, usersResponse);
 
   orders.orders.forEach((order) => {
@@ -51,54 +92,6 @@ const pageRender = async () => {
     elementCreater($list, temp_html);
   });
 };
-
-const orderDatail = (target) => {
-  const orderId = target.parentNode.parentNode.getAttribute('id');
-  sessionStorage.setItem('o_id', orderId);
-  location.href = '/admin/order/detail';
-};
-
-const orderFiltering = async (target) => {
-  const formData = new FormData(target);
-
-  const userId = Object.keys(userMap).find(
-    (key) => userMap[key] === formData.get('user_name'),
-  );
-  sessionStorage.setItem('filter_user', userId);
-  location.href = '/admin/user/order';
-};
-
-const clickEventMap = {
-  back_admin_main_bnt() {
-    location.href = '/admin';
-  },
-  async all_order_list_bnt() {
-    sessionStorage.removeItem('filter_user');
-    location.href = '/admin/order/list';
-  },
-  order_detail_bnt(e) {
-    orderDatail(e);
-  },
-};
-
-const submitEventMap = {
-  filter_form(e) {
-    orderFiltering(e);
-  },
-};
-
-$admin_order_wapper.addEventListener('click', (e) => {
-  if (!clickEventMap[e.target.className]) return;
-
-  clickEventMap[e.target.className](e.target);
-});
-
-$admin_order_wapper.addEventListener('submit', (e) => {
-  e.preventDefault();
-  if (!submitEventMap[e.target.className]) return;
-
-  submitEventMap[e.target.className](e.target);
-});
 
 window.addEventListener('DOMContentLoaded', async () => {
   await pageRender();
