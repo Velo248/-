@@ -105,11 +105,12 @@ userService.setUserInformation = async (obj) => {
  * @returns { object } parsed json object
  */
 userService.updateUserInformation = async (obj) => {
-  const { currentPassword, address, phoneNumber } = obj;
+  const { currentPassword, address, phoneNumber, password } = obj;
   const data = {
     currentPassword,
     address,
     phoneNumber,
+    password,
   };
 
   const reqObj = {

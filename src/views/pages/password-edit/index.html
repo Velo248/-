@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>비밀번호 수정</title>
+    <link rel="stylesheet" href="/public/css/style.css" />
+    <script src="/public/scripts/layout.js" defer></script>
+  </head>
+
+  <body>
+    <header></header>
+
+    <main class="flex-column-center">
+      <form class="password_edit content-box">
+        <!-- <div class="content-box"> -->
+        <div class="wrapper">
+          <label>현재 비밀번호</label>
+          <input
+            type="password"
+            class="password"
+            placeholder="현재 비밀번호"
+            required
+          />
+          <label>새 비밀번호</label>
+          <input
+            type="password"
+            class="new_password"
+            placeholder="영문자 대소문자를 포함한 8글자 이상"
+            required
+          />
+          <label>새 비밀번호 확인</label>
+          <input
+            type="password"
+            class="new_password_confirm"
+            placeholder="영문자 대소문자를 포함한 8글자 이상"
+            required
+          />
+        </div>
+        <button type="submit" class="full bg-darkgreen">
+          비밀번호 수정 완료
+        </button>
+        <!-- </div> -->
+      </form>
+    </main>
+    <footer></footer>
+    <script src="./main.js" type="module"></script>
+  </body>
+</html>

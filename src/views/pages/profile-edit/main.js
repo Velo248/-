@@ -26,6 +26,15 @@ const createUserSection = ({ fullName, email, phoneNumber }) => {
   return wrapper;
 };
 
+const passwordEditBtnEventHandler = (e) => {
+  e.target.disabled = true;
+  if (confirm('비밀번호를 변경하시겠습니까?')) {
+    location.href = '/password-edit';
+  }
+  e.target.disabled = false;
+  return;
+};
+
 const signOutEventHandler = async (e) => {
   e.preventDefault();
   e.target.disabled = true;
@@ -79,6 +88,9 @@ const init = async () => {
 
   const signOutBtn = document.querySelector('.sign_out');
   signOutBtn.addEventListener('click', signOutEventHandler);
+
+  const passwordEditBtn = document.querySelector('.password_edit');
+  passwordEditBtn.addEventListener('click', passwordEditBtnEventHandler);
 
   const profileWrapper = document.querySelector('.profile');
   profileWrapper.innerHTML = '';
