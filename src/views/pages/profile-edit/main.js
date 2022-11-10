@@ -1,8 +1,6 @@
 import userService from '/public/scripts/userService.js';
-import {
-  loggedInOnlyPageProtector,
-  isValidPhoneNumber,
-} from '/public/scripts/common.js';
+import { loggedInOnlyPageProtector } from '/public/scripts/common.js';
+import { errorUtil } from '/public/scripts/util.js';
 
 const createUserSection = ({ fullName, email, phoneNumber }) => {
   const wrapper = document.createElement('div');
@@ -60,7 +58,7 @@ const profileEditSubmitEventHandler = async (e) => {
     phoneNumber: phoneNumberInput.value,
     currentPassword: currentPasswordInput.value,
   };
-  if (isValidPhoneNumber(toUpdateObj.phoneNumber)) {
+  if (errorUtil.isValidPhoneNumber(toUpdateObj.phoneNumber)) {
     const response = await userService.updateUserInformation(toUpdateObj);
     if (response._id) {
       alert('수정이 완료되었습니다');
