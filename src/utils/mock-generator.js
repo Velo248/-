@@ -39,7 +39,7 @@ async function dataPull() {
 
   for (const data in productMockData) {
     //랜덤배정하고싶은경우 아래코드삭제//
-    const productMockDataTitle = productMockData[data].title.split(' ');
+    const productMockDataTitle = productMockData[data].searchKeywords;
     let index = 0;
     for (const category in newCategories) {
       if (productMockDataTitle.includes(newCategories[category].title)) {
