@@ -29,17 +29,24 @@ async function renderHtml(values) {
   return result;
 }
 
-function sendMail(to) {
+function sendMail(to, data) {
   return new Promise(async (resolve, reject) => {
     try {
+      const { country, regionName, city } = data;
+      let regionInfo = '';
+      if (city) regionInfo += `${city}, `;
+      if (country) regionInfo += `${regionName}, `;
+      if (regionName) regionInfo += `${regionName}, `;
+      if (!regionInfo) regionInfo = 'Unknown IP Adress, ';
       const html = await renderHtml({
         email: to,
+        regionInfo,
       });
       const message = {
         // userTo 변수에는 이메일을 받는 사람의 이메일 주소를 적어주세요.
         from: 'gansikjoa@gmail.com',
         to: to,
-        subject: '간식조아 계정 복구',
+        subject: `간식조아 계정 복구`,
         html,
       };
 
@@ -48,7 +55,6 @@ function sendMail(to) {
           reject(err);
           return;
         }
-
         resolve(info);
       });
     } catch (error) {
