@@ -49,8 +49,12 @@ userService.login = async (email, password) => {
     bodyObj: data,
   };
 
-  const response = await customFetcher(reqObj);
-  return await response.json();
+  try {
+    const response = await customFetcher(reqObj);
+    return await response.json();
+  } catch (e) {
+    return alert(e);
+  }
 };
 
 /**
