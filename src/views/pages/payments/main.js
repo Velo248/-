@@ -11,7 +11,7 @@ const createOrderItem = (product, quantity) => {
   const itemWrapper = document.createElement('div');
   itemWrapper.className = 'flex-justify-between order';
   itemWrapper.innerHTML = `
-    <div class="img_wrap">
+    <div class="img_wrap img-s">
       <img
         src="${product.imageKey}"
         alt="${product.title}"
@@ -38,12 +38,12 @@ const paintOrderItems = (root, orderItems) => {
 
 const paintUserSection = (root, user) => {
   const template = document.createElement('div');
-  template.innerHTML = `<div>주문정보</div>
-    <div class="flex flex-row">
+  template.innerHTML = `<em>주문정보</em>
+    <div class="flex-column-center">
       <span>이름</span>
       <span class="username">${user?.fullName}</span>
     </div>
-    <div class="flex flex-row">
+    <div class="flex-column-center">
       <span>주소</span>
       <span class="postal_code">${
         user?.address?.postalCode || '정보 없음'
@@ -52,7 +52,7 @@ const paintUserSection = (root, user) => {
         user?.address?.address1 + user?.address?.address2 || '정보 없음'
       }</span>
     </div>
-    <div class="flex flex-row">
+    <div class="flex-column-center">
       <span>연락처</span>
       <span class="phone">${user.phoneNumber || '전화번호가 없습니다'}</span>
     </div>
