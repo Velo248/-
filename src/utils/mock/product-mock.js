@@ -435,7 +435,7 @@ export const productMockData = [
     shortDescription: '고양이들의 관심을 집중시키는 알록달록한 깃털',
     detailDescription:
       '펫모닝 캣피싱 플라이 토이는 30년 수출 감각과 노하우를 가진 펫모닝의 제품으로, 자체 안전성 검사를 통해 철저한 검사 과정을 거쳐 제작되며 인체에 해가 되는 이물질이 들어가지 않도록 수작업 되었습니다. 낚시대 처럼 생긴 막대기에 알록달록한 깃털과 꿩깃털이 달려있어, 흔들어주면 고양이들의 관심을 완벽하게 끌 수 있습니다. 이 제품은 사람이 놀아주는 것으로, 고양이가 혼자 갖고 놀거나 삼키지 않도록 주의 부탁드립니다.',
-    imageKey: `products/snack/toy1`,
+    imageKey: `products/toy/toy1`,
     inventory: 30,
     price: 16500,
     searchKeywords: ['고양이', '장난감', '펫모닝', '낚싯대'],
@@ -448,7 +448,7 @@ export const productMockData = [
     shortDescription: '고양이들의 관심을 집중시키는 알록달록한 깃털',
     detailDescription:
       '캣가든 데빌 스네이크 롱테일 캣토이는 진짜 벌레가 기어가는 듯한 리얼한 움직임으로 고양이들을 무아지경으로 만드는 제품입니다. 탄성이 좋은 고탄성 줄로 되어 있어 더욱 재미나게 놀 수 있습니다. 수령 후 일주일 안에 사용감이 없는 상태에서 발견된 불량은 교환, 환불 가능하나, 수령 후 일주일 경과 시 불량 적용 불가합니다.',
-    imageKey: `products/snack/toy3`,
+    imageKey: `products/toy/toy3`,
     inventory: 30,
     price: 2500,
     searchKeywords: ['고양이', '장난감', '캣가든', '낚싯대'],
@@ -461,7 +461,7 @@ export const productMockData = [
     shortDescription: '고양이의 심신을 안정시키는 캣닢 성분 사용',
     detailDescription:
       '펫모닝 캣닢 12마리 컬러 마우스는 30년 수출 감각과 노하우를 가진 펫모닝의 제품으로, 12마리가 한 세트로 구성되어 있습니다. 앙증맞은 깃털꼬리 마우스 인형 안에는 고양이의 심신을 안정시키는 캣닢이 들어있으며, 작은 사이즈의 돌이 들어있어 굴리면 잘그락 소리가 나서 고양이의 호기심을 유발합니다. 캣닢은 허브의 일종으로 고양이들의 기분을 좋게 해주므로, 운동량을 늘리거나 의기소침해 있는 고양이에게 좋습니다.',
-    imageKey: `products/snack/toy4`,
+    imageKey: `products/toy/toy4`,
     inventory: 30,
     price: 12000,
     searchKeywords: ['고양이', '장난감', '캣가든', '마우스'],
@@ -474,7 +474,7 @@ export const productMockData = [
     shortDescription: '고양이의 심신을 안정시키는 캣닢 성분 사용',
     detailDescription:
       '펫모닝 바베큐 캣닢 롱쿠션은 캣닢이 함유되어 있는 캣닢 쿠션 장난감입니다. 캣닢의 성분의 스트레스 해소, 심신 안정 및 운동량 증진 등에 도움을 주며, 발톱이 걸리지 않는 부드러운 촉감의 벨보아 원단을 사용하여 안심하고 놀이 활동을 할 수 있습니다. 또한 캣닢향을 유지하기 위해 개별 비닐 포장되어 있으며, 귀여운 바베큐 모양의 디자인으로 인테리어에도 효과적입니다.',
-    imageKey: `products/snack/toy5`,
+    imageKey: `products/toy/toy5`,
     inventory: 30,
     price: 4000,
     searchKeywords: ['고양이', '장난감', '펫모닝', '마우스'],
@@ -487,7 +487,7 @@ export const productMockData = [
     shortDescription: '고양이의 심신을 안정시키는 캣닢 성분 사용',
     detailDescription:
       '캣가든 매운탕 시리즈는 리얼한 생선, 파, 생강모양의 인형속에 고양이들이 좋아하는 캣닢이 들어있어 고양이뿐만 아니라 선물하는 반려인의 마음도 즐거워지는 장난감입니다. 부드러운 패브릭 소재의 쿠션에 캣닢이 들어있어 고양이의 흥미를 자극하며, 세탁 후 비닐봉지에 생선인형을 넣어 캣닢향이 스며들면 재사용이 가능합니다. 전체 패키지의 사이즈는 약 23.5 × 12cm이며 각각의 구성품 사이즈는 상세페이지를 참고부탁드립니다.',
-    imageKey: `products/snack/toy6`,
+    imageKey: `products/toy/toy6`,
     inventory: 30,
     price: 4000,
     searchKeywords: ['고양이', '장난감', '캣가든'],
@@ -500,7 +500,7 @@ export const productMockData = [
     shortDescription: '고양이의 심신을 안정시키는 캣닢 성분 사용',
     detailDescription:
       '스코캇 캣닢 비눗방울은 무해한 성분으로 만든 캣닢 비눗방울입니다. 반려묘의 안전을 위해 미국 EWG 그린 등급의 성분만을 사용하였으며, 6개월간 안정성 검사를 통하여 엄격한 품질확인 공정을 거쳐 엄선된 원료로만 제조하였습니다. 터지는 비눗방울에서 나는 캣닢향이 스트레스 해소 및 심신 안정 등에 도움을 주며, 파라벤, 방부제, 합성계면활성제, 인공향료 등을 첨가하지 않았습니다. 또한 동봉되어있는 캣닢가루를 하우스, 스크래쳐, 캣타워 등 다양한 공간에 활용할 수 있습니다.',
-    imageKey: `products/snack/toy6`,
+    imageKey: `products/toy/toy6`,
     inventory: 30,
     price: 14000,
     searchKeywords: ['고양이', '장난감', '스코캇'],
@@ -513,7 +513,7 @@ export const productMockData = [
     shortDescription: '고양이의 심신을 안정시키는 캣닢 성분 사용',
     detailDescription:
       '스코캇 캣닢 비눗방울은 무해한 성분으로 만든 캣닢 비눗방울입니다. 반려묘의 안전을 위해 미국 EWG 그린 등급의 성분만을 사용하였으며, 6개월간 안정성 검사를 통하여 엄격한 품질확인 공정을 거쳐 엄선된 원료로만 제조하였습니다. 터지는 비눗방울에서 나는 캣닢향이 스트레스 해소 및 심신 안정 등에 도움을 주며, 파라벤, 방부제, 합성계면활성제, 인공향료 등을 첨가하지 않았습니다. 또한 동봉되어있는 캣닢가루를 하우스, 스크래쳐, 캣타워 등 다양한 공간에 활용할 수 있습니다.',
-    imageKey: `products/snack/toy7`,
+    imageKey: `products/toy/toy7`,
     inventory: 30,
     price: 14000,
     searchKeywords: ['고양이', '장난감', '스코캇'],
@@ -526,7 +526,7 @@ export const productMockData = [
     shortDescription: '펫모닝 캣닢 멀티 컬러 폼폼볼',
     detailDescription:
       '펫모닝 캣닢 멀티 컬러 폼폼볼은 30년 수출 감각과 노하우를 가진 펫모닝의 제품으로, 알록달록 볼 안에 고양이의 심신을 안정시키는 캣닢이 들어있습니다. 캣닢은 허브의 일종으로 고양이들의 기분을 좋게 해주어, 운동량을 늘리거나 의기소침해 있는 고양이에게 좋습니다. 자체 안전성 검사를 통해 철저한 검사 과정을 거쳐 완성되었으며, 인체에 해가 되는 이물질이 들어가지 않도록 수작업으로 제작되었습니다.',
-    imageKey: `products/snack/toy8`,
+    imageKey: `products/toy/toy8`,
     inventory: 30,
     price: 2500,
     searchKeywords: ['고양이', '장난감', '펫모닝'],
@@ -539,7 +539,7 @@ export const productMockData = [
     shortDescription: '펫모닝 캣닢 멀티 컬러 폼폼볼',
     detailDescription:
       '브리더랩 스프링토이는 스프링 탄력을 이용한 반려묘 장난감입니다. 어디로 튈지로 모르는 긴장감으로 반려묘의 흥미를 유발하고, 다양한 색상으로 반려묘들의 시선을 사로잡을 수 있습니다. 또한, 운동과 놀이를 동시에 가능하게 하며, 활동량 증가로 스트레스를 해소시켜줍니다. 안전을 위해서는 놀이 시 반드시 옆에서 지켜봐 주시고, 장난감이 파손될 경우 먹지않도록 주의해주시기 바랍니다.',
-    imageKey: `products/snack/toy9`,
+    imageKey: `products/toy/toy9`,
     inventory: 30,
     price: 2000,
     searchKeywords: ['고양이', '장난감', '브리더랩'],
@@ -552,7 +552,7 @@ export const productMockData = [
     shortDescription: 'BPA FREE 소재로 안전하게 사용 가능',
     detailDescription:
       '본 상품은 개봉 시 단순 변심으로 인한 반품이 불가능하며, 상품 특성상 다소 덜거덕거리거나 흔들릴 수 있습니다. 이는 상품의 불량이 아니므로 교환 및 환불이 어려운 점 참고부탁드립니다. 하겐 캣잇 먹이 퍼즐 상품은 먹이 욕조, 피라미드 숲, 먹이 동굴, 슬로우 버블 식기, 터널, 나선형 퍼즐 등 6가지 다양한 구조로 설계되어 있는 반려동물 먹이 퍼즐입니다. 에너지 소모를 통해 분리 불안 해소에 도움을 주며, 씹지 않고 삼키는 등 빠르게 먹는 식습관 개선에도 효과적입니다. 또한 BPA FREE 소재로 안전하게 사용할 수 있으며, 초록색 부분은 분리가 가능하여 세척 및 보관이 용이합니다.',
-    imageKey: `products/snack/toy10`,
+    imageKey: `products/toy/toy10`,
     inventory: 30,
     price: 17900,
     searchKeywords: ['고양이', '장난감', '하겐'],
@@ -565,7 +565,7 @@ export const productMockData = [
     shortDescription: 'BPA FREE 소재로 안전하게 사용 가능',
     detailDescription:
       '발라당 바스락 캣터널 숨숨집 I형은 다양한 용도로 활용 가능한 캣터널입니다. 어둡고 좁은곳을 좋아하는 고양이들에게 안락한 휴식공간과 바스락거리는 소리가 청각적 호기심을 자극하여 즐거운 놀이공간을 동시에 제공합니다. 내부공간이 넉넉하고, 캣닢과 공이 한쪽에 매달려 있어 장난감처럼 가지고 놀 수 있습니다. 또한, 원터치형으로 별도의 설치방법이 필요없으며, 보관시 접어서 케이스에만 넣으면 되어 간편합니다.',
-    imageKey: `products/snack/toy11`,
+    imageKey: `products/toy/toy11`,
     inventory: 30,
     price: 9900,
     searchKeywords: ['고양이', '장난감', '발라당'],
@@ -578,7 +578,7 @@ export const productMockData = [
     shortDescription: 'BPA FREE 소재로 안전하게 사용 가능',
     detailDescription:
       '펫케어 춤추는 참새는 자동으로 움직이는 스마트 장난감 인형입니다. 리얼한 참새 모양의 디자인과 움직임으로 사냥본능을 자극하여 운동량 증진 등에 효과적이며, 인형 안에 들어있는 캣닢이 심신안정 및 스트레스 해소 등에 도움을 줍니다. 터치 센서가 내장되어있어 최초 15초간 작동 후 자동으로 멈춘 뒤 다시 건드리면 15초간 작동하며, 건전지가 아닌 충전식 배터리를 사용하여 편리합니다. 또한 입으로 물고 가지고 노는 반려묘를 위해 무독성의 부드러운 원단으로 제작하였습니다. 사용 방법은 장난감 하단의 벨크로를 열어 전원 버튼을 켜주시고 바닥에 내려놓으시면 됩니다. 충전 시 케이블을 물어뜯지 않게 반려묘가 닿지 않는 곳에서 안전하게 충전해주시기 바랍니다.',
-    imageKey: `products/snack/toy12`,
+    imageKey: `products/toy/toy12`,
     inventory: 30,
     price: 28000,
     searchKeywords: ['고양이', '장난감', '펫케어'],
@@ -591,7 +591,7 @@ export const productMockData = [
     shortDescription: 'BPA FREE 소재로 안전하게 사용 가능',
     detailDescription:
       '멍냥이랑 LED 냥이콥터는 반려묘와 같이 놀 수 있는 LED 프로펠러 장난감입니다. 비행과 팽이 두 가지 모드로 놀이가 가능하며, 눈에 잘 띄는 LED가 사냥 본능을 자극합니다. 사용시 과도하게 돌릴 경우 고장의 원인이 되므로 3~4바퀴 정도가 적당하며, 본상품의 주의사항 및 사용법은 상세페이지를 참고해주시기를 바랍니다.',
-    imageKey: `products/snack/toy13`,
+    imageKey: `products/toy/toy13`,
     inventory: 30,
     price: 29000,
     searchKeywords: ['고양이', '장난감', '멍냥이랑'],
