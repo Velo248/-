@@ -16,13 +16,13 @@
       <div class="content-box">
         <div>
           <div class="order-number">
+            <em>주문 내역</em> &nbsp;
             <span>주문 번호: </span>
             <span>20221102-1502-1220228z1</span>
           </div>
           <div class="order">
-            <h4>주문 내역</h4>
-            <div class="order_wrapper">
-              <div class="row">
+            <div class="order_wrapper overflow-h21">
+              <div class="row grid-3">
                 <span class="column">제품명</span>
                 <span class="column">가격</span>
                 <span class="column">수량</span>
@@ -36,10 +36,9 @@
           </div>
         </div>
         <div class="delivery_detail">
-          <em>배송 정보</em>
           <div class="delivery_info">
             <!-- 여기부터 -->
-            <div class="info">
+            <!-- <div class="info">
               <div class="flex flex-row">
                 <input type="text" class="receiver_name" required />
               </div>
@@ -86,16 +85,18 @@
               <div>
                 <button class="address_search" type="button">주소 검색</button>
               </div>
-            </div>
+            </div> -->
             <!-- 여기까지 -->
           </div>
         </div>
-        <button class="done_btn">수정 완료하기</button>
-        <button class="cancel_btn">수정 취소</button>
+        <p class="center">
+          <button class="done_btn middle bg-darkgreen">수정 완료하기</button>
+          <button class="cancel_btn middle bg-deepgray">수정 취소</button>
+        </p>
       </div>
     </main>
     <footer></footer>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <!-- <script src="./main.js" type="module"></script> -->
+    <script src="./main.js" type="module"></script>
   </body>
 </html>

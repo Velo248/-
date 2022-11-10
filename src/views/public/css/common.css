@@ -92,6 +92,11 @@ h2 span.hightlight::after {
   z-index: -1;
 }
 
+b {
+  display: inline-block;
+  width: 7rem;
+}
+
 .flex {
   display: flex;
 }
@@ -118,6 +123,7 @@ h2 span.hightlight::after {
 .flex-justify-end {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .flex-column-center {
@@ -140,6 +146,11 @@ h2 span.hightlight::after {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.flex-direction-column {
+  display: flex;
+  flex-direction: column;
 }
 
 /* class로 관리하는 background color */
@@ -217,6 +228,14 @@ h2 span.hightlight::after {
 }
 
 /* font weight */
+.lighter {
+  font-weight: lighter;
+}
+
+.normal {
+  font-weight: normal;
+}
+
 .bold {
   font-weight: bold;
 }
@@ -277,7 +296,7 @@ h2 span.hightlight::after {
 
 /* width */
 .w-s {
-  width: 6rem;
+  width: 7rem;
 }
 
 .w-ms {
@@ -324,7 +343,8 @@ h2 span.hightlight::after {
 
 /* font style set */
 .font-hightlight {
-  font-size: 3rem;
+  font-size: 2rem;
+  margin: 1rem 0;
 }
 
 .position-relative {
@@ -560,7 +580,7 @@ h2 span.hightlight::after {
 .content-box em {
   background-color: var(--darkgray);
   color: #fff;
-  padding: 0.2rem 0.6rem;
+  padding: 0.8rem 0.5rem;
   display: inline-block;
   margin-bottom: 1.3rem;
 }
@@ -574,6 +594,14 @@ h2 span.hightlight::after {
   width: 10rem;
   display: inline-block;
   text-align: center;
+}
+
+.content-box .right {
+  text-align: right;
+}
+
+.content-box .w-s {
+  width: 7rem;
 }
 
 .table-box span {
@@ -692,4 +720,26 @@ h2 span.hightlight::after {
 
 .box input {
   margin-right: 3rem;
+}
+
+.row > div {
+  margin-bottom: 1rem;
+}
+
+.column {
+  display: block;
+  margin: 1rem 0;
+}
+
+.child-mb2 > div {
+  margin-bottom: 2rem;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: center;
+  height: 3rem;
+  line-height: 3rem;
+  width: 43rem;
 }
