@@ -37,10 +37,9 @@ const getAllItems = async () => {
 
   // 메인에서는 아이템이 최대 8개만 표시되게
   let get8 = productsList.products.slice(0, 8);
-  get8.forEach((el) => {
-    /* src, imageKey 정하고 풀어주기*/
+  get8.forEach((data) => {
     products += ` <div class="img_wrap">
-        <a href="/product-detail/${el._id}" data-id="el"><img src="/public/images/products/driedFood/driedFood0.jpg" alt="${el.shortDescription}" /></a>
+        <a href="/product-detail/${data._id}" data-id="el"><img src="/public/images/${data.imageKey}.jpg" alt="${data.shortDescription}" /></a>
       </div>`;
   });
 
@@ -75,11 +74,11 @@ const getCategoryItems = () => {
           console.log(err);
         }
 
-        // 메인에서는 아이템이 최대 8개만 표시되게
-        let get8 = selectedItems.slice(0, 8);
+        // 메인에서는 아이템이 최대 8개만 표시
+        const get8 = selectedItems.slice(0, 8);
         get8.forEach((data) => {
           selectedBox += `<div class="img_wrap">
-            <a href="/product-detail/${data._id}}"><img src="/public/images/products/driedFood/driedFood0.jpg" alt="${data.shortDescription}" /></a>
+            <a href="/product-detail/${data._id}"><img src="/public/images/${data.imageKey}.jpg" alt="${data.shortDescription}" /></a>
           </div>`;
           $productsBox.innerHTML = `${selectedBox}`;
         });

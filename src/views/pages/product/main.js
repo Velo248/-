@@ -10,16 +10,14 @@ const makeCategoryList = async () => {
     console.log(err);
   }
 
-  categoryList.forEach((el) => {
-    titles += `<li><a href="/${el._id}" onclick="">${el.title}</a></li>`;
+  categoryList.forEach((list) => {
+    titles += `<li><a href="/${list._id}" onclick="">${list.title}</a></li>`;
   });
 
   $categoryList.innerHTML = `${titles}`;
 };
 
-// 모든 아이템 가져오기
 const getAllItems = async () => {
-  // 2. 문제, img src를 안정함
   let productsList = [];
   let $productsBox = document.querySelector('.products_box');
   let products = '';
@@ -31,22 +29,19 @@ const getAllItems = async () => {
     console.log(err);
   }
 
-  productsList.products.forEach((el) => {
+  productsList.products.forEach((data) => {
     products += ` <div class="img_wrap">
-        <a href="/product-detail/${el._id}"><img src="/public/images/products/driedFood/driedFood0.jpg" alt="${el.shortDescription}" /></a>
+        <a href="/product-detail/${data._id}"><img src="/public/images/${data.imageKey}.jpg" alt="${data.shortDescription}" /></a>
       </div>`;
   });
 
   $productsBox.innerHTML = `${products}`;
 };
 
-// 카테고리 별 아이템 가져오기
-// 카테고리 별 아이템 가져오기
 const getCategoryItems = () => {
   const allA = document.querySelectorAll('.category_tab li a');
   allA.forEach((el, index) => {
     el.addEventListener('click', async (e) => {
-      // 탭 버튼이라 이동 이벤트 방지용
       e.preventDefault();
 
       allA.forEach((el) => el.classList.remove('on'));
@@ -55,11 +50,12 @@ const getCategoryItems = () => {
       if (index === 0) {
         getAllItems();
       } else {
-        let selectedItems = [];
-        let categoryId = e.target.href.split('/').pop();
-        let $productsBox = document.querySelector('.products_box');
+        const selectedItems = [];
+        const categoryId = e.target.href.split('/').pop();
+        const $productsBox = document.querySelector('.products_box');
         let selectedBox = ``;
 
+        console.log(selectedItems);
         try {
           selectedItems = await getAPI(
             `/api/categories/${categoryId}/products`,
@@ -70,7 +66,7 @@ const getCategoryItems = () => {
         }
         selectedItems.forEach((data) => {
           selectedBox += `<div class="img_wrap">
-            <a href="/product-detail/${data._id}}"><img src="/public/images/products/driedFood/driedFood0.jpg" alt="${data.shortDescription}" /></a>
+            <a href="/product-detail/${data._id}"><img src="/public/images/${data.imageKey}.jpg" alt="${data.shortDescription}" /></a>
           </div>`;
           $productsBox.innerHTML = `${selectedBox}`;
         });
@@ -79,7 +75,6 @@ const getCategoryItems = () => {
   });
 };
 
-// api json 불러오기
 const getAPI = async (url) => {
   return (await fetch(`${url}`)).json();
 };

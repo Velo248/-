@@ -105,11 +105,13 @@ const createItemWrapper = (
   itemWrapper.dataset.productId = productId;
   itemWrapper.innerHTML = `
           <input type="checkbox" />
-          <div class="img_wrap img-mini">
-              <img src="${imageKey}" class="product_img" alt="${title}" />
+          <div class="img_wrap img-mini margin-w-s">
+              <img src="/public/images/${imageKey}.jpg" class="product_img" alt="${title}" />
           </div>
           <div class="product_name">${title}</div>
-          <div class="product_price">${price.toLocaleString('ko-kr')}</div>
+          <div class="product_price margin-w-s">${price.toLocaleString(
+            'ko-kr',
+          )}</div>
           <div>
           <input type="number" class="product_count" value="${Number(
             count,
