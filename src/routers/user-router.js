@@ -4,6 +4,7 @@ import is from '@sindresorhus/is';
 import { isAdmin, loginRequired } from '../middlewares';
 import { userService } from '../services';
 import { asyncHandler } from '../utils/async-handler';
+import { logger } from '../utils/logger';
 
 const userRouter = Router();
 
@@ -59,6 +60,8 @@ userRouter.post(
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
     const userToken = await userService.getUserToken({ email, password });
 
+    logger.info('login');
+    logger.error('login-error');
     // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
     res.status(200).json(userToken);
   }),
