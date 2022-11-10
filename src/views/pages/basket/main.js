@@ -51,8 +51,8 @@ const getUserBaskets = async () => {
   const { baskets } = await basketService.getCurrentUserBaskets();
   return baskets;
 };
-const upToDateUserBasksets = async (toUpdateObj) => {
-  await basketService.updateBasketItem(toUpdateObj);
+const upToDateUserBasksets = async (localBasket) => {
+  await basketService.updateBasketItem(localBasket);
 };
 const deleteLocalBasket = (item) => {
   const productId = item.dataset.productId;
@@ -68,7 +68,7 @@ const updateUserBasketItem = async (item) => {
   const productId = item.dataset.productId;
   const quantity = Number(item.querySelector('.product_count').value);
   const toUpdateObj = { productId, quantity };
-  const response = await basketService.updateBasketItem(toUpdateObj);
+  const response = await basketService.updateBasketItem([toUpdateObj]);
   setLocalBasket(item);
   return response;
 };
@@ -204,7 +204,7 @@ const init = async () => {
 
   basketItems = localBasket;
   if (loginToken) {
-    localBasket.forEach(upToDateUserBasksets);
+    await upToDateUserBasksets(localBasket);
     basketItems = await getUserBaskets();
   }
   basketItemList.innerHTML = basketLoader();
