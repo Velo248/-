@@ -77,13 +77,35 @@ const getSelectedPaymentType = () => {
   return [...paymentTypes].filter((radio) => radio.checked)[0];
 };
 
+const updateOrderObj = (orderObj) => {
+  const addressLong = document.querySelector('.receiver_address_long');
+  const addressDetail = document.querySelector('.receiver_address_detail');
+  const postalCode = document.querySelector('.receiver_postal_code');
+  const receiverName = document.querySelector('.receiver_name');
+  const receiverPhone = document.querySelector('.receiver_phone');
+  const deleveryMsg = document.querySelector('.delevery_message');
+  orderObj = {
+    ...orderObj,
+    address: {
+      postalCode: postalCode.value,
+      address1: addressLong.value,
+      address2: addressDetail.value,
+      receiverName: receiverName.value,
+      receiverPhoneNumber: receiverPhone.value,
+    },
+    request: deleveryMsg.value || '배송 전 연락 바랍니다',
+  };
+  return orderObj;
+};
 const paymentBtnEventHandler = (orderObj) => async (e) => {
   e.target.disabled = true;
+  orderObj = updateOrderObj(orderObj);
+  console.log(orderObj);
   const selectedPaymentType = getSelectedPaymentType();
   if (
-    !orderObj.addressDetail ||
-    !orderObj.receiverPhoneNumber ||
-    !orderObj.receiverName
+    !orderObj.address.address1 ||
+    !orderObj.address.receiverPhoneNumber ||
+    !orderObj.address.receiverName
   ) {
     alert('배송 정보를 모두 입력해 주세요');
     e.target.disabled = false;
@@ -125,7 +147,7 @@ const init = async () => {
 
   paintOrderItems(orders, orderList);
   paintUserSection(userInfo, user);
-  orderTotalPrice.innerText = getTotalPrice();
+  setTimeout(() => (orderTotalPrice.innerText = getTotalPrice()), 1000);
 
   const addressSearchBtn = document.querySelector('.address_search');
   const addressLong = document.querySelector('.receiver_address_long');
@@ -133,7 +155,6 @@ const init = async () => {
   const postalCode = document.querySelector('.receiver_postal_code');
   const receiverName = document.querySelector('.receiver_name');
   const receiverPhone = document.querySelector('.receiver_phone');
-  const deleveryMsg = document.querySelector('.delevery_message');
 
   addressSearchBtn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -149,7 +170,7 @@ const init = async () => {
   });
 
   const orderObj = {
-    items: [],
+    products: orderList,
     address: {
       postalCode: postalCode.value,
       address1: addressLong.value,
@@ -157,12 +178,7 @@ const init = async () => {
       receiverName: receiverName.value,
       receiverPhoneNumber: receiverPhone.value,
     },
-    request: deleveryMsg.value || '배송 전 연락 바랍니다.',
   };
-
-  orderList.forEach(({ productId, quantity }) => {
-    orderObj.items.push({ itemId: productId, count: quantity });
-  });
 
   const paymentBtn = document.querySelector('.payment_button');
   paymentBtn.addEventListener('click', paymentBtnEventHandler(orderObj));
