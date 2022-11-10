@@ -31,23 +31,43 @@ const createDeliveryInfo = ({
             <div class="info flex-column row">
               <div class="line">
                 <b>이름</b>
-                <span class="receiver_name">${receiverName}</span>
+                <input type="text" required value="${receiverName}" class="receiver_name" />
               </div>
-              <div class="line">
+              <div class="line address_field">
                 <b>주소</b>
-                <span class="receiver_address"
-                  >${postalCode + ' ' + address1 + ' ' + address2}</span
-                >
+                <input type="text" class="receiver_address_long" disabled required value="${address1}" />
+                <input type="text" class="receiver_postal_code" disabled required value="${postalCode}" />
+                <input type="text" class="receiver_address_detail" disabled required value="${address2}" />
+                <button type="button" class="address_search">주소 검색</button>
               </div>
               <div class="line">
                 <b>연락처</b>
-                <span class="receiver_phone_number">${receiverPhoneNumber}</span>
+                <input type="text" class="receiver_phone" required value="${receiverPhoneNumber}" />
               </div>
               <div class="line">
                 <b>배송상태</b>
                 <span class="delivery_status">${status}</span>
               </div>`;
   return deliveryInfo;
+};
+
+const updateOrderObj = (orderObj) => {
+  const addressLong = document.querySelector('.receiver_address_long');
+  const addressDetail = document.querySelector('.receiver_address_detail');
+  const postalCode = document.querySelector('.receiver_postal_code');
+  const receiverName = document.querySelector('.receiver_name');
+  const receiverPhone = document.querySelector('.receiver_phone');
+  orderObj = {
+    ...orderObj,
+    address: {
+      postalCode: postalCode.value,
+      address1: addressLong.value,
+      address2: addressDetail.value,
+      receiverName: receiverName.value,
+      receiverPhoneNumber: receiverPhone.value,
+    },
+  };
+  return orderObj;
 };
 
 const btnActivityChanger = () => {
@@ -69,6 +89,7 @@ const finishChangeEventHandler = (orderId, toUpdateObj) => async (e) => {
     alert('배송 정보를 모두 입력해주세요');
   } else {
     if (confirm('배송정보 수정을 마치시겠습니까?')) {
+      toUpdateObj = updateOrderObj(toUpdateObj);
       const response = await orderService.setOrderInfomatinByOrderId(
         orderId,
         toUpdateObj,
@@ -81,7 +102,7 @@ const finishChangeEventHandler = (orderId, toUpdateObj) => async (e) => {
   }
   btnActivityChanger();
 };
-const cancleBtnEventHandler = (orderId) => (e) => {
+const cancelBtnClickEventHandler = (orderId) => (e) => {
   btnActivityChanger();
   if (confirm('수정을 취소하시겠습니까?')) {
     location.href = `/orders/${orderId}`;
@@ -107,24 +128,21 @@ const init = async () => {
   const receiverName = document.querySelector('.receiver_name');
   const receiverPhone = document.querySelector('.receiver_phone');
 
-  addressLong.value = order.address.address1;
-  addressDetail.value = order.address.address2;
-  postalCode.value = order.address.postalCode;
-  receiverName.value = order.address.receiverName;
-  receiverPhone.value = order.address.receiverPhoneNumber;
-
-  const addressSearchBtn = document.querySelector('.address_search');
-  addressSearchBtn.addEventListener('click', (e) => {
+  deliveryDetail.addEventListener('click', (e) => {
     e.preventDefault();
-    new daum.Postcode({
-      oncomplete: ({ zonecode, address }) => {
-        addressLong.value = address;
-        postalCode.value = zonecode;
-        addressDetail.disabled = false;
-        addressDetail.focus();
-        addressDetail.placeholder = '상세 주소를 입력해주세요';
-      },
-    }).open();
+    const addressSearchBtn = document.querySelector('.address_search');
+    if (e.target === addressSearchBtn) {
+      new daum.Postcode({
+        oncomplete: ({ zonecode, address }) => {
+          addressLong.value = address;
+          postalCode.value = zonecode;
+          addressDetail.value = '';
+          addressDetail.disabled = false;
+          addressDetail.focus();
+          addressDetail.placeholder = '상세 주소를 입력해주세요';
+        },
+      }).open();
+    }
   });
 
   const doneBtn = document.querySelector('.done_btn');
@@ -145,7 +163,7 @@ const init = async () => {
     finishChangeEventHandler(orderId, toUpdateObj),
   );
 
-  cancelBtn.addEventListener('click', cancleBtnEventHandler(orderId));
+  cancelBtn.addEventListener('click', cancelBtnClickEventHandler(orderId));
 };
 
 document.addEventListener('DOMContentLoaded', init);
