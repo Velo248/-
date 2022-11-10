@@ -1,5 +1,8 @@
 import orderService from '/public/scripts/orderService.js';
-import { loggedInOnlyPageProtector } from '/public/scripts/common.js';
+import {
+  loggedInOnlyPageProtector,
+  isValidPhoneNumber,
+} from '/public/scripts/common.js';
 
 const createOrderRow = ({ summaryTitle, totalPrice, status }) => {
   const orderRow = document.createElement('div');
@@ -94,16 +97,21 @@ const finishChangeEventHandler = (orderId, toUpdateObj) => async (e) => {
   ) {
     alert('배송 정보를 모두 입력해주세요');
   } else {
-    if (confirm('배송정보 수정을 마치시겠습니까?')) {
-      toUpdateObj = updateOrderObj(toUpdateObj);
-      const response = await orderService.setOrderInfomatinByOrderId(
-        orderId,
-        toUpdateObj,
-      );
-      if (response.updateOrderInfo) {
-        alert('수정이 완료되었습니다');
-        location.href = '/pay-history';
+    if (isValidPhoneNumber(toUpdateObj.receiverPhone)) {
+      if (confirm('배송정보 수정을 마치시겠습니까?')) {
+        toUpdateObj = updateOrderObj(toUpdateObj);
+        const response = await orderService.setOrderInfomatinByOrderId(
+          orderId,
+          toUpdateObj,
+        );
+        if (response.updateOrderInfo) {
+          alert('수정이 완료되었습니다');
+          location.href = '/pay-history';
+        }
       }
+    } else {
+      alert('휴대전화번호 형식이 맞지 않습니다');
+      document.querySelector('.receiver_phone').focus();
     }
   }
   btnActivityChanger();
