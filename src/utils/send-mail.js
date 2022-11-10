@@ -29,8 +29,8 @@ async function renderHtml(values) {
   return result;
 }
 
-module.exports = (to) =>
-  new Promise(async (resolve, reject) => {
+function sendMail(to) {
+  return new Promise(async (resolve, reject) => {
     try {
       const html = await renderHtml({
         email: to,
@@ -55,3 +55,5 @@ module.exports = (to) =>
       console.log(error);
     }
   });
+}
+export { sendMail };

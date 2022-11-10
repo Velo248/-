@@ -1,4 +1,4 @@
-import sendMail from '../utils/send-mail';
+import { sendMail } from '../utils/send-mail';
 import { Router } from 'express';
 import { asyncHandler } from '../utils/async-handler';
 
