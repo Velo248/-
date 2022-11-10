@@ -37,11 +37,12 @@ orderService.getOrderByOrderId = async (orderId) => {
  * @returns { json } response
  */
 orderService.createOrder = async (obj) => {
-  const { products, address } = obj;
+  const { products, address, request } = obj;
 
   const data = {
     products: products ?? null,
     address: address ?? null,
+    request,
   };
 
   const reqObj = {
