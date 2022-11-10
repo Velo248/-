@@ -6,7 +6,6 @@ import {
   productRouter,
   categoryRouter,
   orderRouter,
-  cartRouter,
   searchRouter,
   basketRouter,
   sendMailRouter,
