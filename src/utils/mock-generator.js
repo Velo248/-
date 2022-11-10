@@ -3,7 +3,6 @@ import {
   orderModel,
   productModel,
   userModel,
-  cartModel,
   basketModel,
 } from '../db';
 import {
@@ -21,7 +20,6 @@ async function dataReset() {
   await productModel.deleteAll();
   await orderModel.deleteAll();
   await categoryModel.deleteAll();
-  await cartModel.deleteAll();
   await basketModel.deleteAll();
 }
 //더미데이터 삽입
@@ -61,9 +59,6 @@ async function dataPull() {
       ...orderMockData[data],
       userId: userIdList[randomN]._id,
     });
-  }
-  for (const userId of userIdList) {
-    await cartModel.create({ userId, orderSheets: [] });
   }
 }
 

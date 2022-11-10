@@ -1,8 +1,11 @@
 import sendMail from '../utils/send-mail';
 import { Router } from 'express';
+import { asyncHandler } from '../utils/async-handler';
+
 const sendMailRouter = Router();
-sendMailRouter.post('/send-mail', async (req, res, next) => {
-  try {
+sendMailRouter.post(
+  '/send-mail',
+  asyncHandler(async (req, res) => {
     const { email } = req.body;
     if (!email) {
       res
@@ -12,9 +15,7 @@ sendMailRouter.post('/send-mail', async (req, res, next) => {
     }
     await sendMail(email);
     res.status(201).json('메일이 발송되었습니다.');
-  } catch (error) {
-    next(error);
-  }
-});
+  }),
+);
 
 export { sendMailRouter };

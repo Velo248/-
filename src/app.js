@@ -6,13 +6,16 @@ import {
   productRouter,
   categoryRouter,
   orderRouter,
-  cartRouter,
   searchRouter,
   basketRouter,
   sendMailRouter,
 } from './routers';
 import { errorHandler } from './middlewares';
 const app = express();
+import morgan from 'morgan';
+
+import { stream } from './utils/logger';
+app.use(morgan('combined', { stream }));
 
 // CORS 에러 방지
 app.use(cors());
@@ -33,7 +36,6 @@ app.use('/api', userRouter);
 app.use('/api', productRouter);
 app.use('/api', categoryRouter);
 app.use('/api', orderRouter);
-app.use('/api', cartRouter);
 app.use('/api', searchRouter);
 app.use('/api', basketRouter);
 app.use('/api', sendMailRouter);
