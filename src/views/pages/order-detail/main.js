@@ -97,10 +97,10 @@ const init = async () => {
   const orderCancelBtn = document.querySelector('.order_cancel_btn');
   if (['배송 중', '배송 완료'].includes(order.status)) {
     orderChangeBtn.disabled = true;
-    orderChangeBtn.style.display = 'hidden';
+    orderChangeBtn.style.display = 'none';
     orderChangeBtn.innerText = '배송을 취소할 수 없습니다.';
     orderCancelBtn.disabled = true;
-    orderCancelBtn.style.display = 'hidden';
+    orderCancelBtn.style.display = 'none';
     orderCancelBtn.innerText = '배송을 취소할 수 없습니다.';
   } else {
     orderChangeBtn.addEventListener('click', orderChangeEventHandler(orderId));
