@@ -4,25 +4,24 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>주문 정보 수정</title>
+    <title>간식조아 | 배송 정보 수정</title>
     <link rel="stylesheet" href="/public/css/style.css" />
-    <link rel="stylesheet" href="./custom.css" />
     <script src="/public/scripts/layout.js" defer></script>
   </head>
 
   <body>
     <header></header>
 
-    <main>
-      <div class="order_change">
-        <div class="flex-column">
+    <main class="flex-all-center">
+      <div class="content-box">
+        <div>
           <div class="order-number">
             <span>주문 번호: </span>
             <span>20221102-1502-1220228z1</span>
           </div>
           <div class="order">
             <h4>주문 내역</h4>
-            <div class="order_wrapper flex-column">
+            <div class="order_wrapper">
               <div class="row">
                 <span class="column">제품명</span>
                 <span class="column">가격</span>
@@ -36,41 +35,40 @@
             </div>
           </div>
         </div>
-        <div class="wrapper delivery_detail receiver_info">
+        <div class="delivery_detail">
+          <em>배송 정보</em>
           <div class="delivery_info">
-            <h4>배송 정보</h4>
-            <div class="info flex-column">
+            <!-- 여기부터 -->
+            <div class="info">
               <div class="flex flex-row">
-                <span>수령자 이름</span>
-                <input type="text" class="input receiver_name" required />
+                <input type="text" class="receiver_name" required />
               </div>
               <div class="flex flex-row">
-                <span>수령자 전화번호</span>
                 <input
                   type="text"
-                  class="input receiver_phone"
+                  class="receiver_phone"
                   placeholder="00000000000 -를 빼고 입력하세요"
                   required
                 />
               </div>
             </div>
-            <div class="info flex-column">
+            <div class="info">
               <div class="address_field">
-                <div class="field">
+                <div>
                   <input
                     type="text"
                     name="postal-code"
                     id="postal-code"
-                    class="input is-primary receiver_address_long"
+                    class="receiver_address_long"
                     placeholder="주소"
                     disabled
                   />
-                  <div class="field is-grouped">
+                  <div>
                     <input
                       type="text"
                       name="postal-code"
                       id="postal-code"
-                      class="input is-primary receiver_postal_code"
+                      class="receiver_postal_code"
                       placeholder="12034"
                       disabled
                     />
@@ -78,30 +76,26 @@
                       type="text"
                       name="postal-code"
                       id="postal-code"
-                      class="input is-primary receiver_address_detail"
+                      class="receiver_address_detail"
                       placeholder="상세주소"
                       disabled
                     />
                   </div>
                 </div>
               </div>
-              <div class="field">
-                <button
-                  class="button is-link is-small address_search"
-                  type="button"
-                >
-                  주소 검색
-                </button>
+              <div>
+                <button class="address_search" type="button">주소 검색</button>
               </div>
             </div>
+            <!-- 여기까지 -->
           </div>
-          <button class="button is-link done_btn">수정 완료하기</button>
-          <button class="button is-link cancel_btn">수정 취소</button>
         </div>
+        <button class="done_btn">수정 완료하기</button>
+        <button class="cancel_btn">수정 취소</button>
       </div>
     </main>
     <footer></footer>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="./main.js" type="module"></script>
+    <!-- <script src="./main.js" type="module"></script> -->
   </body>
 </html>

@@ -96,6 +96,10 @@ h2 span.hightlight::after {
   display: flex;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .flex-justify-center {
   display: flex;
   justify-content: center;
@@ -106,10 +110,14 @@ h2 span.hightlight::after {
   justify-content: space-between;
 }
 
-.flex-all-center {
+.flex-justify-around {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
+}
+
+.flex-justify-end {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .flex-column-center {
@@ -120,6 +128,18 @@ h2 span.hightlight::after {
 .flex-column-bottom {
   display: flex;
   align-items: baseline;
+}
+
+.flex-all-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-center-space {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* class로 관리하는 background color */
@@ -165,6 +185,10 @@ h2 span.hightlight::after {
 
 .bg-gray {
   background-color: var(--gray);
+}
+
+.bg-dark {
+  background-color: var(--dark);
 }
 
 .bg-transparent {
@@ -247,6 +271,10 @@ h2 span.hightlight::after {
   margin-top: 4rem;
 }
 
+.padding-w-s {
+  padding: 0 1rem;
+}
+
 /* width */
 .w-s {
   width: 6rem;
@@ -258,6 +286,10 @@ h2 span.hightlight::after {
 
 .w-mm {
   width: 20rem;
+}
+
+.w-m {
+  min-width: 35rem;
 }
 
 .w-ls {
@@ -406,6 +438,19 @@ h2 span.hightlight::after {
   font-size: 1.6rem;
 }
 
+.img-mini {
+  overflow: hidden;
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.img-s {
+  overflow: hidden;
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto;
+}
+
 /* 태그 감싸는  */
 .box-style-center {
   width: 80%;
@@ -495,7 +540,11 @@ h2 span.hightlight::after {
   border-bottom: 1px solid #ccc;
 }
 
-.content-box input:read-only {
+.content-box input[type='checkbox'] {
+  transform: scale(1.2);
+}
+
+.content-box input[readonly] {
   background: none;
   border: none;
 }
@@ -512,11 +561,13 @@ h2 span.hightlight::after {
   background-color: var(--darkgray);
   color: #fff;
   padding: 0.2rem 0.6rem;
+  display: inline-block;
+  margin-bottom: 1.3rem;
 }
 
 .content-box em ~ div > div {
   font-size: 1.4rem;
-  padding-top: 2rem;
+  padding-top: 0rem;
 }
 
 .content-box label {
@@ -572,4 +623,73 @@ h2 span.hightlight::after {
 }
 .table-box > :last-child > div span {
   flex: 1;
+}
+
+.overflow-h11 {
+  height: 11rem;
+  overflow-y: auto;
+  padding: 2rem;
+  border: 1px solid #ddd;
+}
+
+.overflow-h21 {
+  height: 21rem;
+  overflow-y: auto;
+  padding: 0.5rem 2rem;
+  border: 1px solid #ddd;
+}
+
+.overflow-h21 > div {
+  align-items: center;
+}
+
+.overflow-h21 > div:first-child {
+  height: 4rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.overflow-h21 > div > div {
+  flex: 1;
+  text-align: center;
+}
+
+.overflow-h32 {
+  height: 32rem;
+  overflow-y: auto;
+  margin: 1.2rem 0;
+  padding: 1.2rem 1rem;
+  border: 1px solid #ddd;
+}
+
+.overflow-h21 input[type='number'],
+.overflow-h32 input[type='number'] {
+  width: 5rem;
+}
+
+.img_wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.input_wrap label {
+  width: 6rem;
+}
+
+.box {
+  border: 1px solid #ddd;
+  padding: 1.9rem 1.7rem;
+  margin: 1.5rem 0;
+}
+
+.box > div > div {
+  padding: 0.5rem 0;
+}
+
+.box span:first-child {
+  width: 13rem;
+}
+
+.box input {
+  margin-right: 3rem;
 }
