@@ -1,25 +1,25 @@
 export const categoryMockData = [
   {
-    title: '모자',
-    description: '모자',
+    title: '사료',
+    description: '사료',
     themeClass: 'is-info',
     imageKey: 'imageKeyExample',
   },
   {
-    title: '노트북',
-    description: '노트북',
+    title: '간식',
+    description: '간식',
     themeClass: 'is-info',
     imageKey: 'imageKeyExample',
   },
   {
-    title: '바지',
-    description: '바지',
+    title: '장난감',
+    description: '장난감',
     themeClass: 'is-info',
     imageKey: 'imageKeyExample',
   },
   {
-    title: '텀블러',
-    description: '텀블러',
+    title: '용품',
+    description: '용품',
     themeClass: 'is-info',
     imageKey: 'imageKeyExample',
   },

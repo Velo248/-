@@ -37,7 +37,7 @@ async function dataPull() {
   }
 
   for (const data in productMockData) {
-    const productMockDataTitle = productMockData[data].title.split(' ');
+    const productMockDataTitle = productMockData[data].searchKeywords;
     let index = 0;
     for (const category in newCategories) {
       if (productMockDataTitle.includes(newCategories[category].title)) {
