@@ -139,7 +139,13 @@ const init = async () => {
 
   const orders = document.querySelector('.orders');
   const userInfo = document.querySelector('.user_info');
-  orders.innerHTML = '';
+  orders.innerHTML = `
+      <div class="flex-justify-between">
+        <div>-</div>
+        <div>제품 이름</div>
+        <div>가격</div>
+        <div>수량</div>
+      </div>`;
   userInfo.innerHTML = '';
 
   const orderTotalPrice = document.querySelector('.order_total_price');
