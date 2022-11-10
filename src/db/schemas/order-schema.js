@@ -19,7 +19,6 @@ const OrderSchema = new Schema(
     address,
     request: {
       type: String,
-      required: true,
     },
     status: {
       type: String,

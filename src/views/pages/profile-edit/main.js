@@ -1,5 +1,6 @@
 import userService from '/public/scripts/userService.js';
 import { loggedInOnlyPageProtector } from '/public/scripts/common.js';
+import { errorUtil } from '/public/scripts/util.js';
 
 const createUserSection = ({ fullName, email, phoneNumber }) => {
   const wrapper = document.createElement('div');
@@ -17,7 +18,7 @@ const createUserSection = ({ fullName, email, phoneNumber }) => {
           ${
             phoneNumber
               ? `<input type="text" class="phone" value="${phoneNumber}"
-            placeholder="00000000000 -없이" />`
+            placeholder="-없이 번호만 입력해주세요" />`
               : `<input type="text" class="phone" placeholder="-없이 번호만 입력해주세요" />`
           }
         </div>
@@ -57,13 +58,15 @@ const profileEditSubmitEventHandler = async (e) => {
     phoneNumber: phoneNumberInput.value,
     currentPassword: currentPasswordInput.value,
   };
-
-  console.log(toUpdateObj);
-
-  const response = await userService.updateUserInformation(toUpdateObj);
-  if (response._id) {
-    alert('수정이 완료되었습니다');
-    location.href = '/profile';
+  if (errorUtil.isValidPhoneNumber(toUpdateObj.phoneNumber)) {
+    const response = await userService.updateUserInformation(toUpdateObj);
+    if (response._id) {
+      alert('수정이 완료되었습니다');
+      location.href = '/profile';
+    }
+  } else {
+    alert('휴대전화번호 형식이 맞지 않습니다');
+    phoneNumberInput.focus();
   }
 };
 

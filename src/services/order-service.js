@@ -65,7 +65,10 @@ class OrderService {
       });
       //사려는 총 합 계산
       sumPrice += priceCount;
-      summaryTitle += `${title} ,${quantity}개\n `;
+      summaryTitle =
+        orders.length === 1
+          ? `${title} ${quantity}개`
+          : `${title} 외 ${orders.length}종`;
     }
     //카트지우기? 일단 비워놔
     //유저 정보 저장
