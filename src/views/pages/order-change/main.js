@@ -131,7 +131,10 @@ const init = async () => {
   deliveryDetail.addEventListener('click', (e) => {
     e.preventDefault();
     const addressSearchBtn = document.querySelector('.address_search');
-    if (e.target === addressSearchBtn) {
+    if (['배송 완료', '배송 중'].includes(order.status)) {
+      addressSearchBtn.style.display = 'hidden';
+      addressSearchBtn.disbled = true;
+    } else if (e.target === addressSearchBtn) {
       new daum.Postcode({
         oncomplete: ({ zonecode, address }) => {
           addressLong.value = address;
