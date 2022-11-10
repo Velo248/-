@@ -1,81 +1,62 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keyword" content="고양이 사료 장난감 츄르 간식 화장실 용품" />
+    <meta name="description" content="반려동물 친구들을 위한 다양한 아이템샵" />
+    <meta name="author" content="[5팀]오히려좋아" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kdt-sw3-team05.elicecoding.com/" />
+    <meta property="og:title" content="(주) 간식조아" />
+    <meta property="og:site_name" content="[5팀]오히려좋아" />
+    <meta
+      property="og:description"
+      content="반려동물 친구들을 위한 다양한 아이템샵"
+    />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:image" content="/public/images/common/logo-square.png" />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="400" />
+    <title>마이페이지 | 간식조아</title>
+    <link rel="shortcut icon" href="/public/images/common/favicon.ico" />
+    <link rel="stylesheet" href="/public/css/style.css" />
+    <script src="/public/scripts/layout.js" defer></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>마이페이지</title>
-  <link rel="stylesheet" href="/public/css/style.css" />
-  <script src="/public/scripts/layout.js" defer></script>
-</head>
+  <body>
+    <header></header>
 
-<body>
-  <header></header>
-
-  <main class="flex-column-center">
-    <div class="content-box">
-      <div>
-        <em>사용자 정보</em>
-        <div class="profile">
-          <!-- 여기부터 -->
-          <div>
-            <label>사용자명</label>
-            <input type="text" class="username" value="${fullName}" readonly></input>
-          </div>
-          <div>
-            <label>이메일</label>
-            <input type="text" class="email" value="${email}" readonly></input>
-          </div>
-          <div>
-            <label>전화번호</label>
-            <input type="tel" class="phone" value="${ phoneNumber || '전화번호가 없습니다.' }" readonly></input>
-          </div>
-          <!-- 여기까지 -->
-        </div>
-      </div>
-
-      <div class="address">
-        <!-- 여기부터 -->
-        <em>배송지정보</em>
+    <main class="flex-column-center">
+      <div class="content-box">
         <div>
-          <div class="address_long">${address1}</div>
-          <div class="flex">
-            <div class="postal_code">${postalCode}</div>
-            <div class="address_detail">${address2}</div>
+          <em>사용자 정보</em>
+          <div class="profile">
           </div>
         </div>
-        <!-- 여기까지 -->
-      </div>
 
-      <div>
-        <em>주문내역</em>
-        <div class="table-box w-ls ">
-          <div>
-            <span>주문번호</span>
-            <span>배송상태</span>
-            <span>금액</span>
-          </div>
-          <div class="orders h-s">
-            <!-- 여기 안을 넣는것 -->
-            <!-- <div>
-              <span>${_id}</span>
-              <span>${status}</span>
-              <span>
-                ${Number( totalPrice, ).toLocaleString('ko-kr')}
-              </span>
-            </div> -->
-            <!-- 여기까지-->
+        <div class="address">
+        </div>
+
+        <div>
+          <em>주문내역</em>
+          <div class="table-box w-ls">
+            <div>
+              <span>주문번호</span>
+              <span>배송상태</span>
+              <span>금액</span>
+            </div>
+            <div class="orders h-s"></div>
           </div>
         </div>
+
+        <p class="right">
+          <a href="/profile-edit" class="middle bg-darkgreen">내 정보 수정</a>
+        </p>
       </div>
-
-      <p class="right"><a href="/profile-edit" class="middle bg-darkgreen">내 정보 수정</a></p>
-
-    </div>
-  </main>
-  <footer></footer>
-  <script src="./main.js" type="module"></script>
-</body>
-
+    </main>
+    <footer></footer>
+    <script src="./main.js" type="module"></script>
+  </body>
 </html>
