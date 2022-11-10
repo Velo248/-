@@ -33,12 +33,18 @@ const createDeliveryInfo = ({
                 <b>이름</b>
                 <input type="text" required value="${receiverName}" class="receiver_name" />
               </div>
-              <div class="line address_field">
+              <div class="line address_field flex">
                 <b>주소</b>
-                <input type="text" class="receiver_address_long" disabled required value="${address1}" />
-                <input type="text" class="receiver_postal_code" disabled required value="${postalCode}" />
-                <input type="text" class="receiver_address_detail" disabled required value="${address2}" />
-                <button type="button" class="address_search">주소 검색</button>
+                <div>
+                  <div>
+                    <input type="text" class="receiver_postal_code" disabled required value="${postalCode}" />
+                    <button type="button" class="address_search small bg-darkgray">주소 검색</button>
+                  </div>
+                  <div>
+                    <input type="text" class="receiver_address_long" disabled required value="${address1}" />
+                    <input type="text" class="receiver_address_detail" disabled required value="${address2}" />
+                  </div>
+                </div>
               </div>
               <div class="line">
                 <b>연락처</b>
