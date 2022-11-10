@@ -23,11 +23,11 @@ basketService.createBasket = async (orderSheets) => {
   return await response.json();
 };
 
-basketService.updateBasketItem = async (toUpdateObj) => {
+basketService.updateBasketItem = async (toUpdateArray) => {
   const reqObj = {
     target: '/baskets',
     method: 'PATCH',
-    bodyObj: { orderSheets: [toUpdateObj] },
+    bodyObj: { orderSheets: toUpdateArray },
   };
   const response = await customFetcher(reqObj);
   return await response.json();
