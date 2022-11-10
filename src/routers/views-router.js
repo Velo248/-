@@ -24,6 +24,7 @@ viewsRouter.use('/payments', serveStatic('payments'));
 viewsRouter.use('/product-detail/:productId', serveStatic('product-detail'));
 viewsRouter.use('/profile', serveStatic('profile'));
 viewsRouter.use('/profile-edit', serveStatic('profile-edit'));
+viewsRouter.use('/password-edit', serveStatic('password-edit'));
 viewsRouter.use('/register', serveStatic('register'));
 
 viewsRouter.use(
