@@ -11,15 +11,15 @@ const createOrderItem = (product, quantity) => {
   const itemWrapper = document.createElement('div');
   itemWrapper.className = 'flex-justify-between order';
   itemWrapper.innerHTML = `
-  <div>
-  <div class="img_wrap img-s">
-    <img
-      src="${product.imageKey}"
-      alt="${product.title}"
-      class="product_image"
-    />
-  </div>
-  </div>
+    <div>
+      <div class="img_wrap img-s">
+        <img
+          src="${product.imageKey}"
+          alt="${product.title}"
+          class="product_image"
+        />
+      </div>
+    </div>
     <div class="product_title">${product.title}</div>
     <div class="product_price">${product.price.toLocaleString('ko-kr')}</div>
     <div class="product_count">${quantity}</div>
