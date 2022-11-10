@@ -7,45 +7,14 @@ const $categories = document.querySelector('.categories');
 
 const checkObj = {};
 
-const getCategory = async () => {
-  const response = await categoryService.getAllCategories();
-  return response;
-};
-
-const pageRender = async () => {
-  const categories = await getCategory();
-
-  categories.forEach((e) => {
-    const { _id, title, description, createdAt, updatedAt } = e;
-    const createDate = dateFormet(createdAt);
-    const updateDate = dateFormet(updatedAt);
-
-    const html_temp = `
-      <div class="category_item">
-        <form class='edit_form' id=${_id}>
-          <input class='category_checked' type='checkbox'>
-          <input name='category-title' value="${title}">
-          <input name='category-description' value="${description}">
-          <span>${createDate}</span>
-          <span>${updateDate}</span>
-          <button class='edit_bnt' type='submit'>수정하기</button>
-        </form>
-      </div>
-    `;
-
-    elementCreater($categories, html_temp);
-  });
-};
-
 const editCategoty = async (target) => {
   const formData = new FormData(target);
+  const categoryId = target.getAttribute('id');
 
   const updateObj = {
     title: formData.get('category-title'),
     description: formData.get('category-description'),
   };
-
-  const categoryId = target.getAttribute('id');
 
   await adminService.setCategoryByCategoryId(categoryId, updateObj);
   $categories.innerHTML = '';
@@ -73,6 +42,7 @@ const createCategory = async (target) => {
   await pageRender();
 };
 
+//forEach isn't wait async
 const deleteCategory = async () => {
   const categoryId = Object.keys(checkObj);
   for (const id of categoryId) {
@@ -89,7 +59,7 @@ const deleteCategoryChecker = (target) => {
   else delete checkObj[targetId];
 };
 
-const allCheckboxChanger = (target) => {
+const checkAll = (target) => {
   const $category_checked = document.querySelectorAll('.category_checked');
   $category_checked.forEach((checkbox) => {
     checkbox.checked = target.checked;
@@ -97,30 +67,20 @@ const allCheckboxChanger = (target) => {
   });
 };
 
+//이벤트 함수
 const clickEventMap = {
-  selected_category_delete_bnt() {
-    deleteCategory();
-  },
-  category_checked(e) {
-    deleteCategoryChecker(e);
-  },
-  all_check(e) {
-    allCheckboxChanger(e);
-  },
-  admin_edit_complete_bnt() {
-    location.href = '/admin/category/list';
-  },
+  selected_category_delete_bnt: deleteCategory,
+  category_checked: deleteCategoryChecker,
+  all_check: checkAll,
+  admin_edit_complete_bnt: () => (location.href = '/admin/category/list'),
 };
 
 const submitEventMap = {
-  edit_form(e) {
-    editCategoty(e);
-  },
-  create_form(e) {
-    createCategory(e);
-  },
+  edit_form: editCategoty,
+  create_form: createCategory,
 };
 
+//이벤트 리스너
 $admin_category_wapper.addEventListener('click', (e) => {
   if (!clickEventMap[e.target.className]) return;
 
@@ -133,6 +93,31 @@ $admin_category_wapper.addEventListener('submit', (e) => {
 
   submitEventMap[e.target.className](e.target);
 });
+
+const pageRender = async () => {
+  const categories = await categoryService.getAllCategories();
+
+  categories.forEach((category) => {
+    const { _id, title, description, createdAt, updatedAt } = category;
+    const createDate = dateFormet(createdAt);
+    const updateDate = dateFormet(updatedAt);
+
+    const html_temp = `
+      <div class="category_item">
+        <form class='edit_form' id=${_id}>
+          <input class='category_checked' type='checkbox'>
+          <input name='category-title' value="${title}">
+          <input name='category-description' value="${description}">
+          <span>${createDate}</span>
+          <span>${updateDate}</span>
+          <button class='edit_bnt' type='submit'>수정하기</button>
+        </form>
+      </div>
+    `;
+
+    elementCreater($categories, html_temp);
+  });
+};
 
 window.addEventListener('DOMContentLoaded', async () => {
   await pageRender();

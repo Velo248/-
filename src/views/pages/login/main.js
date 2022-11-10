@@ -1,56 +1,31 @@
+import userService from '/public/scripts/userService.js';
+
 const $loginEmail = document.querySelector('.login-email');
 const $loginPassword = document.querySelector('.login-pw');
 const $loginBtn = document.querySelector('.login-btn');
-
-const postAPI = async (url, obj) => {
-  return (
-    await fetch(`${url}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(obj),
-    })
-  ).json();
-};
-
-const routeToken = async (url, token) => {};
-
-const changeLocation = (url) => {
-  location.href = `${url}`;
-};
 
 // 로그인 요청
 $loginBtn.addEventListener('click', async (e) => {
   e.preventDefault();
 
-  let token = '';
+  const email = $loginEmail.value;
+  const password = $loginPassword.value;
 
-  let headerObj = {
-    email: $loginEmail.value,
-    password: $loginPassword.value,
-  };
+  const response = await userService.login(email, password);
 
-  console.log(headerObj);
+  if (response.isAdmin && response.token) {
+    sessionStorage.setItem('token', response.token);
+    sessionStorage.setItem('isAdmin', response.isAdmin);
 
-  let data = await postAPI('/api/login', headerObj);
-  if (data.isAdmin && data.token) {
-    token = data.token;
-    sessionStorage.setItem('token', token);
-    sessionStorage.setItem('isAdmin', data.isAdmin);
     alert('관리자 유저 로그인 성공');
-    changeLocation('/admin');
-  } else if (!data.isAdmin && data.token) {
-    token = data.token;
-
-    // 토큰도 같이 저장해주기~
-    sessionStorage.setItem('token', token);
-    sessionStorage.setItem('isAdmin', data.isAdmin);
-
-    alert('일반 유저 로그인 성공');
-    changeLocation('/');
-  } else {
-    alert('유효하지 않은 이메일 입니다');
+    location.href = '/admin';
+    return;
   }
-  // input 초기화
+
+  sessionStorage.setItem('token', response.token);
+  sessionStorage.setItem('isAdmin', response.isAdmin);
+  location.href = '/';
+
   $loginEmail.value = '';
   $loginPassword.value = '';
 });

@@ -5,16 +5,6 @@ import productService from '/public/scripts/productService.js';
 const $admin_product_wapper = document.querySelector('.admin_product_wapper');
 const $products = document.querySelector('.products');
 
-const getProduct = async () => {
-  const response = await productService.getAllProducts();
-  return response;
-};
-
-const getCategory = async () => {
-  const response = await categoryService.getAllCategories();
-  return response;
-};
-
 const getCategoryTitleFromId = (products, categories) => {
   const titleMap = {};
 
@@ -29,9 +19,27 @@ const getCategoryTitleFromId = (products, categories) => {
   return products;
 };
 
+const productDetail = (product) => {
+  const productId = product.parentNode.parentNode.getAttribute('data-key');
+  sessionStorage.setItem('p_id', productId);
+  window.location.href = '/admin/product/detail';
+};
+
+const clickEventMap = {
+  detail_bnt: productDetail,
+  back_admin_main_bnt: () => (location.href = '/admin'),
+  create_product_bnt: () => (location.href = '/admin/product/adder'),
+};
+
+$admin_product_wapper.addEventListener('click', (e) => {
+  if (!clickEventMap[e.target.className]) return;
+
+  clickEventMap[e.target.className](e.target);
+});
+
 const pageRender = async () => {
-  const responseProducts = await getProduct();
-  const responseCategorise = await getCategory();
+  const responseProducts = await productService.getAllProducts();
+  const responseCategorise = await categoryService.getAllCategories();
   const products = getCategoryTitleFromId(responseProducts, responseCategorise);
 
   products.products.forEach((product) => {
@@ -64,29 +72,6 @@ const pageRender = async () => {
     elementCreater($products, html_temp);
   });
 };
-
-const productDetail = (productId) => {
-  sessionStorage.setItem('p_id', productId);
-  window.location.href = '/admin/product/detail';
-};
-
-const clickEventMap = {
-  detail_bnt(e) {
-    productDetail(e.parentNode.parentNode.getAttribute('data-key'));
-  },
-  back_admin_main_bnt() {
-    location.href = '/admin';
-  },
-  create_product_bnt() {
-    location.href = '/admin/product/adder';
-  },
-};
-
-$admin_product_wapper.addEventListener('click', (e) => {
-  if (!clickEventMap[e.target.className]) return;
-
-  clickEventMap[e.target.className](e.target);
-});
 
 window.addEventListener('DOMContentLoaded', async () => {
   await pageRender();

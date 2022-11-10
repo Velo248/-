@@ -1,5 +1,4 @@
 import { elementCreater, dateFormet } from '/public/scripts/util.js';
-import categoryService from '/public/scripts/categoryService.js';
 import adminService from '/public/scripts/adminService.js';
 import orderService from '/public/scripts/orderService.js';
 
@@ -9,12 +8,13 @@ const $admin_order_detail_wapper = document.querySelector(
 const $order_info = document.querySelector('.order_info');
 const $order_edit = document.querySelector('.order_edit');
 
-const deliveryMap = ['상품 배송 준비중', '배송중', '배송완료', '주문취소'];
+const deliveryMap = ['배송 준비', '배송 중', '배송 완료'];
 
 const getOrder = async () => {
   const order = await orderService.getOrderByOrderId(
     sessionStorage.getItem('o_id'),
   );
+  sessionStorage.removeItem('o_id');
   return order;
 };
 
@@ -34,10 +34,39 @@ const setSelectOption = (target, selected) => {
   });
 };
 
+const setDeliveryStatus = async () => {
+  const $delivery_status = document.querySelector('.delivery_status');
+  const deliveryId = document.querySelector('.delivery_id').innerText;
+  const obj = {
+    status: $delivery_status.value,
+  };
+  await adminService.setOrderInformationByOrderId(deliveryId, obj);
+  location.href = '/admin/order/list';
+};
+
+const deleteOrder = async () => {
+  if (confirm('진심 삭제함?')) {
+    const deliveryId = document.querySelector('.delivery_id').innerText;
+    await adminService.deleteOrderByOrderId(deliveryId);
+    location.href = '/admin/order/list';
+  }
+};
+
+const clickEventMap = {
+  back_order_list_bnt: () => (location.href = '/admin/order/list'),
+  edit: async () => await setDeliveryStatus(),
+  cancel: async () => await deleteOrder(),
+};
+
+$admin_order_detail_wapper.addEventListener('click', (e) => {
+  if (!clickEventMap[e.target.className]) return;
+
+  clickEventMap[e.target.className](e.target);
+});
+
 const pageRender = async () => {
   const order = await getOrder();
 
-  console.log(order.order);
   const {
     _id,
     request,
@@ -46,7 +75,6 @@ const pageRender = async () => {
     totalPrice,
     createdAt,
     updatedAt,
-    userId,
     address,
   } = order.order;
 
@@ -149,40 +177,6 @@ const pageRender = async () => {
   elementCreater($order_edit, temp_html2);
   setSelectOption(document.querySelector('.delivery_status'), status);
 };
-
-const setDeliveryStatus = async () => {
-  const $delivery_status = document.querySelector('.delivery_status');
-  const deliveryId = document.querySelector('.delivery_id').innerText;
-  const obj = {
-    status: $delivery_status.value,
-  };
-  await adminService.setOrderInformationByOrderId(deliveryId, obj);
-  location.href = '/admin/order/list';
-};
-
-const deleteOrder = async () => {
-  const deliveryId = document.querySelector('.delivery_id').innerText;
-  await adminService.deleteOrderByOrderId(deliveryId);
-  location.href = '/admin/order/list';
-};
-
-const clickEventMap = {
-  back_order_list_bnt() {
-    location.href = '/admin/order/list';
-  },
-  async edit() {
-    await setDeliveryStatus();
-  },
-  async cancel() {
-    await deleteOrder();
-  },
-};
-
-$admin_order_detail_wapper.addEventListener('click', (e) => {
-  if (!clickEventMap[e.target.className]) return;
-
-  clickEventMap[e.target.className](e.target);
-});
 
 window.addEventListener('DOMContentLoaded', async () => {
   await pageRender();
