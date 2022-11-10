@@ -33,11 +33,6 @@
   background-repeat: no-repeat;
 }
 
-.more {
-  text-align: right;
-  padding: 0.6rem;
-  font-size: 1.6rem;
-}
 .products_box {
   display: flex;
   flex-wrap: wrap;
