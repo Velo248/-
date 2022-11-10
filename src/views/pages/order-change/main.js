@@ -3,9 +3,9 @@ import { loggedInOnlyPageProtector } from '/public/scripts/common.js';
 
 const createOrderRow = ({ summaryTitle, totalPrice, status }) => {
   const orderRow = document.createElement('div');
-  orderRow.className = 'row';
+  orderRow.className = 'row grid-3';
   orderRow.innerHTML = `
-        <span class="order_summary">${summaryTitle}</span>
+        <span class="column order_summary">${summaryTitle}</span>
         <span class="column order_status">${status}</span>
         <span class="column order_price">${totalPrice.toLocaleString(
           'ko-kr',
@@ -27,24 +27,24 @@ const createDeliveryInfo = ({
   const deliveryInfo = document.createElement('div');
   deliveryInfo.classname = 'delivery_info';
   deliveryInfo.innerHTML = `
-            <h4>배송 정보</h4>
-            <div class="info flex-column">
+            <em>배송 정보</em>
+            <div class="info flex-column row">
               <div class="line">
-                <span>이름</span>
+                <b>이름</b>
                 <span class="receiver_name">${receiverName}</span>
               </div>
               <div class="line">
-                <span>주소</span>
+                <b>주소</b>
                 <span class="receiver_address"
                   >${postalCode + ' ' + address1 + ' ' + address2}</span
                 >
               </div>
               <div class="line">
-                <span>연락처</span>
+                <b>연락처</b>
                 <span class="receiver_phone_number">${receiverPhoneNumber}</span>
               </div>
               <div class="line">
-                <span>배송상태</span>
+                <b>배송상태</b>
                 <span class="delivery_status">${status}</span>
               </div>`;
   return deliveryInfo;
