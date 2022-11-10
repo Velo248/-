@@ -14,7 +14,6 @@ export const customFetcher = async (data) => {
     const errorContent = await res.json();
     const { reason } = errorContent;
 
-    alert(reason);
     throw new Error(reason);
   }
 
