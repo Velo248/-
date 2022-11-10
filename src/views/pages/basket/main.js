@@ -187,7 +187,9 @@ const basketChangeEventHandler = async (e) => {
   setOrderList();
   printTotalPrice();
 };
-
+const basketLoader = () => {
+  return `<div class="flex-jusitfy-between basket_loader">장바구니를 불러오고 있습니다</div>`;
+};
 const init = async () => {
   const loginToken = sessionStorage.getItem('token') ?? null;
 
@@ -205,7 +207,11 @@ const init = async () => {
     localBasket.forEach(upToDateUserBasksets);
     basketItems = await getUserBaskets();
   }
-  setTimeout(() => basketItems?.forEach(paintBasketItem), 500);
+  basketItemList.innerHTML = basketLoader();
+  setTimeout(() => {
+    basketItems?.forEach(paintBasketItem);
+    document.querySelector('.basket_loader').remove();
+  }, 1000);
 
   basket.addEventListener('click', basketClickEventHandler);
   basket.addEventListener('change', basketChangeEventHandler);
