@@ -100,12 +100,12 @@ const createItemWrapper = (
   count,
 ) => {
   const itemWrapper = document.createElement('div');
-  itemWrapper.className = 'flex-justify-between product';
+  itemWrapper.className = 'flex-center-space product';
   itemWrapper.dataset.basketId = basketId;
   itemWrapper.dataset.productId = productId;
   itemWrapper.innerHTML = `
           <input type="checkbox" />
-          <div class="img_wrap">
+          <div class="img_wrap img-mini">
               <img src="${imageKey}" class="product_img" alt="${title}" />
           </div>
           <div class="product_name">${title}</div>
@@ -188,7 +188,7 @@ const basketChangeEventHandler = async (e) => {
   printTotalPrice();
 };
 const basketLoader = () => {
-  return `<div class="flex-jusitfy-between basket_loader">장바구니를 불러오고 있습니다</div>`;
+  return `<div class="flex-center-space basket_loader">장바구니를 불러오고 있습니다</div>`;
 };
 const init = async () => {
   const loginToken = sessionStorage.getItem('token') ?? null;
@@ -199,7 +199,7 @@ const init = async () => {
   const basket = document.querySelector('.basket');
   const basketItemList = document.querySelector('.basket_item_list');
   basketItemList.innerHTML = `
-    <div class="flex-justify-between">장바구니에 상품이 없습니다</div>
+    <div class="flex-center-space">장바구니에 상품이 없습니다</div>
   `;
 
   basketItems = localBasket;
