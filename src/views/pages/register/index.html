@@ -7,22 +7,28 @@
     <title>등록</title>
     <link rel="stylesheet" href="/public/css/style.css" />
     <script src="/public/scripts/layout.js" defer></script>
-    <script src="./main.js" defer></script>
+    <script type="module" src="./main.js" defer></script>
   </head>
   <body>
     <header></header>
 
     <main class="flex-column-center">
       <div class="box-style-center">
-        <form action="">
+        <form class="registerForm">
           <div>
             <label>Email</label>
-            <input type="email" class="email" placeholder="abcde@email.com" />
+            <input
+              type="email"
+              name="email"
+              class="email"
+              placeholder="abcde@email.com"
+            />
           </div>
           <div>
             <label>Name</label>
             <input
               class="userName"
+              name="userName"
               type="text"
               placeholder="간식매니아"
               minlength="2"
@@ -64,7 +70,7 @@
           </div>
 
           <div>
-            <button type="button" class="btn-submit full bg-darkgreen">
+            <button type="submit" class="btn-submit full bg-darkgreen">
               가입
             </button>
             <button type="button" class="btn-cancle full bg-deepgray">

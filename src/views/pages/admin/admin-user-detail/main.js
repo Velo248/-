@@ -4,15 +4,31 @@ import adminService from '/public/scripts/adminService.js';
 const $admin_user_wapper = document.querySelector('.admin_user_wapper');
 const $user_dateil = document.querySelector('.user_dateil');
 
-const getUser = async () => {
+const userOrderDirect = () => {
+  const userId = $user_dateil.getAttribute('data-key');
+  sessionStorage.setItem('filter_user', userId);
+  location.href = '/admin/order/list';
+};
+
+const clickEventMap = {
+  user_order_bnt: userOrderDirect,
+  back_admin_main_bnt: () => {
+    sessionStorage.removeItem('u_id');
+    location.href = '/admin/user/list';
+  },
+};
+
+$admin_user_wapper.addEventListener('click', (e) => {
+  if (!clickEventMap[e.target.className]) return;
+
+  clickEventMap[e.target.className]();
+});
+
+const pageRender = async () => {
   const user = await adminService.getUserByUserId(
     sessionStorage.getItem('u_id'),
   );
-  return user;
-};
 
-const pageRender = async () => {
-  const user = await getUser();
   const { _id, fullName, email, createdAt, phoneNumber, address } = user;
   const { address1, address2, postalCode } = address;
 
@@ -39,28 +55,6 @@ const pageRender = async () => {
   elementCreater($user_dateil, temp_html);
   $user_dateil.setAttribute('data-key', _id);
 };
-
-const userOrderDirect = () => {
-  const userId = $user_dateil.getAttribute('data-key');
-  sessionStorage.setItem('filter_user', userId);
-  location.href = '/admin/user/order';
-};
-
-const clickEventMap = {
-  user_order_bnt() {
-    userOrderDirect();
-  },
-  back_admin_main_bnt() {
-    sessionStorage.removeItem('filter_user');
-    location.href = '/admin/user/list';
-  },
-};
-
-$admin_user_wapper.addEventListener('click', (e) => {
-  if (!clickEventMap[e.target.className]) return;
-
-  clickEventMap[e.target.className](e.target);
-});
 
 window.addEventListener('DOMContentLoaded', async () => {
   await pageRender();

@@ -30,7 +30,8 @@ adminService.getUserOrdersByUserId = async function (userId) {
   };
 
   const response = await customFetcher(reqObj);
-  return await response.json();
+  const orders = await response.json();
+  return { orders: orders };
 };
 
 adminService.setUserInformationByUserId = async function (userId, obj) {

@@ -4,13 +4,8 @@ import adminService from '/public/scripts/adminService.js';
 const $admin_user_wapper = document.querySelector('.admin_user_wapper');
 const $user_list = document.querySelector('.user_list');
 
-const getUsers = async () => {
-  const users = await adminService.getAllUser();
-  return users;
-};
-
 const pageRender = async () => {
-  const users = await getUsers();
+  const users = await adminService.getAllUser();
 
   users.forEach((user) => {
     const temp_html = `
@@ -30,12 +25,8 @@ const userDetail = (target) => {
 };
 
 const clickEventMap = {
-  user_detail_bnt(e) {
-    userDetail(e);
-  },
-  back_admin_main_bnt() {
-    window.location.href = '/admin';
-  },
+  user_detail_bnt: userDetail,
+  back_admin_main_bnt: () => (location.href = '/admin'),
 };
 
 $admin_user_wapper.addEventListener('click', (e) => {

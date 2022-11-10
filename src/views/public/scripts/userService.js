@@ -23,9 +23,12 @@ userService.register = async (obj) => {
     method: 'POST',
     bodyObj: data,
   };
-
-  const response = await customFetcher(reqObj);
-  return await response.json();
+  try {
+    const response = await customFetcher(reqObj);
+    return await response.json();
+  } catch (e) {
+    return alert(e);
+  }
 };
 
 /**
