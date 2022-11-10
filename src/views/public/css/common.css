@@ -11,6 +11,7 @@
   --gray: #d9d9d9;
   --deepgray: #adadad;
   --darkgray: #787878;
+  --dark: #333;
 }
 
 html {
@@ -42,6 +43,18 @@ input[readonly] {
   border: 1px solid #ccc;
 }
 
+button {
+  opacity: 0.92;
+}
+
+button:hover {
+  opacity: 1;
+}
+
+select:focus {
+  outline: none;
+}
+
 a:hover {
   text-decoration: underline;
   opacity: 0.8;
@@ -52,18 +65,10 @@ h1 a:hover {
   opacity: 1;
 }
 
-button {
-  opacity: 0.92;
-}
-
-button:hover {
-  opacity: 1;
-}
-
 h2 {
   text-align: center;
   margin-top: 6rem;
-  margin-bottom: 9rem;
+  margin-bottom: 8rem;
 }
 
 h2 span {
@@ -272,6 +277,19 @@ h2 span.hightlight::after {
   height: 38rem;
 }
 
+/* text-align */
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
 /* font style set */
 .font-hightlight {
   font-size: 3rem;
@@ -378,6 +396,13 @@ h2 span.hightlight::after {
   border-radius: 0.3rem;
   color: #fff;
   width: 100%;
+  font-size: 1.6rem;
+}
+
+/* 정렬 + 모양용 */
+.more {
+  text-align: right;
+  padding: 0.6rem;
   font-size: 1.6rem;
 }
 
