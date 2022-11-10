@@ -7,7 +7,7 @@ const transport = nodemailer.createTransport({
     user: 'gansikjoa@gmail.com',
     pass: 'yefytrsuzhjbquym',
   },
-}); // nodemailer 로 gmail transport 생성하기
+});
 
 async function renderHtml(values) {
   const templateHtml = await fsp.readFile(
@@ -29,7 +29,7 @@ async function renderHtml(values) {
   return result;
 }
 
-function sendMail(to, data) {
+function sendPasswordMail(email, password, data) {
   return new Promise(async (resolve, reject) => {
     try {
       const { country, regionName, city } = data;
@@ -39,11 +39,44 @@ function sendMail(to, data) {
       if (regionName) regionInfo += `${regionName}, `;
       if (!regionInfo) regionInfo = 'Unknown IP Adress, ';
       const html = await renderHtml({
-        email: to,
+        email,
+        regionInfo,
+        password,
+      });
+      const message = {
+        from: 'gansikjoa@gmail.com',
+        to: email,
+        subject: `간식조아 계정 복구`,
+        html,
+      };
+
+      transport.sendMail(message, (err, info) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(info);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  });
+}
+
+function sendDormantMail(email, data) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const { country, regionName, city } = data;
+      let regionInfo = '';
+      if (city) regionInfo += `${city}, `;
+      if (country) regionInfo += `${regionName}, `;
+      if (regionName) regionInfo += `${regionName}, `;
+      if (!regionInfo) regionInfo = 'Unknown IP Adress, ';
+      const html = await renderHtml({
+        email,
         regionInfo,
       });
       const message = {
-        // userTo 변수에는 이메일을 받는 사람의 이메일 주소를 적어주세요.
         from: 'gansikjoa@gmail.com',
         to: to,
         subject: `간식조아 계정 복구`,
@@ -62,4 +95,4 @@ function sendMail(to, data) {
     }
   });
 }
-export { sendMail };
+export { sendPasswordMail, sendDormantMail };

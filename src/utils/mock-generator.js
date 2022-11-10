@@ -12,7 +12,6 @@ import {
   userMockData,
 } from './mock';
 
-// 데이터 전부 삭제
 async function dataReset() {
   console.log('collections deleteAll...');
 
@@ -22,7 +21,7 @@ async function dataReset() {
   await categoryModel.deleteAll();
   await basketModel.deleteAll();
 }
-//더미데이터 삽입
+
 async function dataPull() {
   console.log('data pulling...');
 
@@ -38,7 +37,6 @@ async function dataPull() {
   }
 
   for (const data in productMockData) {
-    //랜덤배정하고싶은경우 아래코드삭제//
     const productMockDataTitle = productMockData[data].searchKeywords;
     let index = 0;
     for (const category in newCategories) {
@@ -46,7 +44,6 @@ async function dataPull() {
         index = category;
       }
     }
-    /////////////////////////////////////
     await productModel.create({
       ...productMockData[data],
       sellerId: userIdList[0],

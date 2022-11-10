@@ -20,9 +20,11 @@ const UserSchema = new Schema(
     },
     loggedOutAt: {
       type: Date,
-      default: new Date(),
     },
-    loggedIn: {
+    loggedInAt: {
+      type: Date,
+    },
+    isLogIn: {
       type: Boolean,
       default: false,
     },
