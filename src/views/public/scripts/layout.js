@@ -6,6 +6,10 @@ const logout = () => {
   location.href = '/';
 };
 
+const clickEventMap = {
+  logout_btn: logout,
+};
+
 const headerMaker = () => {
   let header = document.querySelector('header');
 
@@ -19,7 +23,7 @@ const headerMaker = () => {
     </h1>
     <div class="nav_wrap">
       <div class="subnav">
-        <a href="#" onclick="logout()">로그아웃</a>
+        <a href="#" class='logout_btn'>로그아웃</a>
         <a href="/profile">내정보</a>
         <a href="/pay-history">주문·배송</a>
         <a href="/basket">장바구니</a>
@@ -51,6 +55,11 @@ const headerMaker = () => {
     </div>
     `;
   }
+
+  header.addEventListener('click', (e) => {
+    if (!clickEventMap[e.target.className]) return;
+    clickEventMap[e.target.className]();
+  });
 };
 
 const footerMaker = () => {
