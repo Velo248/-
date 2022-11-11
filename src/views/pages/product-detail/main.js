@@ -42,12 +42,18 @@ const getAllItems = async () => {
     <input id="quantity" class="detail-quantity" type="number" value="1" min="1" />
   </div>
   <div class="button_wrap">
-    <button class="bg-pink btn-m-box" onclick="getBasket('${_id}')">장바구니 담기</button>
+    <button class="bg-pink btn-m-box">장바구니 담기</button>
   </div>
 </div>`;
 
   $productDetail.innerHTML = `${products}`;
   $breadcrumb.innerHTML = `${breadcrumb}`;
+
+  $productDetail.addEventListener('click', (e) => {
+    if (e.target.classList.contains('btn-m-box')) {
+      getBasket(_id);
+    }
+  });
 };
 
 const getBasket = (productId) => {
