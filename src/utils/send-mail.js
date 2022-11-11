@@ -9,9 +9,9 @@ const transport = nodemailer.createTransport({
   },
 });
 
-async function renderHtml(values) {
+async function renderHtml(template, values) {
   const templateHtml = await fsp.readFile(
-    './src/utils/mail-tamplate/index.html',
+    `./src/utils/mail-tamplate/${template}.html`,
     {
       encoding: 'utf-8',
     },
@@ -37,8 +37,8 @@ function sendPasswordMail(email, password, data) {
       if (city) regionInfo += `${city}, `;
       if (country) regionInfo += `${regionName}, `;
       if (regionName) regionInfo += `${regionName}, `;
-      if (!regionInfo) regionInfo = 'Unknown IP Adress, ';
-      const html = await renderHtml({
+      if (!regionInfo) regionInfo = 'unknown ip adress, ';
+      const html = await renderHtml('index', {
         email,
         regionInfo,
         password,
@@ -46,7 +46,7 @@ function sendPasswordMail(email, password, data) {
       const message = {
         from: 'gansikjoa@gmail.com',
         to: email,
-        subject: `간식조아 계정 복구`,
+        subject: `간식조아 계정 비밀번호 복구`,
         html,
       };
 
@@ -58,7 +58,7 @@ function sendPasswordMail(email, password, data) {
         resolve(info);
       });
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   });
 }
@@ -71,15 +71,15 @@ function sendDormantMail(email, data) {
       if (city) regionInfo += `${city}, `;
       if (country) regionInfo += `${regionName}, `;
       if (regionName) regionInfo += `${regionName}, `;
-      if (!regionInfo) regionInfo = 'Unknown IP Adress, ';
-      const html = await renderHtml({
+      if (!regionInfo) regionInfo = 'unknown ip adress, ';
+      const html = await renderHtml('dormant', {
         email,
         regionInfo,
       });
       const message = {
         from: 'gansikjoa@gmail.com',
-        to: to,
-        subject: `간식조아 계정 복구`,
+        to: email,
+        subject: `간식조아 휴면 계정 복구`,
         html,
       };
 
@@ -91,7 +91,7 @@ function sendDormantMail(email, data) {
         resolve(info);
       });
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   });
 }
