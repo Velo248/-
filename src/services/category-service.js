@@ -46,9 +46,7 @@ class CategoryService {
         '해당 id의 카테고리를 찾을 수 없습니다. 다시 확인해주세요.',
       );
     }
-    const products = await this.productModel.find({
-      title: categoryId,
-    });
+    const products = await this.productModel.findByName(categoryId);
     return products;
   }
   async getDeletedCategoriesProducts() {
@@ -58,9 +56,7 @@ class CategoryService {
     if (!deletedCategory) {
       return [];
     }
-    const products = await this.productModel.find({
-      title: deletedCategory._id,
-    });
+    const products = await this.productModel.findByName(deletedCategory._id);
     return products;
   }
   //카테고리 정보 수정
