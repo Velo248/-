@@ -3,7 +3,7 @@ import { categoryService } from '../services';
 class CategoryController {
   async getCategory(req, res, next) {
     try {
-      const categories = await categoryService.getCategorylist();
+      const categories = await categoryService.getCategoryList();
 
       res.status(200).json(categories);
     } catch (err) {

@@ -8,11 +8,12 @@ export class CategoryModel {
     const createdNewCategory = await Category.create(categoryInfo);
     return createdNewCategory;
   }
-  async findAllExceptDeleted() {
-    const categories = await Category.find({
-      title: { $nin: ['삭제된 카테고리'] },
-    });
-    return categories;
+
+  async find(query, projection, sort = { id: 1 }, options = { lean: true }) {
+    return await Category.find(query, projection, options).sort(sort).exec();
+  }
+  async findOne(query, projection, options = { lean: true }) {
+    return await Category.findOne(query, projection, options).exec();
   }
   async findAll() {
     const categories = await Category.find({});
@@ -20,10 +21,6 @@ export class CategoryModel {
   }
   async findOneById(categoryId) {
     const category = await Category.findOne({ _id: categoryId });
-    return category;
-  }
-  async findOneByName(title) {
-    const category = await Category.findOne({ title });
     return category;
   }
   async findOneAndDelete(categoryId) {
@@ -45,9 +42,6 @@ export class CategoryModel {
   }
   async deleteAll() {
     await Category.deleteMany({});
-  }
-  async insertAll(data) {
-    await Category.insertMany(data);
   }
 }
 
