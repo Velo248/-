@@ -1,4 +1,5 @@
 import userService from './userService.js';
+import searchSend from './searchSend.js';
 
 const logout = async () => {
   const response = await userService.logout();
@@ -24,6 +25,12 @@ const headerMaker = () => {
         <div class="text_blind">간식조아 로고</div>
       </a>
     </h1>
+    <form class="search_form">
+      <input name="keyword" type="text" onsubmit="searchSend()"/>
+      <button type="submit">
+        <em></em>
+      </button>
+    </form>
     <div class="nav_wrap">
       <div class="subnav">
         <a href="#" class='logout_btn'>로그아웃</a>
@@ -45,6 +52,12 @@ const headerMaker = () => {
         <div class="text_blind">간식조아 로고</div>
       </a>
     </h1>
+    <form class="search_form">
+      <input name="keyword" type="text" onsubmit="searchSend()"/>
+      <button type="submit">
+        <em></em>
+      </button>
+    </form>
     <div class="nav_wrap">
       <div class="subnav">
         <a href="/login">로그인</a>

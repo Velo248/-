@@ -17,13 +17,13 @@ const getAllItems = async () => {
     console.log(err);
   }
 
-  const { imageKey, title, manufacturer, detailDescription, price, _id } =
+  const { imageKey, title, manufacturer, shortDescription, price, _id } =
     productsList;
 
   breadcrumb = `
     <a href="/">Main</a>
     &gt;
-    <a href="/product">제품</a>
+    <a href="/product">상품</a>
     &gt;
     <a href="#">${title}</a>
     `;
@@ -35,7 +35,7 @@ const getAllItems = async () => {
   <div class="detail-producer">${manufacturer}</div>
   <h3 class="detail-title">${title}</h3>
 
-  <p class="detail-producer">${detailDescription}</p>
+  <p class="detail-producer">${shortDescription}</p>
   <div class="detail-price">${price.toLocaleString('ko-KR')} 원</div>
   <div>
     <label class="blind" for="quantity">수량</label>
@@ -94,6 +94,6 @@ const getBasket = (productId) => {
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
-  // /* ----- ALL 탭에서 모든 제품 가져오기 ----- */
+  // /* ----- ALL 탭에서 모든 상품 가져오기 ----- */
   await getAllItems();
 });

@@ -1,5 +1,6 @@
 .box-style-center {
   align-items: flex-start;
+  margin-top: 10rem;
 }
 
 .box-style-center .flex-justify-center {
@@ -8,8 +9,8 @@
 }
 
 .box-style-center .img_wrap {
-  width: 30vw;
-  height: 30vw;
+  width: 30rem;
+  height: 30rem;
   margin-right: 6rem;
   overflow: hidden;
 }
@@ -27,10 +28,14 @@
 .box-style-center .product-detail {
   width: 30vw;
 }
+
 .box-style-center h3 {
   margin-top: 1rem;
   margin-bottom: 1.3rem;
   font-size: 3.6rem;
+  max-width: 43rem;
+  line-height: 1.2;
+  word-break: keep-all;
 }
 
 .box-style-center p {

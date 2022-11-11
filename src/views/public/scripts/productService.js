@@ -72,15 +72,10 @@ productService.getProductByProductId = async (productId) => {
  * @param { String } search
  * @returns { json } response
  */
-productService.getProductBySearch = async (search) => {
-  const data = {
-    search: search,
-  };
-
+productService.getProductBySearch = async (keyword) => {
   const reqObj = {
-    target: `/search/products`,
+    target: `/search/?keyword=${keyword}`,
     method: 'GET',
-    bodyObj: data,
   };
 
   const response = await customFetcher(reqObj);
