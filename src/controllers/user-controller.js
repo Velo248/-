@@ -41,8 +41,10 @@ class UserController {
       const password = req.body.password;
 
       const userToken = await userService.getUserToken({ email, password });
-      logger.info('login');
-      logger.error('login-error');
+
+      const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+      logger.info(ip + ' login');
+
       res.status(200).json(userToken);
     } catch (err) {
       next(err);
