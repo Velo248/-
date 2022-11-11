@@ -1,4 +1,5 @@
-import userService from './userService';
+import userService from './userService.js';
+
 const logout = () => {
   userService.logout();
   localStorage.clear();
