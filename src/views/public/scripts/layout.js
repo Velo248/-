@@ -1,12 +1,12 @@
 import userService from './userService.js';
 
-const logout = () => {
-  userService.logout();
-  localStorage.clear();
-  sessionStorage.clear();
-  alert('로그아웃 되었습니다');
-  headerMaker();
-  location.href = '/';
+const logout = async () => {
+  const response = await userService.logout();
+  if (response) {
+    alert('로그아웃 되었습니다');
+    headerMaker();
+    location.href = '/';
+  }
 };
 
 const clickEventMap = {
