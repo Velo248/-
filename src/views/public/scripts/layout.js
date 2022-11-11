@@ -1,5 +1,5 @@
 import userService from './userService';
-const logout = async () => {
+const logout = () => {
   userService.logout();
   localStorage.clear();
   sessionStorage.clear();
