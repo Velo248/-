@@ -8,7 +8,7 @@ class OrderController {
       const orderBy = req.query.order || 'asc'; // url 쿼리에서 order 받기, 기본값 asc
       const offset = Number(req.query.offset) ? req.query.offset : 1; // url 쿼리에서 offset 받기, 기본값 1
       const limit = Number(req.query.limit) ? req.query.limit : 10; // url 쿼리에서 limit 받기, 기본값 10
-
+      //sortKey은 임의로 정한 것 변경 필요
       const sortKey = {
         created_date: 'createdAt',
         updated_date: 'updatedAt',
@@ -30,14 +30,25 @@ class OrderController {
       if (limit < 1 || 100 <= limit) {
         throw new Error('limit 범위는 1-100입니다.');
       }
-
-      const newQuery = {
-        sortBy: sortKey[sortBy],
-        orderBy: sortOrderType[orderBy],
-        offset,
-        limit,
-      };
-      const orders = await orderService.getOrdersByAdmin(newQuery);
+      if (
+        req.query.sort ||
+        req.query.order ||
+        req.query.offset ||
+        req.query.limit
+      ) {
+        console.log('query 가 존재합니다');
+        const newQuery = {
+          sortBy: sortKey[sortBy],
+          orderBy: sortOrderType[orderBy],
+          offset,
+          limit,
+        };
+        const orders = await orderService.getOrdersByAdmin(newQuery);
+        res.status(200).json({ orders });
+        //query없으면 전체반환
+        return;
+      }
+      const orders = await orderService.getOrders();
       res.status(200).json({ orders });
       //query없으면 전체반환
     } catch (e) {

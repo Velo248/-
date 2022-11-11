@@ -52,9 +52,9 @@ class CategoryService {
     return products;
   }
   async getDeletedCategoriesProducts() {
-    const deletedCategory = await this.categoryModel.findOneByName(
-      '삭제된 카테고리',
-    );
+    const deletedCategory = await this.categoryModel.findOne({
+      title: '삭제된 카테고리',
+    });
     if (!deletedCategory) {
       return [];
     }
