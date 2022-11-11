@@ -23,29 +23,30 @@ const registerValid = (formObj) => {
 
   if (!formValue) {
     alert('모든 형식을 입력해주세요.');
-    return;
+    return false;
   }
   if (!isEmailValid) {
     alert('이메일을 올바른 형식으로 입력해주세요. (ex) abc@gmail.com');
     email.focus();
-    return;
+    return false;
   }
   if (formValue.userName < 2) {
     alert('유저 이름을 2글자 이상 입력하세요');
     userName.focus();
-    return;
+    return false;
   }
   if (!isPasswordValid.code) {
     alert(isPasswordValid.err);
     password.value = '';
     password2.value = '';
     password.focus();
-    return;
+    return false;
   }
   if (!chkPolicy[0].checked) {
     alert('개인정보 제공에 동의하지 않으면 회원가입이 불가능합니다.');
-    return;
+    return false;
   }
+  return true;
 };
 
 registerForm.addEventListener('submit', async (e) => {
@@ -56,7 +57,9 @@ registerForm.addEventListener('submit', async (e) => {
     formObj[key] = formData.get(key);
   }
 
-  registerValid(formObj);
+  const vaild = registerValid(formObj);
+  if (!vaild) return;
+
   const obj = {
     email: formObj.email,
     password: formObj.password,
