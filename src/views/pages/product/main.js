@@ -55,7 +55,6 @@ const getCategoryItems = () => {
         const $productsBox = document.querySelector('.products_box');
         let selectedBox = ``;
 
-        console.log(selectedItems);
         try {
           selectedItems = await getAPI(
             `/api/categories/${categoryId}/products`,

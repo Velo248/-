@@ -6,21 +6,6 @@ const currentPasswordInput = document.querySelector('.password');
 const newPasswordInput = document.querySelector('.new_password');
 const newPasswordConfirmInput = document.querySelector('.new_password_confirm');
 
-// const currentPasswordChecker = () => {
-//   const currentPassword = currentPasswordInput.value;
-
-//   if (currentPassword.length < 8) {
-//     return { code: false, err: 'password longer then 8' };
-//   }
-//   const regex = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/);
-//   const test = regex.test(currentPassword);
-//   if (test) {
-//     return { code: test, currentPassword };
-//   } else {
-//     return { code: false, err: 'password 형식이 맞지 않습니다' };
-//   }
-// };
-
 const newPasswordConfirmChecker = () => {
   const { code, err } = errorUtil.isValidPW(
     newPasswordInput.value,
@@ -51,13 +36,10 @@ const updateUserPassword = async (currentPassword, newPassword) => {
 const finishPasswordEditHandler = async (e) => {
   e.preventDefault();
   //   const currentCheck = currentPasswordChecker();
-  const currentCheck = {
-    code: true,
-    currentPassword: currentPasswordInput.value,
-  };
+  const currentPassword = currentPasswordInput.value;
   const newCheck = newPasswordConfirmChecker();
-  if (!currentCheck.code) {
-    alert(currentCheck.err);
+  if (!currentPassword) {
+    alert('현재 비밀번호를 입력해주세요');
     currentPasswordInput.focus();
     return;
   } else if (!newCheck.code) {
