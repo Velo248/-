@@ -1,4 +1,6 @@
+import userService from './userService';
 const logout = () => {
+  userService.logout();
   localStorage.clear();
   sessionStorage.clear();
   alert('로그아웃 되었습니다');
