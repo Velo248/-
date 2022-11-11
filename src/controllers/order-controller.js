@@ -1,3 +1,4 @@
+import is from '@sindresorhus/is';
 import { orderService } from '../services';
 
 class OrderController {

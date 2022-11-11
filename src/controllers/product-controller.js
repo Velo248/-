@@ -1,4 +1,5 @@
 import { productService } from '../services';
+import is from '@sindresorhus/is';
 
 class ProductController {
   async getProducts(req, res, next) {

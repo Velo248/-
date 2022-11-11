@@ -1,3 +1,4 @@
+import is from '@sindresorhus/is';
 import { categoryService } from '../services';
 
 class CategoryController {
