@@ -43,6 +43,14 @@ export class CategoryModel {
   async deleteAll() {
     await Category.deleteMany({});
   }
+  async findFilteredBySortAndOrders(query) {
+    const { sortBy, orderBy, limit, offset } = query;
+    const orders = await Order.find({})
+      .sort({ [sortBy]: orderBy })
+      .skip(limit * (offset - 1))
+      .limit(limit);
+    return orders;
+  }
 }
 
 const categoryModel = new CategoryModel();

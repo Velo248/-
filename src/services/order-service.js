@@ -161,6 +161,10 @@ class OrderService {
     const orders = await this.orderModel.find(query, projection, sort, options);
     return orders;
   }
+  async getOrdersByAdmin(query) {
+    const orders = await this.orderModel.findFilteredBySortAndOrders(query);
+    return orders;
+  }
 }
 
 const orderService = new OrderService(orderModel, productModel);

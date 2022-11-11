@@ -39,7 +39,6 @@ class CategoryService {
     return category;
   }
   async getProductsByCategories(categoryId) {
-    console.log(categoryId);
     const category = await this.categoryModel.findOneById(categoryId);
     if (!category) {
       throw new Error(
