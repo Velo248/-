@@ -48,6 +48,14 @@ export class OrderModel {
   async getCount() {
     return await Order.countDocuments({});
   }
+  async findFilteredBySortAndOrders(query) {
+    const { sortBy, orderBy, limit, offset } = query;
+    const orders = await Order.find({})
+      .sort({ [sortBy]: orderBy })
+      .skip(limit * (offset - 1))
+      .limit(limit);
+    return orders;
+  }
 }
 
 const orderModel = new OrderModel();
