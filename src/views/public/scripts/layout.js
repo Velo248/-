@@ -1,5 +1,4 @@
 import userService from './userService.js';
-import searchSend from './searchSend.js';
 
 const logout = async () => {
   const response = await userService.logout();
@@ -10,8 +9,18 @@ const logout = async () => {
   }
 };
 
+const searchProduct = async (data) => {
+  const formData = new FormData(data);
+  const keyword = formData.get('keyword');
+  location.href = `/search/?keyword=${keyword}`;
+};
+
 const clickEventMap = {
   logout_btn: logout,
+};
+
+const submitEventMap = {
+  search_form: searchProduct,
 };
 
 const headerMaker = () => {
@@ -26,7 +35,7 @@ const headerMaker = () => {
       </a>
     </h1>
     <form class="search_form">
-      <input name="keyword" type="text" onsubmit="searchSend()"/>
+      <input name="keyword" type="text"/>
       <button type="submit">
         <em></em>
       </button>
@@ -39,8 +48,7 @@ const headerMaker = () => {
         <a href="/basket">장바구니</a>
       </div>
       <nav>
-        <a href="/product">제품</a>
-        <a href="#" onclick="alert('개발 예정입니다')">이벤트</a>
+        <a href="/product">상품</a>
       </nav>
     </div>
     `;
@@ -53,7 +61,7 @@ const headerMaker = () => {
       </a>
     </h1>
     <form class="search_form">
-      <input name="keyword" type="text" onsubmit="searchSend()"/>
+      <input name="keyword" type="text"/>
       <button type="submit">
         <em></em>
       </button>
@@ -65,8 +73,7 @@ const headerMaker = () => {
         <a href="/basket">장바구니</a>
       </div>
       <nav>
-        <a href="/product">제품</a>
-        <a href="#" onclick="alert('개발 예정입니다')">이벤트</a>
+        <a href="/product">상품</a>
       </nav>
     </div>
     `;
@@ -75,6 +82,12 @@ const headerMaker = () => {
   header.addEventListener('click', (e) => {
     if (!clickEventMap[e.target.className]) return;
     clickEventMap[e.target.className]();
+  });
+
+  header.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!submitEventMap[e.target.className]) return;
+    submitEventMap[e.target.className](e.target);
   });
 };
 
