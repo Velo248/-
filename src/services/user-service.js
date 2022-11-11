@@ -62,10 +62,8 @@ class UserService {
     const token = jwt.sign({ userId: user._id, role: user.role }, secretKey);
 
     const loginTime = user.loggedInAt ? user.loggedInAt.getTime() : 0;
-    console.log(user.passwordUpdatedAt.getTime());
     const updatedAt = user.passwordUpdatedAt.getTime();
     const currentTime = Date.now();
-    console.log(currentTime);
 
     const seconds = Math.floor((currentTime - updatedAt) / 1000);
     const msg = user.passwordUpdatedAt
@@ -122,7 +120,6 @@ class UserService {
   }
   async setUser(userInfoRequired, toUpdate) {
     const { userId, currentPassword } = userInfoRequired;
-    console.log(userInfoRequired);
     let user = await this.userModel.findById(userId);
     if (!user) {
       throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');

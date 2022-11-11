@@ -4,27 +4,27 @@ import { logger } from '../utils/logger';
 
 class UserController {
   async register(req, res, next) {
-    if (is.emptyObject(req.body)) {
-      throw new Error(
-        'headers의 Content-Type을 application/json으로 설정해주세요',
-      );
-    }
-    const fullName = req.body.fullName;
-    const email = req.body.email;
-    const password = req.body.password;
-    const phoneNumber = req.body.phoneNumber;
-    const address = req.body.address;
-    const role = req.body.role;
-    const newUser = await userService.addUser({
-      fullName,
-      email,
-      password,
-      phoneNumber,
-      address,
-      role,
-    });
-    res.status(201).json(newUser);
     try {
+      if (is.emptyObject(req.body)) {
+        throw new Error(
+          'headers의 Content-Type을 application/json으로 설정해주세요',
+        );
+      }
+      const fullName = req.body.fullName;
+      const email = req.body.email;
+      const password = req.body.password;
+      const phoneNumber = req.body.phoneNumber;
+      const address = req.body.address;
+      const role = req.body.role;
+      const newUser = await userService.addUser({
+        fullName,
+        email,
+        password,
+        phoneNumber,
+        address,
+        role,
+      });
+      res.status(201).json(newUser);
     } catch (err) {
       next(err);
     }
