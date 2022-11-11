@@ -89,7 +89,7 @@ class CategoryService {
     await this.categoryModel.findOneAndDelete(categoryId);
 
     //삭제 후 해당 카테고리에 있던 상품들 삭제된 카테고리라는 카테고리로 이동시킴
-    let deletedCategory = await this.categoryModel.findOneBy({
+    let deletedCategory = await this.categoryModel.findOne({
       title: '삭제된 카테고리',
     });
     if (deletedCategory) {
