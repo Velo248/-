@@ -1,6 +1,5 @@
 .search_wrap {
   padding: 3rem;
-  height: 100vh;
   margin: 7rem auto;
   border: 1px solid #ddd;
 }
@@ -41,4 +40,5 @@
 .search_wrap .img_wrap {
   width: 20rem;
   height: 20rem;
+  margin-bottom: 1.5rem;
 }

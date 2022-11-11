@@ -9,8 +9,18 @@ const logout = async () => {
   }
 };
 
+const searchProduct = async (data) => {
+  const formData = new FormData(data);
+  const keyword = formData.get('keyword');
+  location.href = `/search/?keyword=${keyword}`;
+};
+
 const clickEventMap = {
   logout_btn: logout,
+};
+
+const submitEventMap = {
+  search_form: searchProduct,
 };
 
 const headerMaker = () => {
@@ -24,6 +34,12 @@ const headerMaker = () => {
         <div class="text_blind">간식조아 로고</div>
       </a>
     </h1>
+    <form class="search_form">
+      <input name="keyword" type="text"/>
+      <button type="submit">
+        <em></em>
+      </button>
+    </form>
     <div class="nav_wrap">
       <div class="subnav">
         <a href="#" class='logout_btn'>로그아웃</a>
@@ -32,8 +48,7 @@ const headerMaker = () => {
         <a href="/basket">장바구니</a>
       </div>
       <nav>
-        <a href="/product">제품</a>
-        <a href="#" onclick="alert('개발 예정입니다')">이벤트</a>
+        <a href="/product">상품</a>
       </nav>
     </div>
     `;
@@ -45,6 +60,12 @@ const headerMaker = () => {
         <div class="text_blind">간식조아 로고</div>
       </a>
     </h1>
+    <form class="search_form">
+      <input name="keyword" type="text"/>
+      <button type="submit">
+        <em></em>
+      </button>
+    </form>
     <div class="nav_wrap">
       <div class="subnav">
         <a href="/login">로그인</a>
@@ -52,8 +73,7 @@ const headerMaker = () => {
         <a href="/basket">장바구니</a>
       </div>
       <nav>
-        <a href="/product">제품</a>
-        <a href="#" onclick="alert('개발 예정입니다')">이벤트</a>
+        <a href="/product">상품</a>
       </nav>
     </div>
     `;
@@ -62,6 +82,12 @@ const headerMaker = () => {
   header.addEventListener('click', (e) => {
     if (!clickEventMap[e.target.className]) return;
     clickEventMap[e.target.className]();
+  });
+
+  header.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!submitEventMap[e.target.className]) return;
+    submitEventMap[e.target.className](e.target);
   });
 };
 
