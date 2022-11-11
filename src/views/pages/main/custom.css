@@ -5,8 +5,8 @@
 
 .main_txt {
   position: absolute;
-  top: 35%;
-  left: 6%;
+  top: 34%;
+  left: 14%;
   transform: translateY(-50%);
   z-index: 1;
 }
@@ -22,13 +22,12 @@
 
 .main_bg {
   position: absolute;
-  top: 55%;
-  right: 0%;
+  top: 53%;
+  right: 19%;
   transform: translateY(-50%);
-
-  width: 50rem;
-  height: 50rem;
-  background-image: url('/public/images/main/purifier.jpg');
+  width: 30rem;
+  height: 28rem;
+  background-image: url(/public/images/products/snack/snack2.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
