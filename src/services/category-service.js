@@ -20,8 +20,9 @@ class CategoryService {
   }
 
   //카테고리 목록을 받음
-  async getCategorylist() {
-    const products = await this.categoryModel.findAllExceptDeleted();
+  async getCategoryList() {
+    const query = { title: { $nin: ['삭제된 카테고리'] } };
+    const products = await this.categoryModel.find({ query });
     return products;
   }
 
@@ -32,7 +33,8 @@ class CategoryService {
   }
   //카테고리 이름으로 카테고리 받음
   async getCategoryByTitle(title) {
-    const category = await this.categoryModel.findOneByName(title);
+    const query = { title };
+    const category = await this.categoryModel.findOne(query);
     return category;
   }
   async getProductsByCategories(categoryId) {
