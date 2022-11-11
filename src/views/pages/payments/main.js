@@ -14,7 +14,7 @@ const createOrderItem = (product, quantity) => {
     <div>
       <div class="img_wrap img-s">
         <img
-          src="${product.imageKey}"
+          src="/public/images/${product.imageKey}.jpg"
           alt="${product.title}"
           class="product_image"
         />

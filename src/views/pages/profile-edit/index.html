@@ -1,71 +1,101 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keyword" content="고양이 사료 장난감 츄르 간식 화장실 용품" />
+    <meta name="description" content="반려동물 친구들을 위한 다양한 아이템샵" />
+    <meta name="author" content="[5팀]오히려좋아" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kdt-sw3-team05.elicecoding.com/" />
+    <meta property="og:title" content="(주) 간식조아" />
+    <meta property="og:site_name" content="[5팀]오히려좋아" />
+    <meta
+      property="og:description"
+      content="반려동물 친구들을 위한 다양한 아이템샵"
+    />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:image" content="/public/images/common/logo-square.png" />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="400" />
+    <title>내 정보 수정 | 간식조아</title>
+    <link rel="shortcut icon" href="/public/images/common/favicon.ico" />
+    <link rel="stylesheet" href="/public/css/style.css" />
+    <script src="/public/scripts/layout.js" defer></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>내 정보 수정</title>
-  <link rel="stylesheet" href="/public/css/style.css" />
-  <script src="/public/scripts/layout.js" defer></script>
-</head>
+  <body>
+    <header></header>
 
-<body>
-  <header></header>
+    <main class="flex-column-center">
+      <form class="profile_edit content-box">
+        <p class="flex-justify-between">
+          <button class="sign_out" type="button">탈퇴하기</button>
+          <button class="password_edit small bg-deepgray" type="button">
+            비밀번호 수정
+          </button>
+        </p>
 
-  <main class="flex-column-center">
-    <form class="profile_edit content-box">
-      <!-- <div class="content-box"> -->
-      <button class="sign_out" type="button">탈퇴하기</button>
-      <button class="password_edit" type="button">비밀번호 수정</button>
-
-      <div>
-        <em>정보 수정</em>
-        <div class="profile">
-          <!-- 여기부터 넣기 -->
-          <div>
-            <label>사용자명</label>
-            <input type="text" class="username" value="${fullName}" readonly></input>
-          </div>
-          <div>
-            <label>이메일</label>
-            <input class="email" value="${email}" readonly></input>
-          </div>
-          <div>
-            <label>전화번호:</label>
-            <input type="text" class="phone" placeholder="00000000000 -없이" />
-          </div>
-          <!-- 여기까지 넣기 -->
+        <div>
+          <em>정보 수정</em>
+          <div class="profile"></div>
         </div>
-      </div>
-      <div class="address">
-        <em>주소 입력/수정</em>
-        <div class="info">
-          <div class="address_field">
-            <div>
-              <input type="text" name="postal-code" id="postal-code" class="address_long" placeholder="주소" disabled />
+        <div class="address">
+          <em>주소 입력/수정</em>
+          <div class="info">
+            <div class="address_field">
               <div>
-                <input type="text" name="postal-code" id="postal-code" class="postal_code w-s" placeholder="12034"
-                  disabled />
-                <input type="text" name="postal-code" id="postal-code" class="address_detail" placeholder="상세주소"
-                  disabled />
-                <button class="address_search small bg-deepgray" type="button">주소 검색</button>
+                <input
+                  type="text"
+                  name="postal-code"
+                  id="postal-code"
+                  class="address_long"
+                  placeholder="주소"
+                  disabled
+                />
+                <div>
+                  <input
+                    type="text"
+                    name="postal-code"
+                    id="postal-code"
+                    class="postal_code w-s"
+                    placeholder="12034"
+                    disabled
+                  />
+                  <input
+                    type="text"
+                    name="postal-code"
+                    id="postal-code"
+                    class="address_detail"
+                    placeholder="상세주소"
+                    disabled
+                  />
+                  <button
+                    class="address_search small bg-deepgray"
+                    type="button"
+                  >
+                    주소 검색
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="wrapper">
-        <label>현재 비밀번호</label>
-        <input type="password" class="password" placeholder="현재 비밀번호" required />
-      </div>
-      <button type="submit" class="full bg-darkgreen">수정 완료</button>
-      <!-- </div> -->
-    </form>
-  </main>
-  <footer></footer>
-  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-  <script src="./main.js" type="module"></script>
-</body>
-
+        <div class="wrapper">
+          <label>현재 비밀번호</label>
+          <input
+            type="password"
+            class="password"
+            placeholder="현재 비밀번호"
+            required
+          />
+        </div>
+        <button type="submit" class="full bg-darkgreen">수정 완료</button>
+      </form>
+    </main>
+    <footer></footer>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="./main.js" type="module"></script>
+  </body>
 </html>

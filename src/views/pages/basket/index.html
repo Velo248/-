@@ -1,66 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>간식조아 | 장바구니</title>
-    <link rel="stylesheet" href="/public/css/style.css" />
-    <script src="/public/scripts/layout.js" defer></script>
-  </head>
 
-  <body>
-    <header></header>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="keyword" content="고양이 사료 장난감 츄르 간식 화장실 용품" />
+  <meta name="description" content="반려동물 친구들을 위한 다양한 아이템샵" />
+  <meta name="author" content="[5팀]오히려좋아" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kdt-sw3-team05.elicecoding.com/" />
+  <meta property="og:title" content="(주) 간식조아" />
+  <meta property="og:site_name" content="[5팀]오히려좋아" />
+  <meta property="og:description" content="반려동물 친구들을 위한 다양한 아이템샵" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:image" content="/public/images/common/logo-square.png" />
+  <meta property="og:image:width" content="400" />
+  <meta property="og:image:height" content="400" />
+  <title>장바구니 | 간식조아</title>
+  <link rel="shortcut icon" href="/public/images/common/favicon.ico" />
+  <link rel="stylesheet" href="/public/css/style.css" />
+  <script src="/public/scripts/layout.js" defer></script>
+</head>
 
-    <main class="flex-column-center">
-      <div class="content-box">
-        <div class="basket">
-          <!-- 맨윗부분 -->
-          <div class="flex-justify-between">
-            <div class="input_wrap">
-              <input id="basketChkAll" type="checkbox" />
-              <label for="basketChkAll"> 전체선택 </label>
-            </div>
-            <div>
-              <button class="remove_selected_item small bg-darkgray">선택 삭제</button>
-              <button class="remove_all_items small bg-dark">전체 삭제</button>
-            </div>
+<body>
+  <header></header>
+
+  <main class="flex-column-center">
+    <div class="content-box">
+      <div class="basket">
+        <div class="flex-justify-between">
+          <div class="input_wrap">
+            <input id="basketChkAll" type="checkbox" />
+            <label for="basketChkAll"> 전체선택 </label>
           </div>
-          <!-- 제품 리스트 부분 -->
-          <!-- 한줄한줄 생성 -->
-          <div class="basket_item_list overflow-h32 w-m">
-            <div
-              class="flex-all-center product"
-              data-product_id="testId123zweqz"
-            >
-              <input type="checkbox" />
-              <div class="img_wrap">
-                <img
-                  src="/public/images/products/driedFood/driedFood0.jpg"
-                  alt=""
-                  class="product_img"
-                />
-              </div>
-              <div class="product_name">제품명제품명제품명...</div>
-              <div class="product_price">2,000</div>
-              <div>
-                <input type="number" class="product_count" min="0" />
-              </div>
-            </div>
+          <div>
+            <button class="remove_selected_item small bg-darkgray">선택 삭제</button>
+            <button class="remove_all_items small bg-dark">전체 삭제</button>
           </div>
-          <div class="flex-center-space">
-            <div>
-              <span>총</span>
-              <span class="product_total_price">0</span>
-              <span>원</span>
-            </div>
-              <button class="payment middle bg-darkgreen">결제하기</button>
-            </div>
+        </div>
+        <div class="basket_item_list overflow-h32 w-m">
+        </div>
+        <div class="right">
+          <div>
+            <span>총</span>
+            <span class="product_total_price">0</span>
+            <span>원</span>
+            <button class="payment middle bg-darkgreen">결제하기</button>
           </div>
         </div>
       </div>
-    </main>
-    <footer></footer>
-    <script src="./main.js" type="module"></script>
-  </body>
+    </div>
+    </div>
+  </main>
+  <footer></footer>
+  <script src="./main.js" type="module"></script>
+</body>
+
 </html>

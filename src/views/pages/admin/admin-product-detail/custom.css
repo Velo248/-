@@ -22,7 +22,6 @@ h2 {
 
 .edit_form,
 .product_detail_name {
-  /* display: grid; */
   height: 100%;
   display: flex;
   flex-direction: column;

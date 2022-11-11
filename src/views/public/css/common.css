@@ -26,7 +26,6 @@ body {
   font-family: 'Poppins', 'Noto Sans KR', sans-serif;
 }
 
-/* Change the color to your own background color */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -153,7 +152,6 @@ b {
   flex-direction: column;
 }
 
-/* class로 관리하는 background color */
 .bg-blue {
   background-color: var(--blue);
 }
@@ -227,7 +225,6 @@ b {
   clip: rect(0, 0, 0, 0);
 }
 
-/* font weight */
 .lighter {
   font-weight: lighter;
 }
@@ -240,8 +237,6 @@ b {
   font-weight: bold;
 }
 
-/* font style */
-/* hightlight */
 .fz-s {
   font-size: 1rem;
 }
@@ -294,7 +289,26 @@ b {
   padding: 0 1rem;
 }
 
-/* width */
+.padding-w-m {
+  padding: 0 2rem;
+}
+
+.padding-w-l {
+  padding: 0 3rem;
+}
+
+.margin-w-s {
+  margin: 0 1rem;
+}
+
+.margin-w-m {
+  margin: 0 2rem;
+}
+
+.margin-w-l {
+  margin: 0 3rem;
+}
+
 .w-s {
   width: 7rem;
 }
@@ -303,7 +317,15 @@ b {
   width: 10rem;
 }
 
+.w-ms {
+  width: 10rem;
+}
+
 .w-mm {
+  width: 15rem;
+}
+
+.w-ml {
   width: 20rem;
 }
 
@@ -319,7 +341,6 @@ b {
   width: 70rem;
 }
 
-/* height */
 .h-s {
   height: 8rem;
 }
@@ -328,7 +349,6 @@ b {
   height: 38rem;
 }
 
-/* text-align */
 .left {
   text-align: left;
 }
@@ -341,7 +361,6 @@ b {
   text-align: right;
 }
 
-/* font style set */
 .font-hightlight {
   font-size: 2rem;
   margin: 1rem 0;
@@ -364,7 +383,6 @@ b {
   clip: rect(0, 0, 0, 0);
 }
 
-/* 로고 시작 */
 .main_logo {
   display: inline-block;
   background-image: url('/public/images/common/logo-b.png');
@@ -373,9 +391,6 @@ b {
   height: 7.9rem;
 }
 
-/* 로고 끝 */
-
-/* 선택하는 탭 모양 시작 */
 .category_tab {
   display: flex;
   width: 100%;
@@ -401,9 +416,6 @@ b {
   border-bottom: none;
 }
 
-/* 선택하는 탭 모양 끝 */
-
-/* 버튼 모양 */
 .btn-s {
   display: inline-block;
   border-radius: 2.5rem;
@@ -438,7 +450,6 @@ b {
   padding: 1rem 2rem;
   border-radius: 0.3rem;
   color: #fff;
-  /* width: 100%; */
   font-size: 1.6rem;
 }
 
@@ -451,7 +462,6 @@ b {
   font-size: 1.6rem;
 }
 
-/* 정렬 + 모양용 */
 .more {
   text-align: right;
   padding: 0.6rem;
@@ -471,12 +481,10 @@ b {
   margin: 0 auto;
 }
 
-/* 태그 감싸는  */
 .box-style-center {
   width: 80%;
   display: flex;
   flex-direction: column;
-  /* height: calc(100vh - 28.3rem); */
   margin: 0 auto;
   justify-content: center;
   align-items: center;
@@ -501,7 +509,6 @@ b {
   text-align: left;
   width: 14rem;
   font-size: 1.8rem;
-  /* margin-right: 2rem; */
 }
 
 .box-style-center > form input:not([type='radio']) {
@@ -570,7 +577,6 @@ b {
 }
 
 .content-box > div {
-  /* border: 1px solid #ddd; */
   border: 1px solid #ebebeb;
   padding: 2rem;
   margin: 1.2rem 0;
@@ -591,7 +597,7 @@ b {
 }
 
 .content-box label {
-  width: 10rem;
+  width: 12rem;
   display: inline-block;
   text-align: center;
 }
@@ -612,7 +618,6 @@ b {
 .table-box > :first-child {
   display: flex;
   justify-content: space-between;
-  /* margin-right: 1.6rem; */
   padding-top: 1.6rem;
   padding-bottom: 1.2rem;
 }
