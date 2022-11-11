@@ -9,7 +9,8 @@ class CategoryService {
   //카테고리 추가
   async addCategory(categoryInfo) {
     //같은이름의 카테고리가 이미 있다면 추가하지 않음
-    const category = await this.categoryModel.findOneByName(categoryInfo.title);
+    const query = { title: categoryInfo.title };
+    const category = await this.categoryModel.findOne(query);
     if (category) {
       throw new Error(
         '이 이름은 현재 사용중입니다. 다른 이름을 입력해 주세요..',
@@ -45,7 +46,9 @@ class CategoryService {
         '해당 id의 카테고리를 찾을 수 없습니다. 다시 확인해주세요.',
       );
     }
-    const products = await this.productModel.findAllByCategory(categoryId);
+    const products = await this.productModel.find({
+      title: categoryId,
+    });
     return products;
   }
   async getDeletedCategoriesProducts() {
@@ -55,9 +58,9 @@ class CategoryService {
     if (!deletedCategory) {
       return [];
     }
-    const products = await this.productModel.findAllByCategory(
-      deletedCategory._id,
-    );
+    const products = await this.productModel.find({
+      title: deletedCategory._id,
+    });
     return products;
   }
   //카테고리 정보 수정
@@ -95,7 +98,7 @@ class CategoryService {
         title: '삭제된 카테고리',
       });
     }
-    const products = await this.productModel.findAllByCategory(categoryId);
+    const products = await this.productModel.find({ title: categoryId });
     for (const product of products) {
       await this.productModel.update({
         productId: product._id,
