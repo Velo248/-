@@ -11,12 +11,16 @@ import {
   sendMailRouter,
 } from './routers';
 import { errorHandler } from './middlewares';
-const app = express();
 import morgan from 'morgan';
-
 import { stream } from './utils/logger';
-//app.use(morgan('combined', { stream }));
 
+const app = express();
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(morgan('combined', { stream }));
+} else {
+  app.use(morgan('dev')); // 개발환경이면
+}
 // CORS 에러 방지
 app.use(cors());
 

@@ -1,6 +1,6 @@
 import is from '@sindresorhus/is';
 import { orderService } from '../services';
-
+import { logger } from '../utils/logger';
 class OrderController {
   async getOrders(req, res, next) {
     try {
@@ -83,6 +83,9 @@ class OrderController {
       };
       const newOrder = await orderService.addOrder(orderInfo);
       res.status(201).json({ newOrder });
+      logger.info(
+        'payment id ' + newOrder._id + ' totalPrice : ' + newOrder.totalPrice,
+      );
     } catch (err) {
       next(err);
     }
