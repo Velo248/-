@@ -1,9 +1,6 @@
 import { orderService } from '../services';
 
 class OrderController {
-  constructor(orderService) {
-    this.orderService = orderService;
-  }
   async getOrders(req, res, next) {
     try {
       const sortBy = req.query.sort || 'created_date';
@@ -178,6 +175,6 @@ class OrderController {
     }
   }
 }
-const orderController = new OrderController(orderService);
+const orderController = new OrderController();
 
 export { orderController };
