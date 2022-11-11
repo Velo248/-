@@ -1,6 +1,5 @@
 import { orderModel } from '../db';
 import { productModel } from '../db';
-
 class OrderService {
   constructor(orderModel, productModel) {
     this.orderModel = orderModel;
