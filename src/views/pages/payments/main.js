@@ -60,6 +60,14 @@ const paintUserSection = (root, user) => {
     </div>
     `;
   root.appendChild(template);
+
+  if (!user.address.address1) {
+    alert(
+      '주문자 정보가 없습니다 내 정보 수정에서 주소지와 연락처를 입력해주세요',
+    );
+    location.href = '/profile-edit';
+  }
+
   return;
 };
 
@@ -102,7 +110,6 @@ const updateOrderObj = (orderObj) => {
 const paymentBtnEventHandler = (orderObj) => async (e) => {
   e.target.disabled = true;
   orderObj = updateOrderObj(orderObj);
-  console.log(orderObj);
   const selectedPaymentType = getSelectedPaymentType();
   if (
     !orderObj.address.address1 ||
