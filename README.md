@@ -2,7 +2,10 @@
 
 <div>
 
-<img alt="쇼핑-데모 로고" src="https://i.ibb.co/xSZHxmy/image.png">
+<a href="https://kdt-sw3-team05.elicecoding.com">
+  <img alt="간식조아 메인페이지" src="https://i.ibb.co/7NCW9XV/main.png">
+</a>
+서비스로 바로가기(위 이미지 클릭)
 
 </div>
 
@@ -10,24 +13,32 @@
 
 ## 1. 서비스 소개
 
-#### 제품 등록, 장바구니 추가, 주문하기 등 쇼핑몰의 핵심 서비스를 구현합니다.
-
 1. 회원가입, 로그인, 회원정보 수정 등 **유저 정보 관련 CRUD**
 2. **제품 목록**을 조회 및, **제품 상세 정보**를 조회 가능함.
 3. 장바구니에 제품을 추가할 수 있으며, **장바구니에서 CRUD** 작업이 가능함.
-4. 장바구니는 서버 DB가 아닌, 프론트 단에서 저장 및 관리됨 (localStorage, indexedDB 등)
+4. 장바구니는 기본적으로 프론트 단(localStorage)에 저장되며 로그인된 사용자는 DB와의 연동을 고려함
 5. 장바구니에서 주문을 진행하며, **주문 완료 후 조회 및 삭제**가 가능함.
-6. 추가 기능 ...
+6. **검색**기능을 *추가*하여 메인 페이지에서 키워드를 통해 제품을 검색할 수 있음
+7.
 
 <br />
 
+### 1-0. 배포된 페이지 및 테스트 계정
+
+### [간식조아](https://kdt-sw3-team05.elicecoding.com/)
+
+| 계정분류 | 아이디          | 비밀번호 |
+| -------- | --------------- | -------- |
+| 관리자   | admin@test.com  | 1234     |
+| 비관리자 | elice1@test.com | 1234     |
+
 ### 1-1. API 문서
 
-<!-- ### https://documenter.getpostman.com/view/23952739/2s847JrX6f  -->
+### https://cooperative-biology-4d7.notion.site/api-960a90e169b44cec97accb4c970af626
 
 <br>
 
-### 1-2. 데모 영상
+### 1-2. 데모 영상(추후 추가 예정)
 
 <details><summary>사용자 회원가입, 로그인</summary>
 
@@ -82,36 +93,72 @@
 
 <br />
 
-### 1-3. 페이지 별 화면
+### 1-3. 페이지 별 화면(추후 추가 예정)
+
+<details>
+<summary> 페이지 별 이미지 보기</summary>
 
 |                                              |                                              |
 | -------------------------------------------- | -------------------------------------------- |
-| ![image](https://i.ibb.co/jyxjcd3/image.png) | ![image](https://i.ibb.co/Q860RKz/image.png) |
-| 메인 페이지                                  | 회원가입 화면                                |
-| ![image](https://i.ibb.co/RpYN379/image.png) |                                              |
-| 로그인 페이지                                | 앞으로 추가할 페이지                         |
+| ![image](https://i.ibb.co/7NCW9XV/main.png)  | ![image](https://i.ibb.co/PNqZdJv/image.png) |
+| 메인 페이지                                  | 회원가입 페이지                              |
+| ![image](https://i.ibb.co/2YvVmhV/image.png) | ![image](https://i.ibb.co/xCFmkTH/image.png) |
+| 로그인 페이지                                | 상품 목록 페이지                             |
+| ![image](https://i.ibb.co/wBN0HnQ/image.png) | ![image](https://i.ibb.co/wYS7Ssx/image.png) |
+| 상품 상세 페이지                             | 장바구니 페이지                              |
+| ![image](https://i.ibb.co/pyBmrz2/image.png) | ![image](https://i.ibb.co/nQBzdMg/image.png) |
+| 내 정보 페이지                               | 내 정보 수정 페이지                          |
+| ![image](https://i.ibb.co/FxvLCTn/image.png) | ![image](https://i.ibb.co/ZhNjGpR/image.png) |
+| 결제 페이지                                  | 결제내역(주문/배송) 페이지                   |
+| ![image](https://i.ibb.co/0q3F2X4/image.png) | ![image](https://i.ibb.co/vL2wrqs/image.png) |
+| 결제 내역 상세 페이지                        | 결제(배송)정보 수정 페이지                   |
+| ![image](https://i.ibb.co/1dB2dYk/image.png) | ![image](https://i.ibb.co/KK70zNQ/image.png) |
+| 관리자 메인 페이지                           | 관리자 카테고리 관리 페이지                  |
+| ![image](https://i.ibb.co/TPXs9sy/image.png) | ![image](https://i.ibb.co/b1DQGQh/image.png) |
+| 관리자 카테고리 수정 페이지                  | 관리자 상품 관리 페이지                      |
+| ![image](https://i.ibb.co/yf0nvFv/image.png) | ![image](https://i.ibb.co/GQbfV0W/image.png) |
+| 관리자 상품 추가 페이지                      | 관리자 상품 상세/수정 페이지                 |
+| ![image](https://i.ibb.co/WzpHS6Q/image.png) | ![image](https://i.ibb.co/G0xWzpN/image.png) |
+| 관리자 유저 관리 페이지                      | 관리자 유저 상세 페이지                      |
+| ![image](https://i.ibb.co/DzrMmmc/image.png) | ![image](https://i.ibb.co/qdMZQrD/image.png) |
+| 관리자 주문 목록 페이지                      | 관리자 주문 상세/수정 페이지                 |
+
+</details>
 
 <br />
 
 ## 2. 기술 스택
 
-![image](https://i.ibb.co/N34mXzy/image.png)
+<!-- ![image](https://i.ibb.co/N34mXzy/image.png) -->
 
 <br />
 
+### 2-0. 공통
+
+- git/gitlab
+- eslint/prettier
+
 ### 2-1. 프론트엔드
 
-- **Vanilla javascript**, html, css (**Bulma css**)
-- Font-awesome
+- **Vanilla javascript**, html, css
 - Daum 도로명 주소 api
-- 이외
 
 ### 2-2. 백엔드
 
 - **Express** (nodemon, babel-node로 실행됩니다.)
-- Mongodb, Mongoose
+- Mongodb, Mongoose, Mongo Atlas
 - cors
-- 이외
+- nodemailer
+- morgan, winston
+- bcrypt
+- node-cron
+
+### 2-3. 배포
+
+- GCP(Google Cloud Platform) Compute engine
+- pm2, nginx
+- Ubuntu
+- certbot letsencrypt
 
 ## 3. 인프라 구조
 
@@ -127,9 +174,13 @@
 
 ## 4. 제작자
 
-| 이름   | 담당 업무 |
-| ------ | --------- |
-| 엘리스 | 팀장/개발 |
+| 이름   | 담당 업무       |
+| ------ | --------------- |
+| 오현석 | 팀장/프론트엔드 |
+| 박재현 | 프론트엔드      |
+| 서아름 | 프론트엔드      |
+| 조건형 | 백엔드          |
+| 최충우 | 백엔드          |
 
 <br />
 
@@ -141,26 +192,19 @@
 git clone <레포지토리 주소>
 ```
 
-2. 클론한 디렉토리에서 backend 디렉토리로 들어가 아래 명령어를 통해 backend에서 필요한 module 설치
+2. 클론한 디렉토리에서 아래 명령어를 통해 필요한 module 설치
 
 ```bash
 npm install
 ```
 
-3. backend에서 필요한 `.env` 설정
+3. 필요한 `.env` 설정
 
 ```bash
 MONGODB_URL=<몽고DB URL>
 PORT=5000
 JWT_SECERT_KEY=<랜덤 문자열>
 ```
-
-앱을 테스트하고 싶은 경우 다음의 몽고DB URL을 이용하세요.
-
-- mongodb+srv://elice:W8RsZsSX2Xs1ydE4@cluster0.4gz9ij3.mongodb.net/?retryWrites=true&w=majority
-
-단, 해당 URL은 READ만 가능하며 회원 가입을 하거나 상품 정보를 추가하는 등의 동작은 할 수 없습니다. <br>
-주어진 URL은 테스트 용이므로 실제 개발을 할 때는 해당 URL을 사용하지 않고, 반드시 직접 설치한 몽고DB의 URL을 사용하시기를 바랍니다.
 
 4. express 앱을 실행
 
@@ -176,22 +220,15 @@ npm start
 
 <br>
 
-## 7. FAQ
+<!-- ## 7. FAQ
 
 <details><summary>1. 배포된 페이지는 어디에서 확인할 수 있나요?</summary>
 
   <p>
-    프로젝트 기본 코드는 따로 배포하지 않았습니다, 레포지토리를 클론하여 직접 실행해보세요.
+    https://kdt-sw3-team05.elicecoding.com/ 에서 확인하실 수 있습니다
   </p>
 
-</details>
-<details><summary>2. env 파일이 보이지 않습니다.</summary>
-
-  <p>
-    해당 파일은 직접 만들어서 코드를 작성해야 합니다, DB를 비롯한 서비스의 계정 정보는 <b>절대로</b> Git에 함부로 공유하면 안되기 때문에 유의 바랍니다.
-  </p>
-
-</details>
+</details> -->
 
 ---
 
