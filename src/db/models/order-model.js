@@ -9,19 +9,15 @@ export class OrderModel {
     return orders;
   }
 
-  //query가 있을 때 작업
-  async findFilteredBySortAndOrders(query) {
-    const { sortBy, orderBy, limit, offset } = query;
-    const orders = await Order.find({})
-      .sort({ [sortBy]: orderBy })
-      .skip(limit * (offset - 1))
-      .limit(limit);
-    return orders;
+  async find(query, projection, sort = { id: 1 }, options = { lean: true }) {
+    return await Order.find(query, projection, options).sort(sort).exec();
   }
+
   async findByUserId(userId) {
     const orders = await Order.find({ userId });
     return orders;
   }
+
   async findOneByOrderId(orderId) {
     const order = await Order.findOne({ _id: orderId });
     return order;
@@ -35,25 +31,21 @@ export class OrderModel {
   async update({ orderId, update }) {
     const filter = { _id: orderId };
     const option = { returnOriginal: false };
-
     const updatedOrder = await Order.findOneAndUpdate(filter, update, option);
     return updatedOrder;
   }
 
-  async deleteOneByOrderId(orderId) {
-    const result = await Order.deleteOne({ _id: orderId });
+  async deleteOne(filter) {
+    const result = await Order.deleteOne(filter);
     return result;
   }
 
+  //mock-generator
   async deleteAll() {
     await Order.deleteMany({});
   }
 
-  async insertAll(data) {
-    await Order.insertMany(data);
-  }
-
-  async getOrdersCount() {
+  async getCount() {
     return await Order.countDocuments({});
   }
 }

@@ -126,8 +126,8 @@ class OrderService {
       throw new Error('remove error : 해당 주문을 찾을 수 없습니다.');
     }
     // 업데이트 진행
-    order = await this.orderModel.deleteOneByOrderId(orderId);
-
+    const filter = { _id: orderId };
+    order = await this.orderModel.deleteOne(filter);
     return order;
   }
   async deleteOrder(userId, orderId) {
@@ -141,27 +141,26 @@ class OrderService {
       throw new Error('이 주문에 접근할 수 없습니다.');
     }
     // 업데이트 진행
-    order = await this.orderModel.deleteOneByOrderId(orderId);
+    const filter = { _id: orderId };
+    order = await this.orderModel.deleteOne(filter);
 
     return order;
   }
   async getOrdersByAdmin(query) {
-    const orders = await this.orderModel.findFilteredBySortAndOrders(query);
+    const { sortBy, orderBy, limit, offset } = query;
+    const countOrders = await this.orderModel.getCount();
+    const divideCount = Math.ceil(countOrders / limit);
 
+    //페이지 조건 검사
+    if (offset > countOrders) {
+      throw new Error(`offset 범위는 1-${divideCount}입니다.`);
+    }
+
+    const projection = {};
+    const sort = { [sortBy]: orderBy };
+    const options = { skip: limit * (offset - 1), limit: limit };
+    const orders = await this.orderModel.find(query, projection, sort, options);
     return orders;
-  }
-
-  //pagiNation시 총 페이지수가 필요할때 만들어줄꺼
-  ///api/admin/orders/count 로 생각중임
-  async getOrdersByAdminCount(query) {
-    const [orderTotal, orders] = await Promise.all([
-      this.orderModel.getOrdersCount(),
-      this.orderModel.findAll(query),
-    ]);
-    const { limit } = query;
-    const totalOrderPage = Math.ceil(orderTotal / limit);
-    // 총페이지필요하면 그때
-    return totalOrderPage;
   }
 }
 

@@ -1,6 +1,5 @@
 import { userModel } from '../db';
 import { orderModel } from '../db';
-import { cartModel } from '../db';
 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
