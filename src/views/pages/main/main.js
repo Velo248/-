@@ -26,6 +26,7 @@ const getAllItems = async () => {
   // 2. 문제, img src를 안정함
   let productsList = [];
   const $productsBox = document.querySelector('.products_box');
+  const $main = document.querySelector('.main_wrapper');
   let products = '';
 
   try {
@@ -34,6 +35,25 @@ const getAllItems = async () => {
     console.log('에러 발생!!');
     console.log(err);
   }
+  const randomIndex = Math.floor(
+    Math.random() * productsList.products.length - 1,
+  );
+  const randomItem = productsList.products[randomIndex];
+  $main.innerHTML = `
+    <div class="main_txt">
+      <span class="color-pink fz-s bold">new!</span>
+      <p>주인님들이 엄청 좋아하는</p>
+      <div>${randomItem.title}</div>
+      <a
+        href="/product-detail/${randomItem._id}"
+        class="bg-pink btn-s"
+        >See details &gt;&gt;</a
+      >
+    </div>
+    <div class="circle"></div>
+    <div class="main_img">
+      <img src="/public/images/${randomItem.imageKey}.jpg" alt="${randomItem.title}" />
+    </div>`;
 
   // 메인에서는 아이템이 최대 8개만 표시되게
   let get8 = productsList.products.slice(0, 8);
