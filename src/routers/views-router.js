@@ -1,6 +1,6 @@
 import express from 'express';
 import path from 'path';
-
+import { dormantRecovery } from '../middlewares/dormant-recovery';
 const viewsRouter = express.Router();
 
 viewsRouter.use('/', serveStatic('main'));
@@ -16,7 +16,7 @@ viewsRouter.use('/admin/user/detail', serveStatic('admin-user-detail'));
 viewsRouter.use('/admin/user/list', serveStatic('admin-user-list'));
 viewsRouter.use('/basket', serveStatic('basket'));
 viewsRouter.use('/product', serveStatic('product'));
-viewsRouter.use('/login', serveStatic('login'));
+viewsRouter.use('/login', dormantRecovery, serveStatic('login'));
 viewsRouter.use('/order-change/:orderId', serveStatic('order-change'));
 viewsRouter.use('/orders/:orderId', serveStatic('order-detail'));
 viewsRouter.use('/pay-history', serveStatic('pay-history'));

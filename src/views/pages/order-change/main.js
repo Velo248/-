@@ -95,7 +95,7 @@ const finishChangeEventHandler = (orderId, toUpdateObj) => async (e) => {
   ) {
     alert('배송 정보를 모두 입력해주세요');
   } else {
-    if (errorUtil.isValidPhoneNumber(toUpdateObj.receiverPhone)) {
+    if (errorUtil.isValidPhoneNumber(toUpdateObj.receiverPhoneNumber)) {
       if (confirm('배송정보 수정을 마치시겠습니까?')) {
         toUpdateObj = updateOrderObj(toUpdateObj);
         const response = await orderService.setOrderInfomatinByOrderId(

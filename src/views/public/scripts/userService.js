@@ -58,6 +58,24 @@ userService.login = async (email, password) => {
 };
 
 /**
+ *로그아웃
+ * @returns { json } response
+ */
+userService.logout = async () => {
+  const reqObj = {
+    target: '/logout',
+    method: 'POST',
+  };
+
+  try {
+    const response = await customFetcher(reqObj);
+    return await response.json();
+  } catch (e) {
+    return alert(e);
+  }
+};
+
+/**
  * 로그인한 유저
  * @returns { json } response
  */
