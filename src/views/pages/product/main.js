@@ -50,7 +50,7 @@ const getCategoryItems = () => {
       if (index === 0) {
         getAllItems();
       } else {
-        const selectedItems = [];
+        let selectedItems = [];
         const categoryId = e.target.href.split('/').pop();
         const $productsBox = document.querySelector('.products_box');
         let selectedBox = ``;

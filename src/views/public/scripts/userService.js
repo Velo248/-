@@ -69,6 +69,8 @@ userService.logout = async () => {
 
   try {
     const response = await customFetcher(reqObj);
+    sessionStorage.clear();
+    localStorage.clear();
     return await response.json();
   } catch (e) {
     return alert(e);
