@@ -47,10 +47,7 @@ const finishPasswordEditHandler = async (e) => {
     newPasswordConfirmInput.focus();
     return;
   } else {
-    await updateUserPassword(
-      currentCheck.currentPassword,
-      newCheck.newPassword,
-    );
+    await updateUserPassword(currentPassword, newCheck.newPassword);
   }
 };
 
