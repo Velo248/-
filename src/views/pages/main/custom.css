@@ -1,49 +1,64 @@
-h2 {
-  padding: 30px 0;
-  text-align: center;
-  font-weight: bold;
-  font-size: 2.5em;
+.main_wrapper {
+  position: relative;
+  height: calc(100vh - 9.7rem);
 }
 
-.category_list {
-  display: flex;
+.main_txt {
+  position: absolute;
+  top: 34%;
+  left: 14%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.main_txt p {
+  font-size: 4rem;
+  padding: 1rem 0 1.5rem;
+}
+.main_txt div {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.main_img {
+  position: absolute;
+  top: 57%;
+  right: 4%;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: 30rem;
+  height: 30rem;
+  z-index: -1;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0rem 0.1rem 0.8rem #adadad;
+}
+
+.main_img img {
   width: 100%;
-  margin-bottom: 10px;
-}
-
-.category_list li {
-  flex: 1;
-  background-color: #000;
-  color: #fff;
-}
-
-.category_list li a {
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-  padding: 15px 5px;
-}
-
-.category_list li a:hover {
-  color: #ddd;
+  height: 100%;
+  object-fit: cover;
 }
 
 .products_box {
   display: flex;
   flex-wrap: wrap;
+  min-height: 50rem;
 }
 
 .products_box .img_wrap {
   width: 25%;
-  height: 100px; /*임시로*/
-  padding: 20px;
-  border: 1px solid #ccc;
+  height: 25rem;
+  padding: 1rem;
 }
 
 .products_box .img_wrap a {
   display: inline-block;
   width: 100%;
   height: 100%;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 1px solid #ddd;
 }
 
 .products_box img {

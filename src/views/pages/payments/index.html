@@ -4,85 +4,126 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>결제하기</title>
-    <link rel="stylesheet" href="../../../public/css/style.css" />
-    <link rel="stylesheet" href="./custom.css" />
+    <meta name="keyword" content="고양이 사료 장난감 츄르 간식 화장실 용품" />
+    <meta name="description" content="반려동물 친구들을 위한 다양한 아이템샵" />
+    <meta name="author" content="[5팀]오히려좋아" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kdt-sw3-team05.elicecoding.com/" />
+    <meta property="og:title" content="(주) 간식조아" />
+    <meta property="og:site_name" content="[5팀]오히려좋아" />
+    <meta
+      property="og:description"
+      content="반려동물 친구들을 위한 다양한 아이템샵"
+    />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:image" content="/public/images/common/logo-square.png" />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="400" />
+    <title>결제하기 | 간식조아</title>
+    <link rel="shortcut icon" href="/public/images/common/favicon.ico" />
+    <link rel="stylesheet" href="/public/css/style.css" />
+    <script type="module" src="/public/scripts/layout.js" defer></script>
   </head>
   <body>
-    <header>
-      <h1>
-        <!-- 임시로 제품 페이지 -->
-        <a href="../categories/categories.html"
-          ><img src="../../../1.public/images/common/logo.png" alt="간식조아"
-        /></a>
-      </h1>
-      <nav>
-        <span><a href="../categories/categories.html">제품</a></span>
-        <span><a href="../../login/login.html">로그인</a></span>
-        <span><a href="../basket/basket.html">장바구니</a></span>
-        <span><a href="../orders/orders.html">주문·배송</a></span>
-      </nav>
-    </header>
-    <main>
-      <div class="imsi">
-        <!-- 제품 리스트 부분 -->
-        <!-- 한줄한줄 생성 -->
-        <div>
-          <div class="flex-justify-between">
-            <input type="checkbox" />
-            <div class="img_wrap">
-              <img src="../images/driedFood0.jpg" alt="" />
+    <header></header>
+    <main class="flex-all-center">
+      <div class="content-box">
+        <div class="payments">
+          <div class="orders overflow-h21"></div>
+          <div class="user_info box"></div>
+
+          <div class="receiver_info box">
+            <em>배송지 정보</em>
+            <div class="flex-column-center">
+              <span>수령자 이름</span>
+              <input type="text" class="input receiver_name" required />
             </div>
-            <div>제품명제품명제품명...</div>
-            <div>2,000</div>
-            <div><input type="number" value="1" disabled /></div>
-          </div>
-          <div class="flex-justify-between">
-            <input type="checkbox" />
-            <div class="img_wrap">
-              <img src="../images/driedFood0.jpg" alt="" />
+            <div class="flex-column-center">
+              <span>수령자 전화번호</span>
+              <input
+                type="text"
+                class="input receiver_phone"
+                required
+                placeholder="숫자만 입력하세요"
+              />
             </div>
-            <div>제품명제품명제품명...</div>
-            <div>2,000</div>
-            <div><input type="number" value="1" disabled /></div>
+            <div class="flex-column-center">
+              <span>배송주소</span>
+              <div class="flex-direction-column">
+                <div>
+                  <input
+                    type="text"
+                    class="input receiver_postal_code"
+                    disabled
+                    required
+                  />
+                  <input
+                    type="text"
+                    class="input receiver_address_long"
+                    disabled
+                    required
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    class="input receiver_address_detail"
+                    disabled
+                    required
+                  />
+                  <button
+                    type="button"
+                    class="address_search small bg-deepgray mt-s"
+                  >
+                    주소 검색
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="flex-column-center">
+              <span>배송 메시지</span>
+              <input
+                type="text"
+                class="input delevery_message"
+                required
+                placeholder="배송 메시지를 남겨주세요."
+              />
+            </div>
           </div>
-        </div>
 
-        <!-- 주문정보 -->
-        <div>
-          <div>주문정보</div>
-          <div class="flex flex-row">
-            <span class="">이름</span>
-            <p>김까망</p>
-          </div>
-          <div class="flex flex-row">
-            <span>주소</span>
-            <p>서울시 강서구 블라블라블라라라라라</p>
-          </div>
-          <div class="flex flex-row">
-            <span>연락처</span>
-            <p>010-0000-0000</p>
-          </div>
-        </div>
+          <div class="right">
+            <div>
+              <input
+                id="impsi_radio"
+                type="radio"
+                class="payment_type"
+                required
+              />
+              <label for="impsi_radio" class="right w-s">바로 결제</label>
+            </div>
 
-        <!-- 결제 방법 -->
-        <div>
-          <input id="impsi_radio" type="radio" />
-          <label for="impsi_radio">바로 결제</label>
-        </div>
+            <div>
+              <div class="font-hightlight">
+                <span>총</span>
+                <span class="order_total_price">20,000</span>
+                <span>원</span>
+              </div>
 
-        <!-- 총 금액 -->
-        <div>
-          <span>총</span>
-          <span>20,000</span>
-          <span>원</span>
-        </div>
-        <!-- 마지막 결제하기 -->
-        <div>
-          <button>결제하기</button>
+              <div>
+                <button
+                  type="button"
+                  class="payment_button middle bg-darkgreen"
+                >
+                  결제하기
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
-    <footer>&copy; 2022 오히려좋아 by elice 5팀</footer>
+    <footer></footer>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="./main.js" type="module"></script>
   </body>
 </html>

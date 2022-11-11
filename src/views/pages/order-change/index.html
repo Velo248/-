@@ -4,99 +4,59 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>주문 정보 수정</title>
-    <link rel="stylesheet" href="../../../public/css/style.css" />
-    <link rel="stylesheet" href="./custom.css" />
+    <meta name="keyword" content="고양이 사료 장난감 츄르 간식 화장실 용품" />
+    <meta name="description" content="반려동물 친구들을 위한 다양한 아이템샵" />
+    <meta name="author" content="[5팀]오히려좋아" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kdt-sw3-team05.elicecoding.com/" />
+    <meta property="og:title" content="(주) 간식조아" />
+    <meta property="og:site_name" content="[5팀]오히려좋아" />
+    <meta
+      property="og:description"
+      content="반려동물 친구들을 위한 다양한 아이템샵"
+    />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:image" content="/public/images/common/logo-square.png" />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="400" />
+    <title>배송 정보 수정 | 간식조아</title>
+    <link rel="shortcut icon" href="/public/images/common/favicon.ico" />
+    <link rel="stylesheet" href="/public/css/style.css" />
+    <script type="module" src="/public/scripts/layout.js" defer></script>
   </head>
-  <body>
-    <header>
-      <h1>
-        <!-- 임시로 제품 페이지 -->
-        <a href="../categories/categories.html"
-          ><img src="../../../1.public/images/common/logo.png" alt="간식조아"
-        /></a>
-      </h1>
-      <nav>
-        <span><a href="../categories/categories.html">제품</a></span>
-        <span><a href="../../login/login.html">로그인</a></span>
-        <span><a href="../basket/basket.html">장바구니</a></span>
-        <span><a href="../orders/orders.html">주문·배송</a></span>
-      </nav>
-    </header>
 
-    <main>
-      <div class="wrapper order-detail">
-        <div class="wrapper flex-column">
+  <body>
+    <header></header>
+
+    <main class="flex-all-center">
+      <div class="content-box">
+        <div>
           <div class="order-number">
+            <em>주문 내역</em> &nbsp;
             <span>주문 번호: </span>
             <span>20221102-1502-1220228z1</span>
           </div>
-          <div class="order-history">
-            <h4>주문 내역</h4>
-            <div class="order-wrapper flex-column">
-              <div class="row">
+          <div class="order">
+            <div class="order_wrapper overflow-h21">
+              <div class="row grid-3">
                 <span class="column">제품명</span>
                 <span class="column">가격</span>
                 <span class="column">수량</span>
               </div>
-              <div class="row">
-                <span class="column">
-                  <img src="#" alt="" width="60" height="60" class="item-img" />
-                  <span>NOT FOR SALE</span>
-                </span>
-                <span class="column"> 2000 </span>
-                <span class="column"> 2 </span>
-              </div>
-            </div>
-            <div class="total_price">
-              <span>총</span>
-              <span>~~~~~~~~~원</span>
             </div>
           </div>
         </div>
-        <div class="wrapper">
-          <div class="delevery-info">
-            <h4>배송 정보</h4>
-            <div class="info flex-column">
-              <div class="address-change">
-                <div class="field">
-                  <input
-                    type="text"
-                    name="postal-code"
-                    id="postal-code"
-                    class="input is-primary"
-                    value="주소지의 가장 긴 부분"
-                    disabled
-                  />
-                  <div class="field is-grouped">
-                    <input
-                      type="text"
-                      name="postal-code"
-                      id="postal-code"
-                      class="input is-primary"
-                      value="12034"
-                      disabled
-                    />
-                    <input
-                      type="text"
-                      name="postal-code"
-                      id="postal-code"
-                      class="input is-primary"
-                      value="주소지의 짤은 부분"
-                      disabled
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="field">
-                <button class="button is-link is-small">주소 검색</button>
-              </div>
-            </div>
-          </div>
-          <button class="button is-link">수정 완료하기</button>
+        <div class="delivery_detail">
+          <div class="delivery_info"></div>
         </div>
+        <p class="center">
+          <button class="done_btn middle bg-darkgreen">수정 완료하기</button>
+          <button class="cancel_btn middle bg-deepgray">수정 취소</button>
+        </p>
       </div>
     </main>
-    <footer>&copy; 2022 오히려좋아 by elice 5팀</footer>
+    <footer></footer>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="./main.js" type="module"></script>
   </body>
 </html>

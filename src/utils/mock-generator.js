@@ -1,4 +1,10 @@
-import { categoryModel, orderModel, productModel, userModel } from '../db';
+import {
+  categoryModel,
+  orderModel,
+  productModel,
+  userModel,
+  basketModel,
+} from '../db';
 import {
   orderMockData,
   categoryMockData,
@@ -6,7 +12,6 @@ import {
   userMockData,
 } from './mock';
 
-// 데이터 전부 삭제
 async function dataReset() {
   console.log('collections deleteAll...');
 
@@ -14,14 +19,15 @@ async function dataReset() {
   await productModel.deleteAll();
   await orderModel.deleteAll();
   await categoryModel.deleteAll();
+  await basketModel.deleteAll();
 }
-//더미데이터 삽입
+
 async function dataPull() {
-  console.log('data pulling...관계는 랜덤으로 배정됩니다');
+  console.log('data pulling...');
 
   const userIdList = [];
   for (const data in userMockData) {
-    const { _id } = await userModel.create(userMockData[data]);
+    const { _id } = await userModel.createWithTimestamp(userMockData[data]);
     userIdList.push(_id);
   }
   const newCategories = [];
@@ -31,13 +37,17 @@ async function dataPull() {
   }
 
   for (const data in productMockData) {
-    const randomN = Math.floor(
-      (Math.random() * 100) % (newCategories.length - 1),
-    );
+    const productMockDataTitle = productMockData[data].searchKeywords;
+    let index = 0;
+    for (const category in newCategories) {
+      if (productMockDataTitle.includes(newCategories[category].title)) {
+        index = category;
+      }
+    }
     await productModel.create({
       ...productMockData[data],
       sellerId: userIdList[0],
-      categoryId: newCategories[randomN]._id,
+      categoryId: newCategories[index]._id,
     });
   }
   for (const data in orderMockData) {

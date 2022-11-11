@@ -4,89 +4,52 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>주문 상세 조회</title>
+    <meta name="keyword" content="고양이 사료 장난감 츄르 간식 화장실 용품" />
+    <meta name="description" content="반려동물 친구들을 위한 다양한 아이템샵" />
+    <meta name="author" content="[5팀]오히려좋아" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kdt-sw3-team05.elicecoding.com/" />
+    <meta property="og:title" content="(주) 간식조아" />
+    <meta property="og:site_name" content="[5팀]오히려좋아" />
+    <meta
+      property="og:description"
+      content="반려동물 친구들을 위한 다양한 아이템샵"
+    />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:image" content="/public/images/common/logo-square.png" />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="400" />
+    <title>주문 상세 조회 | 간식조아</title>
+    <link rel="shortcut icon" href="/public/images/common/favicon.ico" />
     <link rel="stylesheet" href="/public/css/style.css" />
-    <link rel="stylesheet" href="./custom.css" />
+    <script type="module" src="/public/scripts/layout.js" defer></script>
   </head>
-  <body>
-    <header>
-      <h1>
-        <a href="/"
-          ><img src="/public/images/common/logo.png" alt="간식조아"
-        /></a>
-      </h1>
-      <nav>
-        <span><a href="/categories">제품</a></span>
-        <span><a href="/login">로그인</a></span>
-        <span><a href="/basket">장바구니</a></span>
-        <span><a href="/orders">주문·배송</a></span>
-      </nav>
-    </header>
 
-    <main>
-      <div class="wrapper order-detail">
-        <div class="wrapper flex-column">
-          <div class="order_number">
-            <span>주문 번호: </span>
-            <span class="order_number_detail">20221102-1502-1220228z1</span>
-          </div>
-          <div class="order_detail">
-            <h4>주문 상세</h4>
-            <div class="order_wrapper flex-column">
-              <div class="row">
-                <span class="column">제품명</span>
-                <span class="column">가격</span>
-                <span class="column">수량</span>
-              </div>
-              <div class="row">
-                <span class="column">
-                  <img
-                    src="#"
-                    alt=""
-                    width="60"
-                    height="60"
-                    class="product_img"
-                  />
-                  <span class="product_name">NOT FOR SALE</span>
-                </span>
-                <span class="column product_price"> 2000 </span>
-                <span class="column product_count"> 2 </span>
-              </div>
-            </div>
-            <div class="product_total_price">
-              <span>총</span>
-              <span>~~~~~~~~~원</span>
-            </div>
+  <body>
+    <header></header>
+
+    <main class="flex-all-center">
+      <div>
+        <div class="content-box">
+          <div class="order_wrapper">
+            <em>주문 상세</em>
+            <div class="w-ls"></div>
           </div>
         </div>
-        <div class="wrapper">
-          <div class="delevery_info">
-            <h4>배송 정보</h4>
-            <div class="info flex-column">
-              <div class="line">
-                <span>이름</span>
-                <span>아무개</span>
-              </div>
-              <div class="line">
-                <span>주소</span>
-                <span>OOOOO 열한시 이십오분 삼십칠초 401</span>
-              </div>
-              <div class="line">
-                <span>연락처</span>
-                <span>010 1234 1234</span>
-              </div>
-              <div class="line">
-                <span>배송상태</span>
-                <span>배송 중</span>
-              </div>
-            </div>
-          </div>
-          <a href="/order-change" class="button is-link">배송 정보 수정</a>
-          <button class="button is-link">주문 취소</button>
+        <div class="content-box">
+          <div class="delivery_detail"></div>
+          <p class="center">
+            <button type="button" class="order_change_btn middle bg-darkgreen">
+              배송 정보 수정
+            </button>
+            <button type="button" class="order_cancel_btn middle bg-deepgray">
+              주문 취소
+            </button>
+          </p>
         </div>
       </div>
     </main>
-    <footer>&copy; 2022 오히려좋아 by elice 5팀</footer>
+    <footer></footer>
     <script src="./main.js" type="module"></script>
   </body>
 </html>

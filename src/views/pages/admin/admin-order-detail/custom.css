@@ -1,0 +1,66 @@
+.admin_order_detail_header {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.admin_order_detail_header h2 {
+  margin: 2rem 0 2rem 0;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.content-box > div {
+  max-width: 100%;
+  height: 38rem;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.detail_container,
+.delivery_container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  height: 100%;
+}
+
+.detail_name,
+.detail_info,
+.delivery_name,
+.delivery_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+.detail_name > div,
+.detail_info > div,
+.delivery_info > div,
+.delivery_name > div {
+  flex: 1;
+}
+
+.edit {
+  display: block;
+  padding: 1rem 6rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  background-color: var(--darkgray);
+  width: 95%;
+  font-size: 1.6rem;
+  margin: 1.5rem auto;
+}
+
+.back_order_list_bnt {
+  display: block;
+  padding: 1rem 6rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  background-color: var(--dark);
+  width: 95%;
+  font-size: 1.6rem;
+  margin: 1.5rem auto;
+}

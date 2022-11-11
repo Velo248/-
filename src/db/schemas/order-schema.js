@@ -19,12 +19,11 @@ const OrderSchema = new Schema(
     address,
     request: {
       type: String,
-      required: true,
     },
     status: {
       type: String,
       required: true,
-      default: '상품 배송 준비중',
+      default: '상품 준비',
     },
   },
   {

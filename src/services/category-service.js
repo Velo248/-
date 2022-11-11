@@ -1,8 +1,9 @@
-import { categoryModel } from '../db';
+import { categoryModel, productModel } from '../db';
 
 class CategoryService {
-  constructor(categoryModel) {
+  constructor(categoryModel, productModel) {
     this.categoryModel = categoryModel;
+    this.productModel = productModel;
   }
 
   //카테고리 추가
@@ -20,7 +21,7 @@ class CategoryService {
 
   //카테고리 목록을 받음
   async getCategorylist() {
-    const products = await this.categoryModel.findAll();
+    const products = await this.categoryModel.findAllExceptDeleted();
     return products;
   }
 
@@ -29,10 +30,33 @@ class CategoryService {
     const category = await this.categoryModel.findOneById(categoryId);
     return category;
   }
-  //카테고리 아이디로 카테고리 받음
+  //카테고리 이름으로 카테고리 받음
   async getCategoryByTitle(title) {
     const category = await this.categoryModel.findOneByName(title);
     return category;
+  }
+  async getProductsByCategories(categoryId) {
+    console.log(categoryId);
+    const category = await this.categoryModel.findOneById(categoryId);
+    if (!category) {
+      throw new Error(
+        '해당 id의 카테고리를 찾을 수 없습니다. 다시 확인해주세요.',
+      );
+    }
+    const products = await this.productModel.findAllByCategory(categoryId);
+    return products;
+  }
+  async getDeletedCategoriesProducts() {
+    const deletedCategory = await this.categoryModel.findOneByName(
+      '삭제된 카테고리',
+    );
+    if (!deletedCategory) {
+      return [];
+    }
+    const products = await this.productModel.findAllByCategory(
+      deletedCategory._id,
+    );
+    return products;
   }
   //카테고리 정보 수정
   async updateCategory(categoryId, toUpdate) {
@@ -51,15 +75,37 @@ class CategoryService {
 
     return category;
   }
-  //카테고리 이름으로 삭제
+  //카테고리 삭제
   async deleteCategory(categoryId) {
-    const deletedCategory = await this.categoryModel.findOneAndDelete(
-      categoryId,
+    const category = await this.categoryModel.findOneById(categoryId);
+    if (!category) {
+      throw new Error('해당id의 카테고리가 없습니다. 다시 확인해주세요..');
+    }
+    await this.categoryModel.findOneAndDelete(categoryId);
+
+    //삭제 후 해당 카테고리에 있던 상품들 삭제된 카테고리라는 카테고리로 이동시킴
+    let deletedCategory = await this.categoryModel.findOneByName(
+      '삭제된 카테고리',
     );
-    return deletedCategory;
+    if (deletedCategory) {
+    } else {
+      deletedCategory = await this.categoryModel.create({
+        title: '삭제된 카테고리',
+      });
+    }
+    const products = await this.productModel.findAllByCategory(categoryId);
+    for (const product of products) {
+      await this.productModel.update({
+        productId: product._id,
+        update: {
+          categoryId: deletedCategory._id,
+        },
+      });
+    }
+    return category;
   }
 }
 
-const categoryService = new CategoryService(categoryModel);
+const categoryService = new CategoryService(categoryModel, productModel);
 
 export { categoryService };

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>카테고리 수정 | 관리자</title>
+    <link rel="shortcut icon" href="/public/images/common/favicon.ico" />
+    <link rel="stylesheet" href="/public/css/style.css" />
+    <link rel="stylesheet" href="./custom.css" />
+    <script type="module" src="/public/scripts/layout.js" defer></script>
+  </head>
+  <body>
+    <header></header>
+    <main class="flex-all-center">
+      <div class="admin_category_wapper">
+        <div class="admin_category_header">
+          <h2>카테고리 목록 수정</h2>
+          <div class="right">
+            <button class="selected_category_delete_bnt">선택 삭제</button>
+          </div>
+        </div>
+        <div class="content-box">
+          <div class="admin_category_workspace">
+            <div>
+              <div class="category_list">
+                <div><input type="checkbox" class="all_check"></input></div>
+                <div>전체 삭제</div>
+                <div class="category_name"><span>카테고리 이름</span></div>
+                <div><span>카테고리 설명</span></div>
+                <div><span>생성 날짜</span></div>
+                <div><span>수정 날짜</span></div>
+                <div><span> </span></div>
+              </div>
+              <div class="categories"></div>
+            </div>
+            <div class="admin_create_category_container">
+              <em>새로운 카테고리 추가</em>
+              <form class="create_form">
+                <label for="create-category-title">카테고리 이름:</label>
+                <input name="create-category-title" type="text" />
+                <label for="create-category-description">카테고리 설명: </label>
+                <input name="create-category-description" type="text" />
+                <button type="submit">추가</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <button class="admin_edit_complete_bnt">목록으로 돌아가기</button>
+      </div>
+    </main>
+    <footer></footer>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

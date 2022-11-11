@@ -8,8 +8,14 @@ export class ProductModel {
     const product = await Product.findOne({ _id: productId });
     return product;
   }
+
+  async findsById(productId) {
+    const product = await Product.find({ _id: productId });
+    return product;
+  }
+
   async findByName(productTitle) {
-    const product = await Product.findOne({ productTitle });
+    const product = await Product.findOne({ title: productTitle });
     return product;
   }
 
@@ -22,17 +28,39 @@ export class ProductModel {
     const products = await Product.find({});
     return products;
   }
-  async findAll(query) {
-    const { sortKey, sortOrder, limit, offset } = query;
-    const products = await Product.find({})
-      .sort({ [sortKey]: sortOrder })
-      .skip(limit * (offset - 1))
-      .limit(limit);
-    return products;
+  async findByQuery(query) {
+    const { sortBy, orderBy, limit, offset, priceMax, priceMin } = query;
+    const options = {
+      sort: { [sortBy]: orderBy },
+      skip: limit * (offset - 1),
+      limit: limit,
+    };
+    let priceOption = null;
+    // 자꾸 NaN뜸
+    // console.log(priceMax);
+    if (!priceMax) {
+      priceOption = { $gte: priceMin };
+    } else {
+      priceOption = { $lte: priceMax, $gte: priceMin };
+    }
+    const products = await Product.find({ price: priceOption });
+    const productsPerpage = await Product.find(
+      { price: priceOption },
+      null,
+      options,
+    );
+
+    return { products: productsPerpage, count: products.length };
   }
 
   async findAllByCategory(categoryId) {
     const products = await Product.find({ categoryId });
+    return products;
+  }
+
+  async findByKeywords(keywords) {
+    //keywords는 키워드들의 배열
+    const products = await Product.find({ searchKeywords: { $in: keywords } });
     return products;
   }
 

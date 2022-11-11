@@ -1,0 +1,43 @@
+h2 {
+  margin: 2rem 0;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+button.back_admin_main_bnt {
+  display: block;
+  padding: 1rem 6rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  background-color: var(--dark);
+  width: 95%;
+  font-size: 1.6rem;
+  margin: 0 auto;
+}
+
+button.admin_category_edit_bnt {
+  display: inline-block;
+  color: var(--white);
+  background-color: var(--darkgray);
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
+}
+
+.admin_category_header {
+  max-width: 95%;
+  margin: 0 auto;
+}
+
+.admin_category_wapper {
+  max-width: 45rem;
+}
+
+.admin_category_workspace {
+  height: 38rem;
+  overflow-y: auto;
+}
+
+.admin_category_workspace > div {
+  line-height: 1.6;
+}

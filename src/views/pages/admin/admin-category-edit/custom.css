@@ -1,0 +1,91 @@
+h2 {
+  margin: 2rem 0;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+em {
+  display: inline-block;
+  margin-bottom: 0.8rem;
+}
+
+button {
+  display: inline-block;
+  background-color: var(--darkgray);
+  color: var(--white);
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
+}
+
+button.admin_edit_complete_bnt {
+  display: block;
+  padding: 1rem 6rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  width: 95%;
+  font-size: 1.6rem;
+  background-color: var(--dark);
+  margin: 1.8rem auto 0;
+}
+
+.admin_category_header {
+  max-width: 95%;
+  margin: 0 auto;
+}
+
+.admin_category_wapper {
+  width: 76rem;
+}
+
+.admin_category_workspace {
+  height: 46rem;
+}
+
+.admin_category_workspace > div {
+  line-height: 1.6;
+}
+
+.categories {
+  overflow-y: scroll;
+  height: 27rem;
+  margin-bottom: 2rem;
+  padding-right: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.category_list {
+  display: flex;
+  padding: 0.5rem 0 1rem 0rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.category_list > div {
+  flex: 1;
+  text-align: right;
+}
+
+.edit_form {
+  display: flex;
+  padding: 0.5rem 0;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.edit_form > * {
+  margin-right: 1rem;
+  flex: unset;
+}
+
+.edit_form > input:first-child {
+  flex: inherit;
+}
+
+.edit_form > *:last-child {
+  margin-right: 0;
+}
+
+input[name='category-title'],
+input[name='category-description'] {
+  width: 11.5rem;
+}

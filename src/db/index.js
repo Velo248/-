@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { mockGenerator } from '../utils/mock-generator';
-
+import { dormantAccountCheckScheduler } from '../utils/dormant-scheduler';
 if (process.env.MONGODB_URL === undefined) {
   throw new Error(
     '어플리케이션을 시작하려면 Mongo DB URL(MONGODB_URL) 환경변수가 필요합니다.',
@@ -17,6 +17,7 @@ const db = mongoose.connection;
 
 db.on('connected', async () => {
   await mockGenerator();
+  dormantAccountCheckScheduler();
   console.log('정상적으로 MongoDB 서버에 연결되었습니다.  ' + DB_URL);
 });
 db.on('error', (error) =>
@@ -31,4 +32,4 @@ export * from './models/user-model';
 export * from './models/product-model';
 export * from './models/category-model';
 export * from './models/order-model';
-export * from './models/cart-model';
+export * from './models/basket-model';

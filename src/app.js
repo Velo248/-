@@ -6,12 +6,21 @@ import {
   productRouter,
   categoryRouter,
   orderRouter,
-  cartRouter,
+  searchRouter,
+  basketRouter,
+  sendMailRouter,
 } from './routers';
 import { errorHandler } from './middlewares';
+import morgan from 'morgan';
+import { stream } from './utils/logger';
 
 const app = express();
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(morgan('combined', { stream }));
+} else {
+  app.use(morgan('dev')); // 개발환경이면
+}
 // CORS 에러 방지
 app.use(cors());
 
@@ -31,7 +40,9 @@ app.use('/api', userRouter);
 app.use('/api', productRouter);
 app.use('/api', categoryRouter);
 app.use('/api', orderRouter);
-app.use('/api', cartRouter);
+app.use('/api', searchRouter);
+app.use('/api', basketRouter);
+app.use('/api', sendMailRouter);
 // 순서 중요 (errorHandler은 다른 일반 라우팅보다 나중에 있어야 함)
 // 그래야, 에러가 났을 때 next(error) 했을 때 여기로 오게 됨
 app.use(errorHandler);

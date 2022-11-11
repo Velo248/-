@@ -1,0 +1,90 @@
+.admin_order_header {
+  margin: 0 auto;
+  max-width: 95%;
+}
+
+h2 {
+  margin: 2rem 0 4rem 0;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.list_name,
+.list_container {
+  display: grid;
+  grid-template-columns: 1fr 4fr 3fr 1fr 3fr 1fr;
+  text-align: center;
+}
+
+.list_name > div {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1.5rem;
+}
+
+.list {
+  overflow-y: auto;
+  height: 32rem;
+}
+
+.list > div {
+  line-height: 2.8;
+  font-size: 1.4rem;
+}
+
+.filter_form {
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.filter_form label {
+  font-size: 1.6rem;
+}
+
+.filter_form input {
+  border: 1px solid #ddd;
+  width: 15rem;
+  padding: 0.5rem;
+  margin-left: 1rem;
+  margin-right: 0.6rem;
+}
+
+.filter_form button {
+  display: inline-block;
+  color: var(--white);
+  background-color: var(--darkgray);
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
+}
+
+.back_admin_main_bnt {
+  display: block;
+  padding: 1rem 6rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  background-color: var(--dark);
+  width: 95%;
+  font-size: 1.6rem;
+  margin: 2rem auto;
+}
+
+.order_detail_bnt {
+  display: inline-block;
+  color: var(--white);
+  background-color: var(--darkgray);
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+}
+
+.all_order_list_bnt {
+  display: inline-block;
+  color: var(--white);
+  background-color: var(--darkgreen);
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+}

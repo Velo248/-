@@ -1,0 +1,58 @@
+.content-box input {
+  padding: 0;
+}
+
+h2 {
+  margin: 2rem 0;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.admin_product_header {
+  text-align: center;
+}
+
+.create_form > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.create_form {
+  display: flex;
+  flex-direction: column;
+}
+
+.create_form > div {
+  flex: 1;
+}
+
+.create_form > div label,
+.create_form > div input {
+  padding: 1rem;
+}
+
+.create_form_summit_bnt {
+  display: inline-block;
+  color: var(--white);
+  background-color: var(--darkgreen);
+  border-radius: 0.3rem;
+  padding: 1rem 0;
+  margin-top: 2.2rem;
+}
+
+.back_admin_main_bnt {
+  display: block;
+  padding: 1rem 6rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  background-color: var(--darkgray);
+  width: 95%;
+  font-size: 1.6rem;
+  margin: 0 auto;
+}
+
+.create_form > div input[name='isRecommended'] {
+  width: 1.5rem;
+  padding: 0;
+}

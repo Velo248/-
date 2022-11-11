@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>주문 목록 | 관리자</title>
+    <link rel="shortcut icon" href="/public/images/common/favicon.ico" />
+    <link rel="stylesheet" href="/public/css/style.css" />
+    <link rel="stylesheet" href="./custom.css" />
+    <script type="module" src="/public/scripts/layout.js" defer></script>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <div class="admin_order_wapper">
+        <div class="admin_order_header">
+          <h2>주문 목록</h2>
+
+          <div class="flex-justify-between">
+            <button class="all_order_list_bnt">전체 주문정보 확인</button>
+            <form class="filter_form">
+              <label for="user_name">유저 필터</label>
+              <input name="user_name" />
+              <button type="submit">검색</button>
+            </form>
+          </div>
+        </div>
+        <div class="content-box">
+          <div class="workspace">
+            <div class="list_name">
+              <div><span>이름</span></div>
+              <div><span>주문번호</span></div>
+              <div><span>날짜</span></div>
+              <div><span>금액</span></div>
+              <div><span>배송상태</span></div>
+              <div><span>---</span></div>
+            </div>
+            <div class="list"></div>
+          </div>
+        </div>
+        <button class="back_admin_main_bnt">전체 메뉴로</button>
+      </div>
+    </main>
+    <footer></footer>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

@@ -4,106 +4,98 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>등록</title>
+    <meta name="keyword" content="고양이 사료 장난감 츄르 간식 화장실 용품" />
+    <meta name="description" content="반려동물 친구들을 위한 다양한 아이템샵" />
+    <meta name="author" content="[5팀]오히려좋아" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kdt-sw3-team05.elicecoding.com/" />
+    <meta property="og:title" content="(주) 간식조아" />
+    <meta property="og:site_name" content="[5팀]오히려좋아" />
+    <meta
+      property="og:description"
+      content="반려동물 친구들을 위한 다양한 아이템샵"
+    />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:image" content="/public/images/common/logo-square.png" />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="400" />
+    <title>회원가입 | 간식조아</title>
+    <link rel="shortcut icon" href="/public/images/common/favicon.ico" />
     <link rel="stylesheet" href="/public/css/style.css" />
-    <link rel="stylesheet" href="./custom.css" />
-    <script src="./script.js" defer></script>
+    <script type="module" src="/public/scripts/layout.js" defer></script>
+    <script type="module" src="./main.js" defer></script>
   </head>
   <body>
-    <header>
-      <h1>
-        <a href="/"
-          ><img src="/public/images/common/logo.png" alt="간식조아"
-        /></a>
-      </h1>
-      <nav>
-        <span><a href="/product">제품</a></span>
-        <span><a href="/profile">내정보</a></span>
-        <span><a href="/login">로그인</a></span>
-        <span><a href="/register">회원가입</a></span>
-        <span><a href="/basket">장바구니</a></span>
-        <span><a href="/pay-history">주문·배송</a></span>
-      </nav>
-    </header>
+    <header></header>
 
-    <main>
-      <div class="wrapper register-form block">
-          <div class="field">
-            <label class="label">Email</label>
-              <div class="control has-icons-left has-icons-right">
-                <input
-                  class="email input"
-                  type="email"
-                  placeholder="abcde@email.com"
-                />
-              </div>
-              <!-- <button class="btn-check" type="button">중복검사</button> -->
-            <!-- <p class="help is-danger">This email is invalid</p> -->
+    <main class="flex-column-center">
+      <div class="box-style-center">
+        <form class="registerForm">
+          <div>
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              class="email"
+              placeholder="abcde@email.com"
+            />
+          </div>
+          <div>
+            <label>Name</label>
+            <input
+              class="userName"
+              name="userName"
+              type="text"
+              placeholder="간식매니아"
+              minlength="2"
+            />
+          </div>
+          <div>
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              class="password"
+              placeholder="대소문자, 숫자 포함 8글자 이상"
+            />
+          </div>
+          <div>
+            <label>Password Confirm</label>
+            <input
+              type="password"
+              name="password2"
+              class="password2"
+              placeholder="비밀번호 재입력"
+            />
           </div>
 
-          <div class="field">
-            <label class="label">Username</label>
-              <div class="control has-icons-left has-icons-right">
-                <input
-                  class="userName input"
-                  type="text"
-                  placeholder="간식매니아"
-                  minlength="2"
-                />
-              </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Password</label>
-              <div class="control has-icons-left has-icons-right">
-                <input
-                  type="password"
-                  name="password"
-                  class="password input"
-                  placeholder="영어대문자, 소문자, 숫자로 8글자 이상"
-                />
-                <!-- <p class="help is-danger">Password is not safe</p> -->
-              </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Password Confirm</label>
-              <div class="control has-icons-left has-icons-right">
-                <input
-                  type="password"
-                  name="password2"
-                  class="password2 input"
-                  placeholder="비밀번호 재입력"
-                />
-                <!-- <p class="help is-danger">Password is not safe</p> -->
-              </div>
-          </div>
-
-          <div class="field">
-            <div class="control">
-              개인정보 제공에 동의
-              <label class="radio">
-                <input type="radio" name="question" checked />
+          <div class="description flex-column-center">
+            <div>개인정보 제공 동의</div>
+            <div>
+              <label for="register_yes">
+                <input id="register_yes" type="radio" name="question" checked />
                 Yes
               </label>
-              <label class="radio">
-                <input type="radio" name="question" />
+            </div>
+            <div>
+              <label for="register_no">
+                <input id="register_no" type="radio" name="question" />
                 No
               </label>
             </div>
           </div>
 
-          <div class="field is-grouped">
-            <div class="control">
-              <button class="btn-submit button is-link">Submit</button>
-            </div>
-            <div class="control">
-              <button class="btn-cancle button is-link is-light">Cancel</button>
-            </div>
+          <div>
+            <button type="submit" class="btn-submit full bg-darkgreen">
+              가입
+            </button>
+            <button type="button" class="btn-cancle full bg-deepgray">
+              취소
+            </button>
           </div>
         </form>
       </div>
     </main>
-    <footer>&copy; 2022 오히려좋아 by elice 5팀</footer>
+    <footer></footer>
   </body>
 </html>

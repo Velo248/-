@@ -1,29 +1,19 @@
-const testLogin = async () => {
-  const { token } = await (
-    await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: 'elice1@test.com',
-        password: '1234',
-      }),
-    })
-  ).json();
+import orderService from '/public/scripts/orderService.js';
+import { loggedInOnlyPageProtector } from '/public/scripts/common.js';
 
-  return token;
-};
-const templateHistory = ({ _id, summaryTitle, totalPrice, status }) => {
+const createHistoryDiv = ({ _id, summaryTitle, totalPrice, status }) => {
   const historyDetail = document.createElement('div');
   historyDetail.className = 'flex-justify-between payment_history_detail';
   historyDetail.dataset.id = _id;
   const historyBody = `
-    <div class="order_number">
-    <a href="/orders/${_id}">${_id}</a></div>
-    <div class="order_title">${summaryTitle}</div>
-    <div class="order_status">${status}</div>
-    <div class="order_total_price">${totalPrice.toLocaleString('ko-kr')}원</div>
+    <span class="order_number">
+      <a href="/orders/${_id}">${_id}</a>
+    </span>
+    <span class="order_title">${summaryTitle}</span>
+    <span class="order_status">${status}</span>
+    <span class="order_total_price">${totalPrice.toLocaleString(
+      'ko-kr',
+    )}원</span>
     `;
   historyDetail.innerHTML = historyBody;
 
@@ -31,23 +21,14 @@ const templateHistory = ({ _id, summaryTitle, totalPrice, status }) => {
 };
 
 const init = async () => {
-  const token = (await testLogin()) || sessionStorage.getItem('token');
-
+  loggedInOnlyPageProtector();
   const paymentHistoryBody = document.querySelector('.payment_history_body');
 
-  // api 수정 후 URL 변경 필수
-  const orders = await (
-    await fetch('/api/orderlist/user', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-  ).json();
   paymentHistoryBody.innerHTML = '';
+  const { orders } = await orderService.getOrdersByCurrentUser();
   orders.forEach((order) => {
-    paymentHistoryBody.appendChild(templateHistory(order));
+    paymentHistoryBody.appendChild(createHistoryDiv(order));
   });
 };
 
-init();
+document.addEventListener('DOMContentLoaded', init);

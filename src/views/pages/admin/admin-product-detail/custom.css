@@ -1,0 +1,52 @@
+h2 {
+  margin: 2rem 0;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.product_header {
+  text-align: center;
+  max-width: 95%;
+  margin: 0 auto;
+}
+.product_header > h1 {
+  display: inline;
+}
+
+.workspace {
+  height: 55rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.edit_form,
+.product_detail_name {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.edit_form > div,
+.product_detail_name > div {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.edit_form > div > input {
+  width: 80%;
+}
+
+button.product_edit_bnt {
+  display: inline-block;
+  color: var(--white);
+  background-color: var(--darkgray);
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
+}
+
+.flex-justify-between {
+  width: 95%;
+  margin: 0 auto;
+}

@@ -1,0 +1,60 @@
+.admin_user_header h2 {
+  margin: 2rem 0 4rem 0;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.admin_user_wapper .content-box {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.admin_user_wapper .content-box > div {
+  width: 35rem;
+  padding: 3rem 3.2rem;
+}
+
+.workspace {
+  font-size: 1.4rem;
+  display: grid;
+  height: 25rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.list_name,
+.user_dateil {
+  display: grid;
+  grid-template-rows: auto;
+}
+
+.user_order_bnt {
+  display: inline-block;
+  color: var(--white);
+  background-color: var(--darkgray);
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
+}
+
+.back_admin_main_bnt {
+  display: block;
+  padding: 1rem 6rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  background-color: var(--dark);
+  width: 100%;
+  font-size: 1.6rem;
+  margin: 0 auto;
+}
+
+.center button {
+  width: 100%;
+}
+
+.order_detail_bnt {
+  display: inline-block;
+  color: var(--white);
+  background-color: var(--darkgray);
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
+}

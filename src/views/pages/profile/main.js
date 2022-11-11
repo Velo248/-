@@ -1,97 +1,81 @@
-// user profile page가 가져야 할 기능
-// 1. 현재 사용자의 정보를 가져온다 or 가지고 있는 정보를 그린다.
-// 2. 현재 사용자 정보를 통해 주문정보를 가져와서 그린다.
-// 3. 각 주문번호를 클릭 시, 주문 상세 페이지로 넘어간다.
-// 4. 내 정보 수정을 클릭 시, profileEdit으로 연결한다.
+import userService from '/public/scripts/userService.js';
+import orderService from '/public/scripts/orderService.js';
+import { loggedInOnlyPageProtector } from '/public/scripts/common.js';
 
-// test용 로그인 토큰 확보
-const testLogin = async () => {
-  const { token } = await (
-    await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: 'elice1@test.com',
-        password: '1234',
-      }),
-    })
-  ).json();
-
-  return token;
-};
-
-const getCurrentUser = async () => {
-  // const token = sessionStorage.getItem('token');
-
-  const token = await testLogin();
-  const user = await (
-    await fetch('/api/user', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-  ).json();
-
-  return user;
-};
-
-const getOrders = async () => {
-  const token = await testLogin();
-  const orders = await (
-    await fetch('/api/orderlist/user', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-  ).json();
-
-  return orders;
-};
-
-// logged in only page
-const init = async () => {
-  const user = await getCurrentUser();
-
-  const username = document.querySelector('.username');
-  const email = document.querySelector('.email');
-  const phone = document.querySelector('.phone');
-  const addressLong = document.querySelector('.address-long');
-  const addressDetail = document.querySelector('.address-detail');
-  const postalCode = document.querySelector('.postal-code');
-
-  username.innerText = user.fullName;
-  email.innerText = user.email;
-  phone.innerText = user.phoneNumber;
-  if (user.address) {
-    addressLong.innerText = user.address.address1;
-    addressDetail.innerText = user.address.address2;
-    postalCode.innerText = user.address.postalCode;
-  }
-
-  const orderTable = document.querySelector('.order-table');
-  orderTable.innerHTML = '';
-
-  const orders = await getOrders();
-
-  orderTable.innerHTML = '';
-  orders?.forEach(({ _id, status, totalPrice }) => {
-    const orderColumn = document.createElement('div');
-    orderColumn.className = 'order_table_column';
-    orderColumn.innerHTML = `
-        <div class="order_table__column-row">
-            <a href="/orders/${_id}">${_id}</a>
-        </div>
-        <div class="order_table__column-row">${status}</div>
-        <div class="order_table__column-row">${totalPrice.toLocaleString(
-          'ko-kr',
-        )}</div>
+const createUserSection = ({ fullName, email, phoneNumber }) => {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'flex-column';
+  wrapper.innerHTML = `
+            <div>
+              <label>사용자명</label>
+              <input type="text" class="username" value="${fullName}" readonly></input>
+            </div>
+            <div>
+              <label>이메일</label>
+              <input type="text" class="email" value="${email}" readonly></input>
+            </div>
+            <div>
+              <label>전화번호</label>
+              <input type="tel" class="phone" value="${
+                phoneNumber || '전화번호가 없습니다.'
+              }" readonly></input>
+            </div>
     `;
-    orderTable.appendChild(orderColumn);
-  });
+  return wrapper;
+};
+const createAddressSection = ({ address1, address2, postalCode }) => {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'address';
+  if (!address1) {
+    wrapper.innerHTML = `
+          <em>배송지정보</em>
+          <div><div>등록된 배송지가 없습니다.</div></div>
+    `;
+  } else {
+    wrapper.innerHTML = `
+          <em>배송지정보</em>
+          <div>
+            <div class="address_long">${address1}</div>
+            <div class="flex">
+              <div class="postal_code">${postalCode}</div>&nbsp;&nbsp;
+              <div class="address_detail">${address2}</div>
+            </div>
+          </div>
+        `;
+  }
+  return wrapper;
+};
+const createOrderElement = ({ _id, status, totalPrice }) => {
+  const orderColumn = document.createElement('div');
+  orderColumn.innerHTML = `
+        <span>${_id}</span>
+        <span>${status}</span>
+        <span>
+          ${Number(totalPrice).toLocaleString('ko-kr')}
+        </span>
+    `;
+  return orderColumn;
+};
+
+const init = async () => {
+  loggedInOnlyPageProtector();
+  const user = await userService.getCurrentUser(); // userService.getCurrentUser로 변경 예정
+  const { orders } = (await orderService.getOrdersByCurrentUser()) ?? {
+    orders: [],
+  };
+
+  const profileWrapper = document.querySelector('.profile');
+  profileWrapper.innerHTML = '';
+  profileWrapper.appendChild(createUserSection(user));
+
+  const addressWrapper = document.querySelector('.address');
+  addressWrapper.innerHTML = '';
+  addressWrapper.appendChild(createAddressSection(user.address));
+
+  const ordersWrapper = document.querySelector('.orders');
+  orders?.forEach((order) =>
+    ordersWrapper.appendChild(createOrderElement(order)),
+  );
 };
 
 document.addEventListener('DOMContentLoaded', init);

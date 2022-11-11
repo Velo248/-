@@ -8,7 +8,12 @@ export class CategoryModel {
     const createdNewCategory = await Category.create(categoryInfo);
     return createdNewCategory;
   }
-
+  async findAllExceptDeleted() {
+    const categories = await Category.find({
+      title: { $nin: ['삭제된 카테고리'] },
+    });
+    return categories;
+  }
   async findAll() {
     const categories = await Category.find({});
     return categories;
@@ -28,7 +33,7 @@ export class CategoryModel {
     return deletedCategory;
   }
   async update({ categoryId, update }) {
-    const filter = { categoryId };
+    const filter = { _id: categoryId };
     const option = { returnOriginal: false };
 
     const updatedCategory = await Category.findOneAndUpdate(

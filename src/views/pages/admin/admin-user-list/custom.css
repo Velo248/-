@@ -1,0 +1,53 @@
+.admin_user_header h2 {
+  margin: 2rem 0 4rem 0;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.list_name {
+  border-bottom: 1px solid #ddd;
+}
+
+.list_name,
+.user_list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+}
+
+.list_name {
+  padding: 0.8rem 0;
+  font-size: 1.25rem;
+}
+
+.user_list > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem 0;
+  font-size: 1.25rem;
+}
+
+.workspace {
+  height: 40rem;
+}
+
+.user_detail_bnt {
+  display: inline-block;
+  color: var(--white);
+  background-color: var(--darkgray);
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
+}
+
+.back_admin_main_bnt {
+  display: block;
+  padding: 1rem 6rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  background-color: var(--dark);
+  width: 95%;
+  font-size: 1.6rem;
+  margin: 0 auto;
+}
