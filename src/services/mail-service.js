@@ -75,7 +75,7 @@ class MailService {
     const user = await this.userModel.findByEmail(email);
     const userId = user._id;
     const update = {
-      role: 'basic-----user',
+      role: 'basic-user',
     };
     await this.userModel.update({ userId, update });
   }
