@@ -25,6 +25,5 @@ keywords.forEach((data) => {
     `;
 });
 
-console.log($searchBox);
 $counts.innerHTML = `상품 ${keyword.length} 건`;
 $searchBox.innerHTML = `${str}`;

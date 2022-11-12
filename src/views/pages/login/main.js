@@ -54,16 +54,22 @@ const submitEventMap = {
 $findPassword.addEventListener('click', (e) => {
   e.preventDefault();
   const email = prompt('이메일을 입력해주세요.');
-  fetch('/api/send-mail', {
-    method: `POST`,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email }),
-  })
-    .then((res) => res.json())
-    .then(console.log);
-  alert('해당 이메일로 새로운 비밀번호를 발송하였습니다.');
+  if (errorUtil.isValidEmail(email)) {
+    fetch('/api/send-mail', {
+      method: `POST`,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    })
+      .then((res) => res.json())
+      .then(console.log);
+      
+    alert('해당 이메일로 새로운 비밀번호를 발송하였습니다.');
+  } else if (!errorUtil.isValidEmail(email)) {
+    alert('이메일 형식이 맞지 않습니다');
+    return;
+  }
 });
 $loginForm.addEventListener('submit', (e) => {
   e.preventDefault();

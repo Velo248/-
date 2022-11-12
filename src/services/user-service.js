@@ -197,8 +197,8 @@ class UserService {
         ) {
           const loginTime = user.loggedInAt.getTime();
           const currentTime = Date.now();
-          const seconds = Math.floor(currentTime - loginTime / 1000);
-          if (seconds > 10) {
+          const seconds = Math.floor((currentTime - loginTime) / 1000);
+          if (seconds > 90) {
             await this.userModel.update({
               userId: user._id,
               update: { role: 'dormant-account' },

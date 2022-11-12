@@ -67,7 +67,11 @@ export const errorUtil = {
       return { code: false, err: 'password Not match' };
 
     const reg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    return { code: reg.test(password) };
+    const code = reg.test(password);
+    if (!code) {
+      return { code: code, err: 'please check password rule' };
+    }
+    return { code: code };
   },
   isValidPhoneNumber: (phoneNumber) => {
     const regex = new RegExp(/^010([0-9]{4})([0-9]{4})$/);

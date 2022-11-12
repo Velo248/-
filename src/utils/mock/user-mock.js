@@ -23,5 +23,5 @@ export const userMockData = [
     fullName: 'elice3',
     password: '$2b$10$LprHvew8FjJClAuw4VAGn.Ly/Rp3esHoeennEgvaQ2vj3usvdZTm2',
     role: 'basic-user',
-  },
+  }
 ];
