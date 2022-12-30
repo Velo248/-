@@ -5,7 +5,7 @@
 <a href="https://kdt-sw3-team05.elicecoding.com">
   <img alt="간식조아 메인페이지" src="https://i.ibb.co/7NCW9XV/main.png">
 </a>
-서비스로 바로가기(위 이미지 클릭)
+현재는 지원하지 않습니다.
 
 </div>
 
